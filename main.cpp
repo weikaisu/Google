@@ -10,8 +10,12 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0009 run;
-    cout << run.isPalindrome(1000000001) << endl;
+    LC0013 run;
+    cout << run.romanToInt("MCMXCIV") << endl;
+
+//    string s {"ABCDE"};
+//    for(auto c:s) cout << c << ' ';
+//    cout << endl;
 
     for(auto i:v) cout << i << ' ';
     cout << endl;
