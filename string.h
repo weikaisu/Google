@@ -9,10 +9,11 @@
 using namespace std;
 
 /***********  Easy **********/
-
+class LC0020 { public: bool isValid(string s); };
 class LC0014 { public: string longestCommonPrefix(vector<string>& strs); };
 class LC0013 { public: int romanToInt(string s); };
 class LC0009 { public: bool isPalindrome(int x); };
 
+/***********  Medium **********/
 
 #endif //GOOGLE_STRING_H

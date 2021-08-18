@@ -4,7 +4,31 @@
 
 #include "string.h"
 
+//LC0020 run;
+//string s{"()[]{}"};
+//cout << run.isValid(s) << endl;
+//https://www.techiedelight.com/convert-char-to-string-cpp/
+bool LC0020::isValid(string s) {
+    deque<char> dq;
+    set<string> t{"{}", "[]", "()"};
 
+    for(auto c:s) {
+        dq.push_front(c);
+        if(dq.size()>=2) {
+            auto it = dq.begin();
+            if(t.count(string(1,*(it+1)) + string(1, *(it)))) {
+                dq.pop_front();
+                dq.pop_front();
+            }
+        }
+    }
+    return dq.size()==0;
+    //cout << "type: "<< typeid(*(it+1)).name() << endl;
+}
+
+//LC0014 run;
+//vector<string> s{{"flower"},{"flow"},{"flight"}};
+//cout << run.longestCommonPrefix(s) << endl;
 string LC0014::longestCommonPrefix(vector<string>& strs) {
     string ans{""};
     int l_idx=0, c_idx=0;
@@ -24,6 +48,8 @@ string LC0014::longestCommonPrefix(vector<string>& strs) {
     return ans;
 }
 
+//LC0013 run;
+//cout << run.romanToInt("MCMXCIV") << endl;
 int LC0013::romanToInt(string s) {
     unordered_map<char, int> t {
         {'M', 1000}, {'D', 500},
@@ -41,6 +67,8 @@ int LC0013::romanToInt(string s) {
     return ans;
 }
 
+//LC0009 run;
+//cout << run.isPalindrome(1000000001) << endl;
 bool LC0009::isPalindrome(int x) {
     if(x<0) return false;
 
