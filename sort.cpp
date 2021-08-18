@@ -50,7 +50,25 @@ void Sort::quickSortRecursive(vector<int>& d, int l_idx, int r_idx) {
 }
 
 void Sort::quickSortIterative(vector<int>& d) {
+    stack<int> s;
+    int l_idx, m_idx, r_idx;
 
+    s.push(0);
+    s.push(d.size()-1);
+    while(s.size()) {
+        r_idx = s.top(); s.pop();
+        l_idx = s.top(); s.pop();
+        m_idx = _divide(d, l_idx, r_idx);
+
+        if(l_idx<m_idx-1) {
+            s.push(l_idx);
+            s.push(m_idx-1);
+        }
+        if(r_idx>m_idx+1) {
+            s.push(m_idx+1);
+            s.push(r_idx);
+        }
+    }
 }
 
 void Sort::_merge(vector<int>& d, int l_idx, int m_idx, int r_idx) {

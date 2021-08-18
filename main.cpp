@@ -8,15 +8,15 @@ int main() {
     for(auto i:v) cout << i << ' ';
     cout << endl;
 
-//    Sort run;
-//    run.quickSortRecursive(v, 0, v.size()-1);
-    LC0784 run;
-    vector<string> ans=run.letterCasePermutation("a1b2");
-    for(auto a:ans) cout << a << endl;
-    //cout << run.letterCasePermutation("a1b2") << endl;
+    Sort run;
+    run.quickSortIterative(v);
+//    LC0784 run;
+//    vector<string> ans=run.letterCasePermutation("a1b2");
+//    for(auto a:ans) cout << a << endl;
+//    cout << run.letterCasePermutation("a1b2") << endl;
 
-//    for(auto i:v) cout << i << ' ';
-//    cout << endl;
+    for(auto i:v) cout << i << ' ';
+    cout << endl;
 
     return 0;
 }
