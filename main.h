@@ -25,6 +25,7 @@
 #include "search.h"
 #include "list.h"
 #include "math.h"
+#include "string.h"
 
 using namespace std;
 
