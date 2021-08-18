@@ -4,6 +4,26 @@
 
 #include "string.h"
 
+
+string LC0014::longestCommonPrefix(vector<string>& strs) {
+    string ans{""};
+    int l_idx=0, c_idx=0;
+    while(l_idx<strs.size() && c_idx<strs[l_idx].size()) {
+        char p, c=strs[l_idx][c_idx];
+        if(!l_idx) p=c;
+        else if(p!=c) break;
+
+        if(l_idx==strs.size()-1) {
+            l_idx=0;
+            c_idx++;
+            ans+=p;
+        } else {
+            l_idx++;
+        }
+    }
+    return ans;
+}
+
 int LC0013::romanToInt(string s) {
     unordered_map<char, int> t {
         {'M', 1000}, {'D', 500},

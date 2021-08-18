@@ -10,8 +10,9 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0013 run;
-    cout << run.romanToInt("MCMXCIV") << endl;
+    LC0014 run;
+    vector<string> s{{"flower"},{"flow"},{"flight"}};
+    cout << run.longestCommonPrefix(s) << endl;
 
 //    string s {"ABCDE"};
 //    for(auto c:s) cout << c << ' ';
