@@ -4,16 +4,39 @@
 
 #include "list.h"
 
-int LC0026::removeDuplicates(vector<int>& nums) {
+//LC0027 run;
+//vector<int> n{0,1,2,2,3,0,4,2}; // val=2
+//vector<int> n{3,2,2,3}; // val=3
+//vector<int> n{1}; // val=1
+//cout << run.removeElement(n, 1) << endl;
+//for(auto i:n) cout << i << ' ';
+//cout << endl;
+int LC0027::removeElement(vector<int>& nums, int val) {
     int s=nums.size();
-    if(s<=1) return s;
+    int r=0;
+    for(int i=0 ; i<nums.size() ; i++) {
+        if(nums[i]==val)
+            s--;
+        else
+            nums[r++]=nums[i];
+    }
+    return s;
+}
 
+//LC0026 run;
+//vector<int> n{0,0,1,1,1,2,2,3,3,4};
+//vector<int> n{1,1,2};
+//cout << run.removeDuplicates(n) << endl;
+//for(auto i:n) cout << i << ' ';
+//cout << endl;
+int LC0026::removeDuplicates(vector<int>& nums) {
+    int s=nums.size(); if(s<=1) return s;
     int r=1, p=nums[0];
     for(int i=1 ; i<nums.size() ; i++) {
-        if(p == nums[i]) s--;
-        else {
+        if(p == nums[i])
+            s--;
+        else
             nums[r++]=nums[i];
-        }
         p=nums[i];
     }
     return s;

@@ -10,10 +10,11 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0026 run;
-    vector<int> n{0,0,1,1,1,2,2,3,3,4};
-    //vector<int> n{1,1,2};
-    cout << run.removeDuplicates(n) << endl;
+    LC0027 run;
+    //vector<int> n{0,1,2,2,3,0,4,2}; // val=2
+    //vector<int> n{3,2,2,3}; // val=3
+    vector<int> n{1}; // val=1
+    cout << run.removeElement(n, 1) << endl;
     for(auto i:n) cout << i << ' ';
     cout << endl;
 
