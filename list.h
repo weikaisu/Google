@@ -43,6 +43,7 @@ public:
 };
 
 /***********  Easy **********/
+class LC0206 { public: ListNode* reverseList(ListNode* head); };
 class LC0021 { public: ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
 class LC0001 {
 public:
@@ -51,5 +52,7 @@ public:
 };
 
 /***********  Medium **********/
+
+
 
 #endif //GOOGLE_LIST_H
