@@ -4,6 +4,46 @@
 
 #include "list.h"
 
+int LC0026::removeDuplicates(vector<int>& nums) {
+    int s=nums.size();
+    if(s<=1) return s;
+
+    int r=1, p=nums[0];
+    for(int i=1 ; i<nums.size() ; i++) {
+        if(p == nums[i]) s--;
+        else {
+            nums[r++]=nums[i];
+        }
+        p=nums[i];
+    }
+    return s;
+}
+
+vector<int> LC0001::twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> t;
+
+    // find target-nums[i], save nums[i]
+    for(auto i=0 ; i<nums.size(); i++) {
+        auto diff = target - nums[i];
+        if(t.count(diff))
+            return {t[diff], i};
+        t[nums[i]]=i;
+    }
+    return {};
+
+    // find nums[i], save target-nums[i]
+    for(auto i=0 ; i<nums.size() ; i++) {
+        auto diff = target - nums[i];
+        if(t.count(nums[i]))
+            return {t[nums[i] ], i};
+        t[diff] = i;
+    }
+    return {};
+}
+
+
+/***********  Linked List  **********/
+
 bool LC0141::hasCycle(ListNode *head) {
     // time(N) space(N)
     unordered_set<ListNode*> t;
@@ -86,26 +126,4 @@ ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
         l2->next = mergeTwoLists(l1, l2->next);
         return l2;
     }
-}
-
-vector<int> LC0001::twoSum(vector<int>& nums, int target) {
-    unordered_map<int, int> t;
-
-    // find target-nums[i], save nums[i]
-    for(auto i=0 ; i<nums.size(); i++) {
-        auto diff = target - nums[i];
-        if(t.count(diff))
-            return {t[diff], i};
-        t[nums[i]]=i;
-    }
-    return {};
-
-    // find nums[i], save target-nums[i]
-    for(auto i=0 ; i<nums.size() ; i++) {
-        auto diff = target - nums[i];
-        if(t.count(nums[i]))
-            return {t[nums[i] ], i};
-        t[diff] = i;
-    }
-    return {};
 }

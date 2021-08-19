@@ -42,13 +42,15 @@ public:
     }
 };
 
-/***********  Easy **********/
+/***********  Easy  **********/
+class LC0026 { public: int removeDuplicates(vector<int>& nums); };
+class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };
+
 class LC0206 { public: ListNode* reverseList(ListNode* head); };
 class LC0141 { public: bool hasCycle(ListNode *head); };
 class LC0021 { public: ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
-class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };
 
-/***********  Medium **********/
+/***********  Medium  **********/
 
 
 

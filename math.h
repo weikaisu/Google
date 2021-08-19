@@ -8,9 +8,9 @@
 #include "main.h"
 using namespace std;
 
-/***********  Easy **********/
+/***********  Easy  **********/
 class LC0007 { public: int reverse(int x); };
 
-/***********  Medium **********/
+/***********  Medium  **********/
 
 #endif //GOOGLE_MATH_H

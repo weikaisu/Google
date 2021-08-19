@@ -10,12 +10,13 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LinkedList l;
-    l.AddNode(1); l.AddNode(2); l.AddNode(3);
-    l.AddNode(4); l.AddNode(5); l.AddNode(6);
-    LC0206 run;
-    ListNode* r = run.reverseList(l.GetListHead());
-    LinkedList().ShowLinkedList(r);
+    LC0026 run;
+    vector<int> n{0,0,1,1,1,2,2,3,3,4};
+    //vector<int> n{1,1,2};
+    cout << run.removeDuplicates(n) << endl;
+    for(auto i:n) cout << i << ' ';
+    cout << endl;
+
 
 //    string s {"ABCDE"};
 //    for(auto c:s) cout << c << ' ';

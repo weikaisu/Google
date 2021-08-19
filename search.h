@@ -8,11 +8,11 @@
 #include "main.h"
 using namespace std;
 
-/***********  Easy **********/
+/***********  Easy  **********/
 class LC0784 { public: vector<string> letterCasePermutation(string s); };
 class LC0006 { public: string convert(string s, int numRows); };
 
-/***********  Medium **********/
+/***********  Medium  **********/
 
 
 #endif //GOOGLE_SEARCH_H
