@@ -4,6 +4,27 @@
 
 #include "list.h"
 
+bool LC0141::hasCycle(ListNode *head) {
+    // time(N) space(N)
+    unordered_set<ListNode*> t;
+    while(head!=nullptr) {
+        if(t.count(head)) return true;
+        else {
+            t.insert(head);
+            head=head->next;
+        }
+    }
+    return false;
+
+    // fast/slow pointers, no extra space
+    ListNode *fast, *slow;
+    fast=slow=head;
+    while(fast) {
+        if(fast->next==nullptr) return false;
+        if((fast=fast->next->next)==(slow=slow->next)) return true;
+    }
+    return false;
+}
 
 //LinkedList l;
 //l.AddNode(1); l.AddNode(2); l.AddNode(3);
@@ -12,7 +33,7 @@
 //ListNode* r = run.reverseList(l.GetListHead());
 //LinkedList().ShowLinkedList(r);
 ListNode* LC0206::reverseList(ListNode* head) {
-    //time(N), iterative
+    // time(N), iterative
     ListNode *c=nullptr, *n=nullptr;
     while(head) {
         //把n指到head->next
@@ -24,7 +45,7 @@ ListNode* LC0206::reverseList(ListNode* head) {
     }
     return c;
 
-    //time(N), recursive
+    // time(N), recursive
     if(head==nullptr || head->next==nullptr) return head;
     ListNode *h = reverseList(head->next);
     head->next->next = head;
@@ -39,7 +60,7 @@ ListNode* LC0206::reverseList(ListNode* head) {
 //ListNode* r = run.mergeTwoLists(l1.GetListHead(), l2.GetListHead());
 //LinkedList().ShowLinkedList(r);
 ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
-    //time(N), iterative
+    // time(N), iterative
     ListNode head(0);
     ListNode *tail=&head;
     while(l1 && l2) {
@@ -56,7 +77,7 @@ ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
     if(l2) tail->next=l2;
     return head.next;
 
-    //time(N), recursive
+    // time(N), recursive
     if(l1==nullptr || l2==nullptr) return l1==nullptr ? l2 : l1;
     if(l1->val < l2->val) {
         l1->next = mergeTwoLists(l1->next , l2);
@@ -67,10 +88,10 @@ ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
     }
 }
 
-// find target-nums[i], save nums[i]
-vector<int> LC0001::twoSum_1(vector<int>& nums, int target) {
+vector<int> LC0001::twoSum(vector<int>& nums, int target) {
     unordered_map<int, int> t;
 
+    // find target-nums[i], save nums[i]
     for(auto i=0 ; i<nums.size(); i++) {
         auto diff = target - nums[i];
         if(t.count(diff))
@@ -78,11 +99,8 @@ vector<int> LC0001::twoSum_1(vector<int>& nums, int target) {
         t[nums[i]]=i;
     }
     return {};
-}
-// find nums[i], save target-nums[i]
-vector<int> LC0001::twoSum_2(vector<int>& nums, int target) {
-    unordered_map<int, int> t;
 
+    // find nums[i], save target-nums[i]
     for(auto i=0 ; i<nums.size() ; i++) {
         auto diff = target - nums[i];
         if(t.count(nums[i]))

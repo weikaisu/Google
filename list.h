@@ -44,12 +44,9 @@ public:
 
 /***********  Easy **********/
 class LC0206 { public: ListNode* reverseList(ListNode* head); };
+class LC0141 { public: bool hasCycle(ListNode *head); };
 class LC0021 { public: ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
-class LC0001 {
-public:
-    vector<int> twoSum_1(vector<int>& nums, int target);
-    vector<int> twoSum_2(vector<int>& nums, int target);
-};
+class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };
 
 /***********  Medium **********/
 
