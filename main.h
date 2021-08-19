@@ -35,14 +35,15 @@ struct TreeNode {
     TreeNode *left;
     TreeNode *right;
     TreeNode *parent;
-    TreeNode(int x) : val(x), height(1), left(NULL), right(NULL), parent(NULL) {}
+    TreeNode(int x) : val(x), height(1), left(nullptr), right(nullptr), parent(nullptr) {}
 };
 
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
+//struct ListNode {
+//    int val;
+//    ListNode *next;
+//    ListNode(int x) : val(x), next(nullptr) {};
+//    ListNode(int x, ListNode *next) : val(x), next(next) {};
+//};
 
 class Employee {
 public:

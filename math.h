@@ -9,10 +9,7 @@
 using namespace std;
 
 /***********  Easy **********/
-class LC0007 {
-public:
-    int reverse(int x);
-};
+class LC0007 { public: int reverse(int x); };
 
 /***********  Medium **********/
 

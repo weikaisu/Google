@@ -10,9 +10,14 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0020 run;
-    string s{"()[]{}"};
-    cout << run.isValid(s) << endl;
+    LinkedList l1, l2;
+    l1.AddNode(1); l1.AddNode(2); l1.AddNode(4);
+    l2.AddNode(1); l2.AddNode(3); l2.AddNode(4);
+    LinkedList().ShowLinkedList(l1.GetListHead());
+    LinkedList().ShowLinkedList(l2.GetListHead());
+    LC0021 run;
+    ListNode* r = run.mergeTwoLists(l1.GetListHead(), l2.GetListHead());
+    LinkedList().ShowLinkedList(r);
 
 //    string s {"ABCDE"};
 //    for(auto c:s) cout << c << ' ';
