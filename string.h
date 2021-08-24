@@ -9,6 +9,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+class LC0028 { public: int strStr(string haystack, string needle); };
 class LC0020 { public: bool isValid(string s); };
 class LC0014 { public: string longestCommonPrefix(vector<string>& strs); };
 class LC0013 { public: int romanToInt(string s); };

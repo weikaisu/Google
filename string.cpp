@@ -4,6 +4,33 @@
 
 #include "string.h"
 
+int LC0028::strStr(string haystack, string needle) {
+    if(!needle.size()) return 0;
+
+    int m = haystack.size();
+    int n = needle.size();
+    if(m==n) return haystack==needle ? 0 : -1;
+
+    for(int i=0 ; i<=m-n ; i++) {
+        int j;
+        for(j=0 ; j<n ; j++) {
+            if(haystack[i+j]!=needle[j]) break;
+        }
+        if(j==n) return i;
+    }
+    return -1;
+
+    // simplified
+    for(int i=0 ; ; i++) {
+        for(int j=0 ; ; j++) {
+            if(j==needle.size())  return i;
+            if(i+j==haystack.size()) return -1;
+            if(haystack[i+j] != needle[j]) break;
+        }
+    }
+    return -1;
+}
+
 //LC0020 run;
 //string s{"()[]{}"};
 //cout << run.isValid(s) << endl;
