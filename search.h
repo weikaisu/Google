@@ -9,8 +9,12 @@
 using namespace std;
 
 /***********  Easy  **********/
+// linear search
 class LC0784 { public: vector<string> letterCasePermutation(string s); };
 class LC0006 { public: string convert(string s, int numRows); };
+
+// binary search
+class LC0035 { public: int searchInsert(vector<int>& nums, int target); };
 
 /***********  Medium  **********/
 

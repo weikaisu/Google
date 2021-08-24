@@ -4,6 +4,19 @@
 
 #include "search.h"
 
+
+int LC0035::searchInsert(vector<int>& nums, int target) {
+    int l=0, r=nums.size();
+
+    while(l<r) {
+        int m=l+(r-l)/2;
+        if(target>nums[m]) l=m+1;
+        else if(target<nums[m]) r=m;
+        else return m;
+    }
+    return l;
+}
+
 //LC0784 run;
 //vector<string> ans=run.letterCasePermutation("a1b2");
 //for(auto a:ans) cout << a << endl;
