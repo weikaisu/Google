@@ -8,6 +8,7 @@
 #include "main.h"
 using namespace std;
 
+class LC0070 { public: int climbStairs(int n); };
 class LC0053 { public: int maxSubArray(vector<int>& nums); };
 
 

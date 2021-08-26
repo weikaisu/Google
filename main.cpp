@@ -10,10 +10,10 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0053 run;
-    vector<int> nums{-1,-2};
-    int target=5;
-    cout << run.maxSubArray(nums) << endl;
+    LC0070 run;
+    //vector<int> nums{-1,-2};
+    //int target=5;
+    cout << run.climbStairs(45) << endl;
     cout << endl;
 
 
