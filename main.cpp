@@ -10,10 +10,10 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0070 run;
+    LC0058 run;
     //vector<int> nums{-1,-2};
     //int target=5;
-    cout << run.climbStairs(45) << endl;
+    cout << run.lengthOfLastWord("luffy is still joyboy") << endl;
     cout << endl;
 
 

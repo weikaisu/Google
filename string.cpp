@@ -4,6 +4,22 @@
 
 #include "string.h"
 
+//LC0058 run;
+//cout << run.lengthOfLastWord("luffy is still joyboy") << endl;
+int LC0058::lengthOfLastWord(string s) {
+    int last=0, curr=0;
+    for(auto c:s) {
+        if(' '==c) {
+            if(curr) last=curr;
+            curr=0;
+        }
+        else curr++;
+    }
+    return curr ? curr : last;
+}
+
+//LC0028 run;
+//cout << run.strStr("hello", "ll") << endk;
 int LC0028::strStr(string haystack, string needle) {
     if(!needle.size()) return 0;
 
