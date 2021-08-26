@@ -26,6 +26,7 @@
 #include "list.h"
 #include "math.h"
 #include "string.h"
+#include "dp.h"
 
 using namespace std;
 

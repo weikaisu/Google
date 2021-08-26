@@ -4,7 +4,10 @@
 
 #include "search.h"
 
-
+//LC0035 run;
+//vector<int> nums{1,3,5,6};
+//int target=5;
+//cout << run.searchInsert(nums, target) << endl;
 int LC0035::searchInsert(vector<int>& nums, int target) {
     int l=0, r=nums.size();
 
