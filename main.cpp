@@ -10,10 +10,8 @@ int main() {
 
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0066 run;
-    vector<int> nums{9,9,9}, ans;
-    ans=run.plusOne(nums);
-    for(auto n:nums) cout << n << ' ';
+    LC0067 run;
+    cout << run.addBinary("11","1");
     cout << endl;
 
 

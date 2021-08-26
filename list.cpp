@@ -4,7 +4,11 @@
 
 #include "list.h"
 
-
+//LC0066 run;
+//vector<int> nums{9,9,9}, ans;
+//ans=run.plusOne(nums);
+//for(auto n:nums) cout << n << ' ';
+//cout << endl;
 /***********  Vector List  **********/
 vector<int> LC0066::plusOne(vector<int>& digits) {
     int c=1;

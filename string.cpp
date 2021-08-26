@@ -4,6 +4,21 @@
 
 #include "string.h"
 
+//LC0067 run;
+//cout << run.addBinary("11","1");
+string LC0067::addBinary(string a, string b) {
+    int i=a.size()-1, j=b.size()-1, c=0;
+    string ans;
+
+    while( i>=0 || j>=0 || c) {
+        c += i>=0 ? a[i--]-'0' : 0;
+        c += j>=0 ? b[j--]-'0' : 0;
+        ans = to_string(c%2) + ans;
+        c = c/2;
+    }
+    return ans;
+}
+
 //LC0058 run;
 //cout << run.lengthOfLastWord("luffy is still joyboy") << endl;
 int LC0058::lengthOfLastWord(string s) {
