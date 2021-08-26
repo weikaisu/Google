@@ -43,6 +43,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0066 { public: vector<int> plusOne(vector<int>& digits); };
 class LC0027 { public: int removeElement(vector<int>& nums, int val); };
 class LC0026 { public: int removeDuplicates(vector<int>& nums); };
 class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };

@@ -4,6 +4,19 @@
 
 #include "list.h"
 
+
+/***********  Vector List  **********/
+vector<int> LC0066::plusOne(vector<int>& digits) {
+    int c=1;
+    for(int i=digits.size()-1 ; i>=0 ; i--) {
+        int v = digits[i]+c;
+        digits[i] = v % 10;
+        c = v / 10;
+    }
+    if(c) digits.emplace(digits.begin(), c);
+    return digits;
+}
+
 //LC0027 run;
 //vector<int> n{0,1,2,2,3,0,4,2}; // val=2
 //vector<int> n{3,2,2,3}; // val=3
