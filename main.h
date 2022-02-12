@@ -1,7 +1,3 @@
-//
-// Created by steve on 2021-08-10.
-//
-
 #ifndef GOOGLE_MAIN_H
 #define GOOGLE_MAIN_H
 

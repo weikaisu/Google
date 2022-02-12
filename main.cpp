@@ -1,4 +1,5 @@
 #include "main.h"
+#include "play.cpp"
 using namespace std;
 
 int main() {
@@ -8,11 +9,15 @@ int main() {
     for(auto i:v) cout << i << ' ';
     cout << endl;
 
+    Play play;
+    play.BubbleSort(v);
+
+
 //    Sort run;
 //    run.quickSortIterative(v);
-    LC0067 run;
-    cout << run.addBinary("11","1");
-    cout << endl;
+//    LC0067 run;
+//    cout << run.addBinary("11","1");
+//    cout << endl;
 
 
 //    string s {"ABCDE"};

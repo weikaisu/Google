@@ -1,7 +1,3 @@
-//
-// Created by steve on 2021-08-11.
-//
-
 #ifndef GOOGLE_MATH_H
 #define GOOGLE_MATH_H
 
