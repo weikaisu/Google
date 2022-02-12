@@ -9,12 +9,11 @@ int main() {
     for(auto i:v) cout << i << ' ';
     cout << endl;
 
-    Play play;
-    play.BubbleSort(v);
+//    Play play;
+//    play.BubbleSort(v);
 
-
-//    Sort run;
-//    run.quickSortIterative(v);
+    Sort run;
+    run.BubbleSort(v);
 //    LC0067 run;
 //    cout << run.addBinary("11","1");
 //    cout << endl;

@@ -10,15 +10,15 @@ using namespace std;
 
 class Sort {
 public:
-    void selectSort(vector<int>& d);
-    void insertSort(vector<int>& d);
-    void bubbleSort(vector<int>& d);
+    void SelectSort(vector<int>& d);
+    void InsertSort(vector<int>& d);
+    void BubbleSort(vector<int>& d);
 
-    void quickSortRecursive(vector<int>& d, int l_idx, int r_idx);
-    void quickSortIterative(vector<int>& d);
-    void mergeSortRecursive(vector<int>& d);
-    void mergeSortIterative(vector<int>& d);
-    void heapSort(vector<int>& d);
+    void QuickSortRecursive(vector<int>& d, int l_idx, int r_idx);
+    void QuickSortIterative(vector<int>& d);
+    void MergeSortRecursive(vector<int>& d);
+    void MergeSortIterative(vector<int>& d);
+    void HeapSort(vector<int>& d);
 
 
 private:
