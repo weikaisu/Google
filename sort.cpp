@@ -117,10 +117,29 @@ void Sort::MergeSortIterative(vector<int>& nums) {
 }
 
 void Sort::heapify(vector<int>& nums, int n, int i) {
+    // n elements, i is the root, if its child is greater than it, swap.
+    int root=i, lchild=2*i+1, rchild=2*i+2;
 
+    if(lchild>=n || rchild>=n) return;
+
+    if(nums[lchild]>nums[root]) root=lchild;
+    if(nums[rchild]>nums[root]) root=rchild;
+    if(root != i) {
+        swap(nums[root], nums[i]);
+        heapify(nums, n, root);
+    }
 }
 
 void Sort::HeapSort(vector<int>& nums) {
-
+    // create a max heap, keep removing the 1st element, the max one
+    int i, n=nums.size();
+    //creates a Max heap, begin from the last node's parent i=n/2-1.
+    for(i=n/2-1; i>=0; i--)
+        heapify(nums, n, i);
+    // swaps first and last node
+    for(i=n-1; i>=0; i--) {
+        swap(nums[0], nums[i]);
+        heapify(nums, i, 0);
+    }
 }
 

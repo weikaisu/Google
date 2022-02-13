@@ -13,7 +13,7 @@ int main() {
 //    play.Iterative(v);
 
     Sort run;
-    run.MergeSortIterative(v);
+    run.HeapSort(v);
 //    LC0067 run;
 //    cout << run.addBinary("11","1");
 //    cout << endl;
