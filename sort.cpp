@@ -32,39 +32,40 @@ void Sort::BubbleSort(vector<int> &nums) {
     }
 }
 
-int Sort::divide(vector<int> &d, int l_idx, int r_idx) {
+int Sort::divide(vector<int> &nums, int lidx, int ridx) {
     // take the right most one as pivot,
     // one-side greater than it, one-side smaller than it
-    int p=d[r_idx], i, j;
-    i=j=l_idx;
+    int p=nums[ridx], i, j;
+    i=j=lidx;
 
-    while(j<r_idx) {
-        if(d[j]<p) swap(d[i++], d[j]);
+    while(j < ridx) {
+        if(nums[j] < p) swap(nums[i++], nums[j]);
         j++;
     }
-    swap(d[i], d[r_idx]);
+    swap(nums[i], nums[ridx]);
 
     return i;
 }
 
-void Sort::QuickSortRecursive(vector<int>& d, int l_idx, int r_idx) {
-    if(l_idx<r_idx) {
-        auto m_idx = divide(d, l_idx, r_idx);
-        QuickSortRecursive(d, l_idx, m_idx-1);
-        QuickSortRecursive(d, m_idx+1, r_idx);
-    }
+// run.QuickSortRecursive(nums, 0, nums.size()-1);
+void Sort::QuickSortRecursive(vector<int>& nums, int lidx, int ridx) {
+    if(lidx >= ridx) return;
+
+    int m_idx = divide(nums, lidx, ridx);
+    QuickSortRecursive(nums, lidx, m_idx - 1);
+    QuickSortRecursive(nums, m_idx + 1, ridx);
 }
 
-void Sort::QuickSortIterative(vector<int>& d) {
+void Sort::QuickSortIterative(vector<int>& nums) {
     stack<int> s;
     int l_idx, m_idx, r_idx;
 
     s.push(0);
-    s.push(d.size()-1);
+    s.push(nums.size() - 1);
     while(s.size()) {
         r_idx = s.top(); s.pop();
         l_idx = s.top(); s.pop();
-        m_idx = divide(d, l_idx, r_idx);
+        m_idx = divide(nums, l_idx, r_idx);
 
         if(l_idx<m_idx-1) {
             s.push(l_idx);
@@ -77,23 +78,49 @@ void Sort::QuickSortIterative(vector<int>& d) {
     }
 }
 
-void Sort::merge(vector<int>& d, int l_idx, int m_idx, int r_idx) {
+void Sort::merge(vector<int>& nums, int lidx, int midx, int ridx) {
+    vector<int> ldata, rdata;
+    int i=0, j=0, k=lidx;
+
+    ldata.assign(nums.begin() + lidx, nums.begin() + midx + 1);
+    rdata.assign(nums.begin() + midx + 1, nums.begin() + ridx + 1);
+
+    while(i<ldata.size() && j<rdata.size())
+        ldata[i]<rdata[j] ? nums[k++]=ldata[i++] : nums[k++]=rdata[j++];
+    while(i<ldata.size())
+        nums[k++]=ldata[i++];
+    while(j<rdata.size())
+        nums[k++]=rdata[j++];
+}
+
+// run.MergeSortRecursive(v, 0, v.size()-1);
+void Sort::MergeSortRecursive(vector<int>& nums, int lidx, int ridx) {
+    if(lidx>=ridx) return;
+
+    int midx = lidx+((ridx-lidx)>>1);
+
+    MergeSortRecursive(nums, lidx, midx);
+    MergeSortRecursive(nums, midx+1, ridx);
+    merge(nums, lidx, midx, ridx);
+}
+
+void Sort::MergeSortIterative(vector<int>& nums) {
+    // bottom up, no need to use another stack.
+    int stride, lidx, midx, ridx;
+
+    for(stride=1; stride<nums.size(); stride<<=1)
+        for(lidx=0; lidx<nums.size(); lidx+=stride<<1) {
+            midx = min(int(lidx+stride-1), int(nums.size()-1));
+            ridx = min(int(lidx+(stride<<1)-1), int(nums.size()-1));
+            merge(nums, lidx, midx, ridx);
+        }
+}
+
+void Sort::heapify(vector<int>& nums, int n, int i) {
 
 }
 
-void Sort::MergeSortRecursive(vector<int>& d) {
-
-}
-
-void Sort::MergeSortIterative(vector<int>& d) {
-
-}
-
-void Sort::heapify(vector<int>& d, int n, int i) {
-
-}
-
-void Sort::HeapSort(vector<int>& d) {
+void Sort::HeapSort(vector<int>& nums) {
 
 }
 

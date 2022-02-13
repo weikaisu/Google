@@ -10,24 +10,24 @@ using namespace std;
 
 class Sort {
 public:
-    void SelectSort(vector<int>& d);
-    void InsertSort(vector<int>& d);
-    void BubbleSort(vector<int>& d);
+    void SelectSort(vector<int>& nums);
+    void InsertSort(vector<int>& nums);
+    void BubbleSort(vector<int>& nums);
 
-    void QuickSortRecursive(vector<int>& d, int l_idx, int r_idx);
-    void QuickSortIterative(vector<int>& d);
-    void MergeSortRecursive(vector<int>& d);
-    void MergeSortIterative(vector<int>& d);
-    void HeapSort(vector<int>& d);
+    void QuickSortRecursive(vector<int>& nums, int lidx, int ridx);
+    void QuickSortIterative(vector<int>& nums);
+    void MergeSortRecursive(vector<int>& nums, int lidx, int ridx);
+    void MergeSortIterative(vector<int>& nums);
+    void HeapSort(vector<int>& nums);
 
 
 private:
     // for quickSort
-    int divide(vector<int>& d, int l_idx, int r_idx);
+    int divide(vector<int>& nums, int lidx, int ridx);
     // for mergeSort
-    void merge(vector<int>& d, int l_idx, int m_idx, int r_idx);
+    void merge(vector<int>& nums, int lidx, int midx, int ridx);
     // for heapSort
-    void heapify(vector<int>& d, int n, int i);
+    void heapify(vector<int>& nums, int n, int i);
 
 };
 
