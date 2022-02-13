@@ -10,10 +10,10 @@ int main() {
     cout << endl;
 
 //    Play play;
-//    play.BubbleSort(v);
+//    play.Iterative(v);
 
     Sort run;
-    run.BubbleSort(v);
+    run.QuickSortRecursive(v, 0, v.size()-1);
 //    LC0067 run;
 //    cout << run.addBinary("11","1");
 //    cout << endl;

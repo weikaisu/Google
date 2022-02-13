@@ -23,11 +23,11 @@ public:
 
 private:
     // for quickSort
-    int _divide(vector<int>& d, int l_idx, int r_idx);
+    int divide(vector<int>& d, int l_idx, int r_idx);
     // for mergeSort
-    void _merge(vector<int>& d, int l_idx, int m_idx, int r_idx);
+    void merge(vector<int>& d, int l_idx, int m_idx, int r_idx);
     // for heapSort
-    void _heapify(vector<int>& d, int n, int i);
+    void heapify(vector<int>& d, int n, int i);
 
 };
 

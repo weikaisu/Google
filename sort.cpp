@@ -32,13 +32,16 @@ void Sort::BubbleSort(vector<int> &nums) {
     }
 }
 
-int Sort::_divide(vector<int> &d, int l_idx, int r_idx) {
+int Sort::divide(vector<int> &d, int l_idx, int r_idx) {
     // take the right most one as pivot,
     // one-side greater than it, one-side smaller than it
-    int p{d[r_idx]}, i, j;
+    int p=d[r_idx], i, j;
+    i=j=l_idx;
 
-    for(i=j=l_idx ; j<r_idx; j++)
+    while(j<r_idx) {
         if(d[j]<p) swap(d[i++], d[j]);
+        j++;
+    }
     swap(d[i], d[r_idx]);
 
     return i;
@@ -46,11 +49,10 @@ int Sort::_divide(vector<int> &d, int l_idx, int r_idx) {
 
 void Sort::QuickSortRecursive(vector<int>& d, int l_idx, int r_idx) {
     if(l_idx<r_idx) {
-        auto m_idx = _divide(d, l_idx, r_idx);
+        auto m_idx = divide(d, l_idx, r_idx);
         QuickSortRecursive(d, l_idx, m_idx-1);
         QuickSortRecursive(d, m_idx+1, r_idx);
     }
-
 }
 
 void Sort::QuickSortIterative(vector<int>& d) {
@@ -62,7 +64,7 @@ void Sort::QuickSortIterative(vector<int>& d) {
     while(s.size()) {
         r_idx = s.top(); s.pop();
         l_idx = s.top(); s.pop();
-        m_idx = _divide(d, l_idx, r_idx);
+        m_idx = divide(d, l_idx, r_idx);
 
         if(l_idx<m_idx-1) {
             s.push(l_idx);
@@ -75,7 +77,7 @@ void Sort::QuickSortIterative(vector<int>& d) {
     }
 }
 
-void Sort::_merge(vector<int>& d, int l_idx, int m_idx, int r_idx) {
+void Sort::merge(vector<int>& d, int l_idx, int m_idx, int r_idx) {
 
 }
 
@@ -87,7 +89,7 @@ void Sort::MergeSortIterative(vector<int>& d) {
 
 }
 
-void Sort::_heapify(vector<int>& d, int n, int i) {
+void Sort::heapify(vector<int>& d, int n, int i) {
 
 }
 
