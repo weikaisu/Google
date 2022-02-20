@@ -4,6 +4,20 @@
 
 #include "tree.h"
 
+int LC543::diameterOfBinaryTree(TreeNode* root) {
+    auto diameter = [](const auto &self, TreeNode *root, int &len) -> int {
+        if(!root) return -1;
+        int left_len  = self(self, root->left,  len) +1;
+        int right_len = self(self, root->right, len) +1;
+        len = max(len, left_len+right_len);
+        return max(left_len, right_len);
+    };
+
+    int len = 0;
+    diameter(diameter, root, len);
+    return len;
+}
+
 int LC404::sumOfLeftLeaves(TreeNode* root) {
     int sum = 0;
     if(!root) return sum;
@@ -19,7 +33,7 @@ int LC404::sumOfLeftLeaves(TreeNode* root) {
 //cout << run.isBalanced(root) << endl;
 //root->CleanTree(root);
 bool LC110::isBalanced(TreeNode* root) {
-    auto getTreeHeight = [](const auto &self, TreeNode* root, bool &isBalanse)->int {
+    auto getTreeHeight = [](const auto &self, TreeNode* root, bool &isBalanse) -> int {
         if(!root) return 0;
         int lHeight = self(self, root->left, isBalanse);
         int rHeight = self(self, root->right, isBalanse);
