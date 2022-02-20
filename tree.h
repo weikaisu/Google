@@ -8,6 +8,8 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
+#include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -21,6 +23,12 @@ struct TreeNode {
     TreeNode(int x) : val(x), height(1), left(nullptr), right(nullptr), parent(nullptr) {};
     void BuildTree(TreeNode *&root);
     void CleanTree(TreeNode  *root);
+    void TraverseInOrder(TreeNode *root);
+    void TraversePreOrder(TreeNode *root);
+    void TraversePostOrder(TreeNode *root);
+    void TraverseLevelOrder(TreeNode *root);
+    void TraverseTopDown(TreeNode *root);
+    void TraverseBottomUp(TreeNode *root);
 
 };
 
