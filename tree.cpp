@@ -4,6 +4,15 @@
 
 #include "tree.h"
 
+int LC404::sumOfLeftLeaves(TreeNode* root) {
+    int sum = 0;
+    if(!root) return sum;
+
+    if(root->left && !root->left->left && !root->left->right)
+        sum += root->left->val;
+    return sum + sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
+}
+
 //TreeNode *root;
 //root->BuildTree(root);
 //LC110 run;

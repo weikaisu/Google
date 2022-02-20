@@ -29,12 +29,12 @@ struct TreeNode {
     void TraverseLevelOrder(TreeNode *root);
     void TraverseTopDown(TreeNode *root);
     void TraverseBottomUp(TreeNode *root);
-
 };
 
 class tree {};
 
 /***********  Easy  **********/
+struct LC404 { int sumOfLeftLeaves(TreeNode* root) };
 struct LC110 { bool isBalanced(TreeNode* root); };
 struct LC100 { bool isSameTree(TreeNode* p, TreeNode* q); };
 
