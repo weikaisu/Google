@@ -4,6 +4,21 @@
 
 #include "tree.h"
 
+string LC606::tree2str(TreeNode* root) {
+    if(!root) return "";
+
+    const string m = to_string(root->val);
+    const string l = tree2str(root->left);
+    const string r = tree2str(root->right);
+
+    // case : s
+    if(!root->left && !root->right) return m;
+    // case : s(l)
+    if(!root->right) return m+"("+l+")";
+    // general: s(l)(r)
+    return m+"("+l+")"+"("+r+")";
+}
+
 int LC543::diameterOfBinaryTree(TreeNode* root) {
     auto diameter = [](const auto &self, TreeNode *root, int &len) -> int {
         if(!root) return -1;

@@ -34,6 +34,7 @@ struct TreeNode {
 class tree {};
 
 /***********  Easy  **********/
+struct LC606 { string tree2str(TreeNode* root); };
 struct LC543 { int diameterOfBinaryTree(TreeNode* root); };
 struct LC404 { int sumOfLeftLeaves(TreeNode* root); };
 struct LC110 { bool isBalanced(TreeNode* root); };
