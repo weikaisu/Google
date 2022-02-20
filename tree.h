@@ -5,6 +5,7 @@
 #ifndef GOOGLE_TREE_H
 #define GOOGLE_TREE_H
 
+#include <iostream>
 #include <cmath>
 #include <algorithm>
 

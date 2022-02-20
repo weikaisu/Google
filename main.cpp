@@ -22,6 +22,7 @@ int main() {
     root->BuildTree(root);
     LC110 run;
     cout << run.isBalanced(root) << endl;
+    root->CleanTree(root);
 
 
 

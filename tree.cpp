@@ -4,7 +4,11 @@
 
 #include "tree.h"
 
-
+//TreeNode *root;
+//root->BuildTree(root);
+//LC110 run;
+//cout << run.isBalanced(root) << endl;
+//root->CleanTree(root);
 bool LC110::isBalanced(TreeNode* root) {
     auto getTreeHeight = [](const auto &self, TreeNode* root, bool &isBalanse)->int {
         if(!root) return 0;
@@ -27,6 +31,13 @@ bool LC100::isSameTree(TreeNode* p, TreeNode* q) {
 }
 
 void TreeNode::BuildTree(TreeNode *&root) {
+    /*   Let us create below tree
+    *       3
+    *     /   \
+    *    9    20
+    *        /  \
+    *       15   7
+    */
     root = new TreeNode(3);
     root->left = new TreeNode(9);
     root->right = new TreeNode(20);
@@ -35,5 +46,10 @@ void TreeNode::BuildTree(TreeNode *&root) {
 };
 
 void TreeNode::CleanTree(TreeNode *root) {
-
+    // traverse the tree in post order to free each tree node.
+    if(!root) return;
+    if(root->left)  CleanTree(root->left);
+    if(root->right) CleanTree(root->right);
+    cout << "delete " << root->val << endl;
+    delete root;
 }
