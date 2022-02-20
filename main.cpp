@@ -12,11 +12,17 @@ int main() {
 //    Play play;
 //    play.Iterative(v);
 
-    Sort run;
-    run.HeapSort(v);
+//    Sort run;
+//    run.HeapSort(v);
 //    LC0067 run;
 //    cout << run.addBinary("11","1");
 //    cout << endl;
+
+    TreeNode *root;
+    root->BuildTree(root);
+    LC110 run;
+    cout << run.isBalanced(root) << endl;
+
 
 
 //    string s {"ABCDE"};

@@ -18,22 +18,14 @@
 #include <functional>
 
 #include "sort.h"
-#include "search.h"
 #include "list.h"
-#include "math.h"
+#include "search.h"
+#include "tree.h"
 #include "string.h"
 #include "dp.h"
+#include "math.h"
 
 using namespace std;
-
-struct TreeNode {
-    int val;
-    int height; //for AVLTree
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode *parent;
-    TreeNode(int x) : val(x), height(1), left(nullptr), right(nullptr), parent(nullptr) {}
-};
 
 //struct ListNode {
 //    int val;
