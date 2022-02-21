@@ -4,6 +4,29 @@
 
 #include "tree.h"
 
+vector<double> LC637::averageOfLevels(TreeNode* root) {
+    if(!root) return {};
+
+    vector<double> ans;
+    queue<TreeNode*> q;
+    int level_size = 0;
+    int level_cont = 0;
+
+    q.push(root);
+
+    while(level_size=level_cont=q.size()) {
+        double accu = 0.0;
+        while(level_size--) {
+            TreeNode* node = q.front(); q.pop();
+            accu += node->val;
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+        }
+        ans.push_back(static_cast<double>(accu)/level_cont);
+    }
+    return ans;
+}
+
 TreeNode* LC617::mergeTrees(TreeNode* root1, TreeNode* root2) {
     if(!root1) return root2; if(!root2) return root1;
 
