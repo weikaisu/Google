@@ -10,7 +10,7 @@ using namespace std;
 
 /***********  Easy  **********/
 class LC0067 { public: string addBinary(string a, string b); };
-class LC0058 { public: int lengthOfLastWord(string s); };
+class LC0058 { public: int lengthOfLastWord(string& s); };
 class LC0028 { public: int strStr(string haystack, string needle); };
 class LC0020 { public: bool isValid(string s); };
 class LC0014 { public: string longestCommonPrefix(vector<string>& strs); };

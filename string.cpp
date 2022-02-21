@@ -21,7 +21,7 @@ string LC0067::addBinary(string a, string b) {
 
 //LC0058 run;
 //cout << run.lengthOfLastWord("luffy is still joyboy") << endl;
-int LC0058::lengthOfLastWord(string s) {
+int LC0058::lengthOfLastWord(string& s) {
     int last=0, curr=0;
     for(auto c:s) {
         if(' '==c) {
