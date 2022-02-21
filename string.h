@@ -6,6 +6,7 @@
 #define GOOGLE_STRING_H
 
 #include "main.h"
+
 using namespace std;
 
 /***********  Easy  **********/
