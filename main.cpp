@@ -19,10 +19,19 @@ int main() {
 //    Play play;
 //    play.Iterative(v);
 
-    TreeNode *root;
-    root->BuildTree(root);
-    root->TraverseBottomUp(root);
-    root->CleanTree(root);
+//    TreeNode *root;
+//    root->BuildTree(root);
+//    root->TraverseBottomUp(root);
+//    root->CleanTree(root);
+
+    LinkedList l1, l2;
+    l1.AddNode(1); l1.AddNode(2); l1.AddNode(5); l1.AddNode(2); l1.AddNode(2);
+    l2.AddNode(1); l2.AddNode(3); l2.AddNode(4);
+//    Play run;
+//    ListNode* r = run.mergeTwoLists(l1.GetListHead(), l2.GetListHead());
+    LC0083 run;
+    ListNode* r = run.deleteDuplicates(l1.GetListHead());
+    LinkedList::ShowLinkedList(r);
 
 //    string s {"ABCDE"};
 //    for(auto c:s) cout << c << ' ';

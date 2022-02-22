@@ -34,6 +34,7 @@ public:
     ListNode* GetListHead() { return head;};
 
     static void ShowLinkedList(ListNode *n) {
+        if(!n) cout << "Error! nullptr ListNode" << endl;
         while(n!=nullptr) {
             cout << n->val << ' ';
             n=n->next;
@@ -50,6 +51,7 @@ class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };
 
 class LC0206 { public: ListNode* reverseList(ListNode* head); };
 class LC0141 { public: bool hasCycle(ListNode *head); };
+class LC0083 { public: ListNode* deleteDuplicates(ListNode* head); };
 class LC0021 { public: ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
 
 /***********  Medium  **********/

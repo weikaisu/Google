@@ -83,6 +83,32 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 
 
 /***********  Linked List  **********/
+//LinkedList l;
+//l.AddNode(1); l.AddNode(2); l.AddNode(3);
+//l.AddNode(4); l.AddNode(5); l.AddNode(6);
+//LC0206 run;
+//ListNode* r = run.reverseList(l.GetListHead());
+//LinkedList::ShowLinkedList(r);
+ListNode* LC0206::reverseList(ListNode* head) {
+    // time(N), iterative
+    ListNode *c=nullptr, *n=nullptr;
+    while(head) {
+        //把n指到head->next
+        //把n放在head->next的位置
+        n=head->next;
+        head->next=c;
+        c=head;
+        head=n;
+    }
+    return c;
+
+    // time(N), recursive
+    if(head==nullptr || head->next==nullptr) return head;
+    ListNode *h = reverseList(head->next);
+    head->next->next = head;
+    head->next = nullptr;
+    return h;
+}
 
 bool LC0141::hasCycle(ListNode *head) {
     // time(N) space(N)
@@ -106,31 +132,30 @@ bool LC0141::hasCycle(ListNode *head) {
     return false;
 }
 
-//LinkedList l;
-//l.AddNode(1); l.AddNode(2); l.AddNode(3);
-//l.AddNode(4); l.AddNode(5); l.AddNode(6);
-//LC0206 run;
-//ListNode* r = run.reverseList(l.GetListHead());
-//LinkedList().ShowLinkedList(r);
-ListNode* LC0206::reverseList(ListNode* head) {
-    // time(N), iterative
-    ListNode *c=nullptr, *n=nullptr;
-    while(head) {
-        //把n指到head->next
-        //把n放在head->next的位置
-        n=head->next;
-        head->next=c;
-        c=head;
-        head=n;
-    }
-    return c;
+//LinkedList l1;
+//l1.AddNode(1); l1.AddNode(2); l1.AddNode(5); l1.AddNode(2); l1.AddNode(2);
+//LC0083 run;
+//ListNode* r = run.deleteDuplicates(l1.GetListHead());
+//LinkedList::ShowLinkedList(r);
+ListNode* LC0083::deleteDuplicates(ListNode* head) {
+    if(!head || !head->next) return head;
 
-    // time(N), recursive
-    if(head==nullptr || head->next==nullptr) return head;
-    ListNode *h = reverseList(head->next);
-    head->next->next = head;
-    head->next = nullptr;
-    return h;
+    unordered_set<int> set;
+    set.insert(head->val);
+    ListNode* tail = head;
+
+    while(tail->next) {
+        if(!set.count(tail->next->val)) {
+            set.insert(tail->next->val);
+            tail = tail->next;
+        } else {
+            ListNode* node = tail->next;
+            tail->next = tail->next->next;
+            delete node;
+        }
+    }
+
+    return head;
 }
 
 //LinkedList l1, l2;
@@ -138,7 +163,7 @@ ListNode* LC0206::reverseList(ListNode* head) {
 //l2.AddNode(1); l2.AddNode(3); l2.AddNode(4);
 //LC0021 run;
 //ListNode* r = run.mergeTwoLists(l1.GetListHead(), l2.GetListHead());
-//LinkedList().ShowLinkedList(r);
+//LinkedList::ShowLinkedList(r);
 ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
     // time(N), iterative
     ListNode head(0);
