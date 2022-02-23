@@ -50,6 +50,7 @@ class LC0026 { public: int removeDuplicates(vector<int>& nums); };
 class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };
 
 class LC0206 { public: ListNode* reverseList(ListNode* head); };
+class LC0203 { public: ListNode* removeElements(ListNode* head, int val); };
 class LC0160 { public: ListNode *getIntersectionNode(ListNode *headA, ListNode *headB); };
 class LC0141 { public: bool hasCycle(ListNode *head); };
 class LC0083 { public: ListNode* deleteDuplicates(ListNode* head); };

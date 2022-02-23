@@ -109,6 +109,32 @@ ListNode* LC0206::reverseList(ListNode* head) {
     head->next = nullptr;
     return h;
 }
+//LinkedList l1;
+//l1.AddNode(1); l1.AddNode(2); l1.AddNode(6); l1.AddNode(3); l1.AddNode(4); l1.AddNode(5); l1.AddNode(6);
+//LC0203 run;
+//ListNode* r = run.removeElements(l2.GetListHead(), 7);
+//LinkedList::ShowLinkedList(r);
+ListNode* LC0203::removeElements(ListNode* head, int val) {
+    if(!head) return head;
+
+    ListNode dummy(0);
+    ListNode *pre = &dummy;
+    dummy.next = head;
+
+    while(head) {
+        if(head->val == val) {
+            ListNode *node = head;
+            pre->next = head->next;
+            head = head->next;
+            delete node;
+        } else {
+            pre = head;
+            head = head->next;
+        }
+    }
+
+    return dummy.next;
+}
 
 ListNode* LC0160::getIntersectionNode(ListNode *headA, ListNode *headB) {
     if(!headA || !headB) return nullptr;
