@@ -49,6 +49,7 @@ class LC0027 { public: int removeElement(vector<int>& nums, int val); };
 class LC0026 { public: int removeDuplicates(vector<int>& nums); };
 class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };
 
+class LC0876 { ListNode* middleNode(ListNode* head); };
 class LC0237 { public: void deleteNode(ListNode* node); };
 class LC0234 { public: bool isPalindrome(ListNode* head); };
 class LC0206 { public: ListNode* reverseList(ListNode* head); };

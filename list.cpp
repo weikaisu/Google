@@ -84,6 +84,17 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 
 /***********  Linked List  **********/
 
+ListNode* LC0876::middleNode(ListNode* head) {
+    ListNode *slow=head, *fast=head;
+
+    while(fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return fast->next ? slow->next : slow;
+}
+
 void LC0237::deleteNode(ListNode* node) {
     // 先把当前节点的值用下一个节点的值覆盖了，然后我们删除下一个节点即可
     ListNode *n = node->next;
