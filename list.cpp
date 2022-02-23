@@ -84,6 +84,23 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 
 /***********  Linked List  **********/
 
+//LinkedList l2;
+//l2.AddNode(1); l2.AddNode(0); l2.AddNode(1);
+//LC1290 run;
+//cout << run.getDecimalValue(l2.GetListHead()) << endl;
+int LC1290::getDecimalValue(ListNode* head) {
+    auto fun = [](const auto &self, ListNode* node, int &m) -> int {
+        if(!node->next) return node->val;
+        int v =  self(self, node->next, m);
+        m*=2;
+        return node->val*m + v;
+    };
+
+    if(!head) return 0;
+    int m = 1;
+    return fun(fun, head, m);
+}
+
 ListNode* LC0876::middleNode(ListNode* head) {
     ListNode *slow=head, *fast=head;
 
