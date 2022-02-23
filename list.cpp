@@ -113,20 +113,62 @@ ListNode* LC0206::reverseList(ListNode* head) {
 ListNode* LC0160::getIntersectionNode(ListNode *headA, ListNode *headB) {
     if(!headA || !headB) return nullptr;
 
-    unordered_set <ListNode*> set;
+    // slower way
+//    unordered_set <ListNode*> set;
+//    while(headA) {
+//        set.emplace(headA);
+//        headA = headA->next;
+//    }
+//    while(headB) {
+//        if(set.count(headB)) return headB;
+//        set.emplace(headB);
+//        headB = headB->next;
+//    }
+//    return nullptr;
 
-    while(headA) {
-        set.emplace(headA);
-        headA = headA->next;
+    // faster way
+    // 如果两个链长度相同的话，那么对应的一个个比下去就能找到，所以只需要把长链表变短即可。
+    // 具体算法为：分别遍历两个链表，得到分别对应的长度。然后求长度的差值，把较长的那个链表向后移动这个差值的个数，然后一一比较即可
+//    auto diff = [](ListNode* l1, ListNode* l2) -> int  {
+//        int len1 = 0;
+//        while(l1) {
+//            l1 = l1->next;
+//            len1++;
+//        }
+//        int len2 = 0;
+//        while(l2) {
+//            l2 = l2->next;
+//            len2++;
+//        }
+//        return len1-len2;
+//    };
+//
+//    int n = diff(headA, headB);
+//    if(n>0)
+//        while(n-- > 0)
+//            headA = headA->next;
+//    else
+//        while(n++ < 0)
+//            headB = headB->next;
+//
+//    while(headA && headB && headA!=headB) {
+//        headA = headA->next;
+//        headB = headB->next;
+//    }
+//    return (headA && headB) ? headA : nullptr;
+
+    // tricky way
+    // 虽然题目中强调了链表中不存在环，但是可以用环的思想来做，
+    // 这里让两条链表分别从各自的开头开始往后遍历，当其中一条遍历到末尾时，
+    // 跳到另一个条链表的开头继续遍历。两个指针最终会相等，而且只有两种情况，一种情况是在交点处相遇，
+    // 另一种情况是在各自的末尾的空节点处相等。为什么一定会相等呢，因为两个指针走过的路程相同，
+    // 是两个链表的长度之和，所以一定会相等。这个思路真的很巧妙，而且更重要的是代码写起来特别的简洁
+    ListNode *a=headA, *b=headB;
+    while(a!=b) {
+        a = a ? a->next : headB;
+        b = b ? b->next : headA;
     }
-
-    while(headB) {
-        if(set.count(headB)) return headB;
-        set.emplace(headB);
-        headB = headB->next;
-    }
-
-    return nullptr;
+    return a;
 }
 
 bool LC0141::hasCycle(ListNode *head) {
