@@ -84,6 +84,14 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 
 /***********  Linked List  **********/
 
+void LC0237::deleteNode(ListNode* node) {
+    // 先把当前节点的值用下一个节点的值覆盖了，然后我们删除下一个节点即可
+    ListNode *n = node->next;
+    node->val = n->val;
+    node->next = n->next;
+    delete n;
+}
+
 bool LC0234::isPalindrome(ListNode* head) {
     if(!head || !head->next) return true;
     stack<int> s;
