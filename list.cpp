@@ -83,6 +83,43 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 
 
 /***********  Linked List  **********/
+
+bool LC0234::isPalindrome(ListNode* head) {
+    if(!head || !head->next) return true;
+    stack<int> s;
+
+    // 先按顺序把所有的结点值都存入到一个栈 stack 里，然后利用栈的后入先出的特性，
+    // 就可以按顺序从末尾取出结点值了，此时再从头遍历一遍链表，就可以比较回文的对应位置了，
+    // 若不同直接返回 false 即可
+//    ListNode* node = head;
+//    while(node) {
+//        s.push(node->val);
+//        node = node->next;
+//    }
+//    while(head) {
+//        int v = s.top(); s.pop();
+//        if(v != head->val) return false;
+//        head = head->next;
+//    }
+//    return true;
+
+    // use fast/slow pointer
+    ListNode *slow=head, *fast=head;
+    s.push(slow->val);
+    while(fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        s.push(slow->val);
+    }
+    if(!fast->next) s.pop();
+    while(slow->next) {
+        slow = slow->next;
+        int v = s.top(); s.pop();
+        if(v != slow->val) return false;
+    }
+    return true;
+}
+
 //LinkedList l;
 //l.AddNode(1); l.AddNode(2); l.AddNode(3);
 //l.AddNode(4); l.AddNode(5); l.AddNode(6);
