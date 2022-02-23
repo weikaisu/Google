@@ -110,13 +110,32 @@ ListNode* LC0206::reverseList(ListNode* head) {
     return h;
 }
 
+ListNode* LC0160::getIntersectionNode(ListNode *headA, ListNode *headB) {
+    if(!headA || !headB) return nullptr;
+
+    unordered_set <ListNode*> set;
+
+    while(headA) {
+        set.emplace(headA);
+        headA = headA->next;
+    }
+
+    while(headB) {
+        if(set.count(headB)) return headB;
+        set.emplace(headB);
+        headB = headB->next;
+    }
+
+    return nullptr;
+}
+
 bool LC0141::hasCycle(ListNode *head) {
     // time(N) space(N)
-    unordered_set<ListNode*> t;
+    unordered_set<ListNode*> set;
     while(head!=nullptr) {
-        if(t.count(head)) return true;
+        if(set.count(head)) return true;
         else {
-            t.insert(head);
+            set.insert(head);
             head=head->next;
         }
     }
