@@ -6,6 +6,24 @@
 
 /***********  Vector List  **********/
 
+//LC0205 run;
+//cout << run.isIsomorphic("ab", "aa") << endl;
+bool LC0205::isIsomorphic(string s, string t) {
+    // 原字符串中的每个字符可由另外一个字符替代，可以被其本身替代，相同的字符一定要被同一个字符替代，
+    // 且一个字符不能被多个字符替代，即不能出现一对多的映射。根据一对一映射的特点，需要用两个 HashMap
+    // 分别来记录原字符串和目标字符串中字符出现情况，由于 ASCII 码只有 256 个字符，所以可以用一个 256
+    // 大小的数组来代替 HashMap，并初始化为0，遍历原字符串，分别从源字符串和目标字符串取出一个字符，
+    // 然后分别在两个数组中查找其值，若不相等，则返回 false，若相等，将其值更新为 i + 1
+    array<int, 256> sa; sa.fill(-1);
+    array<int, 256> st; st.fill(-1);
+
+    for(int i=0; i<s.size(); i++) {
+        if(sa[s[i]]!=st[t[i]]) return false;
+        sa[s[i]] = st[t[i]] = i;
+    }
+    return true;
+}
+
 bool LC0202::isHappy(int n) {
     // 我们可以用 HashSet 来记录所有出现过的数字，然后每出现一个新数字，
     // 在 HashSet 中查找看是否存在，若不存在则加入表中，若存在则跳出循环，并且判断此数是否为1，
