@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0202 { public: bool isHappy(int n); };
 class LC0169 { public: int majorityElement(vector<int>& nums); };
 class LC0066 { public: vector<int> plusOne(vector<int>& digits); };
 class LC0027 { public: int removeElement(vector<int>& nums, int val); };
