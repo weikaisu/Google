@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0217 { public: bool containsDuplicate(vector<int>& nums); };
 class LC0205 { public: bool isIsomorphic(string s, string t); };
 class LC0202 { public: bool isHappy(int n); };
 class LC0169 { public: int majorityElement(vector<int>& nums); };

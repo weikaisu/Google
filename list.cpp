@@ -6,6 +6,15 @@
 
 /***********  Vector List  **********/
 
+bool LC0217::containsDuplicate(vector<int>& nums) {
+    unordered_set <int> set;
+    for(auto n:nums) {
+        if(set.count(n)) return true;
+        set.insert(n);
+    }
+    return false;
+}
+
 //LC0205 run;
 //cout << run.isIsomorphic("ab", "aa") << endl;
 bool LC0205::isIsomorphic(string s, string t) {
