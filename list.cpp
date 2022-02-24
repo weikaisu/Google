@@ -4,12 +4,25 @@
 
 #include "list.h"
 
+/***********  Vector List  **********/
+int LC0169::majorityElement(vector<int>& nums) {
+    int val=0, cnt=0;
+    for(auto n:nums) {
+        if(!cnt) {
+            val = n;
+            cnt++;
+        } else {
+            (val==n) ? cnt++ : cnt--;
+        }
+    }
+    return val;
+}
+
 //LC0066 run;
 //vector<int> nums{9,9,9}, ans;
 //ans=run.plusOne(nums);
 //for(auto n:nums) cout << n << ' ';
 //cout << endl;
-/***********  Vector List  **********/
 vector<int> LC0066::plusOne(vector<int>& digits) {
     int c=1;
     for(int i=digits.size()-1 ; i>=0 ; i--) {
