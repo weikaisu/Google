@@ -6,6 +6,15 @@
 
 /***********  Vector List  **********/
 
+bool LC0219::containsNearbyDuplicate(vector<int>& nums, int k) {
+    unordered_map<int, int> map;
+    for(int i=0; i<nums.size(); i++) {
+        if(map.find(nums[i])!=map.end() && i-map[nums[i]] <=k) return true;
+        map[nums[i]] = i;
+    }
+    return false;
+}
+
 bool LC0217::containsDuplicate(vector<int>& nums) {
     unordered_set <int> set;
     for(auto n:nums) {
