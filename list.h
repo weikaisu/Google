@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0448 { public: vector<int> findDisappearedNumbers(vector<int>& nums); };
 class LC0409 { public: int longestPalindrome(string s); };
 class LC0389 { public: char findTheDifference(string s, string t); };
 class LC0387 { public: int firstUniqChar(string s); };

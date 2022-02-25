@@ -5,12 +5,37 @@
 #include "list.h"
 
 // 可顯示字元編號範圍是32-126（0x20-0x7E），共95個字元。
-// 跟char有關的hash table都可以用 vector<int> map(128,0)來放
+// 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
 
+vector<int> LC0448::findDisappearedNumbers(vector<int>& nums) {
+    // 使用額外的空間作hash table來紀錄出現過的
+//    unordered_set<int> set;
+//    vector<int> res;
+//    for(auto n:nums)
+//        set.insert(n);
+//    for(int i=1; i<=nums.size(); i++)
+//        if(!set.count(i)) res.push_back(i);
+//    return res;
+
+    // 不使用額外空間。
+    // 将nums[i]置换到其对应的位置nums[nums[i]-1]上去，比如对于没有缺失项的正确的顺序应该是[1, 2, 3, 4, 5, 6, 7, 8]，
+    // 而我们现在却是[4,3,2,7,8,2,3,1]，我们需要把数字移动到正确的位置上去，比如第一个4就应该和7先交换个位置，以此类推，
+    // 最后得到的顺序应该是[1, 2, 3, 4, 3, 2, 7, 8]，我们最后在对应位置检验，如果nums[i]和i+1不等，那么我们将i+1存入结果res中即可
+    vector<int> res;
+    for(int i=0; i<nums.size(); i++)
+        if(nums[i]!=nums[nums[i]-1]) {
+            swap(nums[i], nums[nums[i] - 1]);
+            i--;
+        }
+    for(int i=0; i<nums.size(); i++)
+        if(nums[i] != i+1) res.push_back(i+1);
+    return res;
+}
+
 int LC0409::longestPalindrome(string s) {
-    vector<int> map(128,0);
+    array<int,128> map; map.fill(0);
     int even=0, odd=0;
     for(auto c:s) ++map[c];
     for(auto v:map) {
@@ -22,7 +47,7 @@ int LC0409::longestPalindrome(string s) {
 
 char LC0389::findTheDifference(string s, string t) {
     // 用哈希表来建立字符和个数之间的映射，如果在遍历t的时候某个映射值小于0了，那么返回该字符即可
-//    vector<int> map(128,0); map;
+//    array<int,128> map; map.fill(0);
 //    for(auto c:s) ++map[c];
 //    for(auto c:t)
 //        if(--map[c] < 0) return c;
@@ -37,7 +62,7 @@ char LC0389::findTheDifference(string s, string t) {
 
 int LC0387::firstUniqChar(string s) {
     // 用哈希表建立每个字符和其出现次数的映射，然后按顺序遍历字符串，找到第一个出现次数为1的字符，返回其位置即可
-    vector<int> map(128,0);
+    array<int,128> map; map.fill(0);
     for(auto c:s) ++map[c];
     for(int i=0; i<s.size(); i++)
         if(map[s[i]]==1) return i;
@@ -46,7 +71,7 @@ int LC0387::firstUniqChar(string s) {
 
 bool LC0383::canConstruct(string ransomNote, string magazine) {
     // 用哈希Map统计字符的个数
-    vector<int> map(128,0);
+    array<int,128> map; map.fill(0);
     for(auto c:magazine) ++map[c];
     for(auto c:ransomNote)
         if(--map[c] < 0) return false;
