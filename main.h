@@ -1,6 +1,7 @@
 #ifndef GOOGLE_MAIN_H
 #define GOOGLE_MAIN_H
 
+#include <array>
 #include <iostream>
 #include <string>
 #include <regex>

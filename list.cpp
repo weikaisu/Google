@@ -6,6 +6,21 @@
 
 /***********  Vector List  **********/
 
+bool LC0242::isAnagram(string s, string t) {
+    // 先判断两个字符串长度是否相同，不相同直接返回false。然后把s中所有的字符出现个数统计起来，
+    // 存入一个大小为26的数组中，因为题目中限定了输入字符串为小写字母组成。然后我们再来统计t字符串，如果发现不匹配则返回false。
+    // 存入一个大小为26的数组中，因为题目中限定了输入字符串为小写字母组成。然后我们再来统计t字符串，如果发现不匹配则返回false。
+    if(s.size()!=t.size()) return false;
+
+    array<int, 26> set; set.fill(0);
+    for(auto c:s)
+        ++set[c-'a'];
+    for(auto c:t) {
+        if(--set[c-'a'] < 0) return false;
+    }
+    return true;
+}
+
 bool LC0219::containsNearbyDuplicate(vector<int>& nums, int k) {
     unordered_map<int, int> map;
     for(int i=0; i<nums.size(); i++) {

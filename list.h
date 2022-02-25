@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0242 { public: bool isAnagram(string s, string t); };
 class LC0219 { public: bool containsNearbyDuplicate(vector<int>& nums, int k); };
 class LC0217 { public: bool containsDuplicate(vector<int>& nums); };
 class LC0205 { public: bool isIsomorphic(string s, string t); };
