@@ -6,6 +6,21 @@
 
 /***********  Vector List  **********/
 
+char LC0389::findTheDifference(string s, string t) {
+    // 用哈希表来建立字符和个数之间的映射，如果在遍历t的时候某个映射值小于0了，那么返回该字符即可
+//    unordered_map<char,int> map;
+//    for(auto c:s) ++map[c];
+//    for(auto c:t)
+//        if(--map[c] < 0) return c;
+//    return 0;
+
+    // 使用位操作Bit Manipulation来做，利用异或的性质，相同位返回0，这样相同的字符都抵消了，剩下的就是后加的那个字符
+    char res = 0;
+    for(auto c:s) res ^= c;
+    for(auto c:t) res ^= c;
+    return res;
+}
+
 bool LC0383::canConstruct(string ransomNote, string magazine) {
     // 用哈希Map统计字符的个数
     unordered_map<char,int> map;

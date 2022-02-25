@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0389 { public: char findTheDifference(string s, string t); };
 class LC0383 { public: bool canConstruct(string ransomNote, string magazine); };
 class LC0350 { public: vector<int> intersect(vector<int>& nums1, vector<int>& nums2); };
 class LC0349 { public: vector<int> intersection(vector<int>& nums1, vector<int>& nums2); };
