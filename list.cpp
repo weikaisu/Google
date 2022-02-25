@@ -21,6 +21,15 @@ char LC0389::findTheDifference(string s, string t) {
     return res;
 }
 
+int LC0387::firstUniqChar(string s) {
+    // 用哈希表建立每个字符和其出现次数的映射，然后按顺序遍历字符串，找到第一个出现次数为1的字符，返回其位置即可
+    unordered_map<char,int> map;
+    for(auto c:s) ++map[c];
+    for(int i=0; i<s.size(); i++)
+        if(map[s[i]]==1) return i;
+    return -1;
+}
+
 bool LC0383::canConstruct(string ransomNote, string magazine) {
     // 用哈希Map统计字符的个数
     unordered_map<char,int> map;
