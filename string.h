@@ -6,10 +6,12 @@
 #define GOOGLE_STRING_H
 
 #include "main.h"
+#include <sstream>
 
 using namespace std;
 
 /***********  Easy  **********/
+class LC0290 { public: bool wordPattern(string pattern, string s); };
 class LC0067 { public: string addBinary(string a, string b); };
 class LC0058 { public: int lengthOfLastWord(string& s); };
 class LC0028 { public: int strStr(string haystack, string needle); };

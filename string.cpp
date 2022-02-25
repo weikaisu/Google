@@ -4,6 +4,29 @@
 
 #include "string.h"
 
+//LC0290 run;
+//cout << run.wordPattern("abba", "dog cat cat dog") << endl;
+bool LC0290::wordPattern(string pattern, string s) {
+    // 首先检查其是否在 HashMap 中出现，若出现，其映射的单词若不是此时对应的单词，则返回 false。
+    // 如果没有在 HashMap 中出现，我们还要遍历一遍 HashMap，看新遇到的单词是否已经是其中的映射，
+    // 若已经有其他映射，直接返回 false，如果没有，再跟新遇到的字符建立映射。最后循环退出后，要检查此时的 i 是否和 n 相同，
+    // 这是检查一对一映射的最后一步，因为当 str 中的单词处理完了之后，pattern 中就不能有多余的字符了
+    unordered_map<char, string> map;
+    istringstream in(s);
+    int i = 0;
+    for(string word; in>>word; i++) {
+        if(i>=pattern.size()) continue;
+        if(map.count(pattern[i])) {
+            if (map[pattern[i]] != word) return false;
+        } else {
+            for(auto m:map)
+                if(m.second == word) return false;
+            map[pattern[i]] = word;
+        }
+    }
+    return i==pattern.size();
+}
+
 //LC0067 run;
 //cout << run.addBinary("11","1");
 string LC0067::addBinary(string a, string b) {

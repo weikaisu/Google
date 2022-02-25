@@ -6,6 +6,9 @@
 
 /***********  Vector List  **********/
 
+//LC0268 run;
+//vector<int> v {3,0,1};
+//cout << run.missingNumber(v);
 int LC0268::missingNumber(vector<int>& nums) {
     // 用等差数列的求和公式求出0到n之间所有的数字之和，然后再遍历数组算出给定数字的累积和，然后做减法，差值就是丢失的那个数字
     int sum=0, n=nums.size();
@@ -16,7 +19,6 @@ int LC0268::missingNumber(vector<int>& nums) {
 
 bool LC0242::isAnagram(string s, string t) {
     // 先判断两个字符串长度是否相同，不相同直接返回false。然后把s中所有的字符出现个数统计起来，
-    // 存入一个大小为26的数组中，因为题目中限定了输入字符串为小写字母组成。然后我们再来统计t字符串，如果发现不匹配则返回false。
     // 存入一个大小为26的数组中，因为题目中限定了输入字符串为小写字母组成。然后我们再来统计t字符串，如果发现不匹配则返回false。
     if(s.size()!=t.size()) return false;
 
