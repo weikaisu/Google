@@ -6,6 +6,20 @@
 
 /***********  Vector List  **********/
 
+vector<int> LC0350::intersect(vector<int>& nums1, vector<int>& nums2) {
+    // 允许返回重复的数字，而且是尽可能多的返回，之前那道题是说有重复的数字只返回一个就行。那么这道题用 HashMap 来建立 nums1
+    // 中字符和其出现个数之间的映射, 然后遍历 nums2 数组，如果当前字符在 HashMap 中的个数大于0，则将此字符加入结果 res 中，
+    // 然后 HashMap 的对应值自减1
+    unordered_map<int,int> map;
+    vector<int> res;
+
+    for(auto n:nums1) ++map[n];
+    for(auto n:nums2)
+        if(map[n]-- > 0) res.push_back(n);
+    cout << endl;
+    return res;
+}
+
 vector<int> LC0349::intersection(vector<int>& nums1, vector<int>& nums2) {
     // 用个 HashSet 把 nums1 都放进去，然后遍历 nums2 的元素，如果在 HashSet 中存在，
     // 说明是交集的部分，加入结果的 HashSet 中，最后再把结果转为 vector 的形式即可
