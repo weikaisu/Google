@@ -6,6 +6,15 @@
 
 /***********  Vector List  **********/
 
+vector<int> LC0349::intersection(vector<int>& nums1, vector<int>& nums2) {
+    // 用个 HashSet 把 nums1 都放进去，然后遍历 nums2 的元素，如果在 HashSet 中存在，
+    // 说明是交集的部分，加入结果的 HashSet 中，最后再把结果转为 vector 的形式即可
+    unordered_set<int> res, set(nums1.begin(), nums1.end());
+    for(auto n:nums2)
+        if(set.count(n)) res.insert(n);
+    return vector<int>(res.begin(), res.end());
+}
+
 //LC0268 run;
 //vector<int> v {3,0,1};
 //cout << run.missingNumber(v);
@@ -34,7 +43,7 @@ bool LC0242::isAnagram(string s, string t) {
 bool LC0219::containsNearbyDuplicate(vector<int>& nums, int k) {
     unordered_map<int, int> map;
     for(int i=0; i<nums.size(); i++) {
-        if(map.find(nums[i])!=map.end() && i-map[nums[i]] <=k) return true;
+        if(map.count(nums[i]) && i-map[nums[i]] <=k) return true;
         map[nums[i]] = i;
     }
     return false;

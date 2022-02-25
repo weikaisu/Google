@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0349 { public: vector<int> intersection(vector<int>& nums1, vector<int>& nums2); };
 class LC0268 { public: int missingNumber(vector<int>& nums); };
 class LC0242 { public: bool isAnagram(string s, string t); };
 class LC0219 { public: bool containsNearbyDuplicate(vector<int>& nums, int k); };
