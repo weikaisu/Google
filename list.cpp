@@ -6,6 +6,15 @@
 
 /***********  Vector List  **********/
 
+bool LC0383::canConstruct(string ransomNote, string magazine) {
+    // 用哈希Map统计字符的个数
+    unordered_map<char,int> map;
+    for(auto c:magazine) ++map[c];
+    for(auto c:ransomNote)
+        if(--map[c] < 0) return false;
+    return true;
+}
+
 vector<int> LC0350::intersect(vector<int>& nums1, vector<int>& nums2) {
     // 允许返回重复的数字，而且是尽可能多的返回，之前那道题是说有重复的数字只返回一个就行。那么这道题用 HashMap 来建立 nums1
     // 中字符和其出现个数之间的映射, 然后遍历 nums2 数组，如果当前字符在 HashMap 中的个数大于0，则将此字符加入结果 res 中，
