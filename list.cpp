@@ -4,11 +4,25 @@
 
 #include "list.h"
 
+// 可顯示字元編號範圍是32-126（0x20-0x7E），共95個字元。
+// 跟char有關的hash table都可以用 vector<int> map(128,0)來放
+
 /***********  Vector List  **********/
+
+int LC0409::longestPalindrome(string s) {
+    vector<int> map(128,0);
+    int even=0, odd=0;
+    for(auto c:s) ++map[c];
+    for(auto v:map) {
+        even += v&(~1); // 清掉last bit取得偶數值，累計多少偶數；
+        odd  |= v&( 1); // 看是否有積數值可作為回文中間那一char
+    }
+    return even+odd;
+}
 
 char LC0389::findTheDifference(string s, string t) {
     // 用哈希表来建立字符和个数之间的映射，如果在遍历t的时候某个映射值小于0了，那么返回该字符即可
-//    unordered_map<char,int> map;
+//    vector<int> map(128,0); map;
 //    for(auto c:s) ++map[c];
 //    for(auto c:t)
 //        if(--map[c] < 0) return c;
@@ -23,7 +37,7 @@ char LC0389::findTheDifference(string s, string t) {
 
 int LC0387::firstUniqChar(string s) {
     // 用哈希表建立每个字符和其出现次数的映射，然后按顺序遍历字符串，找到第一个出现次数为1的字符，返回其位置即可
-    unordered_map<char,int> map;
+    vector<int> map(128,0);
     for(auto c:s) ++map[c];
     for(int i=0; i<s.size(); i++)
         if(map[s[i]]==1) return i;
@@ -32,7 +46,7 @@ int LC0387::firstUniqChar(string s) {
 
 bool LC0383::canConstruct(string ransomNote, string magazine) {
     // 用哈希Map统计字符的个数
-    unordered_map<char,int> map;
+    vector<int> map(128,0);
     for(auto c:magazine) ++map[c];
     for(auto c:ransomNote)
         if(--map[c] < 0) return false;

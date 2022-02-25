@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0409 { public: int longestPalindrome(string s); };
 class LC0389 { public: char findTheDifference(string s, string t); };
 class LC0387 { public: int firstUniqChar(string s); };
 class LC0383 { public: bool canConstruct(string ransomNote, string magazine); };
