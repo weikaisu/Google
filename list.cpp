@@ -9,6 +9,29 @@
 
 /***********  Vector List  **********/
 
+vector<string> LC0599::findRestaurant(vector<string>& list1, vector<string>& list2) {
+    // 这道题给了我们两个字符串数组，让我们找到坐标位置之和最小的相同的字符串。那么对于这种数组项和其坐标之间关系的题，
+    // 最先考虑到的就是要建立数据和其位置坐标之间的映射。我们建立list1的值和坐标的之间的映射，然后遍历list2，
+    // 如果当前遍历到的字符串在list1中也出现了，那么我们计算两个的坐标之和，如果跟我们维护的最小坐标和mn相同，
+    // 那么将这个字符串加入结果res中，如果比mn小，那么mn更新为这个较小值，然后将结果res清空并加入这个字符串
+    vector<string> res;
+    unordered_map<string, int> m;
+    int mm = INT_MAX;
+    for(int i=0; i<list1.size(); i++) m[list1[i]] = i;
+    for(int i=0; i<list2.size(); i++) {
+        if(m.count(list2[i])) {
+            int sum = i + m[list2[i]];
+            if(sum == mm)
+                res.push_back(list2[i]);
+            else if(sum < mm) {
+                mm = sum;
+                res = {list2[i]};
+            }
+        }
+    }
+    return res;
+}
+
 int LC0594::findLHS(vector<int>& nums) {
     // 遍历每个数字时，先累加其映射值，然后查找该数字加1是否存在，存在的话用 m[num] 和 m[num+1] 的和来更新结果 res，
     // 同时，还要查找该数字减1是否存在，存在的话用 m[num] 和 m[num-1] 的和来更新结果 res
