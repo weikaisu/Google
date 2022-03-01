@@ -9,6 +9,21 @@
 
 /***********  Vector List  **********/
 
+int LC0594::findLHS(vector<int>& nums) {
+    // 遍历每个数字时，先累加其映射值，然后查找该数字加1是否存在，存在的话用 m[num] 和 m[num+1] 的和来更新结果 res，
+    // 同时，还要查找该数字减1是否存在，存在的话用 m[num] 和 m[num-1] 的和来更新结果 res
+    int res = 0 ;
+    unordered_map<int, int> map;
+    for(auto num:nums) {
+        ++map[num];
+        if(map.count(num+1))
+            res = max(res, map[num]+map[num+1]);
+        if(map.count(num-1))
+            res = max(res, map[num]+map[num-1]);
+    }
+    return res;
+}
+
 int LC0575::distributeCandies(vector<int>& candyType) {
     // 这道题给我们一堆糖，每种糖的个数不定，分给两个人，让我们求其中一个人能拿到的最大的糖的种类数。那么我们想，
     // 如果总共有n个糖，平均分给两个人，每人得到n/2块糖，那么能拿到的最大的糖的种类数也就是n／2种，不可能再多，
