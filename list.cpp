@@ -9,6 +9,20 @@
 
 /***********  Vector List  **********/
 
+int LC0575::distributeCandies(vector<int>& candyType) {
+    // 这道题给我们一堆糖，每种糖的个数不定，分给两个人，让我们求其中一个人能拿到的最大的糖的种类数。那么我们想，
+    // 如果总共有n个糖，平均分给两个人，每人得到n/2块糖，那么能拿到的最大的糖的种类数也就是n／2种，不可能再多，
+    // 只可能再少。那么我们要做的就是统计出总共的糖的种类数，如果糖的种类数小于n/2，说明拿不到n/2种糖，
+    // 最多能拿到的种类数数就是当前糖的总种类数，我们利用集合set的自动去重复特性来求出糖的种类数， 然后跟n/2比较，取二者之中的较小值返回即可
+
+//    unordered_set<int> s;
+//    for(auto type: candyType)
+//        s.insert(type);
+//    return min(s.size(), candyType.size()/2);
+
+    return min(unordered_set<int>(candyType.begin(), candyType.end()).size(), candyType.size()/2);
+}
+
 vector<string> LC0500::findWords(vector<string>& words) {
     // 把键盘的三行字符分别保存到三个set中，然后遍历每个单词中的每个字符，分别看当前字符是否在三个集合中，
     // 如果在，对应的标识变量变为1，我们统计三个标识变量之和就知道有几个集合参与其中了
