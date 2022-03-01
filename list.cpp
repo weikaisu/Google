@@ -9,6 +9,27 @@
 
 /***********  Vector List  **********/
 
+vector<string> LC0500::findWords(vector<string>& words) {
+    // 把键盘的三行字符分别保存到三个set中，然后遍历每个单词中的每个字符，分别看当前字符是否在三个集合中，
+    // 如果在，对应的标识变量变为1，我们统计三个标识变量之和就知道有几个集合参与其中了
+    unordered_set<char> row1 {'q','w','e','r','t','y','u','i','o','p'};
+    unordered_set<char> row2 {'a','s','d','f','g','h','j','k','l'};
+    unordered_set<char> row3 {'z','x','c','v','b','n','m'};
+    vector<string> res;
+    for(auto word:words) {
+        int r1=0, r2=0, r3=0;
+        for(auto w:word) {
+            if(w < 'a') w+=32;  // 大寫的字母變成小寫
+            if(row1.count(w)) r1 = 1;
+            if(row2.count(w)) r2 = 1;
+            if(row3.count(w)) r3 = 1;
+            if(r1 + r2 + r3 >1) break;
+        }
+        if(r1 + r2 + r3 == 1) res.push_back(word);
+    }
+    return res;
+}
+
 vector<int> LC0496::nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
     // 建立每个数字和其右边第一个较大数之间的映射，没有的话就是-1。我们遍历原数组中的所有数字，如果此时栈不为空，
     // 且栈顶元素小于当前数字，说明当前数字就是栈顶元素的右边第一个较大数，那么建立二者的映射，并且去除当前栈顶元素，

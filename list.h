@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0500 { public: vector<string> findWords(vector<string>& words); };
 class LC0496 { public: vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2); };
 class LC0448 { public: vector<int> findDisappearedNumbers(vector<int>& nums); };
 class LC0409 { public: int longestPalindrome(string s); };
