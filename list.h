@@ -41,6 +41,58 @@ public:
 };
 
 /***********  Easy  **********/
+// LC0706
+struct MyHashMap {
+    MyHashMap() {
+
+    }
+    void put(int key, int value) {
+        auto l = &(t[key%1000]);
+        for(auto e:*l) {
+            if (e[0] == key) l->remove(e);
+            break;
+        }
+        l->push_front(array<int,2> {key, value});
+    }
+    int get(int key) {
+        auto l = t[key%1000];
+        for(auto e:l) {
+            if(e[0] == key) return e[1];
+        }
+        return -1;
+    }
+    void remove(int key) {
+        auto l = &(t[key%1000]);
+        for(auto e:*l) {
+            if (e[0] == key) l->remove(e);
+            break;
+        }
+    }
+private:
+    array<forward_list<array<int,2>>, 1000> t;
+};
+// LC0705
+struct MyHashSet {
+    // 範圍是[0, 1000000]，用array搭配list來優化空間
+    MyHashSet() {};
+    void add(int key) {
+        auto l = t[key%1000];
+        for(auto e:l)
+            if(e == key) return;
+        t[key%1000].push_front(key);
+    };
+    void remove(int key) {
+        t[key%1000].remove(key);
+    };
+    bool contains(int key) {
+        auto l = t[key%1000];
+        for(auto e:l)
+            if(e == key) return true;
+        return false;
+    };
+private:
+    array<forward_list<int>, 1000> t;
+};
 struct LC0697 { int findShortestSubArray(vector<int>& nums); };
 struct LC0645 { vector<int> findErrorNums(vector<int>& nums); };
 struct LC0599 { vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
