@@ -44,41 +44,41 @@ public:
 };
 
 /***********  Easy  **********/
-class LC0645 { public: vector<int> findErrorNums(vector<int>& nums); };
-class LC0599 { public: vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
-class LC0594 { public: int findLHS(vector<int>& nums); };
-class LC0575 { public: int distributeCandies(vector<int>& candyType); };
-class LC0500 { public: vector<string> findWords(vector<string>& words); };
-class LC0496 { public: vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2); };
-class LC0448 { public: vector<int> findDisappearedNumbers(vector<int>& nums); };
-class LC0409 { public: int longestPalindrome(string s); };
-class LC0389 { public: char findTheDifference(string s, string t); };
-class LC0387 { public: int firstUniqChar(string s); };
-class LC0383 { public: bool canConstruct(string ransomNote, string magazine); };
-class LC0350 { public: vector<int> intersect(vector<int>& nums1, vector<int>& nums2); };
-class LC0349 { public: vector<int> intersection(vector<int>& nums1, vector<int>& nums2); };
-class LC0268 { public: int missingNumber(vector<int>& nums); };
-class LC0242 { public: bool isAnagram(string s, string t); };
-class LC0219 { public: bool containsNearbyDuplicate(vector<int>& nums, int k); };
-class LC0217 { public: bool containsDuplicate(vector<int>& nums); };
-class LC0205 { public: bool isIsomorphic(string s, string t); };
-class LC0202 { public: bool isHappy(int n); };
-class LC0169 { public: int majorityElement(vector<int>& nums); };
-class LC0066 { public: vector<int> plusOne(vector<int>& digits); };
-class LC0027 { public: int removeElement(vector<int>& nums, int val); };
-class LC0026 { public: int removeDuplicates(vector<int>& nums); };
-class LC0001 { public: vector<int> twoSum(vector<int>& nums, int target); };
+struct LC0645 { vector<int> findErrorNums(vector<int>& nums); };
+struct LC0599 { vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
+struct LC0594 { int findLHS(vector<int>& nums); };
+struct LC0575 { int distributeCandies(vector<int>& candyType); };
+struct LC0500 { vector<string> findWords(vector<string>& words); };
+struct LC0496 { vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2); };
+struct LC0448 { vector<int> findDisappearedNumbers(vector<int>& nums); };
+struct LC0409 { int longestPalindrome(string s); };
+struct LC0389 { char findTheDifference(string s, string t); };
+struct LC0387 { int firstUniqChar(string s); };
+struct LC0383 { bool canConstruct(string ransomNote, string magazine); };
+struct LC0350 { vector<int> intersect(vector<int>& nums1, vector<int>& nums2); };
+struct LC0349 { vector<int> intersection(vector<int>& nums1, vector<int>& nums2); };
+struct LC0268 { int missingNumber(vector<int>& nums); };
+struct LC0242 { bool isAnagram(string s, string t); };
+struct LC0219 { bool containsNearbyDuplicate(vector<int>& nums, int k); };
+struct LC0217 { bool containsDuplicate(vector<int>& nums); };
+struct LC0205 { bool isIsomorphic(string s, string t); };
+struct LC0202 { bool isHappy(int n); };
+struct LC0169 { int majorityElement(vector<int>& nums); };
+struct LC0066 { vector<int> plusOne(vector<int>& digits); };
+struct LC0027 { int removeElement(vector<int>& nums, int val); };
+struct LC0026 { int removeDuplicates(vector<int>& nums); };
+struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
-class LC1290 { public: int getDecimalValue(ListNode* head); };
-class LC0876 { public: ListNode* middleNode(ListNode* head); };
-class LC0237 { public: void deleteNode(ListNode* node); };
-class LC0234 { public: bool isPalindrome(ListNode* head); };
-class LC0206 { public: ListNode* reverseList(ListNode* head); };
-class LC0203 { public: ListNode* removeElements(ListNode* head, int val); };
-class LC0160 { public: ListNode *getIntersectionNode(ListNode *headA, ListNode *headB); };
-class LC0141 { public: bool hasCycle(ListNode *head); };
-class LC0083 { public: ListNode* deleteDuplicates(ListNode* head); };
-class LC0021 { public: ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
+struct LC1290 { int getDecimalValue(ListNode* head); };
+struct LC0876 { ListNode* middleNode(ListNode* head); };
+struct LC0237 { void deleteNode(ListNode* node); };
+struct LC0234 { bool isPalindrome(ListNode* head); };
+struct LC0206 { ListNode* reverseList(ListNode* head); };
+struct LC0203 { ListNode* removeElements(ListNode* head, int val); };
+struct LC0160 { ListNode *getIntersectionNode(ListNode *headA, ListNode *headB); };
+struct LC0141 { bool hasCycle(ListNode *head); };
+struct LC0083 { ListNode* deleteDuplicates(ListNode* head); };
+struct LC0021 { ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
 
 /***********  Medium  **********/
 

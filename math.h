@@ -5,8 +5,8 @@
 using namespace std;
 
 /***********  Easy  **********/
-class LC0171 { public: int titleToNumber(string columnTitle); };
-class LC0007 { public: int reverse(int x); };
+struct LC0171 { int titleToNumber(string columnTitle); };
+struct LC0007 { int reverse(int x); };
 
 /***********  Medium  **********/
 

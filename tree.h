@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <unordered_set>
 
 using namespace std;
 
@@ -34,13 +35,14 @@ struct TreeNode {
 class tree {};
 
 /***********  Easy  **********/
-struct LC637 { vector<double> averageOfLevels(TreeNode* root); };
-struct LC617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };
-struct LC606 { string tree2str(TreeNode* root); };
-struct LC543 { int diameterOfBinaryTree(TreeNode* root); };
-struct LC404 { int sumOfLeftLeaves(TreeNode* root); };
-struct LC110 { bool isBalanced(TreeNode* root); };
-struct LC100 { bool isSameTree(TreeNode* p, TreeNode* q); };
+struct LC0653 { bool findTarget(TreeNode* root, int k); };
+struct LC0637 { vector<double> averageOfLevels(TreeNode* root); };
+struct LC0617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };
+struct LC0606 { string tree2str(TreeNode* root); };
+struct LC0543 { int diameterOfBinaryTree(TreeNode* root); };
+struct LC0404 { int sumOfLeftLeaves(TreeNode* root); };
+struct LC0110 { bool isBalanced(TreeNode* root); };
+struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
 
 /***********  Medium  **********/
 

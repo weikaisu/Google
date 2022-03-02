@@ -8,8 +8,8 @@
 #include "main.h"
 using namespace std;
 
-class LC0070 { public: int climbStairs(int n); };
-class LC0053 { public: int maxSubArray(vector<int>& nums); };
+struct LC0070 { int climbStairs(int n); };
+struct LC0053 { int maxSubArray(vector<int>& nums); };
 
 
 #endif //GOOGLE_DP_H

@@ -4,7 +4,35 @@
 
 #include "tree.h"
 
-vector<double> LC637::averageOfLevels(TreeNode* root) {
+bool LC0653::findTarget(TreeNode* root, int k) {
+    // 遍历二叉树就行，然后用一个HashSet，在递归函数函数中，如果node为空，返回false。如果k减去当前结点值在HashSet中存在，直接返回true；
+    // 否则就将当前结点值加入HashSet，然后对左右子结点分别调用递归函数并且或起来返回即可
+    // recursive
+//    auto fun = [&](const auto& self, TreeNode* node, int k, unordered_set<int> &s) -> bool {
+//        if(!node) return false;
+//        if(s.count(k-node->val)) return true;
+//        s.insert(node->val);
+//        return self(self, node->left, k, s) || self(self, node->right, k, s);
+//    };
+//
+//    unordered_set<int> s;
+//    return fun(fun, root, k, s);
+
+    // iterative
+    unordered_set<int> s;
+    queue<TreeNode*> q{{root}};
+
+    while(q.size()) {
+        TreeNode * node = q.front(); q.pop();
+        if(s.count(k-node->val)) return true;
+        s.insert(node->val);
+        if(node->left)  q.push(node->left);
+        if(node->right) q.push(node->right);
+    }
+    return false;
+}
+
+vector<double> LC0637::averageOfLevels(TreeNode* root) {
     if(!root) return {};
 
     vector<double> ans;
@@ -27,7 +55,7 @@ vector<double> LC637::averageOfLevels(TreeNode* root) {
     return ans;
 }
 
-TreeNode* LC617::mergeTrees(TreeNode* root1, TreeNode* root2) {
+TreeNode* LC0617::mergeTrees(TreeNode* root1, TreeNode* root2) {
     if(!root1) return root2; if(!root2) return root1;
 
     // merge root2 to root1
@@ -38,7 +66,7 @@ TreeNode* LC617::mergeTrees(TreeNode* root1, TreeNode* root2) {
     return root;
 }
 
-string LC606::tree2str(TreeNode* root) {
+string LC0606::tree2str(TreeNode* root) {
     if(!root) return "";
 
     const string m = to_string(root->val);
@@ -53,7 +81,7 @@ string LC606::tree2str(TreeNode* root) {
     return m+"("+l+")"+"("+r+")";
 }
 
-int LC543::diameterOfBinaryTree(TreeNode* root) {
+int LC0543::diameterOfBinaryTree(TreeNode* root) {
     auto diameter = [](const auto &self, TreeNode *root, int &len) -> int {
         if(!root) return -1;
         int left_len  = self(self, root->left,  len) +1;
@@ -67,7 +95,7 @@ int LC543::diameterOfBinaryTree(TreeNode* root) {
     return len;
 }
 
-int LC404::sumOfLeftLeaves(TreeNode* root) {
+int LC0404::sumOfLeftLeaves(TreeNode* root) {
     int sum = 0;
     if(!root) return sum;
 
@@ -81,7 +109,7 @@ int LC404::sumOfLeftLeaves(TreeNode* root) {
 //LC110 run;
 //cout << run.isBalanced(root) << endl;
 //root->CleanTree(root);
-bool LC110::isBalanced(TreeNode* root) {
+bool LC0110::isBalanced(TreeNode* root) {
     auto getTreeHeight = [](const auto &self, TreeNode* root, bool &isBalanse) -> int {
         if(!root) return 0;
         int lHeight = self(self, root->left, isBalanse);
@@ -96,7 +124,7 @@ bool LC110::isBalanced(TreeNode* root) {
     return isBalance;
 }
 
-bool LC100::isSameTree(TreeNode* p, TreeNode* q) {
+bool LC0100::isSameTree(TreeNode* p, TreeNode* q) {
     if(!p&&!q) return true;
     if((!p||!q) || (p->val!=q->val)) return false;
     return isSameTree(p->left, q->left) || isSameTree(p->right, q->right);
