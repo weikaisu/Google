@@ -9,6 +9,19 @@
 
 /***********  Vector List  **********/
 
+vector<int> LC0645::findErrorNums(vector<int>& nums) {
+    // 遍历每个数字，然后将其应该出现的位置上的数字变为其相反数，这样如果我们再变为其相反数之前已经成负数了，说明该数字是重复数，
+    // 将其将入结果res中，然后再遍历原数组，如果某个位置上的数字为正数，说明该位置对应的数字没有出现过，加入res中即可
+    vector<int> res (2, -1);
+    for(auto n:nums) {
+        if(nums[abs(n)-1]<0) res[0]=abs(n);
+        else nums[abs(n)-1] *= -1;
+    }
+    for(int i=0; i<nums.size(); i++)
+        if(nums[i]>0) res[1]=i+1;
+    return res;
+}
+
 vector<string> LC0599::findRestaurant(vector<string>& list1, vector<string>& list2) {
     // 这道题给了我们两个字符串数组，让我们找到坐标位置之和最小的相同的字符串。那么对于这种数组项和其坐标之间关系的题，
     // 最先考虑到的就是要建立数据和其位置坐标之间的映射。我们建立list1的值和坐标的之间的映射，然后遍历list2，

@@ -44,6 +44,7 @@ public:
 };
 
 /***********  Easy  **********/
+class LC0645 { public: vector<int> findErrorNums(vector<int>& nums); };
 class LC0599 { public: vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
 class LC0594 { public: int findLHS(vector<int>& nums); };
 class LC0575 { public: int distributeCandies(vector<int>& candyType); };
