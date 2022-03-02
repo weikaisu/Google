@@ -42,34 +42,30 @@ public:
 
 /***********  Easy  **********/
 // LC0706
+//MyHashMap map;
+//map.put(1,1);
+//map.put(2,2);
+//map.get(1);
+//map.get(3);
+//map.put(2,1);
+//map.get(2);
+//map.remove(2);
+//map.get(2);
 struct MyHashMap {
     MyHashMap() {
-
+        t.fill(-1);
     }
     void put(int key, int value) {
-        auto l = &(t[key%1000]);
-        for(auto e:*l) {
-            if (e[0] == key) l->remove(e);
-            break;
-        }
-        l->push_front(array<int,2> {key, value});
+        t[key]=value;
     }
     int get(int key) {
-        auto l = t[key%1000];
-        for(auto e:l) {
-            if(e[0] == key) return e[1];
-        }
-        return -1;
+        return t[key];
     }
     void remove(int key) {
-        auto l = &(t[key%1000]);
-        for(auto e:*l) {
-            if (e[0] == key) l->remove(e);
-            break;
-        }
+        t[key]=-1;
     }
 private:
-    array<forward_list<array<int,2>>, 1000> t;
+    array<int, 1000001> t;
 };
 // LC0705
 struct MyHashSet {
