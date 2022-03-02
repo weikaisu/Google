@@ -1,6 +1,3 @@
-//
-// Created by steve on 2021-08-12.
-//
 
 #include "search.h"
 

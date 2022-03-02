@@ -1,6 +1,3 @@
-//
-// Created by steve on 2021-08-11.
-//
 
 #ifndef GOOGLE_LIST_H
 #define GOOGLE_LIST_H
@@ -44,6 +41,7 @@ public:
 };
 
 /***********  Easy  **********/
+struct LC0697 { int findShortestSubArray(vector<int>& nums); };
 struct LC0645 { vector<int> findErrorNums(vector<int>& nums); };
 struct LC0599 { vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
 struct LC0594 { int findLHS(vector<int>& nums); };

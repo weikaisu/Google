@@ -1,6 +1,3 @@
-//
-// Created by steve on 2021-08-25.
-//
 
 #include "dp.h"
 

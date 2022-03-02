@@ -1,6 +1,3 @@
-//
-// Created by steve on 2021-08-11.
-//
 
 #include "list.h"
 
@@ -8,6 +5,28 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+
+int LC0697::findShortestSubArray(vector<int>& nums) {
+    // 只用了一次遍历，思路跟上面的解法很相似，还是要建立数字出现次数的哈希表，还有就是建立每个数字和其第一次出现位置之间的映射，
+    // 那么我们当前遍历的位置其实可以看作是尾位置，还是可以计算子数组的长度的。我们遍历数组，累加当前数字出现的次数，如果某个数字是第一次出现，
+    // 建立该数字和当前位置的映射，如果当前数字的出现次数等于degree时，当前位置为尾位置，首位置在startIdx中取的，二者做差加1来更新结果res；
+    // 如果当前数字的出现次数大于degree，说明之前的结果代表的数字不是出现最多的，直接将结果res更新为当前数字的首尾差加1的长度，
+    // 然后degree也更新为当前数字出现的次数。
+    int res=INT_MAX, degree=0;
+    unordered_map<int, int> cnt, fst;
+
+    for(int i=0; i<nums.size(); i++) {
+        ++cnt[nums[i]];
+        if(!fst.count(nums[i])) fst[nums[i]] = i;
+        if(cnt[nums[i]] == degree)
+            res = min(res, i-fst[nums[i]]+1);
+        else if(cnt[nums[i]] > degree) {
+            res = i-fst[nums[i]]+1;
+            degree = cnt[nums[i]];
+        }
+    }
+    return res;
+}
 
 vector<int> LC0645::findErrorNums(vector<int>& nums) {
     // 遍历每个数字，然后将其应该出现的位置上的数字变为其相反数，这样如果我们再变为其相反数之前已经成负数了，说明该数字是重复数，

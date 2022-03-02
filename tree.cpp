@@ -1,6 +1,3 @@
-//
-// Created by WeiKai Steve Su on 2022/2/20.
-//
 
 #include "tree.h"
 

@@ -1,6 +1,3 @@
-//
-// Created by WeiKai Steve Su on 2022/2/20.
-//
 
 #ifndef GOOGLE_TREE_H
 #define GOOGLE_TREE_H

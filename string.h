@@ -1,6 +1,3 @@
-//
-// Created by steve on 2021-08-18.
-//
 
 #ifndef GOOGLE_STRING_H
 #define GOOGLE_STRING_H
