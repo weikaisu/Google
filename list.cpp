@@ -6,6 +6,26 @@
 
 /***********  Vector List  **********/
 
+// LC0705
+struct MyHashSet {
+    // 範圍是[0, 1000000]，用array搭配list來優化空間
+    MyHashSet() {};
+    void add(int key) {
+        t[key%1000].push_front(key);
+    };
+    void remove(int key) {
+        t[key%1000].remove(key);
+    };
+    bool contains(int key) {
+        auto list = t[key%1000];
+        for(auto l:list)
+            if(l == key) return true;
+        return false;
+    };
+private:
+    array<forward_list<int>, 1000> t;
+};
+
 int LC0697::findShortestSubArray(vector<int>& nums) {
     // 只用了一次遍历，思路跟上面的解法很相似，还是要建立数字出现次数的哈希表，还有就是建立每个数字和其第一次出现位置之间的映射，
     // 那么我们当前遍历的位置其实可以看作是尾位置，还是可以计算子数组的长度的。我们遍历数组，累加当前数字出现的次数，如果某个数字是第一次出现，

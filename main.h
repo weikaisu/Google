@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 #include <list>
+#include <forward_list>
 #include <stack>
 #include <queue>
 #include <set>
