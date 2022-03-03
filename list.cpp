@@ -6,6 +6,26 @@
 
 /***********  Vector List  **********/
 
+string LC0748::shortestCompletingWord(string licensePlate, vector<string>& words) {
+    string res = "";
+    int total = 0;
+    unordered_map<char,int> freq;
+    for(auto c:licensePlate) {
+        if(c>='a' && c<='z') {++freq[c]; total++;}
+        else if(c>='A' && c<='Z') {++freq[c + 32]; total++;}
+    }
+    for(auto w:words) {
+        if(w.size()<total) continue;
+        int cnt = total;
+        unordered_map<char,int> m = freq;
+        for(auto c:w)
+            if(--m[c]>=0) cnt--;
+        if(!cnt && (res.empty() || res.size()>w.size()))
+            res = w;
+    }
+    return res;
+}
+
 int LC0697::findShortestSubArray(vector<int>& nums) {
     // 只用了一次遍历，思路跟上面的解法很相似，还是要建立数字出现次数的哈希表，还有就是建立每个数字和其第一次出现位置之间的映射，
     // 那么我们当前遍历的位置其实可以看作是尾位置，还是可以计算子数组的长度的。我们遍历数组，累加当前数字出现的次数，如果某个数字是第一次出现，
@@ -65,8 +85,8 @@ vector<string> LC0599::findRestaurant(vector<string>& list1, vector<string>& lis
 }
 
 int LC0594::findLHS(vector<int>& nums) {
-    // 遍历每个数字时，先累加其映射值，然后查找该数字加1是否存在，存在的话用 m[num] 和 m[num+1] 的和来更新结果 res，
-    // 同时，还要查找该数字减1是否存在，存在的话用 m[num] 和 m[num-1] 的和来更新结果 res
+    // 遍历每个数字时，先累加其映射值，然后查找该数字加1是否存在，存在的话用 freq[num] 和 freq[num+1] 的和来更新结果 res，
+    // 同时，还要查找该数字减1是否存在，存在的话用 freq[num] 和 freq[num-1] 的和来更新结果 res
     int res = 0 ;
     unordered_map<int, int> map;
     for(auto num:nums) {

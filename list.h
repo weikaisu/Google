@@ -67,6 +67,38 @@ struct MyHashMap {
 private:
     array<int, 1000001> t;
 };
+//struct MyHashMap {
+//    MyHashMap() {
+//
+//    }
+//    void put(int key, int value) {
+//        auto& l = t[key%1000];
+//        for(auto& [k,v]:l) {
+//            if (k == key) v=value;
+//            return;
+//        }
+//        l.push_front(make_pair (key,value));
+//    }
+//    int get(int key) {
+//        auto& l = t[key%1000];
+//        for(auto& [k,v]:l) {
+//            if(k == key) return v;
+//        }
+//        return -1;
+//    }
+//    void remove(int key) {
+//        auto& l = t[key%1000];
+//        for (auto it=l.begin(); it!=l.end(); ++it)
+//            if(it->first == key) {
+//                l.remove(*it);
+//                break;
+//            }
+//    }
+//private:
+//    //const static int m=1024;
+//    array<forward_list<pair<int,int>>, 1000> t;
+//};
+
 // LC0705
 struct MyHashSet {
     // 範圍是[0, 1000000]，用array搭配list來優化空間
@@ -89,6 +121,7 @@ struct MyHashSet {
 private:
     array<forward_list<int>, 1000> t;
 };
+struct LC0748 { string shortestCompletingWord(string licensePlate, vector<string>& words); };
 struct LC0697 { int findShortestSubArray(vector<int>& nums); };
 struct LC0645 { vector<int> findErrorNums(vector<int>& nums); };
 struct LC0599 { vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
