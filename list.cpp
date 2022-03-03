@@ -5,6 +5,17 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+int LC0771::numJewelsInStones(string jewels, string stones) {
+    // 我们用HashSet来优化时间复杂度，将珠宝字符串J中的所有字符都放入HashSet中，然后遍历石头字符串中的每个字符，
+    // 到HashSet中查找是否存在，存在的话计数器自增1即可
+    int res = 0;
+    array<int, 128> map; map.fill(0);
+    for(auto c:jewels)
+        map[c] = 1;
+    for(auto c:stones)
+        if(map[c]) res++;
+    return res;
+}
 
 string LC0748::shortestCompletingWord(string licensePlate, vector<string>& words) {
     // 这道题给了我们一个车牌号，还有一些单词，让我们找出包含这个车牌号中所有字母的第一个最短的单词。车牌中的字母有大小写之分，

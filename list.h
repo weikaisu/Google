@@ -121,6 +121,7 @@ struct MyHashSet {
 private:
     array<forward_list<int>, 1000> t;
 };
+struct LC0771 { int numJewelsInStones(string jewels, string stones); };
 struct LC0748 { string shortestCompletingWord(string licensePlate, vector<string>& words); };
 struct LC0697 { int findShortestSubArray(vector<int>& nums); };
 struct LC0645 { vector<int> findErrorNums(vector<int>& nums); };
