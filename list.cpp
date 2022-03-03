@@ -7,20 +7,25 @@
 /***********  Vector List  **********/
 
 string LC0748::shortestCompletingWord(string licensePlate, vector<string>& words) {
+    // 这道题给了我们一个车牌号，还有一些单词，让我们找出包含这个车牌号中所有字母的第一个最短的单词。车牌中的字母有大小写之分，
+    // 但是单词只是由小写单词组成的，所以需要把车牌号中的所有大写字母都转为小写的，转换方法很简单，ASCII码加上32即可。
+    // 我们建立车牌中各个字母和其出现的次数之间的映射，同时记录所有字母的个数total，然后遍历所有的单词，对于每个单词都要单独处理，
+    // 我们遍历单词中所有的字母，如果其在车牌中也出现了，则对应字母的映射减1，同时还需匹配的字母数cnt也自减1，最后遍历字母完成后，
+    // 如果cnt为0（说明车牌中所有的字母都在单词中出现了），并且结果res为空或长度大于当前单词word的话，更新结果即可
     string res = "";
     int total = 0;
-    unordered_map<char,int> freq;
+    array<int,128> map; map.fill(0);
     for(auto c:licensePlate) {
-        if(c>='a' && c<='z') {++freq[c]; total++;}
-        else if(c>='A' && c<='Z') {++freq[c + 32]; total++;}
+        if(c>='a' && c<='z') {++map[c]; total++;}
+        else if(c>='A' && c<='Z') {++map[c+32]; total++;}
     }
     for(auto w:words) {
         if(w.size()<total) continue;
-        int cnt = total;
-        unordered_map<char,int> m = freq;
+        int t = total;
+        array<int,128> m = map;
         for(auto c:w)
-            if(--m[c]>=0) cnt--;
-        if(!cnt && (res.empty() || res.size()>w.size()))
+            if(--m[c]>=0) t--;
+        if(!t && (res.empty() || res.size() > w.size()))
             res = w;
     }
     return res;
