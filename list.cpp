@@ -5,6 +5,20 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+int LC0804::uniqueMorseRepresentations(vector<string>& words) {
+    // 给了我们所有字母的摩斯码的写法，然后给了我们一个单词数组，问我们表示这些单词的摩斯码有多少种。因为某些单词的摩斯码表示是相同的，
+    // 比如gin和zen就是相同的。最简单直接的方法就是我们求出每一个单词的摩斯码，然后将其放入一个HashSet中，利用其去重复的特性，
+    // 从而实现题目的要求，最终HashSet中元素的个数即为所求，
+    array<string, 26> morse{".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+    unordered_set<string> s;
+    for(auto w:words) {
+        string r = "";
+        for(auto c:w) r += morse[c-'a'];
+        s.insert(r);
+    }
+    return s.size();
+}
+
 int LC0771::numJewelsInStones(string jewels, string stones) {
     // 我们用HashSet来优化时间复杂度，将珠宝字符串J中的所有字符都放入HashSet中，然后遍历石头字符串中的每个字符，
     // 到HashSet中查找是否存在，存在的话计数器自增1即可
