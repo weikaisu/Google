@@ -18,6 +18,7 @@
 #include <unordered_map>
 #include <bitset>
 #include <functional>
+#include <numeric> // std:: accumulate
 
 #include "sort.h"
 #include "list.h"
