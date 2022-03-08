@@ -5,6 +5,23 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+bool LC0914::hasGroupsSizeX(vector<int>& deck) {
+    // 基于最大公约数 Greatest Common Divisor 的解法，写起来很简洁，但需要记住最大公约函数的写法，或者直接使用内置的 gcd 函数（
+    // 感觉有点耍赖哈～）。其实原理都差不多，这里是找每种牌数之间的最大公约数，只要这个 gcd 是大于1的，就表示可以找到符合题意的X
+
+    //輾轉相除法
+    auto gcd_divide = [](const auto &self, int x, int y)->int {
+        return x==0 ? y : self(self, y%x, x);
+    };
+
+    unordered_map<int,int> map;
+    int res = 0;
+    for(auto &n:deck) ++map[n];
+    for(auto &m:map)
+        res = gcd_divide(gcd_divide, res, m.second);
+    return res>1;
+}
+
 vector<int> LC0888::fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes) {
     // 这道题说爱丽丝和鲍勃两人有不同大小的糖果，现在要让两人交换一類糖果，使得交换后两人的糖果总重量相同，
     // 而且限定了两人初始时的糖果总量不相同，并且一定会有解。若我们仔细观察题目中给的例子，可以发现所有例子中起始时 Alice 和 Bob
