@@ -8,6 +8,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+struct LC0929 { int numUniqueEmails(vector<string>& emails) ; };
 struct LC0884 { vector<string> uncommonFromSentences(string s1, string s2); };
 struct LC0819 { string mostCommonWord(string paragraph, vector<string>& banned); };
 struct LC0290 { bool wordPattern(string pattern, string s); };

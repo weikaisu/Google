@@ -1,6 +1,25 @@
 
 #include "string.h"
 
+int LC0929::numUniqueEmails(vector<string>& emails) {
+    // 邮件名里可能会有两个特殊符号，点和加号，对于点采取直接忽略的做法，对于加号则是忽略其后面所有的东西，现在问我们有多少个不同的邮箱。
+    // 没有太多的技巧，就直接遍历一下所有的字符，遇到点直接跳过，遇到 '+' 或者 '@' 直接 break 掉。注意这里其实有个坑，就是域名中也可能有点，
+    // 而这个点是不能忽略的，所以要把 '@' 及其后面的域名都提取出来，连到之前处理好的账号后面，一起放到一个 HashSet 中，
+    // 利用其可以去重复的特性，最终剩余的个数即为所求
+    unordered_set<string> set;
+    for(auto &email:emails) {
+        string addr;
+        for(auto &c:email) {
+            if(c == '.') continue;
+            if(c == '+' || c== '@') break;
+            addr.push_back(c);
+        }
+        addr += email.substr(email.find('@'));
+        set.insert(addr);
+    }
+    return set.size();
+}
+
 vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
     // 把每个单词都提取出来，然后统计其在两个句子中出现的个数，若最终若某个单词的统计数为1，则其一定是符合题意的。
     // 所以我们可以先将两个字符串拼接起来，中间用一个空格符隔开，这样提取单词就更方便一些。在 Java 中，可以使用 split()
