@@ -5,15 +5,31 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+bool LC0859::buddyStrings(string s, string goal) {
+    // 首先字符串A和B长度必须要相等，不相等的话直接返回 false。假如起始时A和B就完全相等，那么只有当A中有重复字符出现的时候，
+    // 才能返回 true。快速检测重复字符的方法就是利用 HashSet 的自动去重复功能，将A中所有字符存入 HashSet 中，若有重复字符，
+    // 那么最终 HashSet 的大小一定会小于原字符串A的长度。对于A和B长度相等，但是字符串本身不相等的一般情况，
+    // 我们可以记录出所有对应字符不相同的位置，放到一个数组 diff 中，最终判断 diff 数组的长度是否为2，
+    // 且判断交换位置后是否跟B中对应的位置上的字符相同即可
+    if(s.size() != goal.size()) return false;
+    if(s==goal && unordered_set<char>(s.begin(), s.end()).size() < s.size()) return true;
+
+    vector<int> diff;
+    for(int i =0; i<s.size(); i++) {
+        if(s[i]!=goal[i]) diff.push_back(i);
+    }
+    return diff.size()==2 && s[diff[0]]==goal[diff[1]] && s[diff[1]]==goal[diff[0]];
+}
+
 int LC0804::uniqueMorseRepresentations(vector<string>& words) {
     // 给了我们所有字母的摩斯码的写法，然后给了我们一个单词数组，问我们表示这些单词的摩斯码有多少种。因为某些单词的摩斯码表示是相同的，
     // 比如gin和zen就是相同的。最简单直接的方法就是我们求出每一个单词的摩斯码，然后将其放入一个HashSet中，利用其去重复的特性，
     // 从而实现题目的要求，最终HashSet中元素的个数即为所求，
     array<string, 26> morse{".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
     unordered_set<string> s;
-    for(auto w:words) {
+    for(auto& w:words) {
         string r = "";
-        for(auto c:w) r += morse[c-'a'];
+        for(auto& c:w) r += morse[c-'a'];
         s.insert(r);
     }
     return s.size();

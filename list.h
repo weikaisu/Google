@@ -121,6 +121,7 @@ struct MyHashSet {
 private:
     array<forward_list<int>, 1000> t;
 };
+struct LC0859 { bool buddyStrings(string s, string goal); };
 struct LC0804 { int uniqueMorseRepresentations(vector<string>& words); };
 struct LC0771 { int numJewelsInStones(string jewels, string stones); };
 struct LC0748 { string shortestCompletingWord(string licensePlate, vector<string>& words); };
