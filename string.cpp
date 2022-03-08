@@ -1,6 +1,19 @@
 
 #include "string.h"
 
+vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
+    // 把每个单词都提取出来，然后统计其在两个句子中出现的个数，若最终若某个单词的统计数为1，则其一定是符合题意的。
+    // 所以我们可以先将两个字符串拼接起来，中间用一个空格符隔开，这样提取单词就更方便一些。在 Java 中，可以使用 split()
+    // 函数来快速分隔单词，但是在 C++ 中就没这么好命，只能使用字符串流 istringstream，并用一个 while 循环来一个一个提取。
+    // 当建立好了单词和其出现次数的映射之后，再遍历一遍 HashMap，将映射值为1的单词存入结果 res 即可
+    unordered_map<string,int> map;
+    vector<string> res;
+    istringstream in(s1 + ' ' + s2);
+    for(string w; in>>w; ) ++map[w];
+    for(auto &w : map)
+        if(w.second==1) res.push_back(w.first);
+    return res;
+}
 
 string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     // 给了我们一个字符串，是一个句子，里面有很多单词，并且还有标点符号，然后又给了我们一个类似黑名单功能的一个字符串数组，
