@@ -8,6 +8,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+struct LC0819 { string mostCommonWord(string paragraph, vector<string>& banned); };
 struct LC0290 { bool wordPattern(string pattern, string s); };
 struct LC0067 { string addBinary(string a, string b); };
 struct LC0058 { int lengthOfLastWord(string& s); };

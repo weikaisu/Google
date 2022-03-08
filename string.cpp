@@ -1,6 +1,32 @@
 
 #include "string.h"
 
+
+string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
+    // 给了我们一个字符串，是一个句子，里面有很多单词，并且还有标点符号，然后又给了我们一个类似黑名单功能的一个字符串数组，
+    // 让我们在返回句子中出现的频率最高的一个单词。要求非常简单明了，那么思路也就简单粗暴一些吧。
+    // 因为我们返回的单词不能是黑名单中的，所以我们对于每一个统计的单词肯定都需要去黑名单中检查，为了提高效率，
+    // 我们可以把黑名单中所有的单词放到一个HashSet中，这样就可以常数级时间内查询了。然后要做的就是处理一下字符串数组，
+    // 因为字符串中可能有标点符号，所以我们先过滤一遍字符串，这里我们使用了系统自带的两个函数isalpha()和tolower()函数，
+    // 其实自己写也可以，就放到一个子函数处理一下也不难，这里就偷懒了，遍历每个字符，如果不是字母，就换成空格符号，如果是大写字母，
+    // 就换成小写的。然后我们又使用一个C++中的读取字符串流的类，Java中可以直接调用split函数，叼的飞起。但谁让博主固执的写C++呢，
+    // 也无所谓啦，习惯就好，这里我们也是按照空格拆分，将每个单词读出来，这里要使用一个mx变量，统计当前最大的频率，
+    // 还需要一个HashMap来建立单词和其出现频率之间的映射。然后我们看读取出的单词，如果不在黑名单中内，并且映射值加1后大于mx的话，
+    // 我们更新mx，并且更新结果res即可
+    unordered_set<string> set (banned.begin(), banned.end());
+    unordered_map<string,int> map;
+    string res = "";
+    int mx = 0;
+    for(auto &c:paragraph) c = isalpha(c) ? tolower(c) : ' ';
+    istringstream in(paragraph);
+    for(string w; in>>w; )
+        if(!set.count(w) && ++map[w] > mx) {
+            mx = map[w];
+            res = w;
+        }
+    return res;
+}
+
 //LC0290 run;
 //cout << run.wordPattern("abba", "dog cat cat dog") << endl;
 bool LC0290::wordPattern(string pattern, string s) {
