@@ -123,6 +123,7 @@ private:
 };
 
 // Hash Table
+struct LC1128 { int numEquivDominoPairs(vector<vector<int>>& dominoes); };
 struct LC1122 { vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2); };
 struct LC1002 { vector<string> commonChars(vector<string>& words); };
 struct LC0997 { int findJudge(int n, vector<vector<int>>& trust); };

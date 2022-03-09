@@ -6,6 +6,30 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+int LC1128::numEquivDominoPairs(vector<vector<int>>& dominoes) {
+    // 这道题给了一个多米诺数组，每个多米诺有两个数字，现在让找有多少个相同的多米诺，由于多米诺可以旋转，所以这里两个数字的顺序并不重要。
+    // 虽然说是一道简单的题目，但是暴力搜索法还是不可取的，太不高效了，最好的还是直接统计相同的牌的数量，再来计算相同的 pair 对儿个数。
+    // 若多米诺不能翻转，直接进行统计就行了，现在能翻转，就要统一用个方法来标记翻转后相同的多米诺，这里可以始终将小的放在前面。
+    // 又由于数字只有1到9，所以可以把较小的数字编码到十位上，较大的数字编码到个位上，这样组成的两位数就可以表示独特的多米诺了。
+    // 统计完相同的多米诺个数之后就可以计算相同的 pair 对儿了，若有n个相同的多米诺，则共有 n(n-1)/2 个相同的 pair 对儿，
+    // 这样就可以算出总共相同的 pair 对儿个数了
+
+    // C n 取 2 = n(n-1)/2
+//    unordered_map<int,int> dict;
+//    int res = 0;
+//    for(auto &p:dominoes)
+//        ++dict[ 10*min(p[0],p[1]) + max(p[0],p[1])];
+//    for(auto &d:dict)
+//        res += (d.second)*(d.second-1)/2; // C n 取 2
+//    return res;
+
+    // n(n-1)/2 = 1+2+3+...(n-1)
+    unordered_map<int,int> dict;
+    int res = 0;
+    for(auto &p:dominoes)
+        res += dict[ 10*min(p[0],p[1]) + max(p[0],p[1])]++;
+    return res;
+}
 vector<int> LC1122::relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
     // 有两个数组 arr1 和 arr2，其中 arr2 中的所有数字均在 arr1 中，现在让给 arr1 重新排序，使得其按照 arr2 中数字的顺序排列，将不在
     // arr2 中的数字按照大小顺序排在末尾，题目中给的例子可以很好的帮助我们理解题意。由于 arr1 中可能出现重复数字，而相同的数字是要排在一起
