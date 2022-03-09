@@ -121,6 +121,7 @@ struct MyHashSet {
 private:
     array<forward_list<int>, 1000> t;
 };
+struct LC0961 { int repeatedNTimes(vector<int>& nums); };
 struct LC0914 { bool hasGroupsSizeX(vector<int>& deck); };
 struct LC0888 { vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes); };
 struct LC0859 { bool buddyStrings(string s, string goal); };
