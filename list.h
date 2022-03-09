@@ -121,6 +121,9 @@ struct MyHashSet {
 private:
     array<forward_list<int>, 1000> t;
 };
+
+// Hash Table
+struct LC1122 { vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2); };
 struct LC1002 { vector<string> commonChars(vector<string>& words); };
 struct LC0997 { int findJudge(int n, vector<vector<int>>& trust); };
 struct LC0961 { int repeatedNTimes(vector<int>& nums); };
@@ -156,6 +159,7 @@ struct LC0027 { int removeElement(vector<int>& nums, int val); };
 struct LC0026 { int removeDuplicates(vector<int>& nums); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
+// Link List
 struct LC1290 { int getDecimalValue(ListNode* head); };
 struct LC0876 { ListNode* middleNode(ListNode* head); };
 struct LC0237 { void deleteNode(ListNode* node); };

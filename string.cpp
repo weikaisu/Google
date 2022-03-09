@@ -2,6 +2,7 @@
 #include "string.h"
 
 // 可顯示字元編號範圍是32-126（0x20-0x7E），共95個字元。
+// 大寫：65~90, 小寫：97~122
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 bool LC0953::isAlienSorted(vector<string>& words, string order) {

@@ -6,6 +6,27 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+vector<int> LC1122::relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+    // 有两个数组 arr1 和 arr2，其中 arr2 中的所有数字均在 arr1 中，现在让给 arr1 重新排序，使得其按照 arr2 中数字的顺序排列，将不在
+    // arr2 中的数字按照大小顺序排在末尾，题目中给的例子可以很好的帮助我们理解题意。由于 arr1 中可能出现重复数字，而相同的数字是要排在一起
+    // 的，所以需要统计 arr1 中每个数字出现的次数，又因为最后还需要将不在 arr2 中的数字按顺序排列，那么这里用个 TreeMap 是坠好的，
+    // 既能统计个数，又能排序，简直太棒了。用 TreeMap 统计好 arr1 中数字的个数之后，然后遍历 arr2，将其中每个数字在之前的 TreeMap
+    // 中找到对应的次数，并在结果 res 中加入相同次数的数字进去，之后在 TreeMap 中移除该数字。这样遍历完 arr2 之后，在 TreeMap
+    // 中剩下的数字就是仅存在于 arr1 的，且还是有序的，可以直接按顺序加入到结果 res 中即可
+    vector<int>  res;
+    map<int,int> m;
+    for(auto e:arr1) ++m[e];
+    for(auto e:arr2) {
+        for(int i=0; i<m[e]; i++)
+            res.push_back(e);
+        m.erase(e);
+    }
+    for(auto e:m)
+        for(int i=0; i<e.second; i++)
+            res.push_back(e.first);
+    return res;
+}
+
 vector<string> LC1002::commonChars(vector<string>& words) {
     // 用一个数组 cnt 来记录相同的字母出现的次数，初始化为整型最大值，然后遍历所有的单词，对于每个单词，新建一个大小为 26 的数组t，
     // 并统计每个字符出现的次数，然后遍历0到25各个位置，取 cnt 和 t 对应位置上的较小值来更新 cnt 数组，这样得到就是在所有单词里都出现的
