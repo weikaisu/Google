@@ -2,9 +2,30 @@
 #include "list.h"
 
 // 可顯示字元編號範圍是32-126（0x20-0x7E），共95個字元。
+// 大寫：65~90, 小寫：97~122
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+vector<string> LC1002::commonChars(vector<string>& words) {
+    // 用一个数组 cnt 来记录相同的字母出现的次数，初始化为整型最大值，然后遍历所有的单词，对于每个单词，新建一个大小为 26 的数组t，
+    // 并统计每个字符出现的次数，然后遍历0到25各个位置，取 cnt 和 t 对应位置上的较小值来更新 cnt 数组，这样得到就是在所有单词里都出现的
+    // 字母的个数，最后再把这些字符转为字符串加入到结果 res 中即可
+    array<int,128> map; map.fill(INT_MAX);
+    array<int,128> cnt;
+    vector<string>res;
+    for(auto &w:words) {
+        cnt.fill(0);
+        for(auto c: w) ++cnt[c];
+        for(int i=97; i<=122; i++)
+            map[i] = min(map[i], cnt[i]);
+    }
+    for(int i=97; i<=122; i++)
+        while(map[i]--)
+        //for(int j=0; j<map[i]; j++)
+            res.push_back(string(1, char(i)));
+
+    return res;
+}
 int LC0997::findJudge(int n, vector<vector<int>>& trust) {
     // 跟之前那道Find the Celebrity 非常相似，那道题是所有人都认识名人，但是名人不认识任何人。而这里是法官不相信人任何人，
     // 而所有人都相信法官，不同的是在于给的数据结构不同，名人那道是给了个 API 判断是否认识，而这里给了个信任数组，那么解法就稍有不同了。

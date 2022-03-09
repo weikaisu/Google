@@ -121,6 +121,7 @@ struct MyHashSet {
 private:
     array<forward_list<int>, 1000> t;
 };
+struct LC1002 { vector<string> commonChars(vector<string>& words); };
 struct LC0997 { int findJudge(int n, vector<vector<int>>& trust); };
 struct LC0961 { int repeatedNTimes(vector<int>& nums); };
 struct LC0914 { bool hasGroupsSizeX(vector<int>& deck); };
