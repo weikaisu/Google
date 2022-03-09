@@ -1,6 +1,39 @@
 
 #include "string.h"
 
+// 可顯示字元編號範圍是32-126（0x20-0x7E），共95個字元。
+// 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
+
+bool LC0953::isAlienSorted(vector<string>& words, string order) {
+    array<int,128> map; map.fill(0);
+    for(int i=0; i<order.size(); i++)
+        map[order[i]]=i;
+
+    // 对于正常的字母顺序，就是按字母来比较，只要有字母不同的话，就可以知道两个单词的顺序了，假如比较的字母均相同，但是有一个单词提前结束了，
+    // 而另一个单词后面还有字母，则短的那个单词排前面。整体比较的思路仍然相同，就是字母顺序要用其给定的顺序，所以用一个 HashMap
+    // 来建立字母和其对应位置之间的映射，这样在比较字母顺序的时候就可以从 HashMap 中直接取值。在验证顺序的时候，只需要两两进行验证，
+    // 若某一对的顺序不符合，则直接返回 false。具体的比较方法还是跟之前说的，逐个字母进行比较，为了避免越界，遍历的时候只能遍历到二者中较短
+    // 的长度。若对应位上的字母相同，则直接跳过；若前面的字母顺序靠后，则直接返回 false，否则 break 掉（注意这里不能直接返回 true
+    // 的原因是后面有可能还会出现不合题目要求的情况）。之后还要验证前面提到的一种情况，就是当较短的单词是较长单词的子串时，而且后面的单词较短
+    // 时，也需要返回 false。当外层 for 循环正常退出后，返回 true 即可
+//    for(int i=1; i<words.size(); i++) {
+//        string w0=words[i-1], w1=words[i];
+//        for(int j=0; j<w0.size()&&j<w1.size(); j++) {
+//            if(w0[j]==w1[j]) continue;
+//            if(map[w0[j]]>map[w1[j]]) return false;
+//            else break;
+//        }
+//        if(w0.size()>w1.size() && w0.substr(0,w1.size()) == w1) return false;
+//    }
+//    return true;
+
+    // 把順序當作字母的ASCII碼來排序
+    for(auto &word:words)
+        for(auto &c:word)
+            c = map[c];
+    return is_sorted(words.begin(), words.end());
+}
+
 int LC0929::numUniqueEmails(vector<string>& emails) {
     // 邮件名里可能会有两个特殊符号，点和加号，对于点采取直接忽略的做法，对于加号则是忽略其后面所有的东西，现在问我们有多少个不同的邮箱。
     // 没有太多的技巧，就直接遍历一下所有的字符，遇到点直接跳过，遇到 '+' 或者 '@' 直接 break 掉。注意这里其实有个坑，就是域名中也可能有点，
