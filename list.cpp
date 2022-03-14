@@ -6,6 +6,24 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+int LC1160::countCharacters(vector<string>& words, string chars) {
+    // 一个单纯的字母统计问题，建立 chars 字符串中每个字母和其出现次数之间的映射，然后遍历每个单词，拷贝一个 chars 字符串的 HashMap，
+    // 然后遍历当前单词的每个字母，对应字母的映射值减1，若为负数了，表示 chars 中缺少必要的单词，标记为 false。若最终为 true，
+    // 则将当前单词的长度加入结果 res 中即可
+    // 由於只有小寫字母，用大小26的陣列即可，而用大小32的速度會快很多。
+    array<int,32> map; map.fill(0);
+    int res = 0;
+    for(auto &c:chars) ++map[c-'a'];
+    for(auto &w:words) {
+        array<int,32> m = map;
+        bool good = true;
+        for(auto &c:w)
+            if(--m[c-'a']<0) {good=false;break;}
+        if(good) res+=w.size();
+    }
+    return res;
+}
+
 int LC1128::numEquivDominoPairs(vector<vector<int>>& dominoes) {
     // 这道题给了一个多米诺数组，每个多米诺有两个数字，现在让找有多少个相同的多米诺，由于多米诺可以旋转，所以这里两个数字的顺序并不重要。
     // 虽然说是一道简单的题目，但是暴力搜索法还是不可取的，太不高效了，最好的还是直接统计相同的牌的数量，再来计算相同的 pair 对儿个数。
