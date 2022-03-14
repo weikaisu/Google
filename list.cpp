@@ -6,6 +6,19 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+bool LC1207::uniqueOccurrences(vector<int>& arr) {
+    // 用个 HashMap 来统计每个数字出现的次数，然后再用个 HashSet 来判断某个次数是否之前出现过了，若出现过了，则返回 false，
+    // 否则最终返回 true 即可
+    unordered_map<int,int> m;
+    unordered_set<int> s;
+    for(auto &e:arr) ++m[e];
+    for(auto &e:m) {
+        if(s.count(e.second)) return false;
+        s.insert(e.second);
+    }
+    return true;
+}
+
 int LC1189::maxNumberOfBalloons(string text){
     // 用一个 HashMap 来建立每个字符和其出现次数之间的映射就可以了。balloon 中的字符 b，a，n 分别出现了一次，l和o出现了两次，怎么算最多
     // 能拼成多个 balloon 呢，当然要找这些字符出现次数最少的那个，就像木桶盛水一样，最短的那个板子决定了盛水总量。然后遍历 balloon

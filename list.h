@@ -123,6 +123,7 @@ private:
 };
 
 // Hash Table
+struct LC1207 { bool uniqueOccurrences(vector<int>& arr); };
 struct LC1189 { int maxNumberOfBalloons(string text); };
 struct LC1160 { int countCharacters(vector<string>& words, string chars); };
 struct LC1128 { int numEquivDominoPairs(vector<vector<int>>& dominoes); };
