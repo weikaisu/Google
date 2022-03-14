@@ -123,6 +123,7 @@ private:
 };
 
 // Hash Table
+struct LC1189 { int maxNumberOfBalloons(string text); };
 struct LC1160 { int countCharacters(vector<string>& words, string chars); };
 struct LC1128 { int numEquivDominoPairs(vector<vector<int>>& dominoes); };
 struct LC1122 { vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2); };

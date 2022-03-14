@@ -6,6 +6,34 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Vector List  **********/
+int LC1189::maxNumberOfBalloons(string text){
+    // 用一个 HashMap 来建立每个字符和其出现次数之间的映射就可以了。balloon 中的字符 b，a，n 分别出现了一次，l和o出现了两次，怎么算最多
+    // 能拼成多个 balloon 呢，当然要找这些字符出现次数最少的那个，就像木桶盛水一样，最短的那个板子决定了盛水总量。然后遍历 balloon
+    // 中的每个字符，取其中的最小值，注意对于l和o字符要将次数除以2，因为它们分别都出现了2次，最终返回这个最小值即可
+
+    // 較慢，可能是用到了除法和min
+//    array<int,32> m; m.fill(0);
+//    for(auto &c:text) ++m[c - 'a'];
+//    int res = INT_MAX;
+//    for(auto &c:string("balloon")) {
+//        if (c == 'l' || c == 'o') res = min(res, m[c - 'a'] / 2);
+//        else res = min(res, m[c - 'a']);
+//    }
+//
+//    return res;
+
+    // 較快
+    array<int,32> m; m.fill(0);
+    int res = 0;
+    for(auto &c:text) ++m[c - 'a'];
+    while(true) {
+        if((m['b'-'a']-=1) < 0 || (m['a'-'a']-=1) <0 || (m['l'-'a']-=2) < 0 || (m['o'-'a']-=2) < 0 || (m['n'-'a']-=1) < 0)
+            break;
+        res++;
+    }
+    return res;
+}
+
 int LC1160::countCharacters(vector<string>& words, string chars) {
     // 一个单纯的字母统计问题，建立 chars 字符串中每个字母和其出现次数之间的映射，然后遍历每个单词，拷贝一个 chars 字符串的 HashMap，
     // 然后遍历当前单词的每个字母，对应字母的映射值减1，若为负数了，表示 chars 中缺少必要的单词，标记为 false。若最终为 true，
