@@ -946,16 +946,25 @@ ListNode* LC0002::addTwoNumbers(ListNode* l1, ListNode* l2) {
     // 最高位的进位问题要最后特殊处理一下，若 carry 为1，则再建一个值为1的结点
     ListNode *dummy = new ListNode(-1), *cur = dummy;
     int c = 0;
-    while(l1 || l2) {
-        int val1 = l1 ? l1->val : 0;
-        int val2 = l2 ? l2->val : 0;
-        int sum = val1 + val2 + c;
-        cur->next = new ListNode(sum % 10);
+//    while(l1 || l2) {
+//        int val1 = l1 ? l1->val : 0;
+//        int val2 = l2 ? l2->val : 0;
+//        int sum = val1 + val2 + c;
+//        cur->next = new ListNode(sum % 10);
+//        c = sum/10;
+//        cur = cur->next;
+//        l1 = l1 ? l1->next : nullptr;
+//        l2 = l2 ? l2->next : nullptr;
+//    }
+//    if(c) cur->next = new ListNode(c);
+
+    while(l1 || l2 || c){
+        int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + c;
         c = sum/10;
+        cur->next = new ListNode(sum%10);
         cur = cur->next;
         l1 = l1 ? l1->next : nullptr;
         l2 = l2 ? l2->next : nullptr;
     }
-    if(c) cur->next = new ListNode(c);
     return dummy->next;
 }
