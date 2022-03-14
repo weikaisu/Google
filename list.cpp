@@ -5,7 +5,7 @@
 // 大寫：65~90, 小寫：97~122
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
-/***********  Vector List  **********/
+/***********  Array List  **********/
 bool LC1207::uniqueOccurrences(vector<int>& arr) {
     // 用个 HashMap 来统计每个数字出现的次数，然后再用个 HashSet 来判断某个次数是否之前出现过了，若出现过了，则返回 false，
     // 否则最终返回 true 即可
@@ -928,4 +928,34 @@ ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
         l2->next = mergeTwoLists(l1, l2->next);
         return l2;
     }
+}
+
+
+/***********  Medium  **********/
+
+/***********  Array List  **********/
+
+/***********  Linked List  **********/
+ListNode* LC0002::addTwoNumbers(ListNode* l1, ListNode* l2) {
+    // 建立一个新链表，然后把输入的两个链表从头往后撸，每两个相加，添加一个新节点到新链表后面。为了避免两个输入链表同时为空，
+    // 我们建立一个 dummy 结点，将两个结点相加生成的新结点按顺序加到 dummy 结点之后，由于 dummy 结点本身不能变，所以用一个指针 cur
+    // 来指向新链表的最后一个结点。好，可以开始让两个链表相加了，这道题好就好在最低位在链表的开头，所以可以在遍历链表的同时按从低到高的顺
+    // 序直接相加。while 循环的条件两个链表中只要有一个不为空行，由于链表可能为空，所以在取当前结点值的时候，先判断一下，若为空则取0，
+    // 否则取结点值。然后把两个结点值相加，同时还要加上进位 carry。然后更新 carry，直接 sum/10 即可，然后以 sum%10 为值建立一个新结点，
+    // 连到 cur 后面，然后 cur 移动到下一个结点。之后再更新两个结点，若存在，则指向下一个位置。while 循环退出之后，
+    // 最高位的进位问题要最后特殊处理一下，若 carry 为1，则再建一个值为1的结点
+    ListNode *dummy = new ListNode(-1), *cur = dummy;
+    int c = 0;
+    while(l1 || l2) {
+        int val1 = l1 ? l1->val : 0;
+        int val2 = l2 ? l2->val : 0;
+        int sum = val1 + val2 + c;
+        cur->next = new ListNode(sum % 10);
+        c = sum/10;
+        cur = cur->next;
+        l1 = l1 ? l1->next : nullptr;
+        l2 = l2 ? l2->next : nullptr;
+    }
+    if(c) cur->next = new ListNode(c);
+    return dummy->next;
 }

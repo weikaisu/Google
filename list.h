@@ -177,6 +177,9 @@ struct LC0021 { ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
 
 /***********  Medium  **********/
 
+// Link List
+struct LC0002 { ListNode* addTwoNumbers(ListNode* l1, ListNode* l2); };
+
 
 
 #endif //GOOGLE_LIST_H
