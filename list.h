@@ -146,6 +146,7 @@ struct LC0500 { vector<string> findWords(vector<string>& words); };
 struct LC0496 { vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2); };
 struct LC0448 { vector<int> findDisappearedNumbers(vector<int>& nums); };
 struct LC0409 { int longestPalindrome(string s); };
+struct LC0345 { string reverseVowels(string s); };
 struct LC0389 { char findTheDifference(string s, string t); };
 struct LC0387 { int firstUniqChar(string s); };
 struct LC0383 { bool canConstruct(string ransomNote, string magazine); };

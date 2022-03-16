@@ -415,6 +415,25 @@ int LC0409::longestPalindrome(string s) {
     return even+odd;
 }
 
+string LC0345::reverseVowels(string s) {
+    // 如果两边都是元音字母，那么我们交换
+    // 然後還剩下其中一個是，或兩邊都不是
+    // 如果左邊是，右邊一定不是 -> r--
+    // 剩下左邊一定都不是的情況(左不是右是、左不是右不是) -> l++
+    array<int,128> map; map.fill(0);
+    map['a'] = map['e'] = map['i'] = map['o'] = map['u'] = map['A'] = map['E'] = map['I'] = map['O'] = map['U'] = 1;
+    int l=0, r=s.size()-1;
+    while(l<r) {
+        if(map[s[l]] && map[s[r]])
+            swap(s[l++],s[r--]);
+        else if(map[s[l]])
+            r--;
+        else
+            l++;
+    }
+    return s;
+}
+
 char LC0389::findTheDifference(string s, string t) {
     // 用哈希表来建立字符和个数之间的映射，如果在遍历t的时候某个映射值小于0了，那么返回该字符即可
 //    array<int,128> map; map.fill(0);
@@ -664,7 +683,6 @@ void LC0344::reverseString(vector<char>& s) {
     while(l<r)
         swap(s[l++],s[r--]);
 }
-
 
 /***********  Linked List  **********/
 
