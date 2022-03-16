@@ -93,6 +93,15 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+bool LC0392::isSubsequence(string s, string t) {
+    // 用两个指针分别指向字符串s和t，然后如果字符相等，则i和j自增1，反之只有j自增1，最后看i是否等于s的长度，等于说明s已经遍历完了，
+    // 而且字符都有在t中出现过
+    int i=0;
+    for(int j=0; i<s.size()&&j<t.size(); j++)
+        if(s[i]==t[j]) i++;
+    return i==s.size();
+}
+
 //LC0290 run;
 //cout << run.wordPattern("abba", "dog cat cat dog") << endl;
 bool LC0290::wordPattern(string pattern, string s) {
