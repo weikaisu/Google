@@ -38,6 +38,7 @@ struct LC0617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };
 struct LC0606 { string tree2str(TreeNode* root); };
 struct LC0543 { int diameterOfBinaryTree(TreeNode* root); };
 struct LC0404 { int sumOfLeftLeaves(TreeNode* root); };
+struct LC0257 { vector<string> binaryTreePaths(TreeNode* root); };
 struct LC0110 { bool isBalanced(TreeNode* root); };
 struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
 

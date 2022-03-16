@@ -101,6 +101,22 @@ int LC0404::sumOfLeftLeaves(TreeNode* root) {
     return sum + sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
 }
 
+vector<string> LC0257::binaryTreePaths(TreeNode* root) {
+    // 给我们一个二叉树，让返回所有根到叶节点的路径，跟之前那道 Path Sum II 很类似，比那道稍微简单一些，不需要计算路径和，
+    // 只需要无脑返回所有的路径即可，那么思路还是用递归来解，博主之前就强调过，玩树的题目，十有八九都是递归，而递归的核心就是不停的 DFS
+    // 到叶结点，然后在回溯回去。在递归函数中，当遇到叶结点的时候，即没有左右子结点，那么此时一条完整的路径已经形成了，
+    // 加上当前的叶结点后存入结果 res 中，然后回溯。注意这里结果 res 需要 reference，而 out 是不需要引用的，不然回溯回去还要删除新添加
+    // 的结点，很麻烦。为了减少判断空结点的步骤，我们在调用递归函数之前都检验一下非空即可，代码而很简洁
+    vector<string> res;
+    if(!root) return {};
+    if(!root->left && !root->right) return {to_string(root->val)};
+    for(auto s: binaryTreePaths(root->left))
+        res.push_back(to_string(root->val) + "->" + s);
+    for(auto s: binaryTreePaths(root->right))
+        res.push_back(to_string(root->val) + "->" + s);
+    return res;
+}
+
 //TreeNode *root;
 //root->BuildTree(root);
 //LC110 run;
