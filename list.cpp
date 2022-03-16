@@ -5,7 +5,7 @@
 // 大寫：65~90, 小寫：97~122
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
-/***********  Array List  **********/
+/***********  Hash Table  **********/
 bool LC1207::uniqueOccurrences(vector<int>& arr) {
     // 用个 HashMap 来统计每个数字出现的次数，然后再用个 HashSet 来判断某个次数是否之前出现过了，若出现过了，则返回 false，
     // 否则最终返回 true 即可
@@ -656,6 +656,13 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
         t[diff] = i;
     }
     return {};
+}
+
+/***********  Array List  **********/
+void LC0344::reverseString(vector<char>& s) {
+    int l=0, r=s.size()-1;
+    while(l<r)
+        swap(s[l++],s[r--]);
 }
 
 

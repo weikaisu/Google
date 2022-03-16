@@ -163,6 +163,9 @@ struct LC0027 { int removeElement(vector<int>& nums, int val); };
 struct LC0026 { int removeDuplicates(vector<int>& nums); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
+// Array List
+struct LC0344 { void reverseString(vector<char>& s); };
+
 // Link List
 struct LC1290 { int getDecimalValue(ListNode* head); };
 struct LC0876 { ListNode* middleNode(ListNode* head); };
