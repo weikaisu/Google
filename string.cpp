@@ -94,6 +94,19 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+vector<string> LC0412::fizzBuzz(int n) {
+    // 这道题真心没有什么可讲的，就是分情况处理就行了。
+    // 注意！i%15需先括號起來再判斷是否為0
+    vector<string> res;
+    for(int i=1; i<=n; i++) {
+        if(!(i%15)) res.push_back("FizzBuzz");
+        else if(!(i%3)) res.push_back("Fizz");
+        else if(!(i%5)) res.push_back("Buzz");
+        else res.push_back(to_string(i));
+    }
+    return res;
+}
+
 bool LC0392::isSubsequence(string s, string t) {
     // 用两个指针分别指向字符串s和t，然后如果字符相等，则i和j自增1，反之只有j自增1，最后看i是否等于s的长度，等于说明s已经遍历完了，
     // 而且字符都有在t中出现过
