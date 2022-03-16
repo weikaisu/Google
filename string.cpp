@@ -3,6 +3,7 @@
 
 // 可顯示字元編號範圍是32-126（0x20-0x7E），共95個字元。
 // 大寫：65~90, 小寫：97~122
+// 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 bool LC0953::isAlienSorted(vector<string>& words, string order) {
@@ -123,6 +124,22 @@ bool LC0290::wordPattern(string pattern, string s) {
         }
     }
     return i==pattern.size();
+}
+
+bool LC0125::isPalindrome(string s) {
+    // 所谓回文，就是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。但是这里，加入了空格和非字母数字的字符，
+    // 增加了些难度，但其实原理还是很简单：只需要建立两个指针，left和right, 分别从字符的开头和结尾处开始遍历整个字符串，
+    // 如果遇到非字母数字的字符就跳过，继续往下找，直到找到下一个字母数字或者结束遍历，如果遇到大写字母，就将其转为小写。
+    // 等左右指针都找到字母数字时，比较这两个字符，若相等，则继续比较下面两个分别找到的字母数字，若不相等，直接返回false
+    // tolower傳非字母進去會直接回傳
+    if(s.empty()) return true;
+    int l=0, r=s.size()-1;
+    while(l<r) {
+        if(!isalnum(s[l])) l++;
+        else if(!isalnum(s[r])) r--;
+        else if (tolower(s[l++]) != tolower(s[r--])) return false;
+    }
+    return true;
 }
 
 //LC0067 run;
