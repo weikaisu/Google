@@ -94,6 +94,21 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+string LC0415::addStrings(string num1, string num2) {
+    // 一位一位相加，然后算和算进位，最后根据进位情况看需不需要补一个高位
+    int i=num1.size()-1, j=num2.size()-1;
+    string res;
+    int c = 0;
+    while(i>=0 || j>=0) {
+        int a = i>=0 ? num1[i--]-'0' : 0;
+        int b = j>=0 ? num2[j--]-'0' : 0;
+        int sum = a + b + c;
+        res.insert(res.begin(), sum%10+'0');
+        c = sum/10;
+    }
+    return c ? '1'+res : res;
+}
+
 vector<string> LC0412::fizzBuzz(int n) {
     // 这道题真心没有什么可讲的，就是分情况处理就行了。
     // 注意！i%15需先括號起來再判斷是否為0
