@@ -94,6 +94,17 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+string LC0482::licenseKeyFormatting(string s, int k) {
+    // 正确的注册码的格式是每K个字符后面跟一个短杠，每一部分的长度为K，第一部分长度可以小于K，另外，字母必须是大写的。那么由于第一部分可以
+    // 不为K，那么我们可以反过来想，我们从S的尾部往前遍历，把字符加入结果res，每K个后面加一个短杠，那么最后遍历完再把res翻转一下即可，
+    // 注意翻转之前要把结尾的短杠去掉(如果有的话)
+    string res = "";
+    for(int i=s.size()-1; i>=0; i--)
+        if(s[i]!='-')
+            ((res.size()%(k+1)-k) ? res : res+='-') += toupper(s[i]);
+    return string(res.rbegin(), res.rend());
+}
+
 bool LC0459::repeatedSubstringPattern(string s) {
     // 这道题给了我们一个字符串，问其是否能拆成n个重复的子串。那么既然能拆分成多个子串，那么每个子串的长度肯定不能大于原字符串长度的一半，
     // 那么我们可以从原字符串长度的一半遍历到1，如果当前长度能被总长度整除，说明可以分成若干个子字符串，我们将这些子字符串拼接起来看跟原字符

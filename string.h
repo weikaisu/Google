@@ -12,6 +12,7 @@ struct LC0953 { bool isAlienSorted(vector<string>& words, string order); };
 struct LC0929 { int numUniqueEmails(vector<string>& emails) ; };
 struct LC0884 { vector<string> uncommonFromSentences(string s1, string s2); };
 struct LC0819 { string mostCommonWord(string paragraph, vector<string>& banned); };
+struct LC0482 { string licenseKeyFormatting(string s, int k); };
 struct LC0459 { bool repeatedSubstringPattern(string s); };
 struct LC0434 { int countSegments(string s); };
 struct LC0415 { string addStrings(string num1, string num2); };
