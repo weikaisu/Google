@@ -94,6 +94,23 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+int LC0434::countSegments(string s) {
+    // 遍历字符串，遇到空格直接跳过，如果不是空格，则计数器加1，然后用个while循环找到下一个空格的位置，这样就遍历完了一个单词，
+    // 再重复上面的操作直至结束
+    int res = 0;
+//    for(int i=0; i<s.size(); i++) {
+//        if(s[i] == ' ') continue;
+//        res++;
+//        while(i<s.size() && s[i] != ' ') i++;
+//    }
+//    return res;
+
+    // 统计单词开头的第一个字符，因为每个单词的第一个字符前面一个字符一定是空格，利用这个特性也可以统计单词的个数
+    for(int i=0; i<s.size(); i++)
+        if(s[i]!=' ' && (i==0 || s[i-1]==' ')) res++;
+    return res;
+}
+
 string LC0415::addStrings(string num1, string num2) {
     // 一位一位相加，然后算和算进位，最后根据进位情况看需不需要补一个高位
     int i=num1.size()-1, j=num2.size()-1;
