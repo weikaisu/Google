@@ -94,6 +94,22 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+bool LC0459::repeatedSubstringPattern(string s) {
+    // 这道题给了我们一个字符串，问其是否能拆成n个重复的子串。那么既然能拆分成多个子串，那么每个子串的长度肯定不能大于原字符串长度的一半，
+    // 那么我们可以从原字符串长度的一半遍历到1，如果当前长度能被总长度整除，说明可以分成若干个子字符串，我们将这些子字符串拼接起来看跟原字符
+    // 串是否相等。 如果拆完了都不相等，返回false
+    int n = s.size();
+    for(int i=n/2; i>=1; i--)
+        if(n%i==0) {
+            string t="";
+            for(int j=0; j<n/i; j++)
+                t += s.substr(0,i);
+            if(t==s) return true;
+        }
+
+    return false;
+}
+
 int LC0434::countSegments(string s) {
     // 遍历字符串，遇到空格直接跳过，如果不是空格，则计数器加1，然后用个while循环找到下一个空格的位置，这样就遍历完了一个单词，
     // 再重复上面的操作直至结束
