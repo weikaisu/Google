@@ -678,6 +678,14 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Array List  **********/
+string LC0541::reverseStr(string s, int k) {
+    // 每2k个字符来遍历原字符串s，然后进行翻转，翻转的结尾位置是取i+k和末尾位置之间的较小值
+    for(int i=0; i<s.size(); i+=2*k) {
+        reverse(s.begin()+i, min(s.begin()+i+k, s.end()));
+    }
+    return s;
+}
+
 void LC0344::reverseString(vector<char>& s) {
     int l=0, r=s.size()-1;
     while(l<r)
