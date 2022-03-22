@@ -678,6 +678,28 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Array List  **********/
+bool LC0551::checkRecord(string s) {
+    // 判断学生的出勤率是否是优秀，判断标准是不能缺勤两次和不能连续迟到三次，那么最直接的方法就是分别记录缺勤和连续迟到的次数，
+    // 如果当前遇到缺勤，那么缺勤计数器自增1，如果此时次数大于1了，说明已经不是优秀了，直接返回false，否则连续迟到计数器清零。
+    // 如果当前遇到迟到，那么连续迟到计数器自增1，如果此时连续迟到计数器大于1了，说明已经不是优秀了，直接返回false。如果遇到正常出勤了，
+    // 那么连续迟到计数器清零
+    int a=0, l=0;
+    for(auto c:s) {
+        if (c == 'L') {
+            if (++l > 2) return false;
+        } else {
+            l=0;
+            if(c=='A' && ++a > 1) return false;
+        }
+    }
+    return true;
+
+    // 使用正则匹配来做的解法，我们找出不合题意的情况，然后取反即可，正则匹配式是A.*A|LLL，其中.*表示有零个或者多个，
+    // 那么A.*A就是至少有两A的情况，LLL是三个连续的迟到，|表示两个是或的关系，只要能匹配出任意一种情况，就会返回false
+    // 處理時間會長很多
+    // return !regex_search(s, regex("A.*A|LLL"));
+}
+
 string LC0541::reverseStr(string s, int k) {
     // 每2k个字符来遍历原字符串s，然后进行翻转，翻转的结尾位置是取i+k和末尾位置之间的较小值
     for(int i=0; i<s.size(); i+=2*k) {

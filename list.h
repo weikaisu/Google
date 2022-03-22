@@ -165,6 +165,7 @@ struct LC0026 { int removeDuplicates(vector<int>& nums); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
 // Array List
+struct LC0551 { bool checkRecord(string s); };
 struct LC0541 { string reverseStr(string s, int k); };
 struct LC0344 { void reverseString(vector<char>& s); };
 
