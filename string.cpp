@@ -7,9 +7,14 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 bool LC0953::isAlienSorted(vector<string>& words, string order) {
-    array<int,128> map; map.fill(0);
-    for(int i=0; i<order.size(); i++)
-        map[order[i]]=i;
+    // 把順序當作字母的ASCII碼來排序
+    array<unsigned,26> map{};
+    for(unsigned i=0; i<order.size(); i++)
+        map[order[i]-'a']=i;
+    for(auto &word:words)
+        for(auto &c:word)
+            c = map[c-'a'];
+    return is_sorted(words.begin(), words.end());
 
     // 对于正常的字母顺序，就是按字母来比较，只要有字母不同的话，就可以知道两个单词的顺序了，假如比较的字母均相同，但是有一个单词提前结束了，
     // 而另一个单词后面还有字母，则短的那个单词排前面。整体比较的思路仍然相同，就是字母顺序要用其给定的顺序，所以用一个 HashMap
@@ -28,12 +33,6 @@ bool LC0953::isAlienSorted(vector<string>& words, string order) {
 //        if(w0.size()>w1.size() && w0.substr(0,w1.size()) == w1) return false;
 //    }
 //    return true;
-
-    // 把順序當作字母的ASCII碼來排序
-    for(auto &word:words)
-        for(auto &c:word)
-            c = map[c];
-    return is_sorted(words.begin(), words.end());
 }
 
 int LC0929::numUniqueEmails(vector<string>& emails) {
