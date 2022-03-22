@@ -148,6 +148,11 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+int LC0521::findLUSlength(string a, string b) {
+    // 如果两个字符串相等，那么一定有共同子序列，反之，如果两个字符串不等，那么较长的那个字符串就是最长非共同子序列
+    return a==b ? -1 : max(a.size(), b.size());
+}
+
 bool LC0520::detectCapitalUse(string word) {
     // 给了我们一个单词，让我们检测大写格式是否正确，规定了三种正确方式，要么都是大写或小写，要么首字母大写，其他情况都不正确。
     // 那么我们要做的就是统计出单词中所有大写字母的个数cnt，再来判断是否属于这三种情况，如果cnt为0，说明都是小写，正确；
