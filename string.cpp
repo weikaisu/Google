@@ -36,22 +36,49 @@ bool LC0953::isAlienSorted(vector<string>& words, string order) {
 }
 
 int LC0929::numUniqueEmails(vector<string>& emails) {
+    // 使用lose lose hash function
+    // http://www.cse.yorku.ca/~oz/hash.html
+    // 來對email產生特定的值，最後再看去重後有幾個
+    // 從左到右，從右到左掃一遍string
+    auto hash = [](const string &addr) -> size_t {
+        size_t val{};
+        unsigned n = addr.size();
+        unsigned i;
+        for(i=0; i<n; i++) {
+            char c=addr[i];
+            if(c == '.') continue;
+            if(c == '+' || c == '@') break;
+            val = (val+c) << 1;
+        }
+        for(i=n-1; i>0; i--) {
+            char c=addr[i];
+            val = (val+c) << 1;
+            if(c == '@') break;
+        }
+        return val;
+    };
+
+    unordered_set<size_t> s;
+    for(auto &addr:emails)
+        s.emplace(hash(addr));
+    return s.size();
+
     // 邮件名里可能会有两个特殊符号，点和加号，对于点采取直接忽略的做法，对于加号则是忽略其后面所有的东西，现在问我们有多少个不同的邮箱。
     // 没有太多的技巧，就直接遍历一下所有的字符，遇到点直接跳过，遇到 '+' 或者 '@' 直接 break 掉。注意这里其实有个坑，就是域名中也可能有点，
     // 而这个点是不能忽略的，所以要把 '@' 及其后面的域名都提取出来，连到之前处理好的账号后面，一起放到一个 HashSet 中，
     // 利用其可以去重复的特性，最终剩余的个数即为所求
-    unordered_set<string> set;
-    for(auto &email:emails) {
-        string addr;
-        for(auto &c:email) {
-            if(c == '.') continue;
-            if(c == '+' || c== '@') break;
-            addr.push_back(c);
-        }
-        addr += email.substr(email.find('@'));
-        set.insert(addr);
-    }
-    return set.size();
+//    unordered_set<string> set;
+//    for(auto &email:emails) {
+//        string addr;
+//        for(auto &c:email) {
+//            if(c == '.') continue;
+//            if(c == '+' || c== '@') break;
+//            addr.push_back(c);
+//        }
+//        addr += email.substr(email.find('@'));
+//        set.insert(addr);
+//    }
+//    return set.size();
 }
 
 vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
