@@ -80,17 +80,45 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     // 也无所谓啦，习惯就好，这里我们也是按照空格拆分，将每个单词读出来，这里要使用一个mx变量，统计当前最大的频率，
     // 还需要一个HashMap来建立单词和其出现频率之间的映射。然后我们看读取出的单词，如果不在黑名单中内，并且映射值加1后大于mx的话，
     // 我们更新mx，并且更新结果res即可
-    unordered_set<string> set (banned.begin(), banned.end());
+//    unordered_set<string> set (banned.begin(), banned.end());
+//    unordered_map<string,int> map;
+//    string res = "";
+//    int mx = 0;
+//    for(auto &c:paragraph) c = isalpha(c) ? tolower(c) : ' ';
+//    istringstream in(paragraph);
+//    for(string w; in>>w; )
+//        if(!set.count(w) && ++map[w] > mx) {
+//            mx = map[w];
+//            res = w;
+//        }
+//    return res;
+
+    // 僅使用一個map再從map裡erase掉banned的字串，一個迴圈同時去掉非字母、轉小寫、及收集出現次數。
     unordered_map<string,int> map;
-    string res = "";
-    int mx = 0;
-    for(auto &c:paragraph) c = isalpha(c) ? tolower(c) : ' ';
-    istringstream in(paragraph);
-    for(string w; in>>w; )
-        if(!set.count(w) && ++map[w] > mx) {
-            mx = map[w];
-            res = w;
+    string res="";
+    int m = 0;
+    int n = paragraph.size();
+
+    for(int i=0; i<n; i++) {
+        char c = tolower(paragraph[i]);
+        if(isalpha(c)) {
+            res+=c;
+        } else if(res!=""){
+            ++map[res];
+            res="";
         }
+    }
+    if(isalpha(paragraph[n-1])) ++map[res];
+    res="";
+
+    for(auto s:banned) map.erase(s);
+
+    for(auto e:map) {
+        if(e.second>m) {
+            res = e.first;
+            m = e.second;
+        }
+    }
     return res;
 }
 
