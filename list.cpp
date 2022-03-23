@@ -678,6 +678,25 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Array List  **********/
+bool LC0657::judgeCircle(string moves)
+    // 使用了哈希表来建立字符和其出现的次数之间的映射，最后直接比较对应的字符出现的次数是否相等即可
+    array<int,26> map; map.fill(0);
+    for(auto &c:moves)
+        ++map[c-'A'];
+    return map['U'-'A']==map['D'-'A'] && map['L'-'A']==map['R'-'A'];
+
+    // 使用两个计数器，如果是U，则cnt1自增1；如果是D，cnt1自减1。同理，如果是L，则cnt1自增1；如果是R，cnt1自减1。
+    // 最后只要看cnt1和cnt2是否同时为0即可
+//    int u=0, l=0;
+//    for(auto &c:moves) {
+//        if(c=='U') u++;
+//        else if(c=='D') u--;
+//        else if(c=='L') l++;
+//        else if(c=='R') l--;
+//    }
+//    return !u && !l ;
+}
+
 string LC0557::reverseWords(string s) {
     // 用两个指针，分别指向每个单词的开头和结尾位置，确定了单词的首尾位置后，再用两个指针对单词进行首尾交换即可，有点像验证回文字符串的方法
     int start=0, end=0, n = s.size();
