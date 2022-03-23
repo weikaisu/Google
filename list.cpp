@@ -678,7 +678,26 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Array List  **********/
-bool LC0657::judgeCircle(string moves)
+bool LC0680::validPalindrome(string s) {
+    // 这道题的字符串中只含有小写字母，而且这道题允许删除一个字符，那么当遇到不匹配的时候，我们到底是删除左边的字符，还是右边的字符呢，
+    // 我们的做法是两种情况都要算一遍，只要有一种能返回true，那么结果就返回true。我们可以写一个子函数来判断字符串中的某一个范围内的
+    // 子字符串是否为回文串
+    auto isValid = [](string &s, int l, int r) {
+        while(l<r)
+            if(s[l++]!=s[r--]) return false;
+        return true;
+    };
+
+    int l=0, r=s.size()-1;
+    while(l<r) {
+        if(s[l]!=s[r])
+            return isValid(s, l+1, r) || isValid(s, l, r-1);
+        l++; r--;
+    }
+    return true;
+}
+
+bool LC0657::judgeCircle(string moves) {
     // 使用了哈希表来建立字符和其出现的次数之间的映射，最后直接比较对应的字符出现的次数是否相等即可
     array<int,26> map; map.fill(0);
     for(auto &c:moves)
