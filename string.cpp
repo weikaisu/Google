@@ -148,6 +148,17 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     return res;
 }
 
+string LC0709::toLowerCase(string s) {
+    // 小写字母比其对应的大写字母的ASCII码大32，所以我们只需要遍历字符串，对于所有的大写字母，统统加上32即可
+    for(auto &c:s)
+        if(c >= 'A' && c <='Z') c+=32;
+    return s;
+
+//    for(auto &c:s)
+//        c=tolower(c);
+//    return s;
+}
+
 int LC0696::countBinarySubstrings(string s) {
     // 这道题给了我们一个二进制字符串，然后我们统计具有相同0和1的个数，且0和1各自都群组在一起(即0和1不能交替出现)的子字符串的个数，
     // 题目中的两个例子也很能说明问题。那么我们来分析题目中的第一个例子00110011，符合要求的子字符串要求0和1同时出现，那么当第一个1出
