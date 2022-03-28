@@ -8,6 +8,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+struct LC0824 { string toGoatLatin(string sentence); };
 struct LC0953 { bool isAlienSorted(vector<string>& words, string order); };
 struct LC0929 { int numUniqueEmails(vector<string>& emails) ; };
 struct LC0884 { vector<string> uncommonFromSentences(string s1, string s2); };

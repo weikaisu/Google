@@ -6,6 +6,23 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+string LC0824::toGoatLatin(string sentence) {
+    // 将一句话转为山羊拉丁文，有几个规则，如果单词是元音开头的，那么直接在但此后加ma，如果是非元音开头的单词，那么把首字母移到末尾，
+    // 并且加ma。还有就是根据当前是第几个单词，后面加几个a，估计是为了模仿羊叫声，拉长音，感觉更像绵羊音一样。此题难度不是很大，
+    // 就照题目要求来做，不需要啥特别的技巧。首先为了快速检测开头字母是否为元音，我们将所有元音加入一个HashSet，注意大小写的元音都要加进去。
+    // 然后要一个单词一个单词的处理，这里我们使用C++的字符串流类来快速的提取单词，对于每个提取出的单词，我们先加上一个空格，
+    // 然后判断开头字母是否为元音，是的话直接加上，不然就去子串去掉首字母，然后将首字母加到末尾。后面再加上ma，还有相对应数目个a。
+    // 这里我们定义一个变量cnt，初始化为1，每处理一个单词，cnt自增1，这样我们就知道需要加的a的个数了，最后别忘了把结果res的首空格去掉
+    array<int,128> set; set.fill(0);
+    set['a']=set['e']=set['i']=set['o']=set['u']=set['A']=set['E']=set['I']=set['O']=set['U']=1;
+    istringstream ss(sentence);
+    string res, w;
+    int cnt=1;
+    while(ss>>w)
+        res += ' ' + (set[w[0]] ? w : w.substr(1)+w[0]) + "ma" + string(cnt++,'a');
+    return res.substr(1);
+}
+
 bool LC0953::isAlienSorted(vector<string>& words, string order) {
     // 把順序當作字母的ASCII碼來排序
     array<unsigned,26> map{};
