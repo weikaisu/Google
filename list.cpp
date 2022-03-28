@@ -678,6 +678,37 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Array List  **********/
+vector<int> LC0821::shortestToChar(string s, char c) {
+    // 对于每个是字符C的位置，然后分别像左右两边扩散，不停是更新距离，这样当所有的字符C的点都扩散完成之后，
+    // 每个非字符C位置上的数字就是到字符C的最短距离了
+    int n=s.size();
+    vector<int> res(n,n);
+    for(int i=0; i<n; i++) {
+        if(s[i] != c) continue;
+        res[i] = 0;
+        for(int j=i-1; j>=0 && s[j]!=c; j--) {
+            res[j] = min(res[j], i-j);
+        }
+        for(int j=i+1; j<n && s[j]!=c; j++) {
+            res[j] = min(res[j], j-i);
+        }
+    }
+    return res;
+
+    // 下面这种方法也是建立距离场的思路，不过更加巧妙一些，只需要正反两次遍历就行。首先进行正向遍历，若当前位置是字符C，那么直接赋0，
+    // 否则看如果不是首位置，那么当前位置的值等于前一个位置的值加1。这里不用和当前的值进行比较，因为这个算出来的值不会大于初始化的值。
+    // 然后再进行反向遍历，要从倒数第二个值开始往前遍历，用后一个值加1来更新当前位置的值，此时就要和当前值做比较，取较小的那个
+//    int n=s.size();
+//    vector<int> res(n,n);
+//    for(int i=0; i<n; i++) {
+//        if(s[i]==c) res[i]=0;
+//        else if(i>0) res[i]=res[i-1]+1;
+//    }
+//    for(int i=n-2; i>=0; i--)
+//        res[i] = min(res[i], res[i+1]+1);
+//    return res;
+}
+
 vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
     // 这道题给了我们一个字符串，让我们把里面的字母写下来，规定了每一行的长度为100，然后每个字母的长度可以在widths数组中查询，
     // 说是如果某一个字母加上后超过了长度100的限制，那么就移动到下一行，问我们最终需要多少行，和最后一行的长度。这道题并没有太大的难度和技巧，

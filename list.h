@@ -165,6 +165,7 @@ struct LC0026 { int removeDuplicates(vector<int>& nums); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
 // Array List
+struct LC0821 { vector<int> shortestToChar(string s, char c); };
 struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
 struct LC0680 { bool validPalindrome(string s); };
 struct LC0657 { bool judgeCircle(string moves); };
