@@ -678,6 +678,32 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Array List  **********/
+bool LC0844::backspaceCompare(string s, string t) {
+    // 我们使用常数级的空间复杂度，就是说不能新建空的字符串来保存处理之后的结果，那么只能在遍历的过程中同时进行比较，只能使用双指针同时
+    // 遍历S和T串了。我们采用从后往前遍历，因为退格是要删除前面的字符，所以倒序遍历要好一些。用变量i和j分别指向S和T串的最后一个字符的位置，
+    // 然后还需要两个变量 cnt1 和 cnt2 来分别记录S和T串遍历过程中连续出现的井号的个数，因为在连续井号后，要连续删除前面的字母，
+    // 如何知道当前的字母是否是需要删除，就要知道当前还没处理的退格符的个数。好，现在进行 while 循环，条件是i和j至少有一个要大于等于0，
+    // 然后对S串进行另一个 while 循环，条件是当i大于等于0，且当前字符是井号，或者 cnt1 大于0，若当前字符是退格符，则 cnt1 自增1，
+    // 否则 cnt1 自减1，然后i自减1，这样就相当于跳过了当前的字符，不用进行比较。对T串也是做同样的 while 循环处理。之后若i和j有一个小于0了，
+    // 那么可以根据i和j是否相等的情况进行返回。否则再看若S和T串当前的字母不相等，则返回 false，因为当前位置的退格符已经处理完了，剩下的字母
+    // 是需要比较相等的，若不相等就可以直接返回 false 了。最后当外层的 while 循环退出后，返回i和j是否相等
+    int i=s.size()-1, j=t.size()-1, cnts=0, cntt=0;
+    while(i>=0 || j>=0) {
+        while (i >= 0 && (s[i] == '#' || cnts > 0)) s[i--] == '#' ? ++cnts : --cnts;
+        while (j >= 0 && (t[j] == '#' || cntt > 0)) t[j--] == '#' ? ++cntt : --cntt;
+        if (i < 0 || j < 0) return i == j;
+        if (s[i--] != t[j--]) return false;
+    }
+    return i==j;
+
+    // 新建一个结果 res 的空串，然后遍历输入字符串，当遇到退格符的时候，判断若结果 res 不为空，则将最后一个字母去掉；若遇到的是字母，
+    // 则直接加入结果 res 中即可。这样S和T串同时处理完了之后，再进行比较即可
+//    string strs{}, strt{};
+//    for(auto &c:s) c=='#' ? strs.size() ? strs.pop_back() : void() : strs.push_back(c);
+//    for(auto &c:t) c=='#' ? strt.size() ? strt.pop_back() : void() : strt.push_back(c);
+//    return strs==strt;
+}
+
 vector<vector<int>> LC0830::largeGroupPositions(string s) {
     // 这道题给了我们一个全小写的字符串，说是重复出现的字符可以当作一个群组，如果重复次数大于等于3次，可以当作一个大群组，
     // 让我们找出所有大群组的起始和结束位置。那么实际上就是让我们计数连续重复字符的出现次数，由于要连续，所以我们可以使用双指针来做，
