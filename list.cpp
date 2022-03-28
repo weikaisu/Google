@@ -678,6 +678,20 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Array List  **********/
+vector<vector<int>> LC0830::largeGroupPositions(string s) {
+    // 这道题给了我们一个全小写的字符串，说是重复出现的字符可以当作一个群组，如果重复次数大于等于3次，可以当作一个大群组，
+    // 让我们找出所有大群组的起始和结束位置。那么实际上就是让我们计数连续重复字符的出现次数，由于要连续，所以我们可以使用双指针来做，
+    // 一个指针指向重复部分的开头，一个往后遍历计数，只要不相同了就停止，然后看次数是否大于等3，是的话就将双指针位置存入结果res中，并更新指针
+    vector<vector<int>> res;
+    int n = s.size(), i=0, j=0;
+    while(j<n) {
+        while(j<n && s[j]==s[i]) j++;
+        if(j-i>2) res.push_back({i,j-1});
+        i=j;
+    }
+    return res;
+}
+
 vector<int> LC0821::shortestToChar(string s, char c) {
     // 对于每个是字符C的位置，然后分别像左右两边扩散，不停是更新距离，这样当所有的字符C的点都扩散完成之后，
     // 每个非字符C位置上的数字就是到字符C的最短距离了
