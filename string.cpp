@@ -6,6 +6,56 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+vector<string> LC0937::reorderLogFiles(vector<string>& logs) {
+    // We can break this problem into two tasks: 1) Parition 2) Sort letter-logs
+
+    // Partition: letter-logs at the front, digit-logs at the back.
+    // We're using stable_partition instead of partition to retain the original order.
+    // stable_partition returns an iterator to the first element of the second group.
+    auto it = stable_partition(logs.begin(), logs.end(), [](const string &str) {
+        return isalpha(str.back());
+    });
+
+    // Sort letter-logs: We're only iterating on letter-logs in this case.
+    // We're creating a substring for every element we compare that doesn't include the identifier
+    // If the logs are the same except the identifier, we compare the strings, otherwise, the substrings
+    sort(logs.begin(), it, [](const string &a, const string &b) {
+        string suba = string(a.begin()+a.find(' '), a.end());
+        string subb = string(b.begin()+b.find(' '), b.end());
+        return (suba==subb) ? a<b : suba<subb;
+    });
+
+    return logs;
+
+    // 这道题让给日志排序，每条日志是由空格隔开的一些字符串，第一个字符串是标识符，可能由字母和数字组成，后面的是日志的内容，只有两种形式的，
+    // 要么都是数字的，要么都是字母的。排序的规则是对于内容是字母的日志，按照字母顺序进行排序，假如内容相同，则按照标识符的字母顺序排。而对于
+    // 内容的是数字的日志，放到最后面，且其顺序相对于原顺序保持不变。博主感觉这道题似曾相识啊，貌似之前在很多 OA 中见过，最后还是被 LeetCode
+    // 收入囊中了。其实这道题就是个比较复杂的排序的问题，两种日志需要分开处理，对于数字日志，不需要排序，但要记录其原始顺序。这里就可以用一个
+    // 数组专门来保存数字日志，这样最后加到结果 res 后面，就可以保持其原来顺序。关键是要对字母型日志进行排序，同时还要把标识符提取出来，
+    // 这样在遍历日志的时候，先找到第一空格的位置，这样前面的部分就是标识符了，后面的内容就是日志内容了，此时判断紧跟空格位置的字符，假如是数
+    // 字的话，说明当前日志是数字型的，加入数组 digitLogs 中，并继续循环。如果不是的话，将两部分分开，存入到一个二维数组 data 中。之后要
+    // 对 data 数组进行排序，并需要重写排序规则，要根据日志内容排序，若日志内容相等，则根据标识符排序。最后把排序好的日志按顺序合并，存入结
+    // 果 res 中，最后别忘了把数字型日志也加入 res
+//    vector<string> res, dig;
+//    vector<vector<string>> let;
+//    for(auto &log:logs) {
+//        auto pos=log.find(' ');
+//        if(isdigit(log[pos+1])) { dig.push_back(log); continue; }
+//        let.push_back({log.substr(0,pos), log.substr(pos+1)});
+//    }
+//
+//    sort(let.begin(), let.end(), [](vector<string> &a, vector<string> &b) {
+//        return a[1]<b[1] || (a[1]==b[1] && a[0]<b[0]);
+//    });
+//
+//    for(auto &l:let)
+//        res.push_back(l[0]+' '+l[1]);
+//    for(auto &d:dig)
+//        res.push_back(d);
+//
+//    return res;
+}
+
 bool LC0925::isLongPressedName(string name, string typed) {
     // 直接用j遍历 typed 中每个字母，i初识时指向 name 的第一个字母，假如i小于m，且 name[i] 等于 typed[j-1] 时，则i自增1，否则的话，
     // 若此时j为0（说明第一个字母就不匹配），或者 typed[j] 不等于 typed[j - 1]（说明出现了无法匹配的新字母），则直接返回 false。循环退
