@@ -6,6 +6,36 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+bool LC0925::isLongPressedName(string name, string typed) {
+    // 直接用j遍历 typed 中每个字母，i初识时指向 name 的第一个字母，假如i小于m，且 name[i] 等于 typed[j-1] 时，则i自增1，否则的话，
+    // 若此时j为0（说明第一个字母就不匹配），或者 typed[j] 不等于 typed[j - 1]（说明出现了无法匹配的新字母），则直接返回 false。循环退
+    // 出后若i等于m则返回 true，否则返回 false
+    int i=0, j=0, m=name.size(), n=typed.size();
+
+    for( ; j<n; j++) {
+        if(name[i]==typed[j]) i++;
+        else if(!j || typed[j]!=typed[j-1]) return false;
+    }
+    return i==m;
+
+    // 在用键盘敲入名字的时候，对于某个字母可能会长时间按键，这导可能会有多个相同字母输入，这种情况是允许的，现在给了两个字符串，name
+    // 是朋友的名字，typed 是朋友敲入的字符串，问 typed 是否是朋友敲入的名字。其实这道题的本质是，对于 name 中每个位置的字母，
+    // 对应在 typed 中的出现次数一定要相等或者更多，但是直接统计每个字符出现的次数是不对的，因为位置关系很重要，比如 abb 和 abab，
+    // 虽然后者中a和b的出现次数都大于等于前者，但还是要返回 false。博主最先想的方法是用两个指针i和j分别提取 name 和 typed 字符串中每个字
+    // 母出现的次数，如果 typed 中的次数小于 name 中的次数，则直接返回 false 即可，最终循环结束后，i和j应该分别为 name 和 typed 的长度，
+    // 此时返回 true，否则返回 false
+//    int i=0, j=0, m=name.size(), n=typed.size();
+//    while(i<m || j<n) {
+//        if(name[i]!=typed[j]) return false;
+//        int si=i, sj=j;
+//        while(i<m-1 && name[i]==name[i+1]) i++;
+//        while(j<n-1 && typed[j]==typed[j+1]) j++;
+//        if(i-si > j-sj) return false;
+//        i++; j++;
+//    }
+//    return i==m && j==n;
+}
+
 string LC0917::reverseOnlyLetters(string s) {
     // 使用两个指针i和j，分别指向S串的开头和结尾。当i指向非字母字符时，指针i自增1，否则若j指向非字母字符时，指针j自减1，
     // 若i和j都指向字母时，则交换 S[i] 和 S[j] 的位置，同时i自增1，j自减1，这样也可以实现只翻转字母的目的
