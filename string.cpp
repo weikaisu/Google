@@ -6,6 +6,23 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+vector<int> LC0942::diStringMatch(string s) {
+    // 这道题给了一个只有 'D' 和 'I' 两个字母组成的字符串，表示一种 pattern，其中 'D' 表示需要下降 Decrease，即当前数字大于下个数字，
+    // 同理，'i' 表示需要上升 Increase，即当前数字小于下个数字，让返回符合这个要求的任意一个数组，还有个要求是该数组必须是 [0, n]
+    // 之间的所有数字的一种全排列，其中n是给定 pattern 字符串的长度。这表明了返回数组不能有重复数字，这里一会上升一会下降的，很容易产生重复
+    // 数字，难不成还要不停的检测是否有重复数字么，不，这样太麻烦了，必须想一种生成方法来保证绝对不会有重复数字。对于上升来说，可以从0开始累
+    // 加，而对于下降来说，则可以从n开始下降，这样保证了在结束之前二者绝不会相遇，到最后一个数字的时候二者相同，再将这个相同数字加入即可，
+    // 因为返回的数组的个数始终会比给定字符串长度大1个
+    vector<int> res;
+    int l=0, r=s.size();
+    for(auto &c:s) {
+        if(c == 'I') res.push_back(l++);
+        else res.push_back(r--);
+    }
+    res.push_back(l);
+    return res;
+}
+
 vector<string> LC0937::reorderLogFiles(vector<string>& logs) {
     // We can break this problem into two tasks: 1) Parition 2) Sort letter-logs
 
