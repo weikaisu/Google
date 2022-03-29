@@ -165,6 +165,7 @@ struct LC0026 { int removeDuplicates(vector<int>& nums); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
 // Array List
+struct LC0944 { int minDeletionSize(vector<string>& strs); };
 struct LC0844 { bool backspaceCompare(string s, string t); };
 struct LC0830 { vector<vector<int>> largeGroupPositions(string s); };
 struct LC0821 { vector<int> shortestToChar(string s, char c); };
