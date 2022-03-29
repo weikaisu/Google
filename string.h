@@ -8,6 +8,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+struct LC1021 { string removeOuterParentheses(string s); };
 struct LC0942 { vector<int> diStringMatch(string s); };
 struct LC0937 { vector<string> reorderLogFiles(vector<string>& logs); };
 struct LC0925 { bool isLongPressedName(string name, string typed); };

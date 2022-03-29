@@ -6,6 +6,38 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+string LC1021::removeOuterParentheses(string s) {
+    // 可以写的更简洁一些，并不需要等到找到整个合法括号子串后再加入结果 res，而是在遍历的过程中就加入。因为这里的括号分为两种，一种是合法子串
+    // 的最外层括号，这种不能加到结果 res，另一种是其他位置上的括号，这种要加到 res。所以只要区分出这两种情况，就知道当前括号要不要加，区别
+    // 的方法还是根据 cnt，当遇到左括号时，若此时 cnt 大于0，则一定不是合法子串的起始位置，可以加入 res，之后 cnt 自增1；同理，若遇到右括
+    // 号，若此时 cnt 大于1，则一定不是合法子串的结束位置，可以加入 res，之后 cnt 自减1
+    string res;
+    int cnt = 0;
+    for(auto &c:s) {
+        if(c=='(' && cnt++ > 0) res.push_back(c);
+        if(c==')' && cnt-- > 1) res.push_back(c);
+    }
+    return res;
+
+    // 这道题给了一个合法的括号字符串，其可能由多个合法的括号字符子串组成，现在让把所有合法的子串的最外层的括号去掉，将剩下的拼接起来并返回，
+    // 根据题目给的例子，不难理解题意。LeetCode 中关于括号的题目还是比较多的，比如 Valid Parentheses，Valid Parenthesis String，
+    // Remove Invalid Parentheses，和 Longest Valid Parentheses 等。大多都是考察如何判断一个括号字符串是否合法，所谓的合法，大致就
+    // 是左右括号个数要相同，每个右括号前面必须要有对应的左括号，一个比较简单的判断方法就是用一个变量 cnt，遇到左括号则自增1，遇到右括号则自
+    // 减1，在这过程中 cnt 不能为负，且最后 cnt 必须为0。这道题限定了括号字符串一定是合法的，但也可以用这个方法来找出每个合法的子串部分，
+    // 遍历字符串S，若当前字符为左括号，则 cnt 自增1，否则自减1。若 cnt 不为0，说明还不是一个合法的括号子串，跳过。否则我们就知道了一个合
+    // 法括号子串的结束位置，用一个变量 start 记录合法括号子串的起始位置，初始化为0，这样就可以将去除最外层括号后的中间部分直接取出来加入结
+    // 果 res 中，然后此时更新 start 为下一个合法子串的起始位置继续遍历即可
+//    string res;
+//    int cnt = 0, start = 0;
+//    for(int i=0; i<s.size(); i++) {
+//        (s[i]=='(') ? cnt++ : cnt--;
+//        if(cnt) continue;
+//        res += s.substr(start+1, i-start-1);
+//        start = i+1;
+//    }
+//    return res;
+}
+
 vector<int> LC0942::diStringMatch(string s) {
     // 这道题给了一个只有 'D' 和 'I' 两个字母组成的字符串，表示一种 pattern，其中 'D' 表示需要下降 Decrease，即当前数字大于下个数字，
     // 同理，'i' 表示需要上升 Increase，即当前数字小于下个数字，让返回符合这个要求的任意一个数组，还有个要求是该数组必须是 [0, n]
