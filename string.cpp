@@ -6,6 +6,18 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+string LC0917::reverseOnlyLetters(string s) {
+    // 使用两个指针i和j，分别指向S串的开头和结尾。当i指向非字母字符时，指针i自增1，否则若j指向非字母字符时，指针j自减1，
+    // 若i和j都指向字母时，则交换 S[i] 和 S[j] 的位置，同时i自增1，j自减1，这样也可以实现只翻转字母的目的
+    int l=0, r=s.size()-1;
+    while(l<r) {
+        while(l<r && !isalpha(s[l])) l++;
+        while(l<r && !isalpha(s[r])) r--;
+        swap(s[l++],s[r--]);
+    }
+    return s;
+}
+
 string LC0824::toGoatLatin(string sentence) {
     // 将一句话转为山羊拉丁文，有几个规则，如果单词是元音开头的，那么直接在但此后加ma，如果是非元音开头的单词，那么把首字母移到末尾，
     // 并且加ma。还有就是根据当前是第几个单词，后面加几个a，估计是为了模仿羊叫声，拉长音，感觉更像绵羊音一样。此题难度不是很大，
