@@ -58,6 +58,31 @@ string LC0006::convert(string s, int numRows) {
     return ans;
 }
 
+void LCSearch::permutation(vector<int> nums, int n, int m) {
+    vector<vector<int>> res;
+    vector<int> cur;
+    vector<bool> used(nums.size(), false);
+
+    auto per = [&](const auto &self, int depth) {
+        if(depth==m)
+            {res.push_back(cur); return;}
+        for(int i=0; i<nums.size(); i++) {
+            if(used[i]) continue;
+            cur.push_back(nums[i]); used[i]=true;
+            self(self, depth+1);
+            cur.pop_back(); used[i]=false;
+        }
+    };
+
+    per(per, 0);
+
+    for(auto &v:res) {
+        for(auto &e:v) cout << e << ' ';
+        cout << endl;
+    }
+    cout<<"P("<<n<<","<<m<<")="<<res.size()<<endl;
+}
+
 void LCSearch::combination(vector<int> nums, int n, int m) {
     vector<vector<int>> res;
     vector<int> cur;
