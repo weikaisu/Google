@@ -13,6 +13,10 @@ struct LC0006 { string convert(string s, int numRows); };
 // binary search
 struct LC0035 { int searchInsert(vector<int>& nums, int target); };
 
+struct LCSearch {
+    void permutation(vector<int> nums, int n, int m);
+    void combination(vector<int> nums, int n, int m);
+};
 /***********  Medium  **********/
 
 

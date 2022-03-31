@@ -57,3 +57,26 @@ string LC0006::convert(string s, int numRows) {
 
     return ans;
 }
+
+void LCSearch::combination(vector<int> nums, int n, int m) {
+    vector<vector<int>> res;
+    vector<int> cur;
+
+    auto com = [&](const auto &self, int depth, int start) {
+        if(depth==m)
+            {res.push_back(cur); return;}
+        for(int i=start; i<nums.size(); i++) {
+            cur.push_back(nums[i]);
+            self(self, depth+1, i+1);
+            cur.pop_back();
+        }
+    };
+
+    com(com, 0, 0);
+
+    for(auto &v:res) {
+        for(auto &e:v) cout << e << ' ';
+        cout << endl;
+    }
+    cout<<"C("<<n<<","<<m<<")="<<res.size()<<endl;
+}
