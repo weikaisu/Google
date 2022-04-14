@@ -32,6 +32,7 @@ struct TreeNode {
 class tree {};
 
 /***********  Easy  **********/
+struct LC0700 { TreeNode* searchBST(TreeNode* root, int val); };
 struct LC0653 { bool findTarget(TreeNode* root, int k); };
 struct LC0637 { vector<double> averageOfLevels(TreeNode* root); };
 struct LC0617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };

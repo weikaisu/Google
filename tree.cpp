@@ -1,6 +1,23 @@
 
 #include "tree.h"
 
+TreeNode* LC0700::searchBST(TreeNode* root, int val) {
+    // 这道题让我们搜索一个二叉搜索树，既然是二叉搜索树，而不是普通的二叉树，那么我们肯定要利用二叉搜索树特定的性质来解题，即左<根<右。那么就
+    // 是说任意一个结点的左子树中的所有结点均小于当前结点，其右子树中的所有结点均大于当前结点。那么这不就是一个天然的二分么，当仁不让的二分搜
+    // 索法呼之欲出啊。首先判空，如果当前结点不存在，直接返回空。如果当前结点值等于目标值，返回当前结点。接下来就看如果当前结点值大于目标值，
+    // 则对左子结点调用递归函数，否则就对右子结点调用递归函数
+//    if(root==nullptr) return nullptr;
+//    if(val == root->val) return root;
+//    return (val > root->val) ? searchBST(root->right, val) : searchBST(root->left, val);
+
+    // 使用迭代形式来解，使用一个while循环，思路都是一样的，如果当前结点存在，且结点值不等于目标值，那么若结点值大于目标值，则当前结点指向其
+    // 左子结点，否则指向其右子结点
+    while(root && root->val != val) {
+        root = (val > root->val) ? root->right : root->left;
+    }
+    return root;
+}
+
 bool LC0653::findTarget(TreeNode* root, int k) {
     // 遍历二叉树就行，然后用一个HashSet，在递归函数函数中，如果node为空，返回false。如果k减去当前结点值在HashSet中存在，直接返回true；
     // 否则就将当前结点值加入HashSet，然后对左右子结点分别调用递归函数并且或起来返回即可
