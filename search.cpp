@@ -1,6 +1,7 @@
 
 #include "search.h"
 
+/***********  Binary Search  **********/
 //LC0035 run;
 //vector<int> nums{1,3,5,6};
 //int target=5;
@@ -17,6 +18,7 @@ int LC0035::searchInsert(vector<int>& nums, int target) {
     return l;
 }
 
+/***********  Linear Search  **********/
 //LC0784 run;
 //vector<string> ans=run.letterCasePermutation("a1b2");
 //for(auto a:ans) cout << a << endl;
@@ -58,6 +60,7 @@ string LC0006::convert(string s, int numRows) {
     return ans;
 }
 
+/***********  DF Search  **********/
 void LCSearch::permutation(vector<int> nums, int n, int m) {
     vector<vector<int>> res;
     vector<int> cur;
@@ -105,3 +108,5 @@ void LCSearch::combination(vector<int> nums, int n, int m) {
     }
     cout<<"C("<<n<<","<<m<<")="<<res.size()<<endl;
 }
+
+/***********  BF Search  **********/
