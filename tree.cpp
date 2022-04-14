@@ -160,6 +160,37 @@ bool LC0100::isSameTree(TreeNode* p, TreeNode* q) {
     return isSameTree(p->left, q->left) || isSameTree(p->right, q->right);
 }
 
+vector<int> LC0094::inorderTraversal(TreeNode* root) {
+    // 递归方法，十分直接，对左子结点调用递归函数，根节点访问值，右子节点再调用递归函数
+//    if(root==nullptr) return {};
+//    vector<int> res;
+//    auto dfs = [&](const auto &self, TreeNode* root) -> void {
+//        if(root->left) self(self, root->left);
+//        res.push_back(root->val);
+//        if(root->right) self(self, root->right);
+//    };
+//    dfs(dfs, root);
+//    return res;
+
+    // 从根节点开始，先将根节点压入栈，然后再将其所有左子结点压入栈，然后取出栈顶节点，保存节点值，再将当前指针移到其右子节点上，若存在右子节
+    // 点，则在下次循环时又可将其所有左子结点压入栈中。这样就保证了访问顺序为左-根-右
+    vector<int> res;
+    stack<TreeNode*>  s;
+    TreeNode *p = root;
+    while(s.size() || p) {
+        if(p) {
+            s.push(p);
+            p = p->left;
+        } else {
+            p = s.top(); s.pop();
+            res.push_back(p->val);
+            p = p->right;
+        }
+    }
+    return res;
+}
+
+
 void TreeNode::BuildTree(TreeNode *&root) {
     /*   Let us create below tree
     *       3

@@ -42,6 +42,7 @@ struct LC0404 { int sumOfLeftLeaves(TreeNode* root); };
 struct LC0257 { vector<string> binaryTreePaths(TreeNode* root); };
 struct LC0110 { bool isBalanced(TreeNode* root); };
 struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
+struct LC0094 { vector<int> inorderTraversal(TreeNode* root); };
 
 /***********  Medium  **********/
 
