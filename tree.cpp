@@ -134,6 +134,41 @@ vector<string> LC0257::binaryTreePaths(TreeNode* root) {
     return res;
 }
 
+vector<int> LC0144::preorderTraversal(TreeNode* root) {
+    // 使用了一个辅助结点p，这种写法其实可以看作是一个模版，对应的还有中序和后序的模版写法，形式很统一，方便于记忆。辅助结点p初始化为根结点，
+    // while 循环的条件是栈不为空或者辅助结点p不为空，在循环中首先判断如果辅助结点p存在，那么先将p加入栈中，然后将p的结点值加入结果 res 中，
+    // 此时p指向其左子结点。否则如果p不存在的话，表明没有左子结点，取出栈顶结点，将p指向栈顶结点的右子结点
+    if(!root) return {};
+    vector<int> res;
+    stack<TreeNode*> s;
+    TreeNode* p = root;
+    while(s.size() || p) {
+        if(p) {
+            s.push(p);
+            res.push_back(p->val);
+            p = p->left;
+        } else {
+            p = s.top(); s.pop();
+            p = p->right;
+        }
+    }
+    return res;
+
+    // 用到stack来辅助运算。由于先序遍历的顺序是"根-左-右", 算法为：
+    //1. 把根节点 push 到栈中
+    //2. 循环检测栈是否为空，若不空，则取出栈顶元素，保存其值，然后看其右子节点是否存在，若存在则 push 到栈中。再看其左子节点，若存在，则 push 到栈中。
+    /*if(!root) return {};
+    vector<int> res;
+    stack<TreeNode*> s{{root}};
+    while(s.size()) {
+        TreeNode* n=s.top(); s.pop();
+        res.push_back(n->val);
+        if(n->right) s.push(n->right);
+        if(n->left) s.push(n->left);
+    }
+    return res;*/
+}
+
 //TreeNode *root;
 //root->BuildTree(root);
 //LC110 run;
@@ -189,7 +224,6 @@ vector<int> LC0094::inorderTraversal(TreeNode* root) {
     }
     return res;
 }
-
 
 void TreeNode::BuildTree(TreeNode *&root) {
     /*   Let us create below tree
