@@ -258,7 +258,7 @@ int LC0929::numUniqueEmails(vector<string>& emails) {
 //            addr.push_back(c);
 //        }
 //        addr += email.substr(email.find('@'));
-//        set.insert(addr);
+//        set.insert(move(addr));
 //    }
 //    return set.size();
 }
