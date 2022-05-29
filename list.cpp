@@ -477,7 +477,6 @@ vector<int> LC0350::intersect(vector<int>& nums1, vector<int>& nums2) {
     for(auto n:nums1) ++map[n];
     for(auto n:nums2)
         if(map[n]-- > 0) res.push_back(n);
-    cout << endl;
     return res;
 }
 
@@ -646,7 +645,7 @@ int LC0026::removeDuplicates(vector<int>& nums) {
     int s=nums.size(); if(s<=1) return s;
     int r=1, p=nums[0];
     for(int i=1 ; i<nums.size() ; i++) {
-        if(p == nums[i])
+        if(nums[i] == p)
             s--;
         else
             nums[r++]=nums[i];
