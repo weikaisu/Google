@@ -1152,6 +1152,80 @@ ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
     }
 }
 
+int StackArithmetic::priority(char c) {
+    if(priority_map.count(c))
+        return priority_map[c];
+    else
+        return -1;
+}
+
+string StackArithmetic::toPostFix(string str) {
+    stack<char> s;
+    string res;
+    char e;
+    for(auto &c:str) {
+        switch(c) {
+            case '(':
+                s.push(c);
+                break;
+            case ')':
+                while(s.size() && (e=s.top() != '(')) {
+                    res+=c;
+                    s.pop();
+                }
+                break;
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                while(priority(e=s.top()) >= priority(c)) {
+                    res+=e;
+                    s.pop();
+                }
+                break;
+            default:
+                if(isdigit(c))
+                    res+=c;
+                break;
+        }
+    }
+    while(s.size()) {
+        res+=s.top();
+        s.pop();
+    }
+
+    return res;
+}
+
+int StackArithmetic::calculate(string str) {
+    priority_map['(']=0; priority_map['+']=1; priority_map['-']=1; priority_map['*']=2; priority_map['/']=2;
+
+    stack<int> s;
+    int v = 0;
+    for(auto &c:str) {
+        if(isdigit(c)) {
+            v = v*10 + (c-'0'); continue;
+        }
+        if(v) {
+            s.push(v);
+            v = 0;
+        }
+
+        int z = 0;
+        int y = s.top(); s.pop();
+        int x = s.top(); s.pop();
+
+        switch(c) {
+            case '+': z=x+y; break;
+            case '-': z=x-y; break;
+            case '*': z=x*y; break;
+            case '/': z=x/y; break;
+        }
+
+        s.push('0'+z);
+    }
+    return s.top()-'0';
+}
 
 /***********  Medium  **********/
 

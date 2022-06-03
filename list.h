@@ -247,8 +247,15 @@ struct LC0160 { ListNode *getIntersectionNode(ListNode *headA, ListNode *headB);
 struct LC0141 { bool hasCycle(ListNode *head); };
 /*刪除重複值的node*/
 struct LC0083 { ListNode* deleteDuplicates(ListNode* head); };
-/*合併兩條lsit*/
+/*合併兩條list*/
 struct LC0021 { ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
+
+struct StackArithmetic {
+        unordered_map<char,int> priority_map;
+    int priority(char c);
+    int calculate(string str);
+    string toPostFix(string str);
+};
 
 /***********  Medium  **********/
 
