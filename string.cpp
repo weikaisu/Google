@@ -6,6 +6,20 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+vector<string> LC1078::findOcurrences(string text, string first, string second) {
+    // 我们并不用保存所有的单词，因为这里只关心前两个单词是啥，所以可以使用两个变量 pre2 和 pre 来记录前面的两个单词，当其分别等于 first
+    // 和 second 的时候，将当前单词加入结果 res 中，并且 pre2 赋值为 pre，pre赋值为当前单词即可
+    vector<string> res;
+    istringstream iss(text);
+    string pre2, pre1, curr;
+    while(iss>>curr) {
+        if(pre2==first && pre1==second) res.push_back(curr);
+        pre2=pre1;
+        pre1=curr;
+    }
+    return res;
+}
+
 string LC1071::gcdOfStrings(string str1, string str2) {
     // 由于 str1 和 str2 可以被同一个x串整除，那么 str1+str2 和 str2+str1 一定是相同的，不信大家可以自行带例子去验证。而且最大的x的长
     // 度是 str1 和 str2 长度的最大公约数相同（是不是感觉很神奇，求大佬证明），这样的话直接浓缩到一行就搞定了

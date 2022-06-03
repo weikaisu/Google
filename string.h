@@ -9,6 +9,8 @@
 using namespace std;
 
 /***********  Easy  **********/
+/*回傳文章裡按給定順序的下一個單字*/
+struct LC1078 { vector<string> findOcurrences(string text, string first, string second); };
 /*最大公約字串*/
 struct LC1071 { string gcdOfStrings(string str1, string str2); };
 /*移除相鄰相同字符*/
