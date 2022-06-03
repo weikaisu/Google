@@ -6,6 +6,42 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+string LC1071::gcdOfStrings(string str1, string str2) {
+    // 由于 str1 和 str2 可以被同一个x串整除，那么 str1+str2 和 str2+str1 一定是相同的，不信大家可以自行带例子去验证。而且最大的x的长
+    // 度是 str1 和 str2 长度的最大公约数相同（是不是感觉很神奇，求大佬证明），这样的话直接浓缩到一行就搞定了
+//    return (str1 + str2 == str2 + str1) ? str1.substr(0, gcd(str1.size(), str2.size())) : "";
+
+    // 若存在这样的x的话，那么短的字符串一定是长的字符串的子串，比如例子1和例子2。这样的话其实是可以化简的，当长串中的前缀（和短串的长度相同）
+    // 不等于短串的时候，说明x不存在，可以直接返回空，否则从长串中取出和短串长度相同的前缀，继续调用递归，直到其中一个为空的时候，返回另一个就
+    // 可以了
+    if(str1.size()<str2.size()) return gcdOfStrings(str2,str1);
+    if(str2.empty()) return str1;
+    if(str1.substr(0, str2.size()) != str2) return "";
+    return gcdOfStrings(str1.substr(str2.size()), str2);
+
+    // 由于这个x会重复出现在字符串中，所以其一定是个前缀，则字符串的所有前缀都有可能是这个x，于是乎只要遍历所有的前缀，然后来验证其是否可以
+    // 整除这两个字符串就可以找到要求的x了。遍历 str1 的所有前缀，若 str1 的长度不是这个前缀的长度的整数倍，或者 str2 的长度不是这个前缀
+    // 长度的整数倍，直接跳过。否则直接分别复制前缀直到和 str1，str2 的长度相同，再比较，若完全一样，则说明前缀是一个x，赋值给结果 res。
+    // 这样遍历下来就能得到长度最长的x了
+//    string res;
+//    int m=str1.size(), n=str2.size();
+//    for(int i=0; i<m; i++) {
+//        if( m%(i+1)!=0 || n%(i+1)!=0 ) continue;
+//        string pre=str1.substr(0,i+1), tostr1, tostr2;
+//
+//        for(int j=0; j<m/(i+1); j++)
+//            tostr1+=pre;
+//        if(tostr1!=str1) continue;
+//
+//        for(int j=0; j<n/(i+1); j++)
+//            tostr2+=pre;
+//        if(tostr2!=str2) continue;
+//
+//        res = pre;
+//    }
+//    return res;
+}
+
 string LC1047::removeDuplicates(string s) {
     // 这道题给了一个字符串，让移除所有相邻的重复字符，注意之前不相邻的字符可以在其他字符移除后变的相邻，从而形成的新的相邻的重复字符，所以只
     // 是简单移除一次不能保证能得到最终的结果。这里需要借助栈的思路来做，可以用字符串来模拟栈的后入先出的特性。遍历每个字符，若 res 不空，且

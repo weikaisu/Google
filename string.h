@@ -4,12 +4,16 @@
 
 #include "main.h"
 #include <sstream>
+#include <numeric>
 
 using namespace std;
 
 /***********  Easy  **********/
-struct LC1047 { string removeDuplicates(string s); };
+/*最大公約字串*/
+struct LC1071 { string gcdOfStrings(string str1, string str2); };
 /*移除相鄰相同字符*/
+struct LC1047 { string removeDuplicates(string s); };
+/*把所有合法的子串的最外层的括号去掉*/
 struct LC1021 { string removeOuterParentheses(string s); };
 /*根據字符規定返回整數陣列*/
 struct LC0942 { vector<int> diStringMatch(string s); };
