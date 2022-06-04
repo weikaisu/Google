@@ -227,6 +227,8 @@ struct LC0551 { bool checkRecord(string s); };
 struct LC0541 { string reverseStr(string s, int k); };
 /*反轉字符陣列*/
 struct LC0344 { void reverseString(vector<char>& s); };
+/*找出各連續子陣列的範圍*/
+struct LC0228 { vector<string> summaryRanges(vector<int>& nums); };
 
 // Link List
 /*二進位轉十進位*/
@@ -251,7 +253,7 @@ struct LC0083 { ListNode* deleteDuplicates(ListNode* head); };
 struct LC0021 { ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
 
 struct StackArithmetic {
-        unordered_map<char,int> priority_map;
+    unordered_map<char,int> priority_map;
     int priority(char c);
     int calculate(string str);
     string toPostFix(string str);
