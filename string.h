@@ -10,6 +10,8 @@
 using namespace std;
 
 /***********  Easy  **********/
+/*給定字串最多能切分出多少個平衡字串*/
+struct LC1221 { int balancedStringSplit(string s); };
 /*將日期換算成一年的第幾天*/
 struct LC1154 { int dayOfYear(string date); };
 /*將IP裡的.換成指定字串*/
