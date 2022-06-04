@@ -9,6 +9,8 @@
 using namespace std;
 
 /***********  Easy  **********/
+/*將IP裡的.換成指定字串*/
+struct LC1108 { string defangIPaddr(string address); };
 /*回傳文章裡按給定順序的下一個單字*/
 struct LC1078 { vector<string> findOcurrences(string text, string first, string second); };
 /*最大公約字串*/

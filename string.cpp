@@ -6,6 +6,22 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+string LC1108::defangIPaddr(string address) {
+    // 直接遍历原字符串，遇到点了，就直接把 [.] 加入，否则就加入当前字符即可
+    string res;
+    for(auto &c:address) {
+        if(c=='.')
+            res += "[.]";
+        else
+            res += c;
+    }
+    return res;
+
+    // 用 regex_replace 来直接进行替换.
+    // !處理時間會長很多!
+    return regex_replace(address, regex("[.]"), "[.]");
+}
+
 vector<string> LC1078::findOcurrences(string text, string first, string second) {
     // 我们并不用保存所有的单词，因为这里只关心前两个单词是啥，所以可以使用两个变量 pre2 和 pre 来记录前面的两个单词，当其分别等于 first
     // 和 second 的时候，将当前单词加入结果 res 中，并且 pre2 赋值为 pre，pre赋值为当前单词即可
