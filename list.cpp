@@ -875,6 +875,22 @@ string LC0541::reverseStr(string s, int k) {
     return s;
 }
 
+int LC0463::islandPerimeter(vector<vector<int>>& grid) {
+    // 这道题给了我们一个格子图，若干连在一起的格子形成了一个小岛，规定了图中只有一个相连的岛，且岛中没有湖，让我们求岛的周长。我们知道一个格
+    // 子有四条边，但是当两个格子相邻，周围为6，若某个格子四周都有格子，那么这个格子一条边都不算在周长里。那么我们怎么统计出岛的周长呢？
+    // 对于每个岛屿格子先默认加上四条边，然后检查其左面和上面是否有岛屿格子，有的话分别减去两条边，这样也能得到正确的结果
+    if(grid.empty() || grid[0].empty()) return 0;
+    int res=0, m=grid.size(), n=grid[0].size();
+    for(int i=0; i<m; i++)
+        for(int j=0; j<n; j++) {
+            if(!grid[i][j]) continue;
+            res+=4;
+            if(i && grid[i-1][j]) res-=2;
+            if(j && grid[i][j-1]) res-=2;
+        }
+    return res;
+}
+
 int LC0414::thirdMax(vector<int>& nums) {
     // 这道题让我们求数组中第三大的数，如果不存在的话那么就返回最大的数，题目中说明了这里的第三大不能和第二大相同，必须是严格的小于，而并非小
     // 于等于。这道题并不是很难，如果知道怎么求第二大的数，那么求第三大的数的思路都是一样的。那么我们用三个变量first, second, third来分别
