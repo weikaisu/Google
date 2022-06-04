@@ -875,6 +875,27 @@ string LC0541::reverseStr(string s, int k) {
     return s;
 }
 
+int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
+    // 历一遍数组，用一个计数器 cnt 来统计1的个数，方法是如果当前数字为0，那么 cnt 重置为0，如果不是0，cnt 自增1，然后每次更新结果 res 即可
+    int res=0, cnt=0;
+    for(auto &n:nums) {
+        if(n)
+            { cnt++; }
+        else
+            { res = max(res,cnt); cnt=0; }
+    }
+    return max(res,cnt);
+
+    // 由于是个二进制数组，所以数组中的数字只能是0或1，那么连续1的和跟个数相等，所以可以计算和，通过加上 num，再乘以 num 来计算，如果当前数
+    // 字是0，那么 sum 就被重置为0，还是要更新结果 res
+//    int res=0, sum=0;
+//    for(auto &n:nums) {
+//        sum = (sum+n)*n;
+//        res = max(res, sum);
+//    }
+//    return res;
+}
+
 int LC0463::islandPerimeter(vector<vector<int>>& grid) {
     // 这道题给了我们一个格子图，若干连在一起的格子形成了一个小岛，规定了图中只有一个相连的岛，且岛中没有湖，让我们求岛的周长。我们知道一个格
     // 子有四条边，但是当两个格子相邻，周围为6，若某个格子四周都有格子，那么这个格子一条边都不算在周长里。那么我们怎么统计出岛的周长呢？
