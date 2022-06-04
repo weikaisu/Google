@@ -227,6 +227,8 @@ struct LC0551 { bool checkRecord(string s); };
 struct LC0541 { string reverseStr(string s, int k); };
 /*反轉字符陣列*/
 struct LC0344 { void reverseString(vector<char>& s); };
+/*將陣列裡所有0移到後面*/
+struct LC0283 { void moveZeroes(vector<int>& nums); };
 /*找出各連續子陣列的範圍*/
 struct LC0228 { vector<string> summaryRanges(vector<int>& nums); };
 
