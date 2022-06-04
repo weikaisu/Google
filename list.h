@@ -225,6 +225,8 @@ struct LC0557 { string reverseWords(string s); };
 struct LC0551 { bool checkRecord(string s); };
 /*每2k個字符反轉k個字符*/
 struct LC0541 { string reverseStr(string s, int k); };
+/*回傳陣列裡第三大的數*/
+struct LC0414 { int thirdMax(vector<int>& nums); };
 /*反轉字符陣列*/
 struct LC0344 { void reverseString(vector<char>& s); };
 /*將陣列裡所有0移到後面*/
