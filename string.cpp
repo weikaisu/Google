@@ -6,6 +6,20 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+int LC1154::dayOfYear(string date) {
+    // 这里唯一的难点就是判断闰年了吧。先用个数组列出非闰年各个月的天数，然后分别从给定 date 字符串中提取出年月日，并转为整型数。然后将当前月
+    // 之前的天数都累加到结果 res 中，接下来判断当前月是否大于2月，没有的话都不用判断闰年了。超过了2月就要判断当前年是否是闰年，判断方法很简
+    // 单，若能被 400 整除，一定是闰年，或着不能被 100 整除，但能被4整除的也是闰年。是闰年的话就再多加一天，最后再加上当前的天数返回即可
+    array<int,12> days {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int res=0, year=stoi(date.substr(0,4)), month=stoi(date.substr(5,2)), day=stoi(date.substr(8,2));
+
+    for(int i=0; i<month-1; i++)
+        res+=days[i];
+    if(month>2 && (!(year%400) || (year%100 && !(year%4))))
+        res++;
+    return res+day;
+}
+
 string LC1108::defangIPaddr(string address) {
     // 直接遍历原字符串，遇到点了，就直接把 [.] 加入，否则就加入当前字符即可
     string res;

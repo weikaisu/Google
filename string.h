@@ -5,10 +5,13 @@
 #include "main.h"
 #include <sstream>
 #include <numeric>
+#include <array>
 
 using namespace std;
 
 /***********  Easy  **********/
+/*將日期換算成一年的第幾天*/
+struct LC1154 { int dayOfYear(string date); };
 /*將IP裡的.換成指定字串*/
 struct LC1108 { string defangIPaddr(string address); };
 /*回傳文章裡按給定順序的下一個單字*/
