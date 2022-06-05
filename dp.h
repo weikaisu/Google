@@ -12,6 +12,8 @@ struct LC0070 { int climbStairs(int n); };
 struct LC0053 { int maxSubArray(vector<int>& nums); };
 
 //Greedy
+/*被攻擊後持續中毒的秒數*/
+struct LC0495 { int findPoisonedDuration(vector<int>& timeSeries, int duration); };
 /*分發糖果給小孩*/
 struct LC0455 { int findContentChildren(vector<int>& g, vector<int>& s); };
 

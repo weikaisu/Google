@@ -54,6 +54,17 @@ int LC0053::maxSubArray(vector<int>& nums) {
 }
 
 /***********  Greedy  **********/
+int LC0495::findPoisonedDuration(vector<int>& timeSeries, int duration) {
+    // 使用贪心算法，比较相邻两个时间点的时间差，如果小于duration，就加上这个差，如果大于或等于，就加上duration即可
+    if(timeSeries.empty()) return 0;
+    int res = 0;
+    for(int i=1; i<timeSeries.size(); i++) {
+        int diff = timeSeries[i]-timeSeries[i-1];
+        res += (diff<duration) ? diff : duration;
+    }
+    return res + duration;
+}
+
 int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
     // 这道题给了我们一堆cookie，每个cookie的大小不同，还有一堆小朋友，每个小朋友的胃口也不同的，问我们当前的cookie最多能满足几个小朋友。
     // 这是典型的利用贪婪算法的题目，我们可以首先对两个数组进行排序，让小的在前面。然后我们先拿最小的cookie给胃口最小的小朋友，看能否满足，
