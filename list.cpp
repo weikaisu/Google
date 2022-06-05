@@ -833,6 +833,16 @@ bool LC0657::judgeCircle(string moves) {
 //    return !u && !l ;
 }
 
+vector<vector<int>> LC0566::matrixReshape(vector<vector<int>>& mat, int r, int c) {
+    // 遍历拉直后的一维数组的坐标，然后分别转换为两个二维数组的坐标进行赋值
+    int m=mat.size(), n=mat[0].size();
+    if(m*n != r*c) return mat;
+    vector<vector<int>> res(r, vector<int>(c));
+    for(int i=0; i<r*c; i++)
+        res[i/c][i%c]=mat[i/n][i%n];
+    return res;
+}
+
 string LC0557::reverseWords(string s) {
     // 用两个指针，分别指向每个单词的开头和结尾位置，确定了单词的首尾位置后，再用两个指针对单词进行首尾交换即可，有点像验证回文字符串的方法
     int start=0, end=0, n = s.size();

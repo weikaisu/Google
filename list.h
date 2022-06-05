@@ -219,6 +219,8 @@ struct LC0821 { vector<int> shortestToChar(string s, char c); };
 struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
 /*頂多刪一字符可成回文*/
 struct LC0680 { bool validPalindrome(string s); };
+/*重塑矩陣大小*/
+struct LC0566 { vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c); };
 /*反轉一句話裡的每一個單詞*/
 struct LC0557 { string reverseWords(string s); };
 /*統計出勤紀錄判斷是否合格*/
