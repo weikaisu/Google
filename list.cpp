@@ -833,6 +833,16 @@ bool LC0657::judgeCircle(string moves) {
 //    return !u && !l ;
 }
 
+int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {
+    // 每次在 ops 中给定我们一个横纵坐标，将这个子矩形范围内的数字全部自增1，让我们求最大数字的个数。原数组初始化均为0，那么如果 ops 为空，
+    // 没有任何操作，那么直接返回 m*n 即可，每次用 ops 中的值来更新m和n，取其中较小值，这样遍历完成后，m和n就是最大数矩阵的边界了
+    for(auto &op:ops) {
+        m = min(m, op[0]);
+        n = min(n, op[1]);
+    }
+    return m*n;
+}
+
 vector<vector<int>> LC0566::matrixReshape(vector<vector<int>>& mat, int r, int c) {
     // 遍历拉直后的一维数组的坐标，然后分别转换为两个二维数组的坐标进行赋值
     int m=mat.size(), n=mat[0].size();
