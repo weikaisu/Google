@@ -225,6 +225,8 @@ struct LC0557 { string reverseWords(string s); };
 struct LC0551 { bool checkRecord(string s); };
 /*每2k個字符反轉k個字符*/
 struct LC0541 { string reverseStr(string s, int k); };
+/*給定分數陣列，找出相對排名*/
+struct LC0506 { vector<string> findRelativeRanks(vector<int>& score); };
 /*求矩陣裡最長連續1的長度*/
 struct LC0485 { int findMaxConsecutiveOnes(vector<int>& nums); };
 /*求二為陣列裡小島的周長*/

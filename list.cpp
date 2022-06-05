@@ -875,6 +875,38 @@ string LC0541::reverseStr(string s, int k) {
     return s;
 }
 
+vector<string> LC0506::findRelativeRanks(vector<int>& score) {
+    // 这道题给了我们一组分数，让我们求相对排名，前三名分别是金银铜牌，后面的就是名次数，利用map的自动排序的功能，不过map是升序排列的，所以
+    // 我们遍历的时候就要从最后面开始遍历，最后一个是金牌，然后往前一次是银牌，铜牌，名次数等
+//    vector<string> res(score.size(), "");
+//    map<int,int> m;
+//    for(int i=0; i<score.size(); i++)
+//        m[score[i]]=i;
+//    int cnt=1;
+//    for(auto it=m.rbegin(); it!=m.rend(); it++) {
+//        if(cnt==1) res[it->second] = "Gold Medal";
+//        else if(cnt==2) res[it->second] = "Silver Medal";
+//        else if(cnt==3) res[it->second] = "Bronze Medal";
+//        else res[it->second] = to_string(cnt);
+//        cnt++;
+//    }
+//    return res;
+
+    // 建立一个坐标数组，不过排序的时候比较的不是坐标，而是该坐标位置上对应的数字，后面的处理方法和之前的并没有什么不同
+    int n = score.size();
+    vector<string> res(n,"");
+    vector<int> idx(n);
+    for(int i=0; i<n; i++) idx[i]=i;
+    sort(idx.begin(), idx.end(), [&](int i, int j){return score[i]>score[j];});
+    for(int i=0; i<n; i++) {
+        if(i==0) res[idx[i]] = "Gold Medal";
+        else if(i==1) res[idx[i]] = "Silver Medal";
+        else if(i==2) res[idx[i]] = "Bronze Medal";
+        else res[idx[i]] = to_string(i+1);
+    }
+    return res;
+}
+
 int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
     // 历一遍数组，用一个计数器 cnt 来统计1的个数，方法是如果当前数字为0，那么 cnt 重置为0，如果不是0，cnt 自增1，然后每次更新结果 res 即可
     int res=0, cnt=0;
