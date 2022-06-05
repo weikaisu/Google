@@ -54,6 +54,17 @@ int LC0053::maxSubArray(vector<int>& nums) {
 }
 
 /***********  Greedy  **********/
+int LC0561::arrayPairSum(vector<int>& nums) {
+    // 这道题让我们分割数组，两两一对，让每对中较小的数的和最大。这题难度不大，用贪婪算法就可以了。由于我们要最大化每对中的较小值之和，那么肯
+    // 定是每对中两个数字大小越接近越好，因为如果差距过大，而我们只取较小的数字，那么大数字就浪费掉了。明白了这一点，我们只需要给数组排个序，
+    // 然后按顺序的每两个就是一对，我们取出每对中的第一个数即为较小值累加起来即可
+    int res = 0;
+    sort(nums.begin(), nums.end());
+    for(int i=0; i<nums.size(); i+=2)
+        res+=nums[i];
+    return res;
+}
+
 int LC0495::findPoisonedDuration(vector<int>& timeSeries, int duration) {
     // 使用贪心算法，比较相邻两个时间点的时间差，如果小于duration，就加上这个差，如果大于或等于，就加上duration即可
     if(timeSeries.empty()) return 0;
