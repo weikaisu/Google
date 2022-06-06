@@ -833,6 +833,25 @@ bool LC0657::judgeCircle(string moves) {
 //    return !u && !l ;
 }
 
+bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {
+    // 这道题给了我们一个01数组，其中1表示已经放了花，0表示可以放花的位置，但是有个限制条件是不能有相邻的花。那么我们来看如果是一些简单的例
+    // 子，如果有3个连续的零，000，能放几盆花呢，其实是要取决约左右的位置的，如果是10001，那么只能放1盆，如果左右是边界的花，那么就能放
+    // 两盆，101。可以直接通过修改flowerbed的值来做，我们遍历花床，如果某个位置为0，我们就看其前面一个和后面一个位置的值，注意处理首位置和
+    // 末位置的情况，如果pre和next均为0，那么说明当前位置可以放花，我们修改flowerbed的值，并且n自减1，最后看n是否小于等于0
+    for(int i=0; i<flowerbed.size(); i++) {
+        if(!n) return true;
+        if(!flowerbed[i]) {
+            int pre = (!i) ? 0 : flowerbed[i-1];
+            int nxt = (i==flowerbed.size()-1) ? 0 : flowerbed[i+1];
+            if(pre+nxt == 0) {
+                flowerbed[i]=1;
+                n--;
+            }
+        }
+    }
+    return n<=0;
+}
+
 int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {
     // 每次在 ops 中给定我们一个横纵坐标，将这个子矩形范围内的数字全部自增1，让我们求最大数字的个数。原数组初始化均为0，那么如果 ops 为空，
     // 没有任何操作，那么直接返回 m*n 即可，每次用 ops 中的值来更新m和n，取其中较小值，这样遍历完成后，m和n就是最大数矩阵的边界了
