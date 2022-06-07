@@ -157,6 +157,8 @@ struct LC0697 { int findShortestSubArray(vector<int>& nums); };
 struct LC0657 { bool judgeCircle(string moves); };
 /*找出1～n的陣列裡重複的數和消失的那"個"數字*/
 struct LC0645 { vector<int> findErrorNums(vector<int>& nums); };
+/*找出陣列裡三數相乘之最大值*/
+struct LC0628 { int maximumProduct(vector<int>& nums); };
 /*從兩個字串陣列裡找出相同字串的最小index*/
 struct LC0599 { vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
 /*陣列裡最長harmonious子陣列長度*/

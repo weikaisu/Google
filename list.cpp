@@ -287,6 +287,38 @@ vector<int> LC0645::findErrorNums(vector<int>& nums) {
     return res;
 }
 
+int LC0628::maximumProduct(vector<int>& nums) {
+    // 这道题博主刚开始看的时候，心想直接排序，然后最后三个数字相乘不就完了，心想不会这么Easy吧，果然被OJ无情打脸，没有考虑到负数和0的情况。
+    // 这道题给了数组的范围，至少三个，那么如果是三个的话，就无所谓了，直接相乘返回即可，但是如果超过了3个，而且有负数存在的话，情况就可能不一
+    // 样，我们来考虑几种情况，如果全是负数，三个负数相乘还是负数，为了让负数最大，那么其绝对值就该最小，而负数排序后绝对值小的都在末尾，所以
+    // 是末尾三个数字相乘，这个跟全是正数的情况一样。那么重点在于前半段是负数，后半段是正数，那么最好的情况肯定是两个最小的负数相乘得到一个正
+    // 数，然后跟一个最大的正数相乘，这样得到的肯定是最大的数，所以我们让前两个数相乘，再和数组的最后一个数字相乘，就可以得到这种情况下的最大
+    // 的乘积。实际上我们并不用分情况讨论数组的正负，只要把这两种情况的乘积都算出来，比较二者取较大值，就能涵盖所有的情况，从而得到正确的结果
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    return max(nums[0]*nums[1]*nums[n-1], nums[n-3]*nums[n-2]*nums[n-1]);
+
+    // 找出3个最大的数和一个最大的和两个最小的，相乘对比也能得到结果，而且是O(n)的时间复杂度
+//    int max1 = INT_MIN, max2 = INT_MIN, max3 = INT_MIN;
+//    int min1 = INT_MAX, min2 = INT_MAX;
+//    for(auto &num:nums) {
+//        if(num>max1) {
+//            max3=max2; max2=max1; max1=num;
+//        } else if (num>max2) {
+//            max3=max2; max2=num;
+//        } else if (num>max3) {
+//            max3=num;
+//        }
+//
+//        if(num<min1) {
+//            min2=min1; min1=num;
+//        } else if (num<min2) {
+//            min2=num;
+//        }
+//    }
+//    return max(max1*max2*max3, min1*min2*max1);
+}
+
 vector<string> LC0599::findRestaurant(vector<string>& list1, vector<string>& list2) {
     // 这道题给了我们两个字符串数组，让我们找到坐标位置之和最小的相同的字符串。那么对于这种数组项和其坐标之间关系的题，
     // 最先考虑到的就是要建立数据和其位置坐标之间的映射。我们建立list1的值和坐标的之间的映射，然后遍历list2，
