@@ -1,8 +1,9 @@
 
 #include "sort.h"
 
+//反覆從未排序數列中找出最小值，將它與左邊的數做交換。
 void Sort::SelectSort(vector<int> &nums) {
-    for(int i=0; i<nums.size(); i++)
+    for(int i=0; i<nums.size()-1; i++)
         for(int j=i+1 ; j<nums.size() ; j++)
             if(nums[i]>nums[j]) swap (nums[i],nums[j]);
 }
