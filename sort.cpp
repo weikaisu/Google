@@ -118,10 +118,8 @@ void Sort::heapify(vector<int>& nums, int n, int i) {
     // n elements, i is the root, if its child is greater than it, swap.
     int root=i, lchild=2*i+1, rchild=2*i+2;
 
-    if(lchild>=n || rchild>=n) return;
-
-    if(nums[lchild]>nums[root]) root=lchild;
-    if(nums[rchild]>nums[root]) root=rchild;
+    if(lchild<n && nums[lchild]>nums[root]) root=lchild;
+    if(rchild<n && nums[rchild]>nums[root]) root=rchild;
     if(root != i) {
         swap(nums[root], nums[i]);
         heapify(nums, n, root);
@@ -130,8 +128,10 @@ void Sort::heapify(vector<int>& nums, int n, int i) {
 
 void Sort::HeapSort(vector<int>& nums) {
     // create a max heap, keep removing the 1st element, the max one
+    // begin from the last node's parent i=n/2-1.
     int i, n=nums.size();
-    //creates a Max heap, begin from the last node's parent i=n/2-1.
+    if(n<2) return;
+
     for(i=n/2-1; i>=0; i--)
         heapify(nums, n, i);
     // swaps first and last node
