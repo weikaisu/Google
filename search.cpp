@@ -37,31 +37,10 @@ vector<string> LC0784::letterCasePermutation(string s) {
     return ans;
 }
 
-//LC0006 run;
-//cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
-//convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
-string LC0006::convert(string s, int numRows) {
-    if(numRows<=1 || numRows>= s.size()) return s;
 
-    vector<string> t(numRows);
-    int row=0, step=1;
-
-    for(int i=0 ; i<s.size() ; i++) {
-        if(row == 0)  step = 1;
-        if(row == numRows-1) step = -1;
-        cout << row << ' ' << s[i] << endl;
-        t[row] += s[i];
-        row += step;
-    }
-
-    string ans;
-    for(int i=0 ; i<numRows ; i++) ans+=t[i];
-
-    return ans;
-}
 
 /***********  DF Search  **********/
-void LCSearch::permutation(vector<int> nums, int n, int m) {
+void Search::permutation(vector<int> nums, int n, int m) {
     vector<vector<int>> res;
     vector<int> cur;
     vector<bool> used(nums.size(), false);
@@ -86,7 +65,7 @@ void LCSearch::permutation(vector<int> nums, int n, int m) {
     cout<<"P("<<n<<","<<m<<")="<<res.size()<<endl;
 }
 
-void LCSearch::combination(vector<int> nums, int n, int m) {
+void Search::combination(vector<int> nums, int n, int m) {
     vector<vector<int>> res;
     vector<int> cur;
 

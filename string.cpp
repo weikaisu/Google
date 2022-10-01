@@ -755,3 +755,26 @@ bool LC0009::isPalindrome(int x) {
     }
     return f==b;
 }
+
+//LC0006 run;
+//cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
+//convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
+string LC0006::convert(string s, int numRows) {
+    if(numRows<=1 || numRows>= s.size()) return s;
+
+    vector<string> t(numRows);
+    int row=0, step=1;
+
+    for(int i=0 ; i<s.size() ; i++) {
+        if(row == 0)  step = 1;
+        if(row == numRows-1) step = -1;
+        cout << row << ' ' << s[i] << endl;
+        t[row] += s[i];
+        row += step;
+    }
+
+    string ans;
+    for(int i=0 ; i<numRows ; i++) ans+=t[i];
+
+    return ans;
+}

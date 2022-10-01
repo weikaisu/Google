@@ -84,7 +84,8 @@ struct LC0014 { string longestCommonPrefix(vector<string>& strs); };
 struct LC0013 { int romanToInt(string s); };
 /*一個整數的字面數字是否回文*/
 struct LC0009 { bool isPalindrome(int x); };
-
+/*zigzag掃描轉成line掃描*/
+struct LC0006 { string convert(string s, int numRows); };
 /***********  Medium  **********/
 
 #endif //GOOGLE_STRING_H
