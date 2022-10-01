@@ -9,6 +9,7 @@
 #include <stack>
 #include <unordered_set>
 #include <string>
+#include <functional>
 
 using namespace std;
 

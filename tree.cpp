@@ -192,32 +192,32 @@ bool LC0110::isBalanced(TreeNode* root) {
 bool LC0101::isSymmetric(TreeNode* root) {
     // 判断二叉树是否是平衡树，比如有两个节点n1, n2，我们需要比较n1的左子节点的值和n2的右子节点的值是否相等，同时还要比较n1的右子节点的
     // 值和n2的左子结点的值是否相等，以此类推比较完所有的左右两个节点。
-//    auto bfs = [&](const auto &self, TreeNode* l, TreeNode* r) -> bool {
-//        if(!l && !r) return true;
-//        if(!l || !r || l->val!=r->val) return false;
-//        return self(self, l->left, r->right) && self(self, l->right, r->left);
-//    };
-//
-//    if(!root) return true;
-//    return bfs(bfs, root->left, root->right);
+    function<bool(TreeNode*, TreeNode*)> bfs = [&](TreeNode* l, TreeNode* r) -> bool {
+        if(!l && !r) return true;
+        if(!l || !r || l->val!=r->val) return false;
+        return bfs(l->left, r->right) && bfs(l->right, r->left);
+    };
+
+    if(!root) return true;
+    return bfs(root->left, root->right);
 
     // 借助队列queue
-    queue<TreeNode*> q;
-    if(!root) return true;
-
-    q.push(root->left);
-    q.push(root->right);
-    while(q.size()) {
-        TreeNode* l = q.front(); q.pop();
-        TreeNode* r = q.front(); q.pop();
-        if(!l && !r) continue;
-        if(!l || !r || l->val!=r->val) return false;
-        q.push(l->left);
-        q.push(r->right);
-        q.push(l->right);
-        q.push(r->left);
-    }
-    return true;
+//    queue<TreeNode*> q;
+//    if(!root) return true;
+//
+//    q.push(root->left);
+//    q.push(root->right);
+//    while(q.size()) {
+//        TreeNode* l = q.front(); q.pop();
+//        TreeNode* r = q.front(); q.pop();
+//        if(!l && !r) continue;
+//        if(!l || !r || l->val!=r->val) return false;
+//        q.push(l->left);
+//        q.push(r->right);
+//        q.push(l->right);
+//        q.push(r->left);
+//    }
+//    return true;
 }
 
 bool LC0100::isSameTree(TreeNode* p, TreeNode* q) {
