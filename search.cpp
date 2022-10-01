@@ -18,7 +18,7 @@ int LC0035::searchInsert(vector<int>& nums, int target) {
     return l;
 }
 
-/***********  Linear Search  **********/
+/***********  Depth First Search  **********/
 //LC0784 run;
 //vector<string> ans=run.letterCasePermutation("a1b2");
 //for(auto a:ans) cout << a << endl;
@@ -37,9 +37,6 @@ vector<string> LC0784::letterCasePermutation(string s) {
     return ans;
 }
 
-
-
-/***********  DF Search  **********/
 void Search::permutation(vector<int> nums, int n, int m) {
     vector<vector<int>> res;
     vector<int> cur;
@@ -88,4 +85,4 @@ void Search::combination(vector<int> nums, int n, int m) {
     cout<<"C("<<n<<","<<m<<")="<<res.size()<<endl;
 }
 
-/***********  BF Search  **********/
+/***********  Breadth First Search  **********/

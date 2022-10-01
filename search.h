@@ -9,16 +9,18 @@ using namespace std;
 /* Binary Search */
 struct LC0035 { int searchInsert(vector<int>& nums, int target); };
 
-/* DF Search */
+/* Depth First Search */
 struct LC0784 { vector<string> letterCasePermutation(string s); };
-
-/* BF Search */
 // tree.h
-// struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
+// struct LC0104 { int maxDepth(TreeNode* root); };
+
+/* Breadth First Search */
+// tree.h
 // struct LC0101 { bool isSymmetric(TreeNode* root); };
+// struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
 
 struct Search {
-    /* DF Search */
+    /* Depth First Search */
     void permutation(vector<int> nums, int n, int m);
     void combination(vector<int> nums, int n, int m);
 };

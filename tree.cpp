@@ -189,6 +189,27 @@ bool LC0110::isBalanced(TreeNode* root) {
     return isBalance;
 }
 
+int LC0104::maxDepth(TreeNode* root) {
+    // 求二叉树的最大深度问题用到深度优先搜索 Depth First Search，递归的完美应用，跟求二叉树的最小深度问题原理相同
+    if(!root) return 0;
+    return 1 + std::max(maxDepth(root->left), maxDepth(root->right));
+
+    // 使用层序遍历二叉树，然后计数总层数，即为二叉树的最大深度，注意 while 循环中的 for 循环的写法有个 trick，一定要将 q.size() 放在
+    // 初始化里，而不能放在判断停止的条件中，因为q的大小是随时变化的，所以放停止条件中会出错
+//    if(!root) return 0;
+//    int res = 0;
+//    std::queue<TreeNode*> q {{root}};
+//    while(q.size()) {
+//        res++;
+//        for(int i=q.size(); i>0; i--) {
+//            TreeNode* node = q.front(); q.pop();
+//            if(node->left) q.push(node->left);
+//            if(node->right) q.push(node->right);
+//        }
+//    }
+//    return res;
+}
+
 bool LC0101::isSymmetric(TreeNode* root) {
     // 判断二叉树是否是平衡树，比如有两个节点n1, n2，我们需要比较n1的左子节点的值和n2的右子节点的值是否相等，同时还要比较n1的右子节点的
     // 值和n2的左子结点的值是否相等，以此类推比较完所有的左右两个节点。
