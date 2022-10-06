@@ -548,17 +548,18 @@ int LC0434::countSegments(string s) {
 
 string LC0415::addStrings(string num1, string num2) {
     // 一位一位相加，然后算和算进位，最后根据进位情况看需不需要补一个高位
-    int i=num1.size()-1, j=num2.size()-1;
+
+    int i=num1.size()-1, j=num2.size()-1, c=0;
     string res;
-    int c = 0;
-    while(i>=0 || j>=0) {
-        int a = i>=0 ? num1[i--]-'0' : 0;
-        int b = j>=0 ? num2[j--]-'0' : 0;
-        int sum = a + b + c;
-        res.insert(res.begin(), sum%10+'0');
-        c = sum/10;
+
+    while( i>=0 || j>=0 || c) {
+        c += i>=0 ? num1[i--]-'0' : 0;
+        c += j>=0 ? num2[j--]-'0' : 0;
+        res += c%10+'0';
+        c /= 10;
     }
-    return c ? '1'+res : res;
+    std::reverse(res.begin(), res.end());
+    return res;
 }
 
 vector<string> LC0412::fizzBuzz(int n) {
@@ -594,7 +595,7 @@ bool LC0290::wordPattern(string pattern, string s) {
     istringstream in(s);
     int i = 0;
     for(string word; in>>word; i++) {
-        if(i>=pattern.size()) continue;
+        if(i>=pattern.size()) return false;
         if(map.count(pattern[i])) {
             if (map[pattern[i]] != word) return false;
         } else {
@@ -626,15 +627,16 @@ bool LC0125::isPalindrome(string s) {
 //cout << run.addBinary("11","1");
 string LC0067::addBinary(string a, string b) {
     int i=a.size()-1, j=b.size()-1, c=0;
-    string ans;
+    string res;
 
     while( i>=0 || j>=0 || c) {
         c += i>=0 ? a[i--]-'0' : 0;
         c += j>=0 ? b[j--]-'0' : 0;
-        ans = to_string(c%2) + ans;
-        c = c/2;
+        res += c%2+'0';
+        c /= 2;
     }
-    return ans;
+    std::reverse(res.begin(), res.end());
+    return res;
 }
 
 //LC0058 run;
