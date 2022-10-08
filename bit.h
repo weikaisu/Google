@@ -5,6 +5,7 @@
 #include "main.h"
 
 /***********  Easy  **********/
+struct LC0231 { bool isPowerOfTwo(int n); };
 struct LC0191 { int hammingWeight(uint32_t n); };
 struct LC0190 { uint32_t reverseBits(uint32_t n); };
 struct LC0136 { int singleNumber(vector<int>& nums); };

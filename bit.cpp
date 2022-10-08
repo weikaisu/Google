@@ -2,6 +2,21 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+bool LC0231::isPowerOfTwo(int n) {
+    // 2的次方数都只有一个1，剩下的都是0，所以我们的解题思路就有了，我们只要每次判断最低位是否为1，然后向右移位，最后统计1的个数即可判断是否
+    // 是2的次方数
+//    int cnt=0;
+//    while(n>0) {
+//        cnt += (n & 1);
+//        n>>=1;
+//    }
+//    return cnt==1;
+
+    // 如果一个数是2的次方数的话，根据上面分析，那么它的二进数必然是最高位为1，其它都为0，那么如果此时我们减1的话，则最高位会降一位，
+    // 其余为0的位现在都为变为1，那么我们把两数相与，就会得到0
+    return (n>0) && !(n & (n-1));
+}
+
 int LC0191::hammingWeight(uint32_t n) {
     // Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as
     // cthe Hamming weight).
