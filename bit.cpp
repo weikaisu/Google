@@ -2,6 +2,24 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+uint32_t LC0190::reverseBits(uint32_t n) {
+    // 把要翻转的数从右向左一位位的取出来，如果取出来的是1，将结果 res 左移一位并且加上1；如果取出来的是0，将结果 res 左移一位，
+    // 然后将n右移一位即可
+//    uint32_t res = 0;
+//    for(int i=0; i<32; i++) {
+//        res <<= 1;
+//        if(n & 1) res++;
+//        n>>=1;
+//    }
+//    return res;
+
+    // 不更新n的值，而是直接将n右移i位，然后通过 ‘与’ 1来提取出该位，加到左移一位后的结果 res 中即可
+    uint32_t res=0;
+    for(int i=0; i<32; i++)
+        res = (res<<1) | (n>>i & 1);
+    return res;
+}
+
 int LC0136::singleNumber(vector<int>& nums) {
     // 用位操作 Bit Operation 逻辑异或来解此题
     int res = 0;
