@@ -2,6 +2,16 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+int LC0191::hammingWeight(uint32_t n) {
+    // Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as
+    // cthe Hamming weight).
+    int res=0;
+    for(int i=0; i<32; i++) {
+        res += (n>>i & 1);
+    }
+    return res;
+}
+
 uint32_t LC0190::reverseBits(uint32_t n) {
     // 把要翻转的数从右向左一位位的取出来，如果取出来的是1，将结果 res 左移一位并且加上1；如果取出来的是0，将结果 res 左移一位，
     // 然后将n右移一位即可
