@@ -2,6 +2,29 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+vector<int> LC0338::countBits(int n) {
+    // 利用了 built-in 的函数 bitset 的 count 函数可以直接返回1的个数
+//    vector<int> res;
+//    for(int i=0; i<=n; i++)
+//        res.push_back(bitset<32>(i).count());
+//    return res;
+
+    // 规律是，从1开始，遇到偶数时，其1的个数和该偶数除以2得到的数字的1的个数相同，遇到奇数时，其1的个数等于该奇数除以2得到的数字的1的个数再加1
+//    vector<int> res{0};
+//    for(int i=1; i<=n; i++) {
+//        if(!(i%2)) res.push_back(res[i/2]);
+//        else res.push_back(res[i/2]+1);
+//    }
+//    return res;
+
+    // 利用了 i&(i - 1)， 这个本来是用来判断一个数是否是2的次方数的快捷方法，比如8，二进制位 1000, 那么 8&(8-1) 为0，只要为0就是2的次方
+    // 数, 那么我们现在来看一下0到 15 的数字和其对应的 i&(i - 1) 值, 可以发现每个第i值都是 i&(i-1) 对应的值加1
+    vector<int> res(n+1,0);
+    for(int i=1; i<=n; i++)
+        res[i] = res[i&(i-1)]+1;
+    return res;
+}
+
 bool LC0266::canPermutePalindrome(string s) {
     // Given a string, determine if a permutation of the string could form a palindrome.
     // 判断一个字符串的全排列有没有是回文字符串的
