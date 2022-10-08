@@ -6,6 +6,7 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC0342 { bool isPowerOfFour(int n); };
 struct LC0338 { vector<int> countBits(int n); };
 struct LC0266 { bool canPermutePalindrome(string s); };
 struct LC0231 { bool isPowerOfTwo(int n); };

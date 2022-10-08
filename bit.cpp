@@ -2,6 +2,16 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+bool LC0342::isPowerOfFour(int n) {
+    // 这道题让我们判断一个数是否为4的次方数，那么最直接的方法就是不停的除以4，看最终结果是否为1
+//    while(n && !(n%4))
+//        n /= 4;
+//    return n==1;
+
+    // 在确定其是2的次方数了之后，发现只要是4的次方数，减1之后可以被3整除
+    return n>0 && !(n&(n-1)) && !((n-1)%3);
+}
+
 vector<int> LC0338::countBits(int n) {
     // 利用了 built-in 的函数 bitset 的 count 函数可以直接返回1的个数
 //    vector<int> res;
