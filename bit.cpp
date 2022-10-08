@@ -2,6 +2,18 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+bool LC0266::canPermutePalindrome(string s) {
+    // Given a string, determine if a permutation of the string could form a palindrome.
+    // 判断一个字符串的全排列有没有是回文字符串的
+    // 建立一个 256 大小的 bitset，每个字母根据其 ASCII 码值的不同都有其对应的位置，然后我们遍历整个字符串，遇到一个字符，就将其对应的位
+    // 置的二进制数 flip 一下，就是0变1，1变0，那么遍历完成后，所有出现次数为偶数的对应位置还应该为0，而出现次数为奇数的时候，对应位置就
+    // 为1了，那么我们最后只要统计1的个数，就知道出现次数为奇数的字母的个数了，只要个数小于2就是回文数
+    bitset<256> set;
+    for(auto &c:s)
+        set.flip(c);
+    return set.count()<2;
+}
+
 bool LC0231::isPowerOfTwo(int n) {
     // 2的次方数都只有一个1，剩下的都是0，所以我们的解题思路就有了，我们只要每次判断最低位是否为1，然后向右移位，最后统计1的个数即可判断是否
     // 是2的次方数
