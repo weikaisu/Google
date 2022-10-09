@@ -73,52 +73,54 @@ vector<vector<int>> LC0733::floodFill(vector<vector<int>>& image, int sr, int sc
     return image;
 }
 
-void Search::permutation(vector<int> nums, int n, int m) {
+// N個裡面取M個，N是nums的大小，所以不需要另外當參數傳，緊需要傳M即可
+void Search::Permutation(vector<int> nums, int m) {
     vector<vector<int>> res;
     vector<int> cur;
     vector<bool> used(nums.size(), false);
 
-    auto per = [&](const auto &self, int depth) {
-        if(depth==m)
+    function<void(int)> dfs = [&](int depth) {
+        if(depth == m)
             {res.push_back(cur); return;}
         for(int i=0; i<nums.size(); i++) {
             if(used[i]) continue;
-            cur.push_back(nums[i]); used[i]=true;
-            self(self, depth+1);
-            cur.pop_back(); used[i]=false;
+            cur.push_back(nums[i]); used[i] = true;
+            dfs(depth+1);
+            cur.pop_back(); used[i] = false;
         }
     };
 
-    per(per, 0);
+    dfs(0);
 
     for(auto &v:res) {
         for(auto &e:v) cout << e << ' ';
         cout << endl;
     }
-    cout<<"P("<<n<<","<<m<<")="<<res.size()<<endl;
+    cout<<"P("<<nums.size()<<","<<m<<")="<<res.size()<<endl;
 }
 
-void Search::combination(vector<int> nums, int n, int m) {
+// N個裡面取M個，N是nums的大小，所以不需要另外當參數傳，緊需要傳M即可
+void Search::Combination(vector<int> nums, int m) {
     vector<vector<int>> res;
     vector<int> cur;
 
-    auto com = [&](const auto &self, int depth, int start) {
-        if(depth==m)
+    function<void(int, int)> dfs = [&](int depth, int start) {
+        if(depth == m)
             {res.push_back(cur); return;}
         for(int i=start; i<nums.size(); i++) {
             cur.push_back(nums[i]);
-            self(self, depth+1, i+1);
+            dfs(depth+1, i+1);
             cur.pop_back();
         }
     };
 
-    com(com, 0, 0);
+    dfs(0, 0);
 
     for(auto &v:res) {
         for(auto &e:v) cout << e << ' ';
         cout << endl;
     }
-    cout<<"C("<<n<<","<<m<<")="<<res.size()<<endl;
+    cout<<"C("<<nums.size()<<","<<m<<")="<<res.size()<<endl;
 }
 
 /***********  Breadth First Search  **********/

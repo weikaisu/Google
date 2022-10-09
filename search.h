@@ -22,8 +22,8 @@ struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr
 
 struct Search {
     /* Depth First Search */
-    void permutation(vector<int> nums, int n, int m);
-    void combination(vector<int> nums, int n, int m);
+    void Permutation(vector<int> nums, int m);
+    void Combination(vector<int> nums, int m);
 };
 
 /***********  Medium  **********/
