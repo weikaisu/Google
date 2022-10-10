@@ -19,6 +19,7 @@
 #include <bitset>
 #include <functional>
 #include <numeric> // std:: accumulate
+#include <functional>
 
 #include "sort.h"
 #include "list.h"
@@ -27,6 +28,7 @@
 #include "string.h"
 #include "dp.h"
 #include "math.h"
+#include "bit.h"
 
 using namespace std;
 

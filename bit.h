@@ -6,6 +6,8 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC0401 { vector<string> readBinaryWatch(int turnedOn); };
+// struct LC0389 { char findTheDifference(string s, string t); }; // list.h
 struct LC0342 { bool isPowerOfFour(int n); };
 struct LC0338 { vector<int> countBits(int n); };
 struct LC0266 { bool canPermutePalindrome(string s); };

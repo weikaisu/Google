@@ -2,6 +2,54 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+vector<string> LC0401::readBinaryWatch(int turnedOn) {
+    // 利用到了bitset这个类，可以将任意进制数转为二进制，而且又用到了count函数，用来统计1的个数。那么时针从0遍历到11，分针从0遍历到59，
+    // 然后我们把时针的数组左移6位加上分针的数值，然后统计1的个数，即为亮灯的个数，我们遍历所有的情况，当其等于num的时候，存入结果res中
+    // 寫法漂亮但執行速度會慢些
+    vector<string> res;
+    for(int h=0; h<12; h++)
+        for(int m=0; m<60; m++) {
+            if(bitset<10>((h<<6)+m).count() == turnedOn)
+                res.push_back(std::to_string(h) + ((m<10) ? ":0" : ":") + std::to_string(m));
+        }
+    return res;
+
+    // 如果总共要取num个，我们在小时集合里取i个，算出和，然后在分钟集合里去num-i个求和，如果两个都符合题意，那么加入结果中即可
+//    vector<string> res;
+//    vector<int> hour{8, 4, 2, 1}, minute{32, 16, 8, 4, 2, 1};
+//
+//    function<vector<int>(vector<int>, int)> com = [&](vector<int> nums, int m) -> vector<int> {
+//        int cur = 0;
+//        vector<int> sel;
+//        function<void(int, int)> dfs = [&](int depth, int start) {
+//            if(depth == m)
+//                {sel.push_back(cur); return;}
+//            for(int i=start; i<nums.size(); i++) {
+//                cur += nums[i];
+//                dfs(depth+1, i+1);
+//                cur -= nums[i];
+//            }
+//        };
+//        dfs(0,0);
+//        return sel;
+//    };
+//
+//    for(int i=0; i<=turnedOn; i++) {
+//        vector<int> hours = com(hour, i);
+//        vector<int> minutes = com(minute, turnedOn-i);
+//        for(auto &h:hours) {
+//            if(h>11) continue;
+//            for(auto &m:minutes) {
+//                if(m>59) continue;
+//                res.push_back(std::to_string(h) + ((m<10) ? ":0" : ":") + std::to_string(m));
+//            }
+//        }
+//    }
+//    return res;
+
+
+}
+
 bool LC0342::isPowerOfFour(int n) {
     // 这道题让我们判断一个数是否为4的次方数，那么最直接的方法就是不停的除以4，看最终结果是否为1
 //    while(n && !(n%4))
