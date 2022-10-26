@@ -6,6 +6,7 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC0405 { string toHex(int num); };
 struct LC0401 { vector<string> readBinaryWatch(int turnedOn); };
 // struct LC0389 { char findTheDifference(string s, string t); }; // list.h
 struct LC0342 { bool isPowerOfFour(int n); };

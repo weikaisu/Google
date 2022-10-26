@@ -32,6 +32,9 @@
 
 using namespace std;
 
+// multi condition for loop
+// for(i = 0, j = 0; i < p && j < q; i++, j++){
+
 //struct ListNode {
 //    int val;
 //    ListNode *next;
