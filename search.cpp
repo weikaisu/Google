@@ -19,14 +19,16 @@ int LC0035::searchInsert(vector<int>& nums, int target) {
 }
 
 /***********  Depth First Search  **********/
-//LC0784 run;
-//vector<string> ans=run.letterCasePermutation("a1b2");
-//for(auto a:ans) cout << a << endl;
+// LC0784 run;
+// vector<string> ans=run.letterCasePermutation("a1b2");
+// for(auto a:ans) cout << a << endl;
+// Input: s = "a1b2"
+// Output: ["a1b2","a1B2","A1b2","A1B2"]
 vector<string> LC0784::letterCasePermutation(string s) {
     vector<string> ans;
     function<void(int)> dfs = [&](int d) {
         if(d==s.size()) { ans.push_back(s); return; }
-        dfs(d+1);
+//        dfs(d+1);
 
         if(!isalpha(s[d])) { return; }
         s[d]^=32;
@@ -71,6 +73,44 @@ vector<vector<int>> LC0733::floodFill(vector<vector<int>>& image, int sr, int sc
     };
     dfs(sr,sc);
     return image;
+}
+
+vector<vector<int>> LC0046::permute(vector<int>& nums) {
+    // N個裡面取M個，這裡N等於M，可以利用原本的nums當作cur
+    // 每兩兩swap就是一種可能的組合。
+    int n = nums.size();
+    vector<vector<int>> res;
+
+    function<void(int)> dfs = [&](int depth) {
+        if(depth == n)
+            { res.push_back(nums); return; }
+        for(int i=depth; i<n; i++) {
+            std::swap(nums[depth], nums[i]);
+            dfs(depth+1);
+            std::swap(nums[depth], nums[i]);
+        }
+    };
+    dfs(0);
+    return res;
+
+//    int n = nums.size();
+//    vector<bool> used(n, false);
+//    vector<int> cur;
+//    vector<vector<int>> res;
+//
+//    function<void(int)> dfs = [&](int depth) {
+//        if(depth == n)
+//            {res.push_back(cur); return;}
+//        for(int i=0; i<n; i++) {
+//            if(used[i]) continue;
+//            cur.push_back(nums[i]); used[i] = true;
+//            dfs(depth+1);
+//            cur.pop_back(); used[i] = false;
+//        }
+//    };
+//
+//    dfs(0);
+//    return res;
 }
 
 // N個裡面取M個，N是nums的大小，所以不需要另外當參數傳，緊需要傳M即可

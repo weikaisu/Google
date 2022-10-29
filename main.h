@@ -35,6 +35,12 @@ using namespace std;
 // multi condition for loop
 // for(i = 0, j = 0; i < p && j < q; i++, j++){
 
+// XOR
+// 0 xor 0 = 0
+// 0 xor 1 = 1
+// 1 xor 0 = 1
+// 1 xor 1 = 0
+
 //struct ListNode {
 //    int val;
 //    ListNode *next;

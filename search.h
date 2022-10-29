@@ -12,6 +12,8 @@ struct LC0035 { int searchInsert(vector<int>& nums, int target); };
 /* Depth First Search */
 struct LC0784 { vector<string> letterCasePermutation(string s); };
 struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); };
+struct LC0077 { vector<vector<int>> combine(int n, int k); };
+struct LC0046 { vector<vector<int>> permute(vector<int>& nums); };
 // tree.h
 // struct LC0104 { int maxDepth(TreeNode* root); };
 
