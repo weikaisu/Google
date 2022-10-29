@@ -75,6 +75,26 @@ vector<vector<int>> LC0733::floodFill(vector<vector<int>>& image, int sr, int sc
     return image;
 }
 
+int LC0476::findComplement(int num) {
+    // 由于位操作里面的取反符号～本身就可以翻转位，但是如果直接对num取反的话就是每一位都翻转了，
+    // 而最高位1之前的0是不能翻转的，所以我们只要用一个mask来标记最高位1前面的所有0的位置，
+    // 然后对mask取反后，与上对num取反的结果即可
+    // mask需一開始所有bit都為1，得用unsigned的，否則complement operator會把sign bit翻轉
+    unsigned int mask = UINT_MAX;
+    while(mask & num) mask<<=1;
+    return ~mask & ~num;
+
+    // 这道题给了我们一个数，让我们求补数。通过分析题目汇总的例子，我们知道需要做的就是每个位翻转一下就行了，
+    // 但是翻转的起始位置上从最高位的1开始的，前面的0是不能被翻转的，所以我们从高往低遍历，如果遇到第一个1了后，
+    // 我们的flag就赋值为true，然后就可以进行翻转了，翻转的方法就是对应位异或一个1即可
+//    bool flip = false;
+//    for(int i=31; i>=0; i--) {
+//        if(num & (1<<i)) flip = true;
+//        if(flip) num ^= (1<<i);
+//    }
+//    return num;
+}
+
 int LC0461::hammingDistance(int x, int y) {
     // 遍历每一位的方法并不高效，还可以进一步优化，假如数为num, num & (num - 1)可以快速地移除最右边的bit 1，
     // 一直循环到num为0, 总的循环数就是num中bit 1的个数
