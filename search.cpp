@@ -75,6 +75,23 @@ vector<vector<int>> LC0733::floodFill(vector<vector<int>>& image, int sr, int sc
     return image;
 }
 
+vector<vector<int>> LC0077::combine(int n, int k) {
+    vector<int> cur;
+    vector<vector<int>> res;
+
+    function<void(int, int)> dfs = [&](int depth, int start) {
+        if(depth == k)
+            { res.push_back(cur); return; }
+        for(int i=start; i<=n; i++) {
+            cur.push_back(i);
+            dfs(depth+1, i+1);
+            cur.pop_back();
+        }
+    };
+    dfs(0, 1); // 因為是1~n，所以start是從1開始。
+    return res;
+}
+
 vector<vector<int>> LC0046::permute(vector<int>& nums) {
     // N個裡面取M個，這裡N等於M，可以利用原本的nums當作cur
     // 每兩兩swap就是一種可能的組合。
