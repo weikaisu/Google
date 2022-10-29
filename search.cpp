@@ -75,6 +75,27 @@ vector<vector<int>> LC0733::floodFill(vector<vector<int>>& image, int sr, int sc
     return image;
 }
 
+int LC0461::hammingDistance(int x, int y) {
+    // 遍历每一位的方法并不高效，还可以进一步优化，假如数为num, num & (num - 1)可以快速地移除最右边的bit 1，
+    // 一直循环到num为0, 总的循环数就是num中bit 1的个数
+    int z = x^y, res = 0;
+    while(z) {
+        res++;
+        z &= (z-1);
+    }
+    return res;
+
+    // 这道题让我求两个数字之间的汉明距离，题目中解释的很清楚了，两个数字之间的汉明距离就是其二进制数对应位不同的个数，
+    // 那么最直接了当的做法就是按位分别取出两个数对应位上的数并异或，我们知道异或的性质上相同的为0，不同的为1，
+    // 我们只要把为1的情况累加起来就是汉明距离了
+//    int z = x^y, res = 0;
+//    while(z) {
+//        res += z&1;
+//        z>>=1;
+//    }
+//    return res;
+}
+
 vector<vector<int>> LC0077::combine(int n, int k) {
     vector<int> cur;
     vector<vector<int>> res;

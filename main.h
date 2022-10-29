@@ -36,6 +36,8 @@ using namespace std;
 // for(i = 0, j = 0; i < p && j < q; i++, j++){
 
 // XOR
+// 1. 相同為0，相異為1
+// 2. 跟1做XOR，0變1，1變0
 // 0 xor 0 = 0
 // 0 xor 1 = 1
 // 1 xor 0 = 1
