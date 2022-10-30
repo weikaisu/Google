@@ -6,6 +6,10 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC0762 { int countPrimeSetBits(int left, int right); };
+struct LC0693 { bool hasAlternatingBits(int n); };
+struct LC0476 { int findComplement(int num); };
+struct LC0461 { int hammingDistance(int x, int y); };
 struct LC0405 { string toHex(int num); };
 struct LC0401 { vector<string> readBinaryWatch(int turnedOn); };
 // struct LC0389 { char findTheDifference(string s, string t); }; // list.h
