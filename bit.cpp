@@ -2,6 +2,23 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+int LC1342::numberOfSteps(int num) {
+    // 使用遞歸的方式
+    if(num==0 || num==1)
+        return num;
+    return numberOfSteps(num/2) + ((num%2) ? 2 : 1);
+    // 按題意操作，每操作一次計數+1
+//    int cnt=0;
+//    while(num) {
+//        if(!(num%2))
+//            num>>=1;
+//        else
+//            num--;
+//        cnt++;
+//    }
+//    return cnt;
+}
+
 int LC1009::bitwiseComplement(int n) {
     // 下面的这种解法用到了一些补码的性质，那就是一个二进制数加上其补码，则每个位置上都会变成1，且位数和原数相同。这样的话我们
     // 就可以先求出这个各位上全是1的数，然后再做减法，就可以得到补码了
