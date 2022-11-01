@@ -6,6 +6,7 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC1009 { int bitwiseComplement(int n); };
 struct LC0868 { int binaryGap(int n); };
 struct LC0762 { int countPrimeSetBits(int left, int right); };
 struct LC0693 { bool hasAlternatingBits(int n); };
