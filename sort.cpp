@@ -141,3 +141,11 @@ void Sort::HeapSort(vector<int>& nums) {
     }
 }
 
+vector<int> LC1356::sortByBits(vector<int>& arr) {
+    std::sort(arr.begin(), arr.end(), [&](const int &a, const int  &b)->bool {
+        int cnt_a = bitset<32>(a).count();
+        int cnt_b = bitset<32>(b).count();
+        return cnt_a != cnt_b ? cnt_a < cnt_b : a < b;
+    });
+    return arr;
+}

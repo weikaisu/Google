@@ -17,7 +17,6 @@ public:
     void MergeSortIterative(vector<int>& nums);
     void HeapSort(vector<int>& nums);
 
-
 private:
     // for quickSort
     int divide(vector<int>& nums, int lidx, int ridx);
@@ -25,8 +24,8 @@ private:
     void merge(vector<int>& nums, int lidx, int midx, int ridx);
     // for heapSort
     void heapify(vector<int>& nums, int n, int i);
-
 };
 
+struct LC1356 { vector<int> sortByBits(vector<int>& arr); };
 
 #endif //GOOGLE_SORT_H
