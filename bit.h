@@ -6,6 +6,7 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC1720 { vector<int> decode(vector<int>& encoded, int first); };
 struct LC1486 { int xorOperation(int n, int start); };
 struct LC1342 { int numberOfSteps(int num); };
 struct LC1009 { int bitwiseComplement(int n); };

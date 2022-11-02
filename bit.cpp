@@ -2,6 +2,26 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+vector<int> LC1720::decode(vector<int>& encoded, int first) {
+    // There is a hidden integer array arr that consists of n non-negative integers.
+    //It was encoded into another integer array encoded of length n - 1, such that encoded[i] = arr[i] XOR arr[i + 1].
+    // For example, if arr = [1,0,2,1], then encoded = [1,2,3].
+    //You are given the encoded array. You are also given an integer first, that is the first element of arr,
+    // i.e. arr[0].
+    //Return the original array arr. It can be proved that the answer exists and is unique.
+
+    // a XOR b = c -> c XOR a = b, c XOR b = a
+    // 把first讓入res的第一個，一路XOR回去
+    vector<int> res(encoded.size()+1);
+    res[0] = first;
+    int i=1;
+    for(auto &e:encoded) {
+        res[i] = res[i - 1] ^ e;
+        i++;
+    }
+    return res;
+}
+
 int LC1486::xorOperation(int n, int start){
     // You are given an integer n and an integer start.
     // Define an array nums where nums[i] = start + 2 * i (0-indexed) and n == nums.length.

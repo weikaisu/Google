@@ -50,6 +50,10 @@ using namespace std;
 //    ListNode(int x, ListNode *next) : val(x), next(next) {};
 //};
 
+// all_of:检查区间[first, last)中是否所有的元素都满足一元判断式p，所有的元素都满足条件返回true，否则返回false。
+// any_of：检查区间[first, last)中是否至少有一个元素都满足一元判断式p，只要有一个元素满足条件就返回true，否则返回true。
+// none_of：检查区间[first, last)中是否所有的元素都不满足一元判断式p，所有的元素都不满足条件返回true，否则返回false。
+
 class Employee {
 public:
     // It's the unique ID of each node.
