@@ -2,6 +2,17 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+int LC1486::xorOperation(int n, int start){
+    // You are given an integer n and an integer start.
+    // Define an array nums where nums[i] = start + 2 * i (0-indexed) and n == nums.length.
+    // Return the bitwise XOR of all elements of nums.
+    // 按題意依次處理。
+    int res=0;
+    for(int i=0; i<n; i++)
+        res ^= (start + 2*i);
+    return res;
+}
+
 int LC1342::numberOfSteps(int num) {
     // 使用遞歸的方式
     if(num==0 || num==1)

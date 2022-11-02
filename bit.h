@@ -6,6 +6,7 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC1486 { int xorOperation(int n, int start); };
 struct LC1342 { int numberOfSteps(int num); };
 struct LC1009 { int bitwiseComplement(int n); };
 struct LC0868 { int binaryGap(int n); };
