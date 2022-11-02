@@ -6,6 +6,29 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 /***********  Hash Table  **********/
+int LC1684::countConsistentStrings(string allowed, vector<string>& words) {
+    // You are given a string allowed consisting of distinct characters and an array of strings words.
+    // A string is consistent if all characters in the string appear in the string allowed.
+    // Return the number of consistent strings in the array words.
+    // 用std::count_if, 更快
+    array<bool,128> set; set.fill(false);
+    for(auto &c:allowed)
+        set[c] = true;
+    return std::count_if(words.begin(), words.end(), [&](const string& word) -> bool {
+        for(auto & w:word)
+            if(!set[w]) return false;
+        return true;
+    });
+
+    // 用std::all_of
+//    array<int, 128> set; set.fill(0);
+//    for(auto &c:allowed)
+//        set[c] = 1;
+//    int res=0;
+//    for(auto &w:words)
+//        res += std::all_of(w.begin(), w.end(), [&](char c) -> bool { return set[c]; });
+//    return res;
+}
 bool LC1207::uniqueOccurrences(vector<int>& arr) {
     // 用个 HashMap 来统计每个数字出现的次数，然后再用个 HashSet 来判断某个次数是否之前出现过了，若出现过了，则返回 false，
     // 否则最终返回 true 即可

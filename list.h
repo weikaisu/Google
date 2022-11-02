@@ -123,6 +123,7 @@ private:
 };
 
 // Hash Table
+struct LC1684 { int countConsistentStrings(string allowed, vector<string>& words); };
 /*陣列裡每個字符出現的頻率是否都不同*/
 struct LC1207 { bool uniqueOccurrences(vector<int>& arr); };
 /*找出能從特定字串裡的字符拼出目標字串的數量*/
