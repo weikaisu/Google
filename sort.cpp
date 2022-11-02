@@ -142,10 +142,62 @@ void Sort::HeapSort(vector<int>& nums) {
 }
 
 vector<int> LC1356::sortByBits(vector<int>& arr) {
-    std::sort(arr.begin(), arr.end(), [&](const int &a, const int  &b)->bool {
-        int cnt_a = bitset<32>(a).count();
-        int cnt_b = bitset<32>(b).count();
+    // given an integer array arr. Sort the integers in the array in ascending order by the number of 1's
+    // in their binary representation and in case of two or more integers have the same number of 1's you
+    // have to sort them in ascending order
+    // 利用bitset來計算1之個數
+//    std::sort(arr.begin(), arr.end(), [&](const int &a, const int  &b)->bool {
+//        int cnt_a = bitset<32>(a).count();
+//        int cnt_b = bitset<32>(b).count();
+//        // return期望結果之邏輯
+//        return cnt_a != cnt_b ? cnt_a < cnt_b : a < b;
+//    });
+//    return arr;
+
+    // 利用內建函數計算1之個數, 比用bitset快
+//    std::sort(arr.begin(), arr.end(), [&](const int &a, const int &b) -> bool {
+//        int cnt_a = __builtin_popcount(a);
+//        int cnt_b = __builtin_popcount(b);
+//        return cnt_a != cnt_b ? cnt_a < cnt_b : a < b;
+//    });
+//    return arr;
+
+    // 數字做 n=n & (n-1)直到0的次數恰為含1之個數
+    std::sort(arr.begin(), arr.end(), [&](const int &a, const int &b) -> bool {
+        function<int(int)> cnt = [&](int num) -> int {
+            int n = 0;
+            while(num) {
+                num &= (num-1);
+                n++;
+            }
+            return n;
+        };
+        int cnt_a = cnt(a);
+        int cnt_b = cnt(b);
         return cnt_a != cnt_b ? cnt_a < cnt_b : a < b;
     });
     return arr;
+
+    /*
+    0    0000    0
+    -------------
+    1    0001    1
+    -------------
+    2    0010    1
+    3    0011    2
+    -------------
+    4    0100    1
+    5    0101    2
+    6    0110    2
+    7    0111    3
+    -------------
+    8    1000    1
+    9    1001    2
+    10   1010    2
+    11   1011    3
+    12   1100    2
+    13   1101    3
+    14   1110    3
+    15   1111    4
+     */
 }
