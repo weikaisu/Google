@@ -2,6 +2,48 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+string LC1763::longestNiceSubstring(string s) {
+    // A string s is nice if, for every letter of the alphabet that s contains, it appears both in uppercase and
+    // lowercase. For example, "abABB" is nice because 'A' and 'a' appear, and 'B' and 'b' appear. However, "abA"
+    // is not because 'b' appears, but 'B' does not.
+    // Given a string s, return the longest substring of s that is nice. If there are multiple, return the substring
+    // of the earliest occurrence. If there are none, return an empty string.
+
+    // 用bit operation的方式 (只管有沒有，不管有的個數)
+    int start=0, len=0, n=s.size();
+    string res;
+    for(int i=0; i<n; i++) {
+        int uppercase=0, lowercase=0;
+        for (int j=i; j<n; j++) {
+            if(s[j]>='a') lowercase |= (1<<(s[j]-'a'));
+            else uppercase |= (1<<(s[j]-'A'));
+            if(j-i+1>len && !(lowercase^uppercase)) {
+                start = i;
+                len = j-i+1;
+            }
+        }
+    }
+    return len ? s.substr(start,len) : "";
+
+    // 用兩個table各記下大小寫的個數，當兩個table相等就是一組nice string
+//    int n=s.size();
+//    string res;
+//
+//    for(int i=0; i<n; i++) {
+//        array<int,26> u; u.fill(0);
+//        array<int,26> l; l.fill(0);
+//        for(int j=i; j<n; j++) {
+//            const char c=s[j];
+//            if(std::isupper(c)) u[c-'A'] = 1;
+//            else l[c-'a'] = 1;
+//            if(u==l && j-i+1 > res.size())
+//                res = s.substr(i, j-i+1);
+//        }
+//    }
+//    return res;
+
+}
+
 vector<int> LC1720::decode(vector<int>& encoded, int first) {
     // There is a hidden integer array arr that consists of n non-negative integers.
     //It was encoded into another integer array encoded of length n - 1, such that encoded[i] = arr[i] XOR arr[i + 1].

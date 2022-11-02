@@ -19,7 +19,7 @@
 #include <bitset>
 #include <functional>
 #include <numeric> // std:: accumulate
-#include <functional>
+#include <string_view>
 
 #include "sort.h"
 #include "list.h"
