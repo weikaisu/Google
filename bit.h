@@ -6,6 +6,9 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC2220 { int minBitFlips(int start, int goal); };
+struct LC2206 { bool divideArray(vector<int>& nums); };
+struct LC1863 { int subsetXORSum(vector<int>& nums); };
 struct LC1763 { string longestNiceSubstring(string s); };
 struct LC1720 { vector<int> decode(vector<int>& encoded, int first); };
 struct LC1486 { int xorOperation(int n, int start); };

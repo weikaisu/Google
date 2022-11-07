@@ -2,6 +2,42 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+int LC2220::minBitFlips(int start, int goal) {
+    // A bit flip of a number x is choosing a bit in the binary representation of x and flipping
+    // it from either 0 to 1 or 1 to 0.
+    // For example, for x = 7, the binary representation is 111 and we may choose any bit (including
+    // any leading zeros not shown) and flip it. We can flip the first bit from the right to get 110,
+    // flip the second bit from the right to get 101, flip the fifth bit from the right (a leading zero)
+    // to get 10111, etc.
+    // Given two integers start and goal, return the minimum number of bit flips to convert start to goal.
+    // 找出兩數之間有多少bit不一樣，就表示可以最少flip幾次而獲得目標數，也就是兩數XOR後的值有多少1。
+    int res=0;
+    return res;
+}
+
+bool LC2206::divideArray(vector<int>& nums) {
+    // You are given an integer array nums consisting of 2 * n integers.
+    // You need to divide nums into n pairs such that:
+    // Each element belongs to exactly one pair.
+    // The elements present in a pair are equal.
+    // Return true if nums can be divided into n pairs, otherwise return false.
+    // nums.size()得是偶數，nums內所有值XOR起來為0,這樣就表示倆倆一樣可以互相抵銷。
+    bool res=false;
+    return res;
+
+}
+
+int LC1863::subsetXORSum(vector<int>& nums) {
+    // The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty.
+    // For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 = 1.
+    // Given an array nums, return the sum of all XOR totals for every subset of nums.
+    // Note: Subsets with the same elements should be counted multiple times.
+    // An array a is a subset of an array b if a can be obtained from b by deleting some (possibly zero) elements of b.
+    // 先枚舉出所有subset，各subset再做XOR，把各subset XOR出來的值加總起來。
+    int res=0;
+    return res;
+}
+
 string LC1763::longestNiceSubstring(string s) {
     // A string s is nice if, for every letter of the alphabet that s contains, it appears both in uppercase and
     // lowercase. For example, "abABB" is nice because 'A' and 'a' appear, and 'B' and 'b' appear. However, "abA"
