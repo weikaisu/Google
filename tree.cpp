@@ -251,12 +251,12 @@ vector<int> LC0094::inorderTraversal(TreeNode* root) {
     // 递归方法，十分直接，对左子结点调用递归函数，根节点访问值，右子节点再调用递归函数
 //    if(root==nullptr) return {};
 //    vector<int> res;
-//    auto dfs = [&](const auto &self, TreeNode* root) -> void {
-//        if(root->left) self(self, root->left);
+//    function<void(TreeNode*)> dfs = [&](TreeNode* root) -> void {
+//        if(root->left) dfs(root->left);
 //        res.push_back(root->val);
-//        if(root->right) self(self, root->right);
+//        if(root->right) dfs(root->right);
 //    };
-//    dfs(dfs, root);
+//    dfs(root);
 //    return res;
 
     // 从根节点开始，先将根节点压入栈，然后再将其所有左子结点压入栈，然后取出栈顶节点，保存节点值，再将当前指针移到其右子节点上，若存在右子节
@@ -265,10 +265,10 @@ vector<int> LC0094::inorderTraversal(TreeNode* root) {
     stack<TreeNode*>  s;
     TreeNode *p = root;
     while(s.size() || p) {
-        if(p) {
+        if(p) { // 當p有值時表示需先繼續走訪左子樹
             s.push(p);
             p = p->left;
-        } else {
+        } else { // 當p無值時表示取val，並開始走訪右子樹
             p = s.top(); s.pop();
             res.push_back(p->val);
             p = p->right;
@@ -317,14 +317,14 @@ void TreeNode::CleanTree(TreeNode *root) {
     root = nullptr;
 }
 
-void TreeNode::TraverseInOrder(TreeNode *root) {
+void TreeNode::TraversePreOrder(TreeNode *root) {
     if(!root) return;
     cout << root->val << endl;
     if(root->left) TraverseInOrder(root->left);
     if(root->right) TraverseInOrder(root->right);
 }
 
-void TreeNode::TraversePreOrder(TreeNode *root) {
+void TreeNode::TraverseInOrder(TreeNode *root) {
     if(!root) return;
     if(root->left) TraversePreOrder(root->left);
     cout << root->val << endl;
@@ -339,8 +339,8 @@ void TreeNode::TraversePostOrder(TreeNode *root) {
 }
 
 void TreeNode::TraverseLevelOrder(TreeNode *root) {
+    // 僅依序印出，不需一層一層列印node
     if(!root) return;
-
     queue<TreeNode*> q;
     q.push(root);
     while(q.size()) {
@@ -372,8 +372,8 @@ void TreeNode::TraverseTopDown(TreeNode *root) {
 void TreeNode::TraverseBottomUp(TreeNode *root) {
     if(!root) return;
 
-    queue<TreeNode*> q;
-    stack<TreeNode*> s;
+    queue<TreeNode*> q; // 用來放每一層node
+    stack<TreeNode*> s; // 從root往下走訪時存入stack之後可先取出bottom nodes
     int level_size = 0;
 
     q.push(root);
