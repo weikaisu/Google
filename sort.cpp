@@ -141,6 +141,23 @@ void Sort::HeapSort(vector<int>& nums) {
     }
 }
 
+vector<int> LC1365::smallerNumbersThanCurrent(vector<int>& nums) {
+    // Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
+    // That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+    // Return the answer in an array.
+    // Input: nums = [8,1,2,2,3]
+    // Output: [4,0,1,1,3]
+    // Explanation:
+    // For nums[0]=8 there exist four smaller numbers than it (1, 2, 2 and 3).
+    // For nums[1]=1 does not exist any smaller number than it.
+    // For nums[2]=2 there exist one smaller number than it (1).
+    // For nums[3]=2 there exist one smaller number than it (1).
+    // For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
+    // 循環一次用hash table記下index，排序過後從最大值開始檢查有多小於不等於其之值
+    vector<int> res;
+    return res;
+}
+
 vector<int> LC1356::sortByBits(vector<int>& arr) {
     // given an integer array arr. Sort the integers in the array in ascending order by the number of 1's
     // in their binary representation and in case of two or more integers have the same number of 1's you
@@ -200,6 +217,19 @@ vector<int> LC1356::sortByBits(vector<int>& arr) {
     14   1110    3
     15   1111    4
      */
+}
+
+bool LC1346::checkIfExist(vector<int>& arr) {
+    // Given an array arr of integers, check if there exist two indices i and j such that :
+    // i != j
+    // 0 <= i, j < arr.length
+    // arr[i] == 2 * arr[j]
+    // Input: arr = [10,2,5,3]
+    // Output: true
+    // Explanation: For i = 0 and j = 2, arr[i] == 10 == 2 * 5 == 2 * arr[j]
+    // 將所有元素兩倍值存入hash table裡，再循環一次看是否元素在table裡能查找到
+    bool res=false;
+    return res;
 }
 
 vector<int> LC1337::kWeakestRows(vector<vector<int>>& mat, int k) {

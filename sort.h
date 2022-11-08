@@ -26,7 +26,9 @@ private:
     void heapify(vector<int>& nums, int n, int i);
 };
 
+struct LC1365 { vector<int> smallerNumbersThanCurrent(vector<int>& nums); };
 struct LC1356 { vector<int> sortByBits(vector<int>& arr); };
+struct LC1346 { bool checkIfExist(vector<int>& arr); };
 struct LC1337 { vector<int> kWeakestRows(vector<vector<int>>& mat, int k); };
 struct LC1331 { vector<int> arrayRankTransform(vector<int>& arr); };
 struct LC1200 { vector<vector<int>> minimumAbsDifference(vector<int>& arr); };
