@@ -431,9 +431,19 @@ vector<int> LC0905::sortArrayByParity(vector<int>& nums) {
     // Input: nums = [3,1,2,4]
     // Output: [2,4,3,1]
     // Explanation: The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
+
+    // 优化空间复杂度，不新建额外的数组，而是采用直接交换数字的位置，使用两个指针i和j，初始化均为0。然后j往后遍历，若遇到了偶数，则将
+    // A[j] 和 A[i] 交换位置，同时i自增1，这样操作下来，同样可以将所有的偶数都放在奇数前面
+    for(int i=0, j=0; j<nums.size(); j++)
+        if (nums[j]%2 == 0) std::swap(nums[i++], nums[j]);
+    return nums;
+
     // 創建一vector, 兩個index分別指向頭尾，nums根據機偶數依序分別存入。
-    vector<int> res;
-    return res;
+//    vector<int> res(nums.size());
+//    int h = 0, t = nums.size()-1;
+//    for(auto &num:nums)
+//        (num & 1) ? res[t--] = num : res[h++] = num;
+//    return res;
 }
 
 int LC0747::dominantIndex(vector<int>& nums) {
