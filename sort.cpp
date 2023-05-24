@@ -445,9 +445,33 @@ int LC0747::dominantIndex(vector<int>& nums) {
     // Explanation: 6 is the largest integer.
     // For every other number in the array x, 6 is at least twice as big as x.
     // The index of value 6 is 1, so we return 1.
-    // 用hash table循環記下index，並找出max值，再一個循環檢查是否都大於兩倍其他數
-    int res=0;
-    return res;
+
+    // 找一个至少是其他数字两倍的最大数字，那么我们想，首先明确的一点是这个要求的数字一定是数组中的最大数字，因为其是其他所有的数
+    // 字的至少两倍。然后就是，如果该数字是数组中第二大的数字至少两倍的话，那么它一定是其他所有数字的至少两倍，所以我们可以遍历一
+    // 次数组分别求出最大数字和第二大数字，然后判断一下最大数字是否是第二大数字的两倍即可，注意这里我们判断两倍的方法并不是直接相
+    // 除，为了避免除以零的情况，我们采用减法
+//    int idx=0, firstMX = INT_MIN, secondMX = INT_MIN;
+//    for(int i=0; i<nums.size(); i++) {
+//        if(nums[i] > firstMX) {
+//            secondMX = firstMX;
+//            firstMX = nums[i];
+//            idx = i;
+//        } else if(nums[i] > secondMX) {
+//            secondMX = nums[i];
+//        }
+//    }
+//    return (firstMX - secondMX >= secondMX) ? idx : -1;
+
+    // 使用更straightforward的方法，首先遍历一遍数组找出最大数字，然后再遍历一遍数组，验证这个数字是否是其他数字的至少两倍
+    int idx = 0, mx = INT_MIN;
+    for(int i=0; i<nums.size(); i++)
+        if(nums[i]>mx) {
+            mx = nums[i];
+            idx = i;
+        }
+    for(auto &num:nums)
+        if(num!=mx && mx-num<num) return -1;
+    return idx;
 }
 
 void LC0088::merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
