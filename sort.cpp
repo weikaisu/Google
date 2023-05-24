@@ -458,4 +458,10 @@ void LC0088::merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
     // To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should
     // be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
     // 結果會放在nums1裡，可以從nums1的後面開始往前放相比的element.
+    int i = m + n - 1;
+    m--;
+    n--;
+    while(n >= 0) {
+        nums1[i--] = (m >= 0 && nums1[m] > nums2[n]) ? nums1[m--] : nums2[n--];
+    }
 }
