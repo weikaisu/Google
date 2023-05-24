@@ -420,9 +420,32 @@ vector<int> LC0922::sortArrayByParityII(vector<int>& nums) {
     // Input: nums = [4,2,5,7]
     // Output: [4,5,2,7]
     // Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.
+
+    // 不需要使用额外的空间，思路是用两个指针，i指针一直指向偶数位置，j指针一直指向奇数位置，当 A[i] 是偶数时，则跳到下一个偶数位置，直到i
+    // 指向一个偶数位置上的奇数，同理，当 A[j] 是奇数时，则跳到下一个奇数位置，直到j指向一个奇数位置上的偶数，当 A[i] 和 A[j] 分别是奇数
+    // 和偶数的时候，则交换两个数字的位置，从而满足题意
+    const int n = nums.size();
+    int i = 0, j = 1;
+    while(i<n && j<n) {
+        if(nums[i]%2==0) i+=2;
+        else if(nums[j]%2==1) j+=2;
+        else std::swap(nums[i], nums[j]);
+    }
+    return nums;
+
     // 用兩個index指標分別指向奇偶數的位置，遞增時+=2
-    vector<int> res;
-    return res;
+//    vector<int> res(nums.size());
+//    int eidx = 0, oidx = 1;
+//    for(auto &num:nums)
+//        //(num%2==0) ? res[eidx+=2]=num : res[oidx+=2]=num; <-- incorrect
+//        if(num%2==0) {
+//            res[eidx] = num;
+//            eidx+=2;
+//        } else {
+//            res[oidx] = num;
+//            oidx+=2;
+//        }
+//    return res;
 }
 
 vector<int> LC0905::sortArrayByParity(vector<int>& nums) {
