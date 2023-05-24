@@ -153,8 +153,30 @@ vector<int> LC1365::smallerNumbersThanCurrent(vector<int>& nums) {
     // For nums[2]=2 there exist one smaller number than it (1).
     // For nums[3]=2 there exist one smaller number than it (1).
     // For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
-    // 循環一次用hash table記下index，排序過後從最大值開始檢查有多小於不等於其之值
-    vector<int> res;
+
+    // 用lower_bound找出在排序過後的位置
+//    vector<int> sorted(nums);
+//    const int n = nums.size();
+//    vector<int> res(n);
+//    std::sort(sorted.begin(), sorted.end());
+//    for(int i=0; i<n; i++)
+//        res[i] = std::distance(sorted.begin(), std::lower_bound(sorted.begin(), sorted.end(), nums[i]));
+//    return res;
+
+    // 已知nums值的範圍，統計每個值出現的次數，再算出直方圖即可統計小於的數量
+    const int n = nums.size();
+    vector<int> count(101, 0);
+    vector<int> prefix(101, 0);
+    vector<int> res(n);
+
+    std::for_each(nums.begin(), nums.end(), [&](int num) {count[num]++;});
+
+    for(int i=1; i<101; i++)
+        prefix[i] = prefix[i-1] + count[i-1];
+
+    for(int i=0; i<n; i++)
+        res[i] = prefix[nums[i]];
+
     return res;
 }
 
