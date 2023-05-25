@@ -361,8 +361,15 @@ vector<vector<int>> LC1030::allCellsDistOrder(int rows, int cols, int rCenter, i
     //  [1,0], [1,1], [1,2]]
     // Explanation: The distances from (1, 2) to other cells are: [0,1,1,2,2,3]
     // There are other answers that would also be accepted as correct, such as [[1,2],[1,1],[0,2],[1,0],[0,1],[0,0]].
-    // 雙層迴圈從(rCenter,cCenter)遞減依序枚舉出相近點之座標。
+    // 给了一个R行C列的矩阵，又给了一个起始点 (r0, c0)，让按照离起始点的曼哈顿距离从小到大排序坐标点。自定义一个 comparator 给 res 数组
+    // 重新排序即可，自定义的 comparator 要把 (r0, c0) 当参数传进去，因为要求和其的曼哈顿距离
     vector<vector<int>> res;
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            res.push_back({i, j});
+    std::sort(res.begin(), res.end(), [rCenter, cCenter](vector<int> &a, vector<int> &b) {
+        return std::abs(a[0]-rCenter) + std::abs(a[1]-cCenter) < std::abs(b[0]-rCenter) + std::abs(b[1]-cCenter);
+    });
     return res;
 }
 
