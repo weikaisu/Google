@@ -395,9 +395,22 @@ vector<int> LC0977::sortedSquares(vector<int>& nums) {
     // Output: [0,1,9,16,100]
     // Explanation: After squaring, the array becomes [16,1,0,9,100].
     // After sorting, it becomes [0,1,9,16,100].
-    // 由於平方過後大小關係會改變，所以先對每數做平方，再做排序
-    vector<int> res;
+
+    // 使用双指针来做，用两个变量分别指向开头和结尾，然后比较，每次将绝对值较大的那个数的平方值先加入数组的末尾，然后依次往前更新，
+    // 最后得到的就是所求的顺序
+    const int n = nums.size();
+    vector<int> res(n);
+    int r = 0, l = n-1;
+    for(int i=n-1; i>=0; i--) {
+        (std::abs(nums[r]) < std::abs(nums[l])) ? res[i] = nums[l]*nums[l--] : res[i] = nums[r]*nums[r++];
+    }
     return res;
+
+    // 由於平方過後大小關係會改變，所以先對每數做平方，再做排序
+//    for(auto &num:nums)
+//        num*=num;
+//    std::sort(nums.begin(), nums.end());
+//    return nums;
 }
 
 int LC0976::largestPerimeter(vector<int>& nums) {
@@ -423,7 +436,7 @@ int LC0976::largestPerimeter(vector<int>& nums) {
 }
 
 vector<int> LC0922::sortArrayByParityII(vector<int>& nums) {
-    // Given an array of integers nums, half of the integers in nums are odd, and the other half are even.
+    // Given an array of integers nums, half of the integers in nums are o\dd, and the other half are even.
     // Sort the array so that whenever nums[i] is odd, i is odd, and whenever nums[i] is even, i is even.
     // Return any answer array that satisfies this condition.
     // Input: nums = [4,2,5,7]
