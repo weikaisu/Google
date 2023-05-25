@@ -296,7 +296,17 @@ vector<int> LC1331::arrayRankTransform(vector<int>& arr) {
     // Output: [1,1,1]
     // Explanation: Same elements share the same rank.
     // 排序過後用一hash table建立rank, 再查找table得出每個值的rank
-    vector<int> res;
+    const int n = arr.size();
+    int rank = 1;
+    vector<int> res(n);
+    vector<int> sorted(arr);
+    unordered_map<int, int> t;
+
+    std::sort(sorted.begin(), sorted.end());
+    for(auto &s:sorted)
+        if(!t.count(s)) t[s] = rank++;
+    for(int i=0; i<n; i++)
+        res[i] = t[arr[i]];
     return res;
 }
 
