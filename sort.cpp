@@ -382,10 +382,19 @@ int LC1005::largestSumAfterKNegations(vector<int>& nums, int k) {
     // Input: nums = [2,-3,-1,5,-4], k = 2
     // Output: 13
     // Explanation: Choose indices (1, 4) and nums becomes [2,3,-1,5,4].
-    // 先將原本nums做排序，若有負數，先將k次機會用在將負數轉正，若只有正數則先將最小數轉負，
-    // 因此可以說k次就依序用在最小的k數上，再求總合
-    int res=0;
-    return res;
+    // 先给数组排个序，这样所有的负数都在数组的前面了，然后此时将前K个负数翻转成正数，注意只是翻转负数，若负数的个数小于K，也不会翻转多余的正
+    // 数。然后此时遍历数组，求数组之后，并且求此时数组中最小的数字，此时K还是有奇偶两种情况，当K是偶数的时候（包括0），直接返回数组之和，
+    // 若是奇数的时候，此时说明数组中的负数已经全部翻转为了正数，那么最小的数也就是绝对值最小的数，减去其的2倍即可
+    int res = 0, min=INT_MAX;
+
+    std::sort(nums.begin(), nums.end());
+    for(int i=0; k && i<nums.size() && nums[i]<0; i++, k--)
+        nums[i] = -nums[i];
+    for(auto &num:nums) {
+        res += num;
+        min = std::min(min, num);
+    }
+    return res - (k%2)*2*min;
 }
 
 vector<int> LC0977::sortedSquares(vector<int>& nums) {
