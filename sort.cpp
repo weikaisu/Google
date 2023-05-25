@@ -330,8 +330,15 @@ int LC1051::heightChecker(vector<int>& heights) {
     // heights:  [1,1,4,2,1,3]
     // expected: [1,1,1,2,3,4]
     // Indices 2, 4, and 5 do not match.
-    // 排序過後看每一位置不相等的有幾個
+    // 一群学生随机的站成一排照相，现在想让学生按照身高来排列，问需要移动多个同学。这是一道很简单的题目没有什么难度，只要复制一个新的数组，
+    // 然后给数组排序，再跟原数组逐个按数字来对比，只要数字不同，则结果 res 自增1即可
     int res=0;
+
+    vector<int> sorted(heights);
+    std::sort(sorted.begin(), sorted.end());
+    for(int i=0; i<heights.size(); i++)
+        if(heights[i]!= sorted[i]) res++;
+
     return res;
 }
 
