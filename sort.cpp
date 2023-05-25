@@ -310,8 +310,24 @@ vector<vector<int>> LC1200::minimumAbsDifference(vector<int>& arr) {
     // Input: arr = [4,2,1,3]
     // Output: [[1,2],[2,3],[3,4]]
     // Explanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.
-    // 排序過後找出兩兩相鄰相差最小之值，循環一次把符合的pair放進res
+    // 给了一个没有重复数字的整型数组，现在让找出差的绝对值最小的数对儿。既然是 Easy 的身价，那么就没有太 Fancy 的解法，为了更方便的找出差
+    // 的绝对值最小的数对儿，先给数组进行排序，这样最小差值一定会出现在相邻的两个数字之间。接下来就是遍历所有相邻的两个数字，维护一个最小值
+    // mn，若当前差值 diff 小于等于 mn，则进行进一步操作，二者中唯一不同的是当 diff 小于 mn 时，结果 res 需要清空。然后将 mn 更新为
+    // diff，并把当前数组对儿加入到结果 res 中即可
     vector<vector<int>> res;
+    int min = INT_MAX;
+    std::sort(arr.begin(), arr.end());
+    for(int i=1; i<arr.size(); i++) {
+        int diff = arr[i] - arr[i-1];
+        if(diff <= min) {
+            if(diff < min) {
+                res.clear();
+                min = diff;
+            }
+            res.push_back({arr[i-1], arr[i]});
+        }
+    }
+
     return res;
 }
 
