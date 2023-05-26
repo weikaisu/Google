@@ -249,9 +249,30 @@ bool LC1346::checkIfExist(vector<int>& arr) {
     // Input: arr = [10,2,5,3]
     // Output: true
     // Explanation: For i = 0 and j = 2, arr[i] == 10 == 2 * 5 == 2 * arr[j]
+
+    // 用兩層迴圈掃每個element的2倍值是否存在，並先判斷是否是偶數來加速。
+    // 這方法看似暴力法，實際上卻比下面用table的方式快很多。
+    const int size = arr.size();
+
+    for(int i=0; i<size; i++) {
+        if(arr[i]%2 == 0)
+            for(int j=0; j<size; j++) {
+                if(i!=j && arr[i] == 2*arr[j])
+                    return true;
+            }
+    }
+    return false;
+
     // 將所有元素兩倍值存入hash table裡，再循環一次看是否元素在table裡能查找到
-    bool res=false;
-    return res;
+//    unordered_map<int, int> m;
+//
+//    for(int i=0; i<arr.size(); i++)
+//        m[arr[i]*2] = i;
+//
+//    for(int i=0; i<arr.size(); i++)
+//        if(m.count(arr[i]) && m[arr[i]] != i)
+//            return true;
+//    return false;
 }
 
 vector<int> LC1337::kWeakestRows(vector<vector<int>>& mat, int k) {
