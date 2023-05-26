@@ -1,4 +1,4 @@
-
+﻿
 #ifndef GOOGLE_SEARCH_H
 #define GOOGLE_SEARCH_H
 

@@ -1,4 +1,4 @@
-
+﻿
 #ifndef GOOGLE_BIT_H
 #define GOOGLE_BIT_H
 

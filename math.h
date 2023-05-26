@@ -1,4 +1,4 @@
-#ifndef GOOGLE_MATH_H
+﻿#ifndef GOOGLE_MATH_H
 #define GOOGLE_MATH_H
 
 #include "main.h"

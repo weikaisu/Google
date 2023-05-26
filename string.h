@@ -1,4 +1,4 @@
-
+﻿
 #ifndef GOOGLE_STRING_H
 #define GOOGLE_STRING_H
 
