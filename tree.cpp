@@ -134,6 +134,37 @@ vector<string> LC0257::binaryTreePaths(TreeNode* root) {
     return res;
 }
 
+vector<int> LC0145::postorderTraversal(TreeNode* root) {
+    // 改变先序遍历的顺序来实现后序遍历。比起另一種方法會有較少的s.push，所以性能較好。
+    if(!root) return {};
+    vector<int> res;
+    stack<TreeNode*> s;
+    TreeNode* p = root;
+    while(s.size() || p) {
+        if(p) {
+            s.push(p);
+            res.insert(res.begin(), p->val);
+            p = p->right;
+        } else {
+            p = s.top(); s.pop();
+            p = p->left;
+        }
+    }
+    return res;
+
+    // 改变先序遍历的顺序来实现后序遍历，跟LC0144相同的作法，只是改用res.insert()的方式
+//    if(!root) return {};
+//    vector<int> res;
+//    stack<TreeNode*> s({root});
+//    while(s.size()) {
+//        TreeNode* node=s.top(); s.pop();
+//        res.insert(res.begin(), node->val);
+//        if(node->left) s.push(node->left);
+//        if(node->right) s.push(node->right);
+//    }
+//    return res;
+}
+
 vector<int> LC0144::preorderTraversal(TreeNode* root) {
     // 使用了一个辅助结点p，这种写法其实可以看作是一个模版，对应的还有中序和后序的模版写法，形式很统一，方便于记忆。辅助结点p初始化为根结点，
     // while 循环的条件是栈不为空或者辅助结点p不为空，在循环中首先判断如果辅助结点p存在，那么先将p加入栈中，然后将p的结点值加入结果 res 中，

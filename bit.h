@@ -6,6 +6,7 @@
 #include <bitset>
 
 /***********  Easy  **********/
+struct LC2595 { vector<int> evenOddBit(int n); };
 struct LC2220 { int minBitFlips(int start, int goal); };
 struct LC2206 { bool divideArray(vector<int>& nums); };
 struct LC1863 { int subsetXORSum(vector<int>& nums); };

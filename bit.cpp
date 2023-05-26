@@ -2,6 +2,20 @@
 #include "bit.h"
 
 /***********  Easy  **********/
+vector<int> LC2595::evenOddBit(int n) {
+    // You are given a positive integer n.
+    // Let even denote the number of even indices in the binary representation of n (0-indexed) with value 1.
+    // Let odd denote the number of odd indices in the binary representation of n (0-indexed) with value 1.
+    // Return an integer array answer where answer = [even, odd].
+    // Input: n = 17
+    // Output: [2,0]
+    // Explanation: The binary representation of 17 is 10001.
+    // It contains 1 on the 0th and 4th indices.
+    // There are 2 even and 0 odd indices.
+    vector<int> res;
+    return res;
+}
+
 int LC2220::minBitFlips(int start, int goal) {
     // A bit flip of a number x is choosing a bit in the binary representation of x and flipping
     // it from either 0 to 1 or 1 to 0.
@@ -24,7 +38,6 @@ bool LC2206::divideArray(vector<int>& nums) {
     // nums.size()得是偶數，nums內所有值XOR起來為0,這樣就表示倆倆一樣可以互相抵銷。
     bool res=false;
     return res;
-
 }
 
 int LC1863::subsetXORSum(vector<int>& nums) {
