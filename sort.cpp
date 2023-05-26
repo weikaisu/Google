@@ -278,9 +278,38 @@ vector<int> LC1337::kWeakestRows(vector<vector<int>>& mat, int k) {
     // - Row 3: 2
     // - Row 4: 5
     // The rows ordered from weakest to strongest are [2,0,3,1,4].
-    // 算出每個row 1的個數，建立pair(row, 1's), pair再根據1's排序，即可得到前k名row的index
-    vector<int> res;
+
+    // use priority queue and merge soldier count and index into one number : cunt*100 + idx;
+    const int m=mat.size();
+    priority_queue<int, vector<int>, greater<int>> pq;
+    vector<int> res(k);
+
+    for(int i=0; i<m; i++)
+        pq.push(std::accumulate(mat[i].begin(), mat[i].end(), 0)*100 + i);
+
+    for(int i=0; i<k; i++) {
+        res[i] = pq.top() % 100;
+        pq.pop();
+    }
+
     return res;
+
+//    // 算出每個row 1的個數，建立pair(1's, row), 調用std::sort即可根據pair的第一個欄位排序，如此得到前k名row的index
+//    const int m=mat.size();
+//    vector<int> res(k);
+//    vector<pair<int, int>> v(m);
+//
+//    for(int i=0; i<m; i++) {
+//        int n = std::accumulate(mat[i].begin(), mat[i].end(), 0);
+//        v[i] = pair(n,i);
+//    }
+//
+//    std::sort(v.begin(), v.end());
+//
+//    for(int i=0; i<k && i<m; i++)
+//        res[i] = v[i].second;
+//
+//    return res;
 }
 
 vector<int> LC1331::arrayRankTransform(vector<int>& arr) {
