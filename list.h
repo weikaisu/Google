@@ -123,11 +123,48 @@ private:
 };
 
 // LC0232
+class MyQueue {
+public:
+    MyQueue() {}
+
+    // 使用了两个栈intS和revS，其中新进栈的都先缓存在intS中，要pop和peek的时候，才将intS中所有元素移到revS中操作
+    void push(int x) {
+        intS.push(x);
+    }
+
+    void reverse_stack() {
+        if(revS.size()) return;
+        while(intS.size()) {
+            revS.push(intS.top()); intS.pop();
+        }
+    }
+
+    int pop() {
+        reverse_stack();
+        int v = revS.top(); revS.pop();
+        return v;
+    }
+
+    int peek() {
+        reverse_stack();
+        return revS.top();
+    }
+
+    bool empty() {
+        return intS.empty() && revS.empty();
+    }
+
+private:
+    stack<int> intS, revS;
+};
 
 // LC0225
 class MyStack {
 public:
     MyStack() {}
+
+    // 两种解法对于不同的输入效果不同，解法一花在 top() 函数上的时间多，所以适合于有大量 push () 操作，而 top() 和 pop() 比较少
+    // 的输入。而第二种解法在 push() 上要花大量的时间，所以适合高频率的 top() 和 pop()，较少的 push()。两种方法各有千秋，互有利弊
 
     // 只要实现对了 push() 函数，后面三个直接调用队列的函数即可。这种方法的原理就是每次把新加入的数插到前头，这样队列保存的顺序和栈的
     // 顺序是相反的，它们的取出方式也是反的，那么反反得正，就是我们需要的顺序了。我们可以使用一个辅助队列，把q的元素也逆着顺序存入到辅
