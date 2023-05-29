@@ -5,6 +5,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+struct LC0263 { bool isUgly(int n); };
 struct LC0258 { int addDigits(int num); };
 struct LC0171 { int titleToNumber(string columnTitle); };
 struct LC0168 { string convertToTitle(int columnNumber); };
