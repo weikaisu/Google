@@ -1,6 +1,16 @@
 ﻿
 #include "math.h"
 
+bool LC0326::isPowerOfThree(int n) {
+    bool res;
+    return res;
+}
+
+bool LC0292::canWinNim(int n) {
+    bool res;
+    return res;
+}
+
 bool LC0263::isUgly(int n) {
     // 这道题让我们检测一个数是否为丑陋数，所谓丑陋数就是其质数因子只能是 2，3，5。那么最直接的办法就是不停的除以这些质数，如果剩余的数字
     // 是1的话就是丑陋数了。

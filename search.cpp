@@ -2,6 +2,22 @@
 #include "search.h"
 
 /***********  Binary Search  **********/
+
+int LC0374::guessNumber(int n) {
+    int res;
+    return res;
+}
+
+bool LC0367::isPerfectSquare(int num) {
+    bool res;
+    return res;
+}
+
+int LC0278::firstBadVersion(int n) {
+    int res;
+    return res;
+}
+
 //LC0035 run;
 //vector<int> nums{1,3,5,6};
 //int target=5;
