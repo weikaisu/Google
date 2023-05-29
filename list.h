@@ -122,6 +122,75 @@ private:
     array<forward_list<int>, 1000> t;
 };
 
+// LC0232
+
+// LC0225
+class MyStack {
+public:
+    MyStack() {}
+
+    // 只要实现对了 push() 函数，后面三个直接调用队列的函数即可。这种方法的原理就是每次把新加入的数插到前头，这样队列保存的顺序和栈的
+    // 顺序是相反的，它们的取出方式也是反的，那么反反得正，就是我们需要的顺序了。我们可以使用一个辅助队列，把q的元素也逆着顺序存入到辅
+    // 助队列中，此时加入新元素x，再把辅助队列中的元素存回来，这样就是我们要的顺序了。当然，我们也可以直接对队列q操作，在队尾加入了新元
+    // 素x后，将x前面所有的元素都按顺序取出并加到队列到末尾，这样下次就能直接取出x了，符合栈到后入先出到特性，其他三个操作也就直接调用队
+    // 列的操作即可
+    void push(int x) {
+        intQ.push(x);
+        for(int i=0; i<intQ.size()-1; i++) {
+            intQ.push(intQ.front()); intQ.pop();
+        }
+    }
+
+    int pop() {
+        int v = intQ.front(); intQ.pop();
+        return v;
+    }
+
+    int top() {
+        return intQ.front();
+    }
+
+    bool empty() {
+        return intQ.empty();
+    }
+
+    // 用队列来实现栈，队列和栈作为两种很重要的数据结构，它们最显著的区别就是，队列是先进先出，而栈是先进后出。题目要求中又给定了限制条件
+    // 只能用 queue 的最基本的操作，像 back() 这样的操作是禁止使用的。那么怎么样才能让先进先出的特性模拟出先进后出呢，这里就需要另外一
+    // 个队列来辅助操作，我们总共需要两个队列，其中一个队列用来放最后加进来的数，模拟栈顶元素。剩下所有的数都按顺序放入另一个队列中。当
+    // push() 操作时，将新数字先加入模拟栈顶元素的队列中，如果此时队列中有数字，则将原本有的数字放入另一个队中，让新数字在这队中，用来模
+    // 拟栈顶元素。当 top() 操作时，如果模拟栈顶的队中有数字则直接返回，如果没有则到另一个队列中通过平移数字取出最后一个数字加入模拟栈顶
+    // 的队列中。当 pop() 操作时，先执行下 top() 操作，保证模拟栈顶的队列中有数字，然后再将该数字移除即可。当 empty() 操作时，当两个
+    // 队列都为空时，栈为空。
+//    void push(int x) {
+//        lastQ.push(x);
+//        if(lastQ.size()>1) {
+//            intQ.push(lastQ.front()); lastQ.pop();
+//        }
+//    }
+//
+//    int pop() {
+//        int v = top(); lastQ.pop();
+//        return v;
+//    }
+//
+//    int top() {
+//        if(lastQ.empty()) {
+//            for(int i=0; i<intQ.size()-1; i++) {
+//                intQ.push(intQ.front()); intQ.pop();
+//            }
+//            lastQ.push(intQ.front()); intQ.pop();
+//        }
+//        return lastQ.front();
+//    }
+//
+//    bool empty() {
+//        return intQ.empty() && lastQ.empty();
+//    }
+
+private:
+    queue<int> intQ, lastQ;
+};
+
 // Hash Table
 struct LC1684 { int countConsistentStrings(string allowed, vector<string>& words); };
 /*陣列裡每個字符出現的頻率是否都不同*/
