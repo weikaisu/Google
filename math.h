@@ -5,6 +5,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+struct LC0492 { vector<int> constructRectangle(int area); };
 struct LC0326 { bool isPowerOfThree(int n); };
 struct LC0292 { bool canWinNim(int n); };
 struct LC0263 { bool isUgly(int n); };
