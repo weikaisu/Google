@@ -4,8 +4,15 @@
 /***********  Dynamic Programming  **********/
 
 int LC0509::fib(int n) {
-    int res;
-    return res;
+    // f(n) = f(n-1) + f(n-2)
+    if(n<=1) return n;
+    int sCurr=0, sPre1=1, sPre2=0;
+    for (int i=2; i<=n; i++) {
+        sCurr = sPre1 + sPre2;
+        sPre2 = sPre1;
+        sPre1 = sCurr;
+    }
+    return sCurr;
 }
 
 LC0303::LC0303(vector<int>& nums) {
