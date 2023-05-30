@@ -12,10 +12,29 @@ bool LC0367::isPerfectSquare(int num) {
     bool res;
     return res;
 }
-
+bool isBadVersion(int version) {};
 int LC0278::firstBadVersion(int n) {
-    int res;
-    return res;
+    // 有一系列版本，其中有一个版本是坏的，而且后面跟着的全是坏的，给了一个 API 函数可以用来判定当前版本是否是坏的，让我们尽可能少的调用这个
+    // API，找出第一个坏版本。那么这种搜索题最先开始考虑用二分查找法把，效率高嘛。由于这题很有规律，好版本和坏版本一定有个边界，那么用二分法
+    // 来找这个边界，对 mid 值调用API函数，如果是坏版本，说明边界在左边，则把 mid 赋值给 right，如果是好版本，则说明边界在右边，则把
+    // mid+1 赋给 left，最后返回 left 即可。需要注意的是，OJ 里有个坑，那就是如果 left 和 right 都特别大的话，那么 left+right 可能
+    // 会溢出，这里处理方法就是变成 left + (right - left) / 2，很好的避免的溢出问题
+    int l=1, r=n;
+    while(l<r) {
+        int m = l+(r-l)/2;
+        if(isBadVersion(m)) r=m;
+        else l=m+1;
+    }
+    return l;
+
+    // 如果习惯了二分搜索法从0开始找，可以用下面的方法
+//    int l=0, r=n-1;
+//    while(l<r) {
+//        int m=l+(r-l)/2;
+//        if(isBadVersion(m+1)) r=m;
+//        else l=m+1;
+//    }
+//    return l+1;
 }
 
 //LC0035 run;
