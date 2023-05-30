@@ -219,6 +219,26 @@ vector<vector<int>> LC0046::permute(vector<int>& nums) {
 //    return res;
 }
 
+vector<int> LC0590::postorder(Node* root) {
+    vector<int> res;
+    return res;
+}
+
+vector<int> LC0589::preorder(Node* root) {
+    vector<int> res;
+    return res;
+}
+
+bool LC0572::isSubtree(TreeNode* root, TreeNode* subRoot) {
+    bool res;
+    return res;
+}
+
+int LC0563::findTilt(TreeNode* root) {
+    int res;
+    return res;
+}
+
 int LC0559::maxDepth(Node* root) {
     int res;
     return res;
