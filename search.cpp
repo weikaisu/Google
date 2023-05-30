@@ -3,9 +3,24 @@
 
 /***********  Binary Search  **********/
 
+int guess(int num) {
+    /* -1 : My number is lower
+        1 : My number is higher
+        0 : Congrats! You got it! */
+    return 0;
+};
 int LC0374::guessNumber(int n) {
-    int res;
-    return res;
+    // 猜价格的问题，根据对方说高了还是低了来缩小范围，虽然是道 Easy 题，无脑线性遍历还是会超时 Time Limit Exceeded，所以更快速的方法
+    // 就是折半搜索法，原理很简单，属于博主之前的总结帖 LeetCode Binary Search Summary 二分搜索法小结 中的第四类-用子函数当作判断关系
+    if (!guess(n)) return n;
+    int l=1, r=n;
+    while (l<n) {
+        int m=l+(r-l)/2, t=guess(m);
+        if (t==1) l=m+1;
+        else if (t==-1) r=m;
+        else return m;
+    }
+    return l;
 }
 
 bool LC0367::isPerfectSquare(int num) {
