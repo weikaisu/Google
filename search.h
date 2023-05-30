@@ -3,6 +3,7 @@
 #define GOOGLE_SEARCH_H
 
 #include "main.h"
+#include "tree.h"
 using namespace std;
 
 /***********  Easy  **********/
@@ -19,6 +20,9 @@ struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr
 struct LC0077 { vector<vector<int>> combine(int n, int k); };
 struct LC0046 { vector<vector<int>> permute(vector<int>& nums); };
 // tree.h
+struct LC0559 { int maxDepth(Node* root); };
+struct LC0530 { int getMinimumDifference(TreeNode* root); };
+struct LC0501 { vector<int> findMode(TreeNode* root); };
 // struct LC0104 { int maxDepth(TreeNode* root); };
 
 /* Breadth First Search */

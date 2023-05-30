@@ -1,6 +1,16 @@
 ﻿
 #include "math.h"
 
+bool LC0507::checkPerfectNumber(int num) {
+    bool res;
+    return res;
+}
+
+string LC0504::convertToBase7(int num) {
+    string res;
+    return res;
+}
+
 vector<int> LC0492::constructRectangle(int area) {
     // 根据面积来求出矩形的长和宽，要求长和宽的差距尽量的小，那么就是说越接近正方形越好。那么我们肯定是先来判断一下是不是正方行，对面积开方，
     // 如果得到的不是整数，说明不是正方形。那么我们取最近的一个整数，看此时能不能整除，如果不行，就自减1，再看能否整除。最坏的情况就是面积是
