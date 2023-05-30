@@ -9,10 +9,22 @@ int LC0374::guessNumber(int n) {
 }
 
 bool LC0367::isPerfectSquare(int num) {
-    bool res;
-    return res;
+    // 给了我们一个数，让我们判断其是否为完全平方数，使用二分查找法来做，要查找的数为 mid*mid
+    int l=0, r=num;
+    while (l<=r) {
+        long m=l+(r-l)/2, mm=m*m; // 處理平方，用long避免overflow
+        if (num > mm) l=m+1;
+        else if (num < mm) r=m-1;
+        else return true;
+    }
+    return false;
+
+    // 从1搜索到 sqrt(num)，看有没有平方正好等于 num 的数
+//    for (int i=1; i<=num/i; i++)
+//        if (i*i==num) return true;
+//    return false;
 }
-bool isBadVersion(int version) {};
+bool isBadVersion(int version) {return true;};
 int LC0278::firstBadVersion(int n) {
     // 有一系列版本，其中有一个版本是坏的，而且后面跟着的全是坏的，给了一个 API 函数可以用来判定当前版本是否是坏的，让我们尽可能少的调用这个
     // API，找出第一个坏版本。那么这种搜索题最先开始考虑用二分查找法把，效率高嘛。由于这题很有规律，好版本和坏版本一定有个边界，那么用二分法
