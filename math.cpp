@@ -7,8 +7,23 @@ bool LC0507::checkPerfectNumber(int num) {
 }
 
 string LC0504::convertToBase7(int num) {
-    string res;
-    return res;
+    // 给了我们一个数，让我们转为七进制的数，而且这个可正可负。那么我们想如果给一个十进制的100，怎么转为七进制。我会先用100除以49，
+    // 商2余2。在除以7，商0余2，于是就得到七进制的202。其实我们还可以反过来算，先用100除以7，商14余2，然后用14除以7，商2余0，
+    // 再用2除以7，商0余2，这样也可以得到202。这种方法更适合于代码实现，要注意的是，我们要处理好负数的情况
+//    if(!num) return "0";
+//    string res{};
+//    bool sign = num > 0;
+//    num = std::abs(num);
+//    while(num) {
+//        res = std::to_string(num%7) + res;
+//        num /= 7;
+//    }
+//    return sign ? res : "-" + res;
+
+    // recursive way, 兩者跑起來性能一樣
+    if(num < 0) return "-" + convertToBase7(std::abs(num));
+    if(num < 7) return std::to_string(num);
+    return convertToBase7(num/7) + std::to_string(num%7);
 }
 
 vector<int> LC0492::constructRectangle(int area) {
