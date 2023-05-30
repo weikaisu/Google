@@ -7,6 +7,7 @@ using namespace std;
 
 /***********  Easy  **********/
 /* Binary Search */
+struct LC0441 { int arrangeCoins(int n); };
 struct LC0374 { int guessNumber(int n); };
 struct LC0367 { bool isPerfectSquare(int num); };
 struct LC0278 { int firstBadVersion(int n); };
