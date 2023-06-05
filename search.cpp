@@ -2,6 +2,18 @@
 #include "search.h"
 
 /***********  Binary Search  **********/
+int LC0704::search(vector<int>& nums, int target) {
+    // Given a sorted (in ascending order) integer array nums of n elements and a target value, write a function to
+    // search target in nums. If target exists, then return its index, otherwise return -1.
+    int l=0, r=nums.size();
+    while(l<r) {
+        int m=l+(r-l)/2;
+        if(target == nums[m]) return m;
+        else if(target > nums[m]) l=m+1;
+        else r=m;
+    }
+    return -1;
+}
 
 int LC0441::arrangeCoins(int n) {
     // 给了我们n个硬币，让我们按一定规律排列，第一行放1个，第二行放2个，以此类推，问我们有多少行能放满。通过分析题目中的例子可以得知最后一
