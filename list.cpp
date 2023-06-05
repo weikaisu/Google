@@ -894,6 +894,28 @@ bool LC0657::judgeCircle(string moves) {
 //    return !u && !l ;
 }
 
+int LC0674::findLengthOfLCIS(vector<int>& nums) {
+    // 这道题让我们求一个数组的最长连续递增序列，由于有了连续这个条件，跟之前那道 Number of Longest Increasing Subsequence 比起来，
+    // 其实难度就降低了很多。可以使用一个计数器，如果遇到大的数字，计数器自增1；如果是一个小的数字，则计数器重置为1。用一个变量 cur 来表示
+    // 前一个数字，初始化为整型最大值，当前遍历到的数字 num 就和 cur 比较就行了，每次用 cnt 来更新结果 res
+    int res=0, cnt=0, cur=INT_MAX;
+    for(auto &num:nums) {
+        if(num>cur) cnt++;
+        else cnt=1;
+        res = std::max(res, cnt);
+        cur = num;
+    }
+    return res;
+
+    // 下面这种方法的思路和上面的解法一样，由於每次都和前面一个数字来比较，是可以省略cur變數。注意处理无法取到钱一个数字的情况
+    int res=0, cnt=0;
+    for(int i=0; i<nums.size(); i++) {
+        if (i == 0 || nums[i] > nums[i - 1]) res = std::max(res, ++cnt);
+        else cnt = 1;
+    }
+    return res;
+}
+
 vector<vector<int>> LC0661::imageSmoother(vector<vector<int>>& img) {
     // 给一个图片进行平滑处理，一般来说都是用算子来跟图片进行卷积，但是由于这道题只是个Easy的题目，我们直接用土办法就能解了，就直接对于每一个
     // 点统计其周围点的个数，然后累加像素值，做个除法就行了，注意边界情况的处理
