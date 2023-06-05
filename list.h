@@ -328,6 +328,7 @@ struct LC0821 { vector<int> shortestToChar(string s, char c); };
 struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
 /*頂多刪一字符可成回文*/
 struct LC0680 { bool validPalindrome(string s); };
+struct LC0643 { double findMaxAverage(vector<int>& nums, int k); };
 /*01陣列裡是否可以插入指定1的數量*/
 struct LC0605 { bool canPlaceFlowers(vector<int>& flowerbed, int n); };
 /*在一系列操作後，二為陣列裡最大數的個數*/

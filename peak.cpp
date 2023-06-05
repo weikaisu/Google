@@ -118,7 +118,7 @@ vector<vector<int>> shortest_continuous_subseq(int target, string file_path) {
     return res;
 }
 
-int main(int argc, char *argv[]) {
+int my_main(int argc, char *argv[]) {
 
     int target = 0;
     for(int i=0; std::isdigit(argv[1][i]); i++)

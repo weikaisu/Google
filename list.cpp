@@ -30,8 +30,8 @@ int LC1684::countConsistentStrings(string allowed, vector<string>& words) {
 //    return res;
 }
 bool LC1207::uniqueOccurrences(vector<int>& arr) {
-    // 用个 HashMap 来统计每个数字出现的次数，然后再用个 HashSet 来判断某个次数是否之前出现过了，若出现过了，则返回 false，
-    // 否则最终返回 true 即可
+    // 这道题给了一个整型数组，问每个数字出现的次数都否都不同。用个 HashMap 来统计每个数字出现的次数，然后再用个 HashSet 来判断某个次数是
+    // 否之前出现过了，若出现过了，则返回 false，否则最终返回 true 即可
     unordered_map<int,int> m;
     unordered_set<int> s;
     for(auto &e:arr) ++m[e];
@@ -892,6 +892,33 @@ bool LC0657::judgeCircle(string moves) {
 //        else if(c=='R') l--;
 //    }
 //    return !u && !l ;
+}
+
+double LC0643::findMaxAverage(vector<int>& nums, int k) {
+    // 这道题给了我们一个数组nums，还有一个数字k，让我们找长度为k且平均值最大的子数组。由于子数组必须是连续的，所以我们不能给数组排序。计算
+    // 子数组之和的常用方法应该是建立累加数组，然后我们可以快速计算出任意一个长度为k的子数组，用来更新结果res，从而得到最大的那个
+//    const int n=nums.size();
+//    vector<int> sum(n);
+//
+//    sum[0] = nums[0];
+//    for(int i=1; i<n; i++)
+//        sum[i] = sum[i-1] + nums[i];
+//
+//    double mx = sum[k-1]; // 需用double
+//    for(int i=k; i<n; i++)
+//        mx = std::max(mx, (double)sum[i]-sum[i-k]); // 需用double
+//
+//    return mx/k;
+
+    // 由于这道题子数组的长度k是确定的，所以我们其实没有必要建立整个累加数组，而是先算出前k个数字的和，然后就像维护一个滑动窗口一样，将窗口向
+    // 右移动一位，即加上一个右边的数字，减去一个左边的数字，就等同于加上右边数字减去左边数字的差值，然后每次更新结果res即可
+    // 需用double
+    double sum=std::accumulate(nums.begin(), nums.begin()+k, 0), res=sum;
+    for(int i=k; i<nums.size(); i++) {
+        sum += nums[i] - nums[i-k];
+        res = std::max(res, sum);
+    }
+    return res/k;
 }
 
 bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {

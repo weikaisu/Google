@@ -2,7 +2,7 @@
 #include "play.cpp"
 using namespace std;
 
-int my_main() {
+int main() {
     cout << "Hello, World!" << endl;
 //    vector<int> v{3,1,7,11};
 //    vector<int> {3, 17, 42, 1, 26, 8, 0, 63};
