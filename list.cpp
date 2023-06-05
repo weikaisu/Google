@@ -894,6 +894,26 @@ bool LC0657::judgeCircle(string moves) {
 //    return !u && !l ;
 }
 
+vector<vector<int>> LC0661::imageSmoother(vector<vector<int>>& img) {
+    // 给一个图片进行平滑处理，一般来说都是用算子来跟图片进行卷积，但是由于这道题只是个Easy的题目，我们直接用土办法就能解了，就直接对于每一个
+    // 点统计其周围点的个数，然后累加像素值，做个除法就行了，注意边界情况的处理
+    if(img.empty() || img[0].empty()) return {};
+    const int m=img.size(), n=img[0].size();
+    vector<vector<int>> res=img, dirs{ {-1,-1}, {0,-1}, {1,-1}, {-1,0}, {1,0}, {-1,1}, {0,1}, {1,1} }; // {x, y}
+    for(int y=0; y<m; y++)
+        for(int x=0; x<n; x++) {
+            int val = img[y][x], cnt = 1;
+            for(auto dir:dirs) {
+                int col=x+dir[0], raw=y+dir[1];
+                if(col<0 || col>=n || raw<0 || raw>=m) continue;
+                val+=img[raw][col];
+                cnt++;
+            }
+            res[y][x] = val/cnt;
+        }
+    return res;
+}
+
 double LC0643::findMaxAverage(vector<int>& nums, int k) {
     // 这道题给了我们一个数组nums，还有一个数字k，让我们找长度为k且平均值最大的子数组。由于子数组必须是连续的，所以我们不能给数组排序。计算
     // 子数组之和的常用方法应该是建立累加数组，然后我们可以快速计算出任意一个长度为k的子数组，用来更新结果res，从而得到最大的那个
