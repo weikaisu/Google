@@ -856,6 +856,28 @@ vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
     return vector<int> {l,n};
 }
 
+int LC0682::calPoints(vector<string>& operations) {
+    // Integer (one round's score): Directly represents the number of points you get in this round.
+    // "+" (one round's score): Represents that the points you get in this round are the sum of the last two validround's points.
+    // "D" (one round's score): Represents that the points you get in this round are the doubled data of the last valid round's points.
+    // "C" (an operation, which isn't a round's score): Represents the last valid round's points you get were invalid and should be removed.
+    // 直接按照题目的描述来分情况处理即可，博主开始在取数组的最后一个数和倒数第二个数的时候还做了数组为空检测，但是的貌似这道题默认
+    // 输入都是合法的，不会存在上一轮不存在还要取值的情况，那就不用检测
+    vector<int> v;
+    for(auto &op:operations) {
+        if(op == "+") {
+            v.push_back(v[v.size()-1] + v[v.size()-2]);
+        }else if(op == "D") {
+            v.push_back(v[v.size()-1] * 2);
+        }else if(op == "C") {
+            v.pop_back();
+        } else {
+            v.push_back(std::stoi(op));
+        }
+    }
+    return std::accumulate(v.begin(), v.end(), 0);
+}
+
 bool LC0680::validPalindrome(string s) {
     // 这道题的字符串中只含有小写字母，而且这道题允许删除一个字符，那么当遇到不匹配的时候，我们到底是删除左边的字符，还是右边的字符呢，
     // 我们的做法是两种情况都要算一遍，只要有一种能返回true，那么结果就返回true。我们可以写一个子函数来判断字符串中的某一个范围内的
@@ -898,14 +920,14 @@ int LC0674::findLengthOfLCIS(vector<int>& nums) {
     // 这道题让我们求一个数组的最长连续递增序列，由于有了连续这个条件，跟之前那道 Number of Longest Increasing Subsequence 比起来，
     // 其实难度就降低了很多。可以使用一个计数器，如果遇到大的数字，计数器自增1；如果是一个小的数字，则计数器重置为1。用一个变量 cur 来表示
     // 前一个数字，初始化为整型最大值，当前遍历到的数字 num 就和 cur 比较就行了，每次用 cnt 来更新结果 res
-    int res=0, cnt=0, cur=INT_MAX;
-    for(auto &num:nums) {
-        if(num>cur) cnt++;
-        else cnt=1;
-        res = std::max(res, cnt);
-        cur = num;
-    }
-    return res;
+//    int res=0, cnt=0, cur=INT_MAX;
+//    for(auto &num:nums) {
+//        if(num>cur) cnt++;
+//        else cnt=1;
+//        res = std::max(res, cnt);
+//        cur = num;
+//    }
+//    return res;
 
     // 下面这种方法的思路和上面的解法一样，由於每次都和前面一个数字来比较，是可以省略cur變數。注意处理无法取到钱一个数字的情况
     int res=0, cnt=0;
