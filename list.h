@@ -326,6 +326,7 @@ struct LC0830 { vector<vector<int>> largeGroupPositions(string s); };
 struct LC0821 { vector<int> shortestToChar(string s, char c); };
 /*一段文字可分幾行*/
 struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
+struct LC0724 { int pivotIndex(vector<int>& nums); };
 struct LC0682 { int calPoints(vector<string>& operations); };
 /*頂多刪一字符可成回文*/
 struct LC0680 { bool validPalindrome(string s); };

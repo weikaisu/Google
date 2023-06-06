@@ -856,6 +856,19 @@ vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
     return vector<int> {l,n};
 }
 
+int LC0724::pivotIndex(vector<int>& nums) {
+    // 给了我们一个数组，让我们求一个中枢点，使得该位置左右两边的子数组之和相等。这道题难度不大，直接按题意去搜索就行了，因为中枢点可能出现的
+    // 位置就是数组上的位置，所以我们搜索一遍就可以找出来，我们先求出数组的总和，然后维护一个当前数组之和curSum，然后对于遍历到的位置，用总
+    // 和减去当前数字，看得到的结果是否是curSum的两倍，是的话，那么当前位置就是中枢点，返回即可；否则就将当前数字加到curSum中继续遍历，遍
+    // 历结束后还没返回，说明没有中枢点，返回-1即可
+    int cur=0, sum=std::accumulate(nums.begin(), nums.end(), 0);
+    for(int i=0; i<nums.size(); i++) {
+        if(sum-nums[i]==2*cur) return i;
+        cur += nums[i];
+    }
+    return -1;
+}
+
 int LC0682::calPoints(vector<string>& operations) {
     // Integer (one round's score): Directly represents the number of points you get in this round.
     // "+" (one round's score): Represents that the points you get in this round are the sum of the last two validround's points.
