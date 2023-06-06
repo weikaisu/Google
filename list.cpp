@@ -842,6 +842,22 @@ vector<int> LC0821::shortestToChar(string s, char c) {
 //    return res;
 }
 
+double LC0812::largestTriangleArea(vector<vector<int>>& points) {
+    // 这道题给了我们一系列的二维平面上的点，让我们找出任意三个点能组成的最大三角形的面积。那么我们只能遍历所有的三角形面积，然后找出最大的那
+    // 个。貌似这道题也没有啥特别简便的方法，不遍历不行啊。
+    double res=0;
+    for(auto &i:points)
+        for(auto &j:points)
+            for(auto &k:points)
+                res = std::max(res, 0.5*std::abs(i[0] * j[1] +
+                                                         j[0] * k[1] +
+                                                         k[0] * i[1] -
+                                                         i[0] * k[1] -
+                                                         k[0] * j[1] -
+                                                         j[0] * i[1] ));
+    return res;
+}
+
 vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
     // 这道题给了我们一个字符串，让我们把里面的字母写下来，规定了每一行的长度为100，然后每个字母的长度可以在widths数组中查询，
     // 说是如果某一个字母加上后超过了长度100的限制，那么就移动到下一行，问我们最终需要多少行，和最后一行的长度。这道题并没有太大的难度和技巧，

@@ -324,6 +324,7 @@ struct LC0844 { bool backspaceCompare(string s, string t); };
 struct LC0830 { vector<vector<int>> largeGroupPositions(string s); };
 /*每個離特定字符最近的距離*/
 struct LC0821 { vector<int> shortestToChar(string s, char c); };
+struct LC0812 { double largestTriangleArea(vector<vector<int>>& points); };
 /*一段文字可分幾行*/
 struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
 struct LC0766 { bool isToeplitzMatrix(vector<vector<int>>& matrix); };
