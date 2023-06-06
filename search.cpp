@@ -2,6 +2,25 @@
 #include "search.h"
 
 /***********  Binary Search  **********/
+char LC0744::nextGreatestLetter(vector<char>& letters, char target) {
+    // 了我们一堆有序的字母，然后又给了我们一个target字母，让我们求字母数组中第一个大于target的字母，数组是循环的，如果没有，那就返回第一
+    // 个字母。像这种在有序数组中找数字，二分法简直不要太适合啊。题目中说了数组至少有两个元素，那么我们首先用数组的尾元素来跟target比较，
+    // 如果target大于等于尾元素的话，直接返回数组的首元素即可。否则就利用二分法来做，这里是查找第一个大于目标值的数组，博主之前做过二分法的
+    // 总结，参见这个帖子LeetCode Binary Search Summary 二分搜索法小结
+    if(target >= letters.back()) return letters[0];
+    int n=letters.size(), l=0, r=n;
+    while(l<r) {
+        int m=l+(r-l)/2;
+        if(target >= letters[m]) l=m+1;
+        else r=m;
+    }
+    return letters[r]; //回傳的是r
+
+    // 用STL自带的upper_bound函数来做，这个就是找第一个大于目标值的数字，如果返回end()，说明没找到，返回首元素即可
+//    auto it = std::upper_bound(letters.begin(), letters.end(), target);
+//    return it==letters.end() ? *letters.begin() : *it;
+}
+
 int LC0704::search(vector<int>& nums, int target) {
     // Given a sorted (in ascending order) integer array nums of n elements and a target value, write a function to
     // search target in nums. If target exists, then return its index, otherwise return -1.

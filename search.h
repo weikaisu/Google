@@ -8,6 +8,7 @@ using namespace std;
 
 /***********  Easy  **********/
 /* Binary Search */
+struct LC0744 { char nextGreatestLetter(vector<char>& letters, char target); };
 struct LC0704 { int search(vector<int>& nums, int target); };
 struct LC0441 { int arrangeCoins(int n); };
 struct LC0374 { int guessNumber(int n); };
