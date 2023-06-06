@@ -856,6 +856,17 @@ vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
     return vector<int> {l,n};
 }
 
+bool LC0766::isToeplitzMatrix(vector<vector<int>>& matrix) {
+    // 这道题让我们验证一个矩阵是否是托普利兹矩阵Toeplitz Matrix，所谓的这个托普利兹矩阵，就是看每条从左上到右下的对角线是否是值都相等。
+    // 注意矩阵的行数列数不一定相等，要验证所有的对角线。那么其实这道题的本质是让我们斜向遍历矩阵，就是按对角线来。按正常顺序来遍历数组，
+    // 对于每个遍历到的数字，都跟其右下方的数字对比，如果不相同，直接返回false即可。为了防止越界，我们不遍历最后一行和最后一列，遍历完成后，
+    // 返回true
+    for(int y=0; y<matrix.size()-1; y++)
+        for(int x=0; x<matrix[0].size()-1; x++)
+            if(matrix[y][x] != matrix[y+1][x+1]) return false;
+    return true;
+}
+
 int LC0724::pivotIndex(vector<int>& nums) {
     // 给了我们一个数组，让我们求一个中枢点，使得该位置左右两边的子数组之和相等。这道题难度不大，直接按题意去搜索就行了，因为中枢点可能出现的
     // 位置就是数组上的位置，所以我们搜索一遍就可以找出来，我们先求出数组的总和，然后维护一个当前数组之和curSum，然后对于遍历到的位置，用总
