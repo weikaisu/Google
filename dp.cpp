@@ -2,6 +2,25 @@
 #include "dp.h"
 
 /***********  Dynamic Programming  **********/
+int LC0746::minCostClimbingStairs(vector<int>& cost) {
+    // 这道题应该算是之前那道 Climbing Stairs 的拓展，这里不是求步数，而是每个台阶上都有一个 cost，让我们求爬到顶端的最小 cost 是多少。
+    // 换汤不换药，还是用动态规划 Dynamic Programming 来做。这里定义一个一维的 dp数组，其中 dp[i] 表示爬到第i层的最小 cost，然后来想
+    // dp[i] 如何推导。来思考一下如何才能到第i层呢？是不是只有两种可能性，一个是从第 i-2 层上直接跳上来，一个是从第 i-1 层上跳上来。不会
+    // 再有别的方法，所以 dp[i] 只和前两层有关系，可以写做如下：
+    //
+    //dp[i] = min(dp[i- 2] + cost[i - 2], dp[i - 1] + cost[i - 1])
+    int n=cost.size();
+    if(!n) return 0;
+    if(n==1) return cost[0];
+    if(n==2) return std::min(cost[0], cost[1]); // 回傳的是前兩個的min
+
+    int sPr1=cost[1], sPr2=cost[0], sCur;
+    for(int i=2; i<n; i++) {
+        sCur = std::min(sPr1, sPr2) + cost[i];
+        sPr2 = sPr1; sPr1 = sCur;
+    }
+    return std::min(sPr1, sPr2); // 回傳的是前兩個的min
+}
 
 int LC0509::fib(int n) {
     // f(n) = f(n-1) + f(n-2)

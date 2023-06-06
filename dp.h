@@ -6,6 +6,7 @@
 using namespace std;
 
 // Dynamic Programming
+struct LC0746 { int minCostClimbingStairs(vector<int>& cost); };
 struct LC0509 { int fib(int n); };
 /*回傳陣列某一區間值之和*/
 struct LC0303 { vector<int> dp; LC0303(vector<int>& nums); int sumRange(int left, int right); };
