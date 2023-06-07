@@ -797,6 +797,28 @@ bool LC0844::backspaceCompare(string s, string t) {
 //    return strs==strt;
 }
 
+vector<vector<int>> LC0832::flipAndInvertImage(vector<vector<int>>& image) {
+    // 这道题让我们翻转图像，翻转的方法是对于二维数组的每一行，先将所有元素位置翻转一下，然后再按顺序将每个像素值取个反。既然要求这么直接明了，
+    // 那么就按照其说的一步一步来呗，首先翻转每一行，记得一定要加 ‘&’ 号，不然原数组不会被修改。然后在遍历每个数字，让其或上1，达到取反的目的，
+    // 当然还是必须要加 ‘&’ 号，最后返回修改后的A数组即可
+//    for(auto &row:image)
+//        std::reverse(row.begin(), row.end());
+//    for(auto &row:image)
+//        for(auto &e:row)
+//            e ^= 1;
+//    return image;
+
+    // 上面的方法虽然直接了当，但是毕竟修改了原数组A，再来看一种不修改的方法，这里我们新建一个跟A一样长的二维数组，只不过里面的各行还是空的。
+    // 然后我们遍历A数组的各行，但在遍历各行上的数字时，我们采用从后往前的遍历顺序，然后对于每个数字取反在加入结果res中，这样直接将翻转和取
+    // 反同时完成了
+    int n=image.size();
+    vector<vector<int>> res(n);
+    for(int y=0; y<n; y++)
+        for(int x=n-1; x>=0; x--)
+            res[y].push_back(!image[y][x]); // push_back到第y row
+    return res;
+}
+
 vector<vector<int>> LC0830::largeGroupPositions(string s) {
     // 这道题给了我们一个全小写的字符串，说是重复出现的字符可以当作一个群组，如果重复次数大于等于3次，可以当作一个大群组，
     // 让我们找出所有大群组的起始和结束位置。那么实际上就是让我们计数连续重复字符的出现次数，由于要连续，所以我们可以使用双指针来做，

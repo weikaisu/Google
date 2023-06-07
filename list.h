@@ -320,6 +320,7 @@ struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 struct LC0944 { int minDeletionSize(vector<string>& strs); };
 /*有backspace字符的兩list是否是相同的字串*/
 struct LC0844 { bool backspaceCompare(string s, string t); };
+struct LC0832 { vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image); };
 /*有幾組連續字符*/
 struct LC0830 { vector<vector<int>> largeGroupPositions(string s); };
 /*每個離特定字符最近的距離*/
