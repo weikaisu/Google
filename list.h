@@ -318,6 +318,7 @@ struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 // Array List
 /*刪除字符沒有排序好的column*/
 struct LC0944 { int minDeletionSize(vector<string>& strs); };
+struct LC0941 { bool validMountainArray(vector<int>& arr); };
 struct LC0908 { int smallestRangeI(vector<int>& nums, int k); };
 struct LC0896 { bool isMonotonic(vector<int>& nums); };
 struct LC0892 { int surfaceArea(vector<vector<int>>& grid); };
