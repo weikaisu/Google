@@ -771,6 +771,19 @@ int LC0944::minDeletionSize(vector<string>& strs) {
     return res;
 }
 
+vector<vector<int>> LC0867::transpose(vector<vector<int>>& matrix) {
+    // 转置一个矩阵，在大学的线性代数中，转置操作应该说是非常的常见。所谓矩阵的转置，就是把 mxn 的矩阵变为 nxm 的，并且原本在 A[i][j] 位置
+    // 的数字变到 A[j][i] 上即可，非常的简单直接。而且由于此题又限定了矩阵的大小范围为 [1, 1000]，所以不存在空矩阵的情况，因而不用开始时对
+    // 矩阵进行判空处理，直接去获取矩阵的宽和高即可。又因为之前说了转置会翻转原矩阵的宽和高，所以我们新建一个 nxm 的矩阵，然后遍历原矩阵中的每
+    // 个数，将他们赋值到新矩阵中对应的位置上即可
+    int m=matrix.size(), n=matrix[0].size();
+    vector<vector<int>> res(n, vector<int>(m));
+    for(int y=0; y<m; y++)
+        for(int x=0; x<n; x++)
+            res[x][y] = matrix[y][x];
+    return res;
+}
+
 bool LC0860::lemonadeChange(vector<int>& bills) {
     // 这道题说是有很多柠檬，每个卖5刀，顾客可能会提供5刀，10刀，20刀的钞票，我们刚开始的时候并没有零钱，只有收到顾客的5刀，或者 10 刀可以
     // 来给顾客找钱，当然如果第一个顾客就给 10 刀或者 20 刀，那么是无法找零的，这里就问最终是否能够都成功找零。
