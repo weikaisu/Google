@@ -318,6 +318,7 @@ struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 // Array List
 /*刪除字符沒有排序好的column*/
 struct LC0944 { int minDeletionSize(vector<string>& strs); };
+struct LC0860 { bool lemonadeChange(vector<int>& bills); };
 /*有backspace字符的兩list是否是相同的字串*/
 struct LC0844 { bool backspaceCompare(string s, string t); };
 struct LC0832 { vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image); };
