@@ -771,6 +771,24 @@ int LC0944::minDeletionSize(vector<string>& strs) {
     return res;
 }
 
+int LC0908::smallestRangeI(vector<int>& nums, int k) {
+    // 给了一个非负数的数组，和一个非负数K，说是数组中的每一个数字都可以加上 [-K, K] 范围内的任意一个数字，问新数组的最大值最小值之间的差值
+    // 最小是多少。这道题的难度是 Easy，理论上应该是可以无脑写代码的，但其实很容易想的特别复杂。本题的解题标签是 Math，这种类型的题目基本上
+    // 就是一种脑筋急转弯的题目，有时候一根筋转不过来就怎么也做不出来。首先来想，既然是要求新数组的最大值和最小值之间的关系，那么肯定是跟原数
+    // 组的最大值最小值有着某种联系，原数组的最大值最小值我们可以很容易的得到，只要找出了跟新数组之间的联系，问题就能迎刃而解了。题目中说了每
+    // 个数字都可以加上 [-K, K] 范围内的数字，当然最大值最小值也可以，如何让二者之间的差值最小呢？当然是让最大值尽可能变小，最小值尽可能变大
+    // 了，所以最大值 mx 要加上 -K，而最小值 mn 要加上K，然后再做减法，即 (mx-K)-(mn+K) = mx-mn-2K，这就是要求的答案啦
+    int mx=nums[0], mn=nums[0];
+    for(auto &num:nums) {
+        mx = std::max(mx, num);
+        mn = std::min(mn, num);
+    }
+    return std::max(0, mx-mn-2*k);
+
+    // 也可以使用 STL 自带的求最大值最小值的函数，从而一行搞定。max_element/min_element記得要deference
+//    return std::max(0, *std::max_element(nums.begin(), nums.end()) - *std::min_element(nums.begin(), nums.end())-2*k);
+}
+
 bool LC0896::isMonotonic(vector<int>& nums) {
     // 判断一个数组是否单调，单调数组就是说这个数组的数字要么是递增的，要么是递减的，不存在一会儿递增一会儿递减的情况，即不会有山峰存在。
     // 这里不是严格的递增或递减，是允许有相同的数字的。那么我们直接将相邻的两个数字比较一下即可，使用两个标识符，inc 和 dec，初始化均为
