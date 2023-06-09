@@ -755,6 +755,26 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
  *          array[y][x]
  */
 
+vector<int> LC0989::addToArrayForm(vector<int>& num, int k) {
+    // 给了一个数组A，说是可以表示一个正整数，高位在开头，又给了一个正数K，让用数组A表示的正整数加上K，并还用数组来表示相加的后的结果。这种
+    // 用不同的数据结构玩加法的题，之前也出现过，比如 Add Two Numbers，Plus One，Add Binary，和 Add Strings。但其实都是万变不离其宗，
+    // 都是要一位一位的相加，并且处理好进位的问题。这里由于高位是在数组开头，而相加是要从低位开始的，所以从数组的后面往前开始遍历，用当前位上
+    // 的数字加上K，再对 10 取余，得到的就是相加后该位上的数字。只用一个循环搞定，并且直接更新数组A，不额外使用数组。那么循环条件就是K大于0，
+    // 或进位值 carry 大于0。在循环中，先让 carry 加上K对 10 取余的值，此时若数组A的值还没有遍历完，即i大于等于0时，再加上 A[i]，此时
+    // num 除以 10 就是更新后的 carry 值，对 10 取余就是当前位上的值。此时若i大于等于0，则更新 A[i] 为 num 值，且i自减1，否则将 num
+    // 加到数组A的开头，然后K在自除以 10，最后返回数组A即可
+    int i=num.size()-1, c=0;
+    while(k || c) {
+        int val = k%10 + c;
+        if(i>=0) val += num[i];
+        c = val/10;
+        val %= 10;
+        if(i>=0) { num[i] = val; i--;}
+        else num.insert(num.begin(), val);
+        k /= 10;
+    }
+    return num;
+}
 
 int LC0944::minDeletionSize(vector<string>& strs) {
     // 这道题给了一个字符串数组，里面的字符串长度均相同，这样如果将每个字符串看作一个字符数组的话，于是就可以看作的一个二维数组，题目要求所有
