@@ -73,6 +73,8 @@ struct LC0094 { vector<int> inorderTraversal(TreeNode* root); };
  * A specialized tree-based data structure which is essentially an almost complete[1] tree that satisfies the heap property:
  * In a max heap, for any given node C, if P is a parent node of C, then the key (the value) of P is greater than or equal to the key of C.
  * In a min heap, the key of P is less than or equal to the key of C*/
+// LC0703
+//struct KthLargest { KthLargest(int k, vector<int>& nums); int add(int val); };
 struct LC1046 { int lastStoneWeight(vector<int>& stones); };
 /*給定分數陣列，找出相對排名*/
 struct LC0506 { vector<string> findRelativeRanks(vector<int>& score); };
