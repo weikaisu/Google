@@ -755,6 +755,28 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
  *          array[y][x]
  */
 
+void LC1089::duplicateZeros(vector<int>& arr) {
+    // 这道题给了一个数字数组，让将每个0都复制一个，然后将数字右移一位，数组的长度还是保持不变，右移出范围的数字就移除掉。这不是一道难题，比较
+    // 直接的做法就是新建一个结果数组 res，然后遍历给定数组 arr，for 循环条件加上一个 res 的长度小于n，将当前遍历到的数字加入 res，然后判
+    // 断若当前数字是0，且此时 res 长度小于n，则再加个0到 res 中，最后把 arr 更新为 res 即可
+//    int n=arr.size();
+//    vector<int> res;
+//    for(int i=0; i<n && res.size()<n; i++) {
+//        res.push_back(arr[i]);
+//        if(arr[i]==0 && res.size()<n) res.push_back(0);
+//    }
+//    arr = res;
+
+    // 不使用额外空间的解法，还是使用了双指针来做，j初始化为 arr 数组的长度加上其中0的个数，实际上就是在不右移的情况下得到的新的数组的长度，
+    // i从 n-1 开始遍历到0，首先对j进行自减1，若此时j小于n了，说明已经到需要更新的地方了，将 arr[j] 赋值为 arr[i]，接下来处理0的情况，若
+    // arr[i] 为0，且自减1后的j小于n，则将 arr[j] 赋值为0，还是不太理解整个过程的童鞋可以将例子1带入，一步一步来尝试运行，其实并不是很难理解
+    int n=arr.size(), j=n+std::count(arr.begin(), arr.end(), 0);
+    for(int i=n-1; i>=0; --i) {
+        if(--j<n) arr[j] = arr[i];
+        if(arr[i]==0 && --j<n) arr[j] = 0;
+    }
+}
+
 vector<bool> LC1018::prefixesDivBy5(vector<int>& nums) {
     // 给了一个只由0和1组成的数组，问从0开始每个子数组表示的二进制数是否可以整除5，二进制数是从高位到低位的。既然是一道 Easy 的题目，也就不
     // 用太多的技巧，直接按顺序遍历即可。首先对于第一个数字，可以快速知道其是否可以整除5，当子数组新加一位，实际上相当于之前的数字左移了一位，
