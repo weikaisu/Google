@@ -139,6 +139,31 @@ int LC0035::searchInsert(vector<int>& nums, int target) {
 }
 
 /***********  Depth First Search  **********/
+int LC0999::numRookCaptures(vector<vector<char>>& board) {
+    // 这道题给了一个 8x8 大小的国际象棋棋盘，上面只能有三种棋子，分别是白方的车，白方的象，和黑方的兵，问白色方的车最多能吃到多个黑方的兵。
+    // 在国际象棋中，车是可以上下左右走的，若某条路径上先遇到了白方的象，则该路上没法吃兵了，若先遇上了兵，可以吃，但此时后面若还有兵，不能
+    // 连续吃。搞懂了题意其实很简单了，首先遍历棋盘，找到白方车的位置。利用深度优先遍历 DFS 的思想，用方向数组，每次加上方向的偏移，若没有越
+    // 界，则判断，若是黑兵，则结果 res 加1，若不是点，则 break，这判断很精髓，覆盖了当前是白象或黑兵的情况，保证了遇到了白象，或者已经吃了
+    // 黑兵之后可以 break，然后继续增加偏移量直至退出循环
+    int res=0, y0=0, x0=0;
+    int m=board.size(), n=board[0].size();
+    for(int y=0; y<m; y++)
+        for(int x=0; x<n; x++)
+            if(board[y][x] == 'R') {
+                y0=y; x0=x; break;
+            }
+    vector<vector<int>> dirs{ {-1,0}, {1,0}, {0,-1}, {0,1} };
+    for(auto &dir:dirs) {
+        int y=y0+dir[0], x=x0+dir[1];
+        while(y>=0 && y<m && x>=0 && x<n) {
+            if(board[y][x] == 'p') ++res;
+            if(board[y][x] != '.') break;
+            y+=dir[0]; x+=dir[1];
+        }
+    }
+    return res;
+}
+
 // LC0784 run;
 // vector<string> ans=run.letterCasePermutation("a1b2");
 // for(auto a:ans) cout << a << endl;

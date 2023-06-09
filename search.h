@@ -17,6 +17,7 @@ struct LC0278 { int firstBadVersion(int n); };
 struct LC0035 { int searchInsert(vector<int>& nums, int target); };
 
 /* Depth First Search */
+struct LC0999 { int numRookCaptures(vector<vector<char>>& board); };
 struct LC0784 { vector<string> letterCasePermutation(string s); };
 struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); };
 struct LC0077 { vector<vector<int>> combine(int n, int k); };
