@@ -755,6 +755,21 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
  *          array[y][x]
  */
 
+vector<bool> LC1018::prefixesDivBy5(vector<int>& nums) {
+    // 给了一个只由0和1组成的数组，问从0开始每个子数组表示的二进制数是否可以整除5，二进制数是从高位到低位的。既然是一道 Easy 的题目，也就不
+    // 用太多的技巧，直接按顺序遍历即可。首先对于第一个数字，可以快速知道其是否可以整除5，当子数组新加一位，实际上相当于之前的数字左移了一位，
+    // 也就相当于乘以了2，所以新的子数组表示的数字就是之前的数字乘以2再加上新加进来的数字，然后就可以判断是否可以整除5了。但是需要注意的一点
+    // 是，由于A数组可能会很长，所以最终累加出来的数字可能会很大，超过整型最大值，甚至也超过长整型的最大值，为了避免这种情况，对每次累加出来
+    // 的新数字都对5取余，这样就不会溢出了
+    vector<bool> res;
+    int val=0;
+    for(int &num:nums) {
+        val = (val<<1 | num) % 5;
+        res.push_back(val%5 == 0);
+    }
+    return res;
+}
+
 vector<int> LC0989::addToArrayForm(vector<int>& num, int k) {
     // 给了一个数组A，说是可以表示一个正整数，高位在开头，又给了一个正数K，让用数组A表示的正整数加上K，并还用数组来表示相加的后的结果。这种
     // 用不同的数据结构玩加法的题，之前也出现过，比如 Add Two Numbers，Plus One，Add Binary，和 Add Strings。但其实都是万变不离其宗，

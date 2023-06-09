@@ -316,6 +316,7 @@ struct LC0026 { int removeDuplicates(vector<int>& nums); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
 // Array List
+struct LC1018 { vector<bool> prefixesDivBy5(vector<int>& nums); };
 struct LC0989 { vector<int> addToArrayForm(vector<int>& num, int k); };
 /*刪除字符沒有排序好的column*/
 struct LC0944 { int minDeletionSize(vector<string>& strs); };
