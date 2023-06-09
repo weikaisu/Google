@@ -14,6 +14,7 @@ struct LC0070 { int climbStairs(int n); };
 struct LC0053 { int maxSubArray(vector<int>& nums); };
 
 //Greedy
+struct LC1013 { bool canThreePartsEqualSum(vector<int>& arr); };
 struct LC0717 { bool isOneBitCharacter(vector<int>& bits); };
 /*求兩兩一對較小數的和最大*/
 struct LC0561 { int arrayPairSum(vector<int>& nums); };
