@@ -275,64 +275,6 @@ bool LC1346::checkIfExist(vector<int>& arr) {
 //    return false;
 }
 
-vector<int> LC1337::kWeakestRows(vector<vector<int>>& mat, int k) {
-    // You are given an m x n binary matrix mat of 1's (representing soldiers) and 0's (representing civilians).
-    // The soldiers are positioned in front of the civilians. That is, all the 1's will appear to the left of all
-    // the 0's in each row.
-    // A row i is weaker than a row j if one of the following is true:
-    // The number of soldiers in row i is less than the number of soldiers in row j.
-    // Both rows have the same number of soldiers and i < j.
-    // Return the indices of the k weakest rows in the matrix ordered from weakest to strongest.
-    // Input: mat =
-    //[[1,1,0,0,0],
-    // [1,1,1,1,0],
-    // [1,0,0,0,0],
-    // [1,1,0,0,0],
-    // [1,1,1,1,1]],
-    // k = 3
-    // Output: [2,0,3]
-    // Explanation:
-    // The number of soldiers in each row is:
-    // - Row 0: 2
-    // - Row 1: 4
-    // - Row 2: 1
-    // - Row 3: 2
-    // - Row 4: 5
-    // The rows ordered from weakest to strongest are [2,0,3,1,4].
-
-    // use priority queue and merge soldier count and index into one number : cunt*100 + idx;
-    const int m=mat.size();
-    priority_queue<int, vector<int>, greater<int>> pq;
-    vector<int> res(k);
-
-    for(int i=0; i<m; i++)
-        pq.push(std::accumulate(mat[i].begin(), mat[i].end(), 0)*100 + i);
-
-    for(int i=0; i<k; i++) {
-        res[i] = pq.top() % 100;
-        pq.pop();
-    }
-
-    return res;
-
-//    // 算出每個row 1的個數，建立pair(1's, row), 調用std::sort即可根據pair的第一個欄位排序，如此得到前k名row的index
-//    const int m=mat.size();
-//    vector<int> res(k);
-//    vector<pair<int, int>> v(m);
-//
-//    for(int i=0; i<m; i++) {
-//        int n = std::accumulate(mat[i].begin(), mat[i].end(), 0);
-//        v[i] = pair(n,i);
-//    }
-//
-//    std::sort(v.begin(), v.end());
-//
-//    for(int i=0; i<k && i<m; i++)
-//        res[i] = v[i].second;
-//
-//    return res;
-}
-
 vector<int> LC1331::arrayRankTransform(vector<int>& arr) {
     // Given an array of integers arr, replace each element with its rank.
     // The rank represents how large the element is. The rank has the following rules:
