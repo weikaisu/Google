@@ -5,6 +5,7 @@
 using namespace std;
 
 /***********  Easy  **********/
+struct LC1037 { bool isBoomerang(vector<vector<int>>& points); };
 struct LC0507 { bool checkPerfectNumber(int num); };
 struct LC0504 { string convertToBase7(int num); };
 struct LC0492 { vector<int> constructRectangle(int area); };
