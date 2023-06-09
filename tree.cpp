@@ -1,6 +1,69 @@
 ﻿
 #include "tree.h"
 
+/***********  Heap  **********/
+int LC1046::lastStoneWeight(vector<int>& stones) {
+    // 给了一堆重量不同的石头，每次选出两个最重的出来相互碰撞，若二者重量相同，则直接湮灭了，啥也不剩，否则剩一个重量为二者差值的石头。然后继
+    // 续如此操作，直至啥也不剩（返回0），或者剩下一个石头（返回该石头的重量）。这道题是一道 Easy 的题目，没有太大的难度，主要就是每次要选出
+    // 最大的两个数字，若是给数组排序，是可以知道最后两个数字是最大的，然是碰撞过后若有剩余，要将这个剩余的石头加到数组的合适位置，每次都排一
+    // 次序显然时间复杂度太大。这里需要用一个更合理的数据结构，最大堆，在 C++ 中用优先队列实现的，每次加入一个新的石头，就会自动根据其重量加
+    // 入到正确的位置。起始时将所有的石头加入优先队列中，然后进行循环，条件是队列中的石头个数大于1，然后取出队首两个石头，假如重量不等，则将
+    // 差值加入队列。最终只需要判断队列是否为空，是的话返回0，否则返回队首元素
+    priority_queue<int> pq;
+    for(int &stone:stones) pq.push(stone);
+    while(pq.size()>1) {
+        int first  = pq.top(); pq.pop();
+        int second = pq.top(); pq.pop();
+        if(first>second) pq.push(first-second);
+    }
+    return pq.empty() ? 0 : pq.top();
+
+    // use set
+    // 不行！set裡同值只有一個
+//    set<int> pq;
+//    for(int &stone:stones) pq.insert(stone);
+//    while(pq.size()>1) {
+//        int first  = *pq.rbegin(); pq.erase(*pq.rbegin());
+//        int second = *pq.rbegin(); pq.erase(*pq.rbegin());
+//        if(first>second) pq.insert(first-second);
+//    }
+//    return pq.empty() ? 0 : *pq.begin();
+}
+
+vector<string> LC0506::findRelativeRanks(vector<int>& score) {
+    // 这道题给了我们一组分数，让我们求相对排名，前三名分别是金银铜牌，后面的就是名次数，利用map的自动排序的功能，不过map是升序排列的，所以
+    // 我们遍历的时候就要从最后面开始遍历，最后一个是金牌，然后往前一次是银牌，铜牌，名次数等
+//    vector<string> res(score.size(), "");
+//    map<int,int> m;
+//    for(int i=0; i<score.size(); i++)
+//        m[score[i]]=i;
+//    int cnt=1;
+//    for(auto it=m.rbegin(); it!=m.rend(); it++) {
+//        if(cnt==1) res[it->second] = "Gold Medal";
+//        else if(cnt==2) res[it->second] = "Silver Medal";
+//        else if(cnt==3) res[it->second] = "Bronze Medal";
+//        else res[it->second] = to_string(cnt);
+//        cnt++;
+//    }
+//    return res;
+
+    // 建立一个坐标数组，不过排序的时候比较的不是坐标，而是该坐标位置上对应的数字，后面的处理方法和之前的并没有什么不同
+    int n = score.size();
+    vector<string> res(n,"");
+    vector<int> idx(n);
+    for(int i=0; i<n; i++) idx[i]=i;
+    sort(idx.begin(), idx.end(), [&](int i, int j){return score[i]>score[j];});
+    for(int i=0; i<n; i++) {
+        if(i==0) res[idx[i]] = "Gold Medal";
+        else if(i==1) res[idx[i]] = "Silver Medal";
+        else if(i==2) res[idx[i]] = "Bronze Medal";
+        else res[idx[i]] = to_string(i+1);
+    }
+    return res;
+}
+
+/***********  Tree  **********/
+
 TreeNode* LC0700::searchBST(TreeNode* root, int val) {
     // 这道题让我们搜索一个二叉搜索树，既然是二叉搜索树，而不是普通的二叉树，那么我们肯定要利用二叉搜索树特定的性质来解题，即左<根<右。那么就
     // 是说任意一个结点的左子树中的所有结点均小于当前结点，其右子树中的所有结点均大于当前结点。那么这不就是一个天然的二分么，当仁不让的二分搜

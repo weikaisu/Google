@@ -5,11 +5,12 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
-#include <queue>
+#include <queue> // queue and priority
 #include <stack>
 #include <unordered_set>
 #include <string>
 #include <functional>
+#include <set>
 
 using namespace std;
 
@@ -68,11 +69,13 @@ struct LC0101 { bool isSymmetric(TreeNode* root); };
 struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
 struct LC0094 { vector<int> inorderTraversal(TreeNode* root); };
 
-/***********  Medium  **********/
 /* Heap
  * A specialized tree-based data structure which is essentially an almost complete[1] tree that satisfies the heap property:
  * In a max heap, for any given node C, if P is a parent node of C, then the key (the value) of P is greater than or equal to the key of C.
  * In a min heap, the key of P is less than or equal to the key of C*/
+struct LC1046 { int lastStoneWeight(vector<int>& stones); };
+/*給定分數陣列，找出相對排名*/
+struct LC0506 { vector<string> findRelativeRanks(vector<int>& score); };
 
 /* Trie (Prefix tree or Digital Tree )
  * A type of k-ary search tree, a tree data structure used for locating specific keys from within a set.
