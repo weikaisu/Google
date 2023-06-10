@@ -51,9 +51,7 @@ struct TreeNode {
 
 class tree {};
 
-/***********  Easy  **********/
-struct LC0700 { TreeNode* searchBST(TreeNode* root, int val); };
-struct LC0653 { bool findTarget(TreeNode* root, int k); };
+/***********  Binary Tree  **********/
 struct LC0637 { vector<double> averageOfLevels(TreeNode* root); };
 struct LC0617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };
 struct LC0606 { string tree2str(TreeNode* root); };
@@ -68,6 +66,10 @@ struct LC0104 { int maxDepth(TreeNode* root); };
 struct LC0101 { bool isSymmetric(TreeNode* root); };
 struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
 struct LC0094 { vector<int> inorderTraversal(TreeNode* root); };
+/***********  Binary Search Tree  **********/
+struct LC0700 { TreeNode* searchBST(TreeNode* root, int val); };
+struct LC0653 { bool findTarget(TreeNode* root, int k); };
+struct LC0108 { TreeNode* sortedArrayToBST(vector<int>& nums); };
 
 /* Heap
  * A specialized tree-based data structure which is essentially an almost complete[1] tree that satisfies the heap property:
