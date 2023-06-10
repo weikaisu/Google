@@ -70,6 +70,7 @@ struct LC0094 { vector<int> inorderTraversal(TreeNode* root); };
 /***********  Binary Search Tree  **********/
 struct LC0700 { TreeNode* searchBST(TreeNode* root, int val); };
 struct LC0653 { bool findTarget(TreeNode* root, int k); };
+struct LC0530 { int getMinimumDifference(TreeNode* root); };
 struct LC0501 { vector<int> findMode(TreeNode* root); };
 struct LC0108 { TreeNode* sortedArrayToBST(vector<int>& nums); };
 

@@ -491,6 +491,44 @@ bool LC0653::findTarget(TreeNode* root, int k) {
     return false;
 }
 
+int LC0530::getMinimumDifference(TreeNode* root) {
+    // 给了我们一棵二叉搜索树，让我们求任意个节点值之间的最小绝对差。由于BST的左<根<右的性质可知，如果按照中序遍历会得到一个有序数组，那么最
+    // 小绝对差肯定在相邻的两个节点值之间产生。所以我们的做法就是对BST进行中序遍历，然后当前节点值和之前节点值求绝对差并更新结果res。这里需
+    // 要注意的就是在处理第一个节点值时，由于其没有前节点，所以不能求绝对差。这里我们用变量pre来表示前节点值，这里由于题目中说明了所以节点值
+    // 不为负数，所以我们给pre初始化-1，这样我们就知道pre是否存在。如果没有题目中的这个非负条件，那么就不能用int变量来，必须要用指针，通过
+    // 来判断是否为指向空来判断前结点是否存在。还好这里简化了问题，用-1就能搞定了，这里我们先来看中序遍历的递归写法
+    // recursive way
+//    int mn=INT_MAX;
+//    TreeNode* pre=nullptr;
+//    function<void(TreeNode*)> fun = [&](TreeNode* node) {
+//        if(node == nullptr) return;
+//        fun(node->left);
+//        if(pre)
+//            mn = std::min(mn, node->val-pre->val);
+//        pre = node;
+//        fun(node->right);
+//    };
+//    fun(root);
+//    return mn;
+
+    // iterative way
+    int mn=INT_MAX;
+    TreeNode *pre=nullptr, *p=root;
+    stack<TreeNode*> s;
+    while(s.size() || p) {
+        while(p) {
+            s.push(p);
+            p = p->left;
+        }
+        p = s.top(); s.pop();
+        if(pre)
+            mn = std::min(mn, p->val - pre->val);
+        pre = p;
+        p = p->right;
+    }
+    return mn;
+}
+
 vector<int> LC0501::findMode(TreeNode* root) {
     // 求二分搜索树中的众数，这里定义的二分搜索树中左根右结点之间的关系是小于等于的，有些题目中是严格小于的，所以一定要看清题目要求。所谓的
     // 众数就是出现最多次的数字，可以有多个，那么这道题比较直接点思路就是利用一个哈希表来记录数字和其出现次数之前的映射，然后维护一个变量mx

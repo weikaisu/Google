@@ -28,8 +28,6 @@ struct LC0589 { vector<int> preorder(Node* root); };
 struct LC0572 { bool isSubtree(TreeNode* root, TreeNode* subRoot); };
 struct LC0563 { int findTilt(TreeNode* root); };
 struct LC0559 { int maxDepth(Node* root); };
-struct LC0530 { int getMinimumDifference(TreeNode* root); };
-struct LC0501 { vector<int> findMode(TreeNode* root); };
 // struct LC0104 { int maxDepth(TreeNode* root); };
 
 /* Breadth First Search */

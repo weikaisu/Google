@@ -300,16 +300,6 @@ int LC0559::maxDepth(Node* root) {
     return res;
 }
 
-int LC0530::getMinimumDifference(TreeNode* root) {
-    int res;
-    return res;
-}
-
-vector<int> LC0501::findMode(TreeNode* root) {
-    vector<int> res;
-    return res;
-}
-
 // N個裡面取M個，N是nums的大小，所以不需要另外當參數傳，緊需要傳M即可
 void Search::Permutation(vector<int> nums, int m) {
     vector<vector<int>> res;
