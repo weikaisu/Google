@@ -24,20 +24,6 @@ string LC1309::freqAlphabets(string s) {
     return res;
 }
 
-int LC1221::balancedStringSplit(string s) {
-    // 这道题给了一个只有L和R两个字符的字符串，并且定义了一种平衡字符串，即L和R的个数相同，现在问最多能将字符串分为多少个这样的平衡字符串。
-    // 博主看到这题以后第一反应就觉得这是一道验证合法括号个数的题目，就像之前的那道 Valid Parentheses，这里的L就可以看作是左括号，R可以看
-    // 作是右括号，其实这道题比验证合法括号更简单一些，因为合法括号不仅仅需要左右括号个数相同，而且任何时候右括号的个数不能多于左括号，而这道
-    // 题并没有这个限制。这里只需要一个 cnt 变量来记录L的个数，遇到L则 cnt 自增1，遇到R则 cnt 自减1。每次检测一下，若某个状态 cnt 为0了，
-    // 则说明此时L和R个数相等了，结果 res 自增1即可
-    int res = 0, cnt = 0;
-    for(auto &c:s) {
-        (c=='L') ? cnt++ : cnt-- ;
-        if(!cnt) res++;
-    }
-    return res;
-}
-
 int LC1154::dayOfYear(string date) {
     // 这里唯一的难点就是判断闰年了吧。先用个数组列出非闰年各个月的天数，然后分别从给定 date 字符串中提取出年月日，并转为整型数。然后将当前月
     // 之前的天数都累加到结果 res 中，接下来判断当前月是否大于2月，没有的话都不用判断闰年了。超过了2月就要判断当前年是否是闰年，判断方法很简
@@ -172,23 +158,6 @@ string LC1021::removeOuterParentheses(string s) {
 //        start = i+1;
 //    }
 //    return res;
-}
-
-vector<int> LC0942::diStringMatch(string s) {
-    // 这道题给了一个只有 'D' 和 'I' 两个字母组成的字符串，表示一种 pattern，其中 'D' 表示需要下降 Decrease，即当前数字大于下个数字，
-    // 同理，'i' 表示需要上升 Increase，即当前数字小于下个数字，让返回符合这个要求的任意一个数组，还有个要求是该数组必须是 [0, n]
-    // 之间的所有数字的一种全排列，其中n是给定 pattern 字符串的长度。这表明了返回数组不能有重复数字，这里一会上升一会下降的，很容易产生重复
-    // 数字，难不成还要不停的检测是否有重复数字么，不，这样太麻烦了，必须想一种生成方法来保证绝对不会有重复数字。对于上升来说，可以从0开始累
-    // 加，而对于下降来说，则可以从n开始下降，这样保证了在结束之前二者绝不会相遇，到最后一个数字的时候二者相同，再将这个相同数字加入即可，
-    // 因为返回的数组的个数始终会比给定字符串长度大1个
-    vector<int> res;
-    int l=0, r=s.size();
-    for(auto &c:s) {
-        if(c == 'I') res.push_back(l++);
-        else res.push_back(r--);
-    }
-    res.push_back(l);
-    return res;
 }
 
 vector<string> LC0937::reorderLogFiles(vector<string>& logs) {

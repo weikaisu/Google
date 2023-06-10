@@ -278,8 +278,6 @@ struct LC0500 { vector<string> findWords(vector<string>& words); };
 struct LC0496 { vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2); };
 /*找出1～n的陣列裡消失的那"些"數字*/
 struct LC0448 { vector<int> findDisappearedNumbers(vector<int>& nums); };
-/*回傳能建立最長的回文字串長度*/
-struct LC0409 { int longestPalindrome(string s); };
 /*把字串裡的母音對調*/
 struct LC0345 { string reverseVowels(string s); };
 /*判斷隨機加入字串的字符為何*/
@@ -328,7 +326,6 @@ struct LC0896 { bool isMonotonic(vector<int>& nums); };
 struct LC0892 { int surfaceArea(vector<vector<int>>& grid); };
 struct LC0883 { int projectionArea(vector<vector<int>>& grid); };
 struct LC0867 { vector<vector<int>> transpose(vector<vector<int>>& matrix); };
-struct LC0860 { bool lemonadeChange(vector<int>& bills); };
 /*有backspace字符的兩list是否是相同的字串*/
 struct LC0844 { bool backspaceCompare(string s, string t); };
 struct LC0832 { vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image); };
@@ -342,13 +339,9 @@ struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
 struct LC0766 { bool isToeplitzMatrix(vector<vector<int>>& matrix); };
 struct LC0724 { int pivotIndex(vector<int>& nums); };
 struct LC0682 { int calPoints(vector<string>& operations); };
-/*頂多刪一字符可成回文*/
-struct LC0680 { bool validPalindrome(string s); };
 struct LC0674 { int findLengthOfLCIS(vector<int>& nums); };
 struct LC0661 { vector<vector<int>> imageSmoother(vector<vector<int>>& img); };
 struct LC0643 { double findMaxAverage(vector<int>& nums, int k); };
-/*01陣列裡是否可以插入指定1的數量*/
-struct LC0605 { bool canPlaceFlowers(vector<int>& flowerbed, int n); };
 /*在一系列操作後，二為陣列裡最大數的個數*/
 struct LC0598 { int maxCount(int m, int n, vector<vector<int>>& ops); };
 /*重塑矩陣大小*/

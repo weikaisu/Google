@@ -12,8 +12,6 @@ using namespace std;
 /***********  Easy  **********/
 /*字串替換*/
 struct LC1309 { string freqAlphabets(string s); };
-/*給定字串最多能切分出多少個平衡字串*/
-struct LC1221 { int balancedStringSplit(string s); };
 /*將日期換算成一年的第幾天*/
 struct LC1154 { int dayOfYear(string date); };
 /*將IP裡的.換成指定字串*/
@@ -26,8 +24,6 @@ struct LC1071 { string gcdOfStrings(string str1, string str2); };
 struct LC1047 { string removeDuplicates(string s); };
 /*把所有合法的子串的最外层的括号去掉*/
 struct LC1021 { string removeOuterParentheses(string s); };
-/*根據字符規定返回整數陣列*/
-struct LC0942 { vector<int> diStringMatch(string s); };
 /*排序log裡的字串*/
 struct LC0937 { vector<string> reorderLogFiles(vector<string>& logs); };
 /*某一單字是否是因為另一單字的字符長按的結果*/

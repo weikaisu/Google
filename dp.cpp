@@ -86,6 +86,20 @@ int LC0053::maxSubArray(vector<int>& nums) {
 }
 
 /***********  Greedy  **********/
+int LC1221::balancedStringSplit(string s) {
+    // 这道题给了一个只有L和R两个字符的字符串，并且定义了一种平衡字符串，即L和R的个数相同，现在问最多能将字符串分为多少个这样的平衡字符串。
+    // 博主看到这题以后第一反应就觉得这是一道验证合法括号个数的题目，就像之前的那道 Valid Parentheses，这里的L就可以看作是左括号，R可以看
+    // 作是右括号，其实这道题比验证合法括号更简单一些，因为合法括号不仅仅需要左右括号个数相同，而且任何时候右括号的个数不能多于左括号，而这道
+    // 题并没有这个限制。这里只需要一个 cnt 变量来记录L的个数，遇到L则 cnt 自增1，遇到R则 cnt 自减1。每次检测一下，若某个状态 cnt 为0了，
+    // 则说明此时L和R个数相等了，结果 res 自增1即可
+    int res = 0, cnt = 0;
+    for(auto &c:s) {
+        (c=='L') ? cnt++ : cnt-- ;
+        if(!cnt) res++;
+    }
+    return res;
+}
+
 bool LC1013::canThreePartsEqualSum(vector<int>& arr) {
     // 给了我们一个数组，问能不能将该数组分成非空的三个部分，且每个部分的和相同。其实就是分成三个子数组，既然每个部分的和相同，说明数组的数字
     // 总和一定是3的倍数，若不是，则一定无法分。先求出数组的数字之和，除以3就是每个部分之和 target，然后进行数组的遍历，用一个变量 cur 来累
@@ -104,6 +118,99 @@ bool LC1013::canThreePartsEqualSum(vector<int>& arr) {
         }
     }
     return cnt>=3;
+}
+
+int LC1005::largestSumAfterKNegations(vector<int>& nums, int k) {
+    // Given an integer array nums and an integer k, modify the array in the following way:
+    // choose an index i and replace nums[i] with -nums[i].
+    // You should apply this process exactly k times. You may choose the same index i multiple times.
+    // Return the largest possible sum of the array after modifying it in this way.
+    // Input: nums = [4,2,3], k = 1
+    // Output: 5
+    // Explanation: Choose index 1 and nums becomes [4,-2,3].
+    // Example 2:
+    // Input: nums = [3,-1,0,2], k = 3
+    // Output: 6
+    // Explanation: Choose indices (1, 2, 2) and nums becomes [3,1,0,2].
+    // Example 3:
+    // Input: nums = [2,-3,-1,5,-4], k = 2
+    // Output: 13
+    // Explanation: Choose indices (1, 4) and nums becomes [2,3,-1,5,4].
+    // 先给数组排个序，这样所有的负数都在数组的前面了，然后此时将前K个负数翻转成正数，注意只是翻转负数，若负数的个数小于K，也不会翻转多余的正
+    // 数。然后此时遍历数组，求数组之后，并且求此时数组中最小的数字，此时K还是有奇偶两种情况，当K是偶数的时候（包括0），直接返回数组之和，
+    // 若是奇数的时候，此时说明数组中的负数已经全部翻转为了正数，那么最小的数也就是绝对值最小的数，减去其的2倍即可
+    int res = 0, min=INT_MAX;
+
+    std::sort(nums.begin(), nums.end());
+    for(int i=0; k && i<nums.size() && nums[i]<0; i++, k--)
+        nums[i] = -nums[i];
+    for(auto &num:nums) {
+        res += num;
+        min = std::min(min, num);
+    }
+    return res - (k%2)*2*min;
+}
+
+int LC0976::largestPerimeter(vector<int>& nums) {
+    // Given an integer array nums, return the largest perimeter of a triangle with a non-zero area,
+    // formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, return 0.
+    // Input: nums = [2,1,2]
+    // Output: 5
+    // Input: nums = [1,2,1]
+    // Output: 0
+    // 三角形任意兩邊的和大於第三邊，任意兩邊的差小於第三邊。
+    // 先把nums排序過，從最大的三個值開始檢查是否符合三角形邊長規則，若否則遞減一值
+
+    // 给了个正整数数组，让从中选三个数当作三角形的三条边，问能组成的三角形的最大周长是多少。因为要组成三角形，所以必须要满足两边之和大于
+    // 第三边这一条性质，我们并不用去检测所有的组合情况，而是只要判断较短的两边之和是否大于最长的那条边就可以了。虽然这道是 Easy 题目，但
+    // 是 OJ 仍然不让用暴力搜索法，遍历任意三条边是会超时的。所以只能想优化的解法，既然要周长最长，则肯定是选较大的数字先测比较好。这里就
+    // 先给数组排个序，然后从末尾开始，每次取出三个数字，先检测能否组成三角形，可以的话直接返回周长，不行的话就继续往前取，若都不行的话，就
+    // 返回0
+    std::sort(nums.begin(), nums.end());
+    for(int i=nums.size()-1; i>=2; i--)
+        if(nums[i] < nums[i-1] + nums[i-2])
+            return nums[i] + nums[i-1] + nums[i-2];
+    return 0;
+}
+
+vector<int> LC0942::diStringMatch(string s) {
+    // 这道题给了一个只有 'D' 和 'I' 两个字母组成的字符串，表示一种 pattern，其中 'D' 表示需要下降 Decrease，即当前数字大于下个数字，
+    // 同理，'i' 表示需要上升 Increase，即当前数字小于下个数字，让返回符合这个要求的任意一个数组，还有个要求是该数组必须是 [0, n]
+    // 之间的所有数字的一种全排列，其中n是给定 pattern 字符串的长度。这表明了返回数组不能有重复数字，这里一会上升一会下降的，很容易产生重复
+    // 数字，难不成还要不停的检测是否有重复数字么，不，这样太麻烦了，必须想一种生成方法来保证绝对不会有重复数字。对于上升来说，可以从0开始累
+    // 加，而对于下降来说，则可以从n开始下降，这样保证了在结束之前二者绝不会相遇，到最后一个数字的时候二者相同，再将这个相同数字加入即可，
+    // 因为返回的数组的个数始终会比给定字符串长度大1个
+    vector<int> res;
+    int l=0, r=s.size();
+    for(auto &c:s) {
+        if(c == 'I') res.push_back(l++);
+        else res.push_back(r--);
+    }
+    res.push_back(l);
+    return res;
+}
+
+bool LC0860::lemonadeChange(vector<int>& bills) {
+    // 这道题说是有很多柠檬，每个卖5刀，顾客可能会提供5刀，10刀，20刀的钞票，我们刚开始的时候并没有零钱，只有收到顾客的5刀，或者 10 刀可以
+    // 来给顾客找钱，当然如果第一个顾客就给 10 刀或者 20 刀，那么是无法找零的，这里就问最终是否能够都成功找零。
+    // 只关心当前还剩余的5刀和 10 刀钞票的个数，用两个变量 five 和 ten 来记录。然后遍历所有的钞票，假如遇到5刀钞票，则 five 自增1，若遇
+    // 到 10 刀钞票，则需要找零5刀，则 five 自减1，ten 自增1。否则遇到的就是 20 刀的了，若还有 10 刀的钞票话，就先用 10 刀找零，则 ten
+    // 自减1，再用一张5刀找零，five 自减1。若没有 10 刀了，则用三张5刀找零，five 自减3。找零了后检测若此时5刀钞票个数为负数了，则直接返
+    // 回 false
+    int five=0, ten=0;
+    for(auto &bill:bills) {
+        if(bill == 5) five++;
+        else if(bill == 10) {
+            five--;
+            ten++;
+        }
+        else if(bill == 20) {
+            if(ten > 0) { ten--; five--; }
+            else { five-=3;}
+        }
+        if(five < 0) return false;
+    }
+    return true;
 }
 
 bool LC0717::isOneBitCharacter(vector<int>& bits) {
@@ -135,6 +242,44 @@ bool LC0717::isOneBitCharacter(vector<int>& bits) {
 //        return fun(i+2);
 //    };
 //    return fun(0);
+}
+
+bool LC0680::validPalindrome(string s) {
+    // 这道题的字符串中只含有小写字母，而且这道题允许删除一个字符，那么当遇到不匹配的时候，我们到底是删除左边的字符，还是右边的字符呢，
+    // 我们的做法是两种情况都要算一遍，只要有一种能返回true，那么结果就返回true。我们可以写一个子函数来判断字符串中的某一个范围内的
+    // 子字符串是否为回文串
+    auto isValid = [](string &s, int l, int r) {
+        while(l<r)
+            if(s[l++]!=s[r--]) return false;
+        return true;
+    };
+
+    int l=0, r=s.size()-1;
+    while(l<r) {
+        if(s[l]!=s[r])
+            return isValid(s, l+1, r) || isValid(s, l, r-1);
+        l++; r--;
+    }
+    return true;
+}
+
+bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {
+    // 这道题给了我们一个01数组，其中1表示已经放了花，0表示可以放花的位置，但是有个限制条件是不能有相邻的花。那么我们来看如果是一些简单的例
+    // 子，如果有3个连续的零，000，能放几盆花呢，其实是要取决约左右的位置的，如果是10001，那么只能放1盆，如果左右是边界的花，那么就能放
+    // 两盆，101。可以直接通过修改flowerbed的值来做，我们遍历花床，如果某个位置为0，我们就看其前面一个和后面一个位置的值，注意处理首位置和
+    // 末位置的情况，如果pre和next均为0，那么说明当前位置可以放花，我们修改flowerbed的值，并且n自减1，最后看n是否小于等于0
+    for(int i=0; i<flowerbed.size(); i++) {
+        if(!n) return true;
+        if(!flowerbed[i]) {
+            int pre = (!i) ? 0 : flowerbed[i-1];
+            int nxt = (i==flowerbed.size()-1) ? 0 : flowerbed[i+1];
+            if(pre+nxt == 0) {
+                flowerbed[i]=1;
+                n--;
+            }
+        }
+    }
+    return n<=0;
 }
 
 int LC0561::arrayPairSum(vector<int>& nums) {
@@ -172,4 +317,15 @@ int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
     for(int i=0; i<s.size() && j<g.size(); i++)
         if(s[i]>=g[j]) j++;
     return j;
+}
+
+int LC0409::longestPalindrome(string s) {
+    array<int,128> map; map.fill(0);
+    int even=0, odd=0;
+    for(auto c:s) ++map[c];
+    for(auto v:map) {
+        even += v&(~1); // 清掉last bit取得偶數值，累計多少偶數；
+        odd  |= v&( 1); // 看是否有積數值可作為回文中間那一char
+    }
+    return even+odd;
 }

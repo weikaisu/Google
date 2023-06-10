@@ -14,13 +14,26 @@ struct LC0070 { int climbStairs(int n); };
 struct LC0053 { int maxSubArray(vector<int>& nums); };
 
 //Greedy
+/*給定字串最多能切分出多少個平衡字串*/
+struct LC1221 { int balancedStringSplit(string s); };
 struct LC1013 { bool canThreePartsEqualSum(vector<int>& arr); };
+struct LC1005 { int largestSumAfterKNegations(vector<int>& nums, int k);};
+struct LC0976 { int largestPerimeter(vector<int>& nums); };
+/*根據字符規定返回整數陣列*/
+struct LC0942 { vector<int> diStringMatch(string s); };
+struct LC0860 { bool lemonadeChange(vector<int>& bills); };
 struct LC0717 { bool isOneBitCharacter(vector<int>& bits); };
+/*頂多刪一字符可成回文*/
+struct LC0680 { bool validPalindrome(string s); };
+/*01陣列裡是否可以插入指定1的數量*/
+struct LC0605 { bool canPlaceFlowers(vector<int>& flowerbed, int n); };
 /*求兩兩一對較小數的和最大*/
 struct LC0561 { int arrayPairSum(vector<int>& nums); };
 /*被攻擊後持續中毒的秒數*/
 struct LC0495 { int findPoisonedDuration(vector<int>& timeSeries, int duration); };
 /*分發糖果給小孩*/
 struct LC0455 { int findContentChildren(vector<int>& g, vector<int>& s); };
+/*回傳能建立最長的回文字串長度*/
+struct LC0409 { int longestPalindrome(string s); };
 
 #endif //GOOGLE_DP_H

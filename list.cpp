@@ -459,17 +459,6 @@ vector<int> LC0448::findDisappearedNumbers(vector<int>& nums) {
     return res;
 }
 
-int LC0409::longestPalindrome(string s) {
-    array<int,128> map; map.fill(0);
-    int even=0, odd=0;
-    for(auto c:s) ++map[c];
-    for(auto v:map) {
-        even += v&(~1); // 清掉last bit取得偶數值，累計多少偶數；
-        odd  |= v&( 1); // 看是否有積數值可作為回文中間那一char
-    }
-    return even+odd;
-}
-
 string LC0345::reverseVowels(string s) {
     // 如果两边都是元音字母，那么我们交换
     // 然後還剩下其中一個是，或兩邊都不是
@@ -969,29 +958,6 @@ vector<vector<int>> LC0867::transpose(vector<vector<int>>& matrix) {
     return res;
 }
 
-bool LC0860::lemonadeChange(vector<int>& bills) {
-    // 这道题说是有很多柠檬，每个卖5刀，顾客可能会提供5刀，10刀，20刀的钞票，我们刚开始的时候并没有零钱，只有收到顾客的5刀，或者 10 刀可以
-    // 来给顾客找钱，当然如果第一个顾客就给 10 刀或者 20 刀，那么是无法找零的，这里就问最终是否能够都成功找零。
-    // 只关心当前还剩余的5刀和 10 刀钞票的个数，用两个变量 five 和 ten 来记录。然后遍历所有的钞票，假如遇到5刀钞票，则 five 自增1，若遇
-    // 到 10 刀钞票，则需要找零5刀，则 five 自减1，ten 自增1。否则遇到的就是 20 刀的了，若还有 10 刀的钞票话，就先用 10 刀找零，则 ten
-    // 自减1，再用一张5刀找零，five 自减1。若没有 10 刀了，则用三张5刀找零，five 自减3。找零了后检测若此时5刀钞票个数为负数了，则直接返
-    // 回 false
-    int five=0, ten=0;
-    for(auto &bill:bills) {
-        if(bill == 5) five++;
-        else if(bill == 10) {
-            five--;
-            ten++;
-        }
-        else if(bill == 20) {
-            if(ten > 0) { ten--; five--; }
-            else { five-=3;}
-        }
-        if(five < 0) return false;
-    }
-    return true;
-}
-
 bool LC0844::backspaceCompare(string s, string t) {
     // 我们使用常数级的空间复杂度，就是说不能新建空的字符串来保存处理之后的结果，那么只能在遍历的过程中同时进行比较，只能使用双指针同时
     // 遍历S和T串了。我们采用从后往前遍历，因为退格是要删除前面的字符，所以倒序遍历要好一些。用变量i和j分别指向S和T串的最后一个字符的位置，
@@ -1161,25 +1127,6 @@ int LC0682::calPoints(vector<string>& operations) {
     return std::accumulate(v.begin(), v.end(), 0);
 }
 
-bool LC0680::validPalindrome(string s) {
-    // 这道题的字符串中只含有小写字母，而且这道题允许删除一个字符，那么当遇到不匹配的时候，我们到底是删除左边的字符，还是右边的字符呢，
-    // 我们的做法是两种情况都要算一遍，只要有一种能返回true，那么结果就返回true。我们可以写一个子函数来判断字符串中的某一个范围内的
-    // 子字符串是否为回文串
-    auto isValid = [](string &s, int l, int r) {
-        while(l<r)
-            if(s[l++]!=s[r--]) return false;
-        return true;
-    };
-
-    int l=0, r=s.size()-1;
-    while(l<r) {
-        if(s[l]!=s[r])
-            return isValid(s, l+1, r) || isValid(s, l, r-1);
-        l++; r--;
-    }
-    return true;
-}
-
 bool LC0657::judgeCircle(string moves) {
     // 使用了哈希表来建立字符和其出现的次数之间的映射，最后直接比较对应的字符出现的次数是否相等即可
     array<int,26> map; map.fill(0);
@@ -1266,25 +1213,6 @@ double LC0643::findMaxAverage(vector<int>& nums, int k) {
         res = std::max(res, sum);
     }
     return res/k;
-}
-
-bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {
-    // 这道题给了我们一个01数组，其中1表示已经放了花，0表示可以放花的位置，但是有个限制条件是不能有相邻的花。那么我们来看如果是一些简单的例
-    // 子，如果有3个连续的零，000，能放几盆花呢，其实是要取决约左右的位置的，如果是10001，那么只能放1盆，如果左右是边界的花，那么就能放
-    // 两盆，101。可以直接通过修改flowerbed的值来做，我们遍历花床，如果某个位置为0，我们就看其前面一个和后面一个位置的值，注意处理首位置和
-    // 末位置的情况，如果pre和next均为0，那么说明当前位置可以放花，我们修改flowerbed的值，并且n自减1，最后看n是否小于等于0
-    for(int i=0; i<flowerbed.size(); i++) {
-        if(!n) return true;
-        if(!flowerbed[i]) {
-            int pre = (!i) ? 0 : flowerbed[i-1];
-            int nxt = (i==flowerbed.size()-1) ? 0 : flowerbed[i+1];
-            if(pre+nxt == 0) {
-                flowerbed[i]=1;
-                n--;
-            }
-        }
-    }
-    return n<=0;
 }
 
 int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {

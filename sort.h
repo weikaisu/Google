@@ -34,9 +34,7 @@ struct LC1200 { vector<vector<int>> minimumAbsDifference(vector<int>& arr); };
 // struct LC1122 { vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2); } // list.h
 struct LC1051 { int heightChecker(vector<int>& heights); };
 struct LC1030 { vector<vector<int>> allCellsDistOrder(int rows, int cols, int rCenter, int cCenter); };
-struct LC1005 { int largestSumAfterKNegations(vector<int>& nums, int k);};
 struct LC0977 { vector<int> sortedSquares(vector<int>& nums); };
-struct LC0976 { int largestPerimeter(vector<int>& nums); };
 struct LC0922 { vector<int> sortArrayByParityII(vector<int>& nums); };
 struct LC0905 { vector<int> sortArrayByParity(vector<int>& nums); };
 // struct LC0888 { vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes); }; // list.h

@@ -398,37 +398,6 @@ vector<vector<int>> LC1030::allCellsDistOrder(int rows, int cols, int rCenter, i
     return res;
 }
 
-int LC1005::largestSumAfterKNegations(vector<int>& nums, int k) {
-    // Given an integer array nums and an integer k, modify the array in the following way:
-    // choose an index i and replace nums[i] with -nums[i].
-    // You should apply this process exactly k times. You may choose the same index i multiple times.
-    // Return the largest possible sum of the array after modifying it in this way.
-    // Input: nums = [4,2,3], k = 1
-    // Output: 5
-    // Explanation: Choose index 1 and nums becomes [4,-2,3].
-    // Example 2:
-    // Input: nums = [3,-1,0,2], k = 3
-    // Output: 6
-    // Explanation: Choose indices (1, 2, 2) and nums becomes [3,1,0,2].
-    // Example 3:
-    // Input: nums = [2,-3,-1,5,-4], k = 2
-    // Output: 13
-    // Explanation: Choose indices (1, 4) and nums becomes [2,3,-1,5,4].
-    // 先给数组排个序，这样所有的负数都在数组的前面了，然后此时将前K个负数翻转成正数，注意只是翻转负数，若负数的个数小于K，也不会翻转多余的正
-    // 数。然后此时遍历数组，求数组之后，并且求此时数组中最小的数字，此时K还是有奇偶两种情况，当K是偶数的时候（包括0），直接返回数组之和，
-    // 若是奇数的时候，此时说明数组中的负数已经全部翻转为了正数，那么最小的数也就是绝对值最小的数，减去其的2倍即可
-    int res = 0, min=INT_MAX;
-
-    std::sort(nums.begin(), nums.end());
-    for(int i=0; k && i<nums.size() && nums[i]<0; i++, k--)
-        nums[i] = -nums[i];
-    for(auto &num:nums) {
-        res += num;
-        min = std::min(min, num);
-    }
-    return res - (k%2)*2*min;
-}
-
 vector<int> LC0977::sortedSquares(vector<int>& nums) {
     // Given an integer array nums sorted in non-decreasing order, return an array of the squares of each
     // number sorted in non-decreasing order.
@@ -452,28 +421,6 @@ vector<int> LC0977::sortedSquares(vector<int>& nums) {
 //        num*=num;
 //    std::sort(nums.begin(), nums.end());
 //    return nums;
-}
-
-int LC0976::largestPerimeter(vector<int>& nums) {
-    // Given an integer array nums, return the largest perimeter of a triangle with a non-zero area,
-    // formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, return 0.
-    // Input: nums = [2,1,2]
-    // Output: 5
-    // Input: nums = [1,2,1]
-    // Output: 0
-    // 三角形任意兩邊的和大於第三邊，任意兩邊的差小於第三邊。
-    // 先把nums排序過，從最大的三個值開始檢查是否符合三角形邊長規則，若否則遞減一值
-
-    // 给了个正整数数组，让从中选三个数当作三角形的三条边，问能组成的三角形的最大周长是多少。因为要组成三角形，所以必须要满足两边之和大于
-    // 第三边这一条性质，我们并不用去检测所有的组合情况，而是只要判断较短的两边之和是否大于最长的那条边就可以了。虽然这道是 Easy 题目，但
-    // 是 OJ 仍然不让用暴力搜索法，遍历任意三条边是会超时的。所以只能想优化的解法，既然要周长最长，则肯定是选较大的数字先测比较好。这里就
-    // 先给数组排个序，然后从末尾开始，每次取出三个数字，先检测能否组成三角形，可以的话直接返回周长，不行的话就继续往前取，若都不行的话，就
-    // 返回0
-    std::sort(nums.begin(), nums.end());
-    for(int i=nums.size()-1; i>=2; i--)
-        if(nums[i] < nums[i-1] + nums[i-2])
-            return nums[i] + nums[i-1] + nums[i-2];
-    return 0;
 }
 
 vector<int> LC0922::sortArrayByParityII(vector<int>& nums) {
