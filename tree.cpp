@@ -491,6 +491,100 @@ bool LC0653::findTarget(TreeNode* root, int k) {
     return false;
 }
 
+vector<int> LC0501::findMode(TreeNode* root) {
+    // 求二分搜索树中的众数，这里定义的二分搜索树中左根右结点之间的关系是小于等于的，有些题目中是严格小于的，所以一定要看清题目要求。所谓的
+    // 众数就是出现最多次的数字，可以有多个，那么这道题比较直接点思路就是利用一个哈希表来记录数字和其出现次数之前的映射，然后维护一个变量mx
+    // 来记录当前最多的次数值，这样在遍历完树之后，根据这个mx值就能把对应的元素找出来。那么用这种方法的话就不需要用到二分搜索树的性质了，随
+    // 意一种遍历方式都可以
+    // recursive way
+//    vector<int> res;
+//    int mode = INT_MIN;
+//    unordered_map<int, int> map;
+//    function<void(TreeNode*)> fun = [&](TreeNode* node) {
+//        if(node == nullptr) return node;
+//        fun(node->left);
+//        ++map[node->val];
+//        mode = std::max(mode, map[node->val]);
+//        fun(node->right);
+//        return node;
+//    };
+//    fun(root);
+//    for(auto &m:map)
+//        if(m.second == mode)
+//            res.push_back(m.first);
+//    return res;
+
+    // iterative way
+//    if(root == nullptr) return {};
+//    vector<int> res;
+//    int mode=INT_MIN;
+//    unordered_map<int, int> map;
+//    stack<TreeNode*> s;
+//    TreeNode* p=root;
+//    while(s.size() || p) {
+//        while(p) {
+//            s.push(p);
+//            p = p->left;
+//        }
+//        p = s.top(); s.pop();
+//        ++map[p->val];
+//        mode = std::max(mode, map[p->val]);
+//        p = p->right;
+//    }
+//    for(auto &m:map)
+//        if(m.second == mode)
+//            res.push_back(m.first);
+//    return res;
+
+    // 题目中的follow up说了让我们不用除了递归中的隐含栈之外的额外空间，那么我们就不能用哈希表了，不过这也不难，由于是二分搜索树，那么我们
+    // 中序遍历出来的结果就是有序的，这样我们只要比较前后两个元素是否相等，就等统计出现某个元素出现的次数，因为相同的元素肯定是都在一起的。我
+    // 们需要一个结点变量pre来记录上一个遍历到的结点，然后mx还是记录最大的次数，cnt来计数当前元素出现的个数，我们在中序遍历的时候，如果pre
+    // 不为空，说明当前不是第一个结点，我们和之前一个结点值比较，如果相等，cnt自增1，如果不等，cnt重置1。如果此时cnt大于了mx，那么我们清空
+    // 结果res，并把当前结点值加入结果res，如果cnt等于mx，那我们直接将当前结点值加入结果res，然后mx赋值为cnt。最后我们要把pre更新为当前结点
+    // recursive way
+//    vector<int> res;
+//    int mode=INT_MIN, cnt=1;
+//    TreeNode* pre=nullptr;
+//    function<void(TreeNode*)> fun = [&](TreeNode* node) {
+//        if(node == nullptr) return;
+//        fun(node->left);
+//        if(pre)
+//            cnt = (node->val == pre->val) ? cnt+1 : 1;
+//        if(cnt >= mode) {
+//            if(cnt > mode) res.clear();
+//            res.push_back(node->val);
+//            mode = cnt;
+//        }
+//        pre = node;
+//        fun(node->right);
+//    };
+//    fun(root);
+//    return res;
+
+    // iterative way
+    vector<int> res;
+    int mode=INT_MIN, cnt=1;
+    TreeNode *pre=nullptr, *p=root;
+    stack<TreeNode*> s;
+    while(s.size() || p) {
+        while(p) {
+            s.push(p);
+            p = p->left;
+        }
+        p = s.top(); s.pop();
+        if(pre)
+            cnt = (p->val == pre->val) ? cnt+1 : 1;
+        if(cnt >= mode) {
+            if(cnt > mode) res.clear();
+            res.push_back(p->val);
+            mode = cnt;
+        }
+        pre = p;
+        p = p->right;
+    }
+    return res;
+}
+
 TreeNode* LC0108::sortedArrayToBST(vector<int>& nums) {
     // 将有序数组转为二叉搜索树，所谓二叉搜索树，是一种始终满足左<根<右的特性，如果将二叉搜索树按中序遍历的话，得到的就是一个有序数组了。那么
     // 反过来，我们可以得知，根节点应该是有序数组的中间点，从中间点分开为左右两个有序数组，在分别找出其中间点作为原中间点的左右两个子节点，这
