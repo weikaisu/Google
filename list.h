@@ -316,6 +316,7 @@ struct LC0026 { int removeDuplicates(vector<int>& nums); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
 // Array List
+struct LC1184 { int distanceBetweenBusStops(vector<int>& distance, int start, int destination); };
 struct LC1089 { void duplicateZeros(vector<int>& arr); };
 struct LC1018 { vector<bool> prefixesDivBy5(vector<int>& nums); };
 struct LC0989 { vector<int> addToArrayForm(vector<int>& num, int k); };

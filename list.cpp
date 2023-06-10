@@ -755,6 +755,30 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
  *          array[y][x]
  */
 
+int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destination) {
+    // 有n个公交站形成了一个环，它们之间的距离用一个数组 distance 表示，其中 distance[i] 表示公交站i和 (i+1)%n 之间的距离。说是公交可以
+    // 顺时针和逆时针的开，问给定的任意起点和终点之间的最短距离。对于一道 Easy 题的身价，没有太多的技巧而言，主要就是考察了一个循环数组，求任
+    // 意两个点之间的距离，由于两个方向都可以到达，那么两个方向的距离加起来就正好是整个数组之和，所以只要求出一个方向的距离，另一个用总长度减
+    // 去之前的距离就可以得到。所以这里先求出所有数字之和，然后要求出其中一个方向的距离，由于处理循环数组比较麻烦，所以这里希望 start 小于
+    // destination，可以从二者之间的较小值遍历到较大值，累加距离之和，然后比较这个距离和，跟总距离减去该距离所得结果之间的较小值返回即可
+//    int sum = std::accumulate(distance.begin(), distance.end(), 0);
+//    int dis = 0;
+//    for(int i=std::min(start, destination); i<std::max(start,destination); ++i)
+//        dis += distance[i];
+//    return std::min(dis, sum-dis);
+
+    // 只要一次遍历就可以完成，因为最终都要是要遍历所有的站点距离，当这个站点在 [start, destination) 范围内，就累加到 sum1 中，否则就
+    // 累加到 sum2 中。不过要要注意的是要确保 start 小于 destination，所以可以开始做个比较，若不满足则交换二者。最终返回 sum1 和
+    // sum2 中较小者即可
+    int sum1=0, sum2=0, n=distance.size();
+    if(start > destination) std::swap(start, destination);
+    for(int i=0; i<n; ++i) {
+        if(i>=start && i<destination) sum1 += distance[i];
+        else sum2 += distance[i];
+    }
+    return std::min(sum1, sum2);
+}
+
 void LC1089::duplicateZeros(vector<int>& arr) {
     // 这道题给了一个数字数组，让将每个0都复制一个，然后将数字右移一位，数组的长度还是保持不变，右移出范围的数字就移除掉。这不是一道难题，比较
     // 直接的做法就是新建一个结果数组 res，然后遍历给定数组 arr，for 循环条件加上一个 res 的长度小于n，将当前遍历到的数字加入 res，然后判
