@@ -446,6 +446,41 @@ vector<int> LC0094::inorderTraversal(TreeNode* root) {
 }
 
 /***********  Binary Search Tree  **********/
+int LC0783::minDiffInBST(TreeNode* root) {
+    // the same as LC0530
+    // recursive way
+//    int mn=INT_MAX;
+//    TreeNode* pre=nullptr;
+//    function<void(TreeNode*)> fun = [&](TreeNode* node) {
+//        if(node == nullptr) return;
+//        fun(node->left);
+//        if(pre)
+//            mn = std::min(mn, node->val - pre->val);
+//        pre = node;
+//        fun(node->right);
+//    };
+//    fun(root);
+//    return mn;
+
+    // iterative way
+    int mn=INT_MAX;
+    TreeNode *pre=nullptr, *p=root;
+    stack<TreeNode*> s;
+    while(s.size() || p) {
+        while(p) {
+            s.push(p);
+            p = p->left;
+        }
+        p = s.top(); s.pop();
+        if(pre)
+            mn = std::min(mn, p->val - pre->val);
+        pre = p;
+        p = p->right;
+    }
+    return mn;
+
+}
+
 TreeNode* LC0700::searchBST(TreeNode* root, int val) {
     // 这道题让我们搜索一个二叉搜索树，既然是二叉搜索树，而不是普通的二叉树，那么我们肯定要利用二叉搜索树特定的性质来解题，即左<根<右。那么就
     // 是说任意一个结点的左子树中的所有结点均小于当前结点，其右子树中的所有结点均大于当前结点。那么这不就是一个天然的二分么，当仁不让的二分搜
