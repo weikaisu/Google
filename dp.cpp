@@ -100,6 +100,34 @@ int LC1221::balancedStringSplit(string s) {
     return res;
 }
 
+int LC1217::minCostToMoveChips(vector<int>& position) {
+    // 有一堆筹码，第i个筹码所在的位置是 position[i]，现在需要将所有的筹码移动到一摞，规则是：左右移动两个位置没有 cost，左右移动一个位置
+    // 需要花费1个 cost，问移动到同一摞需要的最少花费是多少。最终结果位置必定在某一个已经存在的筹码的位置，那么这里其实就可以遍历所有给定筹
+    // 码的位置，然后统计每个位置的花费。但其实这里还可以进一步优化，若有很多筹码都在同一个位置，那么显然按筹码遍历就不是很高效了，因为同一摞
+    // 的筹码可以一起移动，则花费可以一起计算。这里用一个 HashMap 统计每个位置上的筹码个数，这样就可以把相同位置上的筹码摞到一起了。然后就可
+    // 以遍历每一个位置了，对于遍历到的位置，再遍历其他所有的位置，统计花费，这样只要找到距离目标奇数位置，就可以把整个一摞的花费一起加上了。
+    // 最后每次更新结果 res 即可
+//    unordered_map<int, int> posCnt;
+//    int res=INT_MAX;
+//    for(int &p:position) ++posCnt[p];
+//    for(auto &a:posCnt) {
+//        int sum=0;
+//        for(auto &b:posCnt) {
+//            if((b.first-a.first)%2 == 0) continue;
+//            sum += b.second;
+//        }
+//        res = std::min(res, sum);
+//    }
+//    return res;
+
+    // 因为距离为偶数的筹码可以事先移动到一摞，而所有奇数位置的筹码互相之间都是相距偶数的距离，所有偶数位置的筹码互相之间也都是相距偶数的距离。
+    // 这样所有筹码就可以在花费为0的情况下归为相邻的两大摞，则总花费其实就是个数较小的那一摞
+    int odd=0, even=0;
+    for(int &p:position)
+        (p & 1) ? ++odd : ++even;
+    return std::min(odd, even);
+}
+
 bool LC1013::canThreePartsEqualSum(vector<int>& arr) {
     // 给了我们一个数组，问能不能将该数组分成非空的三个部分，且每个部分的和相同。其实就是分成三个子数组，既然每个部分的和相同，说明数组的数字
     // 总和一定是3的倍数，若不是，则一定无法分。先求出数组的数字之和，除以3就是每个部分之和 target，然后进行数组的遍历，用一个变量 cur 来累

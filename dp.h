@@ -16,6 +16,7 @@ struct LC0053 { int maxSubArray(vector<int>& nums); };
 //Greedy
 /*給定字串最多能切分出多少個平衡字串*/
 struct LC1221 { int balancedStringSplit(string s); };
+struct LC1217 { int minCostToMoveChips(vector<int>& position); };
 struct LC1013 { bool canThreePartsEqualSum(vector<int>& arr); };
 struct LC1005 { int largestSumAfterKNegations(vector<int>& nums, int k);};
 struct LC0976 { int largestPerimeter(vector<int>& nums); };
