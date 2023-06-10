@@ -460,21 +460,48 @@ int LC0938::rangeSumBST(TreeNode* root, int low, int high) {
 }
 
 TreeNode* LC0897::increasingBST(TreeNode* root) {
-    TreeNode *head=nullptr, *pre=nullptr;
-    function<void(TreeNode*)> fun = [&](TreeNode* node) {
-        if(node == nullptr) return;
-        fun(node->left);
-        if(pre != nullptr) {
-            pre->right = node;
-            pre = pre->right;
-        } else {
-            pre = node;
-            head = pre;
+    // 给了一棵二叉树，让我们对其进行重排序，使得最左结点变为根结点，而且整个树不能有左子结点，如题目中的例子所示，排序后的结果是一条向右下方
+    // 延伸的直线。如果我们仔细观察题目中的例子，可以发现遍历顺序其实是 左->根->右，就是中序遍历的顺序，虽然题目中没说是二叉搜索树，但这并不
+    // 影响我们进行中序遍历。我们先从最简单的例子开始分析，当 root 为空时，直接返回空，当 root 没有左右子结点时，也是直接返回 root。当 root
+    // 只有一个左子结点时，我们此时要把其左子结点变为根结点，将原来的根结点变成其原来的左子结点的右子结点。但是如果 root 只有一个右子结点，
+    // 还是保持原来的顺序不变，而若 root 同时具有左右子结点的话，还是要将左子结点变为根结点，然后把之前的根结点连到右子结点上，之前的右子结点
+    // 还连在之前的根结点上，这个不用改变。我们可以发现，最麻烦的就是左子结点了，需要和其根结点交换位置，所以对于每个结点，我们需要知道其父结点
+    // 的位置，那么就在递归函数的参数中传入一个 pre 结点，再对左右子结点调用递归函数时，都将其下一个要连接的结点传入，这个 pre 结点可能是当前
+    // 结点或者当前结点的父结点。
+    //
+    //在递归函数中，首先判空，若当前结点为空的话，直接返回 pre 结点，因为到空结点的时候，说明已经遍历到叶结点的下方了，那么 pre 就是这个叶结
+    // 点了。由于是中序遍历，所以要先对左子结点调用递归函数，将返回值保存到一个新的结点 res 中，表示的意义是此时 node 的左子树已经全部捋直了，
+    // 而且根结点就是 res，而且 node 结点本身也被连到了捋直后的左子树下，即此时左子结点和根结点已经完成了交换位子，当然要断开原来的连接，所以
+    // 将 node->left 赋值为 nullptr。然后再对 node 的右子结点调用递归函数，注意此时的 pre 不能传入 node 本身，而是要传 node 结点的
+    // pre 结点，这是因为右子结点后面要连接的是 node 的父结点
+    // recursive way
+//    function<TreeNode*(TreeNode*, TreeNode*)> fun = [&](TreeNode* node, TreeNode* pre) -> TreeNode* {
+//        if(node == nullptr) return pre;
+//        TreeNode* res = fun(node->left, node);
+//        node->left = nullptr;
+//        node->right = fun(node->right, pre);
+//        return res;
+//    };
+//    return fun(root, nullptr);
+
+    // 采用中序遍历的迭代形式，使用栈来辅助。由于根结点可能会产生变化，所以我们需要一个 dummy 结点，还需要一个 pre 结点。在 while 循环中，
+    // 先找到最左结点，把路径上的所有结点都压入栈，然后取出栈顶元素，将其连到 pre 的右子结点上，并将 pre 更新为其右子结点，然后断开栈顶元素
+    // 的左子结点连接，并将其移动到右子结点上，并继续循环，最终返回 dummy 的右子结点即可
+    // iterative way
+    TreeNode *dummy = new TreeNode(-1), *pre = dummy, *p=root;
+    stack<TreeNode*> s;
+    while(s.size() || p) {
+        while(p) {
+            s.push(p);
+            p = p->left;
         }
-        fun(node->right);
-    };
-    fun(root);
-    return head;
+        p = s.top(); s.pop();
+        pre->right = p;
+        pre = pre->right;
+        p->left = nullptr;
+        p = p->right;
+    }
+    return dummy->right;
 }
 
 int LC0783::minDiffInBST(TreeNode* root) {
