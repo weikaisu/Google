@@ -446,6 +446,37 @@ vector<int> LC0094::inorderTraversal(TreeNode* root) {
 }
 
 /***********  Binary Search Tree  **********/
+int LC0938::rangeSumBST(TreeNode* root, int low, int high) {
+    // 由于 BST 具有 左<根<右 的特点，所以就可以进行剪枝，若当前结点值小于L，则说明其左子树所有结点均小于L，可以直接将左子树剪去；同理，
+    // 若当前结点值大于R，则说明其右子树所有结点均大于R，可以直接将右子树剪去。否则说明当前结点值正好在区间内，将其值累加上，并分别对左右子
+    // 结点调用递归函数即可
+    function<int(TreeNode*)> fun = [&](TreeNode* node) -> int {
+        if(node == nullptr) return 0;
+        if(node->val < low) node->left = nullptr;
+        if(node->val > high) node->right = nullptr;
+        return ((node->val>=low && node->val<=high) ? node->val : 0) + fun(node->left) + fun(node->right);
+    };
+    return fun(root);
+}
+
+TreeNode* LC0897::increasingBST(TreeNode* root) {
+    TreeNode *head=nullptr, *pre=nullptr;
+    function<void(TreeNode*)> fun = [&](TreeNode* node) {
+        if(node == nullptr) return;
+        fun(node->left);
+        if(pre != nullptr) {
+            pre->right = node;
+            pre = pre->right;
+        } else {
+            pre = node;
+            head = pre;
+        }
+        fun(node->right);
+    };
+    fun(root);
+    return head;
+}
+
 int LC0783::minDiffInBST(TreeNode* root) {
     // the same as LC0530
     // recursive way

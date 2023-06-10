@@ -68,6 +68,8 @@ struct LC0101 { bool isSymmetric(TreeNode* root); };
 struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
 struct LC0094 { vector<int> inorderTraversal(TreeNode* root); };
 /***********  Binary Search Tree  **********/
+struct LC0938 { int rangeSumBST(TreeNode* root, int low, int high); };
+struct LC0897 { TreeNode* increasingBST(TreeNode* root); };
 struct LC0783 { int minDiffInBST(TreeNode* root); };
 struct LC0700 { TreeNode* searchBST(TreeNode* root, int val); };
 struct LC0653 { bool findTarget(TreeNode* root, int k); };
