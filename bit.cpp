@@ -35,9 +35,20 @@ bool LC2206::divideArray(vector<int>& nums) {
     // Each element belongs to exactly one pair.
     // The elements present in a pair are equal.
     // Return true if nums can be divided into n pairs, otherwise return false.
-    // nums.size()得是偶數，nums內所有值XOR起來為0,這樣就表示倆倆一樣可以互相抵銷。
-    bool res=false;
-    return res;
+    // 不能直接把nums內所有值XOR起來為看是否為0，例如6,17,12,4,20,11全部XOR起來會是0。
+    // LC0136可以這麼做是因為題目已經表明只有一個數字是不一樣的。
+    // 但可以先sort過後在兩兩XOR起來
+    std::sort(nums.begin(), nums.end());
+    for(int i=1; i<nums.size(); i+=2) {
+        if(nums[i] ^ nums[i-1]) return false;
+    }
+    return true;
+
+    // use hash table
+//    unordered_map<int, int> map;
+//    for(int &num:nums) ++map[num];
+//    for(auto &m:map) if(m.second % 2 ) return false;
+//    return true;
 }
 
 int LC1863::subsetXORSum(vector<int>& nums) {
