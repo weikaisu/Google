@@ -47,7 +47,25 @@ int LC1863::subsetXORSum(vector<int>& nums) {
     // Note: Subsets with the same elements should be counted multiple times.
     // An array a is a subset of an array b if a can be obtained from b by deleting some (possibly zero) elements of b.
     // 先枚舉出所有subset，各subset再做XOR，把各subset XOR出來的值加總起來。
-    int res=0;
+    // iterative way
+//    int res=0, n=nums.size(), tot=(1<<n); // 總共有2的n次方種排列組合
+//    for(int i=0; i<tot; i++) { // 每一種排列組合
+//        int xorsum=0;
+//        for(int j=0; j<n; j++)
+//            if((i>>j) & 1) xorsum ^= nums[j]; // 這一次在第j個bit若是1表示這次的排列組合有出現
+//        res += xorsum;
+//    }
+//    return res;
+
+    // 遞歸算從第i個到最後，每次包含和不包含這第i個的情況
+    // recursive way
+    int res=0, n=nums.size();
+    function<void(int,int)> fun = [&](int cur, int xorsum) {
+        if(cur == n) { res += xorsum; return;}
+        fun(cur+1, xorsum^nums[cur]); // 包含
+        fun(cur+1, xorsum); // 不包含
+    };
+    fun(0,0);
     return res;
 }
 
