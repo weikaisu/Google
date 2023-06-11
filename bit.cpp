@@ -12,8 +12,13 @@ vector<int> LC2595::evenOddBit(int n) {
     // Explanation: The binary representation of 17 is 10001.
     // It contains 1 on the 0th and 4th indices.
     // There are 2 even and 0 odd indices.
-    vector<int> res;
-    return res;
+    // 循環32次，每次向右shift i位跟1做and，然後看這第i位是odd or even去累加。當n為0時可以提早結束。
+    int even=0, odd=0;
+    for(int i=0; i<32 && n; i++, n>>=1) {
+        if(n & 1)
+            (i & 1) ? odd++ : even++;
+    }
+    return {even, odd};
 }
 
 int LC2220::minBitFlips(int start, int goal) {
