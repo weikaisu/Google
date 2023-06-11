@@ -291,8 +291,32 @@ bool LC0572::isSubtree(TreeNode* root, TreeNode* subRoot) {
 }
 
 int LC0563::findTilt(TreeNode* root) {
-    int res;
-    return res;
+    // 求二叉树的坡度，某个结点的坡度的定义为该结点的左子树之和与右子树之和的差的绝对值，这道题让我们求所有结点的坡度之和。我开始的想法就是
+    // 老老实实的按定义去做，用先序遍历，对于每个遍历到的结点，先计算坡度，根据定义就是左子树之和与右子树之和的差的绝对值，然后返回的是当前结
+    // 点的tilt加上对其左右子结点调用求坡度的递归函数即可。其中求子树之和用另外一个函数来求，也是用先序遍历来求结点之和，为了避免重复运算，
+    // 这里用哈希表来保存已经算过的结点
+//    unordered_map<TreeNode*, int> map;
+//    function<int(TreeNode*)> subNodeSum = [&](TreeNode* node) -> int {
+//        if(node == nullptr) return 0;
+//        if(map.count(node)) return map[node];
+//        return map[node] = node->val + subNodeSum(node->left) + subNodeSum(node->right);
+//    };
+//
+//    if(root == nullptr) return 0;
+//    int tilt = std::abs(subNodeSum(root->left) - subNodeSum(root->right));
+//    return tilt + findTilt(root->left) + findTilt(root->right);
+
+    // 用后序遍历来做，因为后序遍历的顺序是左-右-根，那么就会从叶结点开始处理，这样我们就能很方便的计算结点的累加和，同时也可以很容易的根据子树和来计算tilt
+    int sum=0;
+    function<int(TreeNode*)> fun = [&](TreeNode* node) ->int {
+        if(node == nullptr) return 0;
+        int left = fun(node->left);
+        int right = fun(node->right);
+        sum += std::abs(left-right);
+        return node->val + left + right;
+    };
+    fun(root);
+    return sum;
 }
 
 int LC0559::maxDepth(Node* root) {
