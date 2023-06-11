@@ -286,8 +286,37 @@ vector<int> LC0589::preorder(Node* root) {
 }
 
 bool LC0572::isSubtree(TreeNode* root, TreeNode* subRoot) {
-    bool res;
-    return res;
+    // 这道题让我们求一个数是否是另一个树的子树，从题目中的第二个例子中可以看出，子树必须是从叶结点开始的，中间某个部分的不能算是子树，
+    // 那么我们转换一下思路，是不是从s的某个结点开始，跟t的所有结构都一样，那么问题就转换成了判断两棵树是否相同，也就是Same Tree的问题了，
+    // 这点想通了其实代码就很好写了，用递归来写十分的简洁，我们先从s的根结点开始，跟t比较，如果两棵树完全相同，那么返回true，否则就分别对s的
+    // 左子结点和右子结点调用递归再次来判断是否相同，只要有一个返回true了，就表示可以找得到
+//    function<bool(TreeNode*, TreeNode*)> isSameTree = [&](TreeNode* p, TreeNode* q) -> bool {
+//        if(!p && !q) return true;
+//        if(!p || !q || p->val != q->val) return false;
+//        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+//    };
+//
+//    if(!root) return false;
+//    if(isSameTree(root, subRoot)) return true;
+//    return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
+
+    // 用到了之前那道Serialize and Deserialize Binary Tree的解法，思路是对s和t两棵树分别进行序列化，各生成一个字符串，如果t的字符串
+    // 是s的子串的话，就说明t是s的子树，但是需要注意的是，为了避免出现[12], [2], 这种情况，虽然2也是12的子串，但是[2]却不是[12]的子树，
+    // 所以我们再序列化的时候要特殊处理一下，就是在每个结点值前面都加上一个字符，比如','，来分隔开，那么[12]序列化后就是",12,#"，而[2]序
+    // 列化之后就是",2,#"，这样就可以完美的解决之前的问题了
+    function<void(TreeNode*, ostringstream&)> serialize = [&](TreeNode* node, ostringstream &os) {
+        if(!node) os << ",#";
+        else {
+            os << "," << node->val;
+            serialize(node->left, os);
+            serialize(node->right, os);
+        }
+    };
+    ostringstream os1, os2;
+    serialize(root, os1);
+    serialize(subRoot, os2);
+    return os1.str().find(os2.str()) != std::string::npos;
+
 }
 
 int LC0563::findTilt(TreeNode* root) {

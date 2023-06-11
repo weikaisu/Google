@@ -410,9 +410,9 @@ bool LC0101::isSymmetric(TreeNode* root) {
 }
 
 bool LC0100::isSameTree(TreeNode* p, TreeNode* q) {
-    if(!p&&!q) return true;
-    if((!p||!q) || (p->val!=q->val)) return false;
-    return isSameTree(p->left, q->left) || isSameTree(p->right, q->right);
+    if(!p && !q) return true;
+    if(!p || !q || (p->val!=q->val)) return false;
+    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
 }
 
 vector<int> LC0094::inorderTraversal(TreeNode* root) {
