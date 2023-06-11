@@ -281,7 +281,32 @@ vector<int> LC0590::postorder(Node* root) {
 }
 
 vector<int> LC0589::preorder(Node* root) {
+    // 求N叉树的前序遍历，有之前那道Binary Tree Preorder Traversal的基础，知道了二叉树的前序遍历的方法，很容易就可以写出N叉树的前序遍
+    // 历。先来看递归的解法，主要实现一个递归函数即可，判空之后，将当前结点值加入结果res中，然后遍历子结点数组中所有的结点，对每个结点都调
+    // 用递归函数即可
+    // recursive way
+//    vector<int> res;
+//    function<void(Node*)> dfs = [&](Node* node) {
+//        if(!node) return;
+//        res.push_back(node->val);
+//        for(auto &child:node->children)
+//            dfs(child);
+//    };
+//    dfs(root);
+//    return res;
+
+    // iterative way
+    // 使用迭代的解法来做，使用栈stack来辅助，需要注意的是，如果使用栈的话，我们遍历子结点数组的顺序应该是从后往前的，因为栈是后进先出的顺序，
+    // 所以需要最先遍历的子结点应该最后进栈
+    if(!root) return {};
     vector<int> res;
+    stack<Node*> s{{root}};
+    while(s.size()) {
+        Node* node = s.top(); s.pop();
+        res.push_back(node->val);
+        for(int i=node->children.size()-1; i>=0; i--)
+            s.push(node->children[i]);
+    }
     return res;
 }
 
