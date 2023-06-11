@@ -296,8 +296,27 @@ int LC0563::findTilt(TreeNode* root) {
 }
 
 int LC0559::maxDepth(Node* root) {
-    int res;
-    return res;
+    // 求一个N叉树的最大深度
+    // recursive way
+//    int mx=1;
+//    if(root == nullptr) return 0;
+//    for(auto child:root->children)
+//        mx = std::max(mx, maxDepth(child)+1);
+//    return mx;
+
+    // iterative way, 用queue, BFS來計算有多少level來得到最大深度
+    if(root == nullptr) return 0;
+    int level=0;
+    queue<Node*> q{{root}};
+    while(q.size()) {
+        for(int i=q.size(); i>0; --i) {
+            Node* node = q.front(); q.pop();
+            for(auto child:node->children)
+                if(child) q.push(child);
+        }
+        ++level;
+    }
+    return level;
 }
 
 // N個裡面取M個，N是nums的大小，所以不需要另外當參數傳，緊需要傳M即可
