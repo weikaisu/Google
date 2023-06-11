@@ -276,7 +276,32 @@ vector<vector<int>> LC0046::permute(vector<int>& nums) {
 }
 
 vector<int> LC0590::postorder(Node* root) {
+    // 求N叉树的后序遍历，由于有了之前那道 Binary Tree Postorder Traversal 的基础，了解了二叉树的后序遍历，则N叉树的后序遍历也就没有
+    // 那么难了。首先还是用递归来做，在递归函数中，判空后，遍历子结点数组，对所有的子结点调用递归函数，然后在 for 循环之外在将当前结点值加入
+    // 结果 res 数组，这样才能保证是后序遍历的顺序
+    // recursive way
+//    vector<int> res;
+//    function<void(Node*)> dfs = [&](Node* node) {
+//        if(!node) return;
+//        for(auto &child:node->children)
+//            dfs(child);
+//        res.push_back(node->val);
+//    };
+//    dfs(root);
+//    return res;
+
+    // 使用迭代的方法来做，这里有个小 trick，写法跟先序遍历十分的像，不同的就是每次把从 stack 中取的结点的值都加到结果 res 的最前面，
+    // 还有就是遍历子结点数组的顺序是正常的顺序，而前序遍历是从子结点数组的后面往前面遍历，这点区别一定要注意
+    // iterative way
+    if(!root) return {};
     vector<int> res;
+    stack<Node*> s{{root}};
+    while(s.size()) {
+        Node *node = s.top(); s.pop();
+        res.insert(res.begin(), node->val);
+        for(auto &child:node->children)
+            s.push(child);
+    }
     return res;
 }
 
@@ -295,9 +320,9 @@ vector<int> LC0589::preorder(Node* root) {
 //    dfs(root);
 //    return res;
 
-    // iterative way
     // 使用迭代的解法来做，使用栈stack来辅助，需要注意的是，如果使用栈的话，我们遍历子结点数组的顺序应该是从后往前的，因为栈是后进先出的顺序，
     // 所以需要最先遍历的子结点应该最后进栈
+    // iterative way
     if(!root) return {};
     vector<int> res;
     stack<Node*> s{{root}};
