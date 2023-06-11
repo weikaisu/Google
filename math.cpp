@@ -11,6 +11,17 @@ bool LC1037::isBoomerang(vector<vector<int>>& points) {
            ((points[1][1] - points[0][1]) * (points[2][0] - points[0][0]));
 }
 
+bool LC0836::isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {
+    // 求两个矩形是否是重叠，矩形的表示方法是用两个点，左下和右上点来定位的。
+    // rec1 [x1, y1, x2, y2], rec2 [x3, y3, x4, y4]
+    // 两个矩形在矩形1的右上角重叠 x1<x4 && x3<x2 && y1<y4 && y3<y2
+    return rec1[0] < rec2[2] && rec2[0] < rec1[2] && rec1[1] < rec2[3] && rec2[1] < rec1[3];
+    // 两个矩形在矩形1的左上角重叠 x3<x2 && x1<x4 && y1<y4 && y3<y2
+    // 两个矩形在矩形1的左下角重叠 x3<x2 && x1<x4 && y3<y2 && y1<y4
+    // 两个矩形在矩形1的右下角重叠 x1<x4 && x3<x2 && y3<y2 && y1<y4
+    // 上面四种情况的满足条件其实都是相同的，只不过顺序调换了位置，所以我们只要一行就可以解决问题了
+}
+
 vector<int> LC0728::selfDividingNumbers(int left, int right) {
     // 找一个给定范围内的所有的自整除数字，所谓的自整除数字就是该数字可以整除其每一个位上的数字。既然这道题是Easy类，那么一般来说不需要
     // 用tricky的方法，直接暴力搜索就行了，遍历区间内的所有数字，然后调用子函数判断其是否是自整除数，是的话就加入结果res中。在子函数中，
