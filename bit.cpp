@@ -25,8 +25,8 @@ int LC2220::minBitFlips(int start, int goal) {
     // to get 10111, etc.
     // Given two integers start and goal, return the minimum number of bit flips to convert start to goal.
     // 找出兩數之間有多少bit不一樣，就表示可以最少flip幾次而獲得目標數，也就是兩數XOR後的值有多少1。
-    int res=0;
-    return res;
+    // 由於是兩個整數做XOR，總共會有32bit，可以利用bitset來統計XOR之後1的個數
+    return bitset<32>(start ^ goal).count();
 }
 
 bool LC2206::divideArray(vector<int>& nums) {
