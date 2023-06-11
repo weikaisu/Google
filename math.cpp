@@ -11,6 +11,20 @@ bool LC1037::isBoomerang(vector<vector<int>>& points) {
            ((points[1][1] - points[0][1]) * (points[2][0] - points[0][0]));
 }
 
+vector<int> LC0728::selfDividingNumbers(int left, int right) {
+    // 找一个给定范围内的所有的自整除数字，所谓的自整除数字就是该数字可以整除其每一个位上的数字。既然这道题是Easy类，那么一般来说不需要
+    // 用tricky的方法，直接暴力搜索就行了，遍历区间内的所有数字，然后调用子函数判断其是否是自整除数，是的话就加入结果res中。在子函数中，
+    // 我们先把数字转为字符串，然后遍历每个字符，只要其为0，或者num无法整除该位上的数字，就返回false，循环结束后返回true
+    vector<int> res;
+    for(int num=left; num<=right; ++num) {
+        int n=0;
+        for (n = num; n > 0; n /= 10)
+            if((n%10==0) || (num%(n%10) != 0)) break;
+        if(n==0) res.push_back(num);
+    }
+    return res;
+}
+
 bool LC0507::checkPerfectNumber(int num) {
     // 让我们判断给定数字是否为完美数字，并给来完美数字的定义，就是一个整数等于除其自身之外的所有的因子之和。那么由于不能包含自身，所以n必
     // 定大于1。其实这道题跟之前的判断质数的题蛮类似的，都是要找因子。由于1肯定是因子，可以提前加上，那么我们找其他因子的范围是[2, sqrt(n)]。
