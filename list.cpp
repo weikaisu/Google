@@ -1374,6 +1374,16 @@ vector<string> LC0228::summaryRanges(vector<int>& nums) {
     return res;
 }
 
+int LC0122::maxProfit(vector<int>& prices) {
+    // 由于可以无限次买入和卖出。我们都知道炒股想挣钱当然是低价买入高价抛出，那么这里我们只需要从第二天开始，如果当前价格比之前价格高，则把差
+    // 值加入利润中，因为我们可以昨天买入，今日卖出，若明日价更高的话，还可以今日买入，明日再抛出。以此类推，遍历完整个数组后即可求得最大利润
+    int prf=0;
+    for(int i=0; i<prices.size()-1; ++i)
+        if(prices[i+1] > prices[i])
+            prf += (prices[i+1] - prices[i]);
+    return prf;
+}
+
 int LC0121::maxProfit(vector<int>& prices) {
     // 只需要遍历一次数组，用一个变量记录遍历过数中的最小值，然后每次计算当前值和这个最小值之间的差值最为利润，然后每次选较大的利润来更新。
     // 当遍历完成后当前利润即为所求
