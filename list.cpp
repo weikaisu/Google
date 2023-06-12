@@ -674,15 +674,12 @@ vector<int> LC0066::plusOne(vector<int>& digits) {
 //for(auto i:n) cout << i << ' ';
 //cout << endl;
 int LC0027::removeElement(vector<int>& nums, int val) {
-    int s=nums.size();
-    int r=0;
-    for(int i=0 ; i<nums.size() ; i++) {
-        if(nums[i]==val)
-            s--;
-        else
-            nums[r++]=nums[i];
-    }
-    return s;
+    // 除一个数组中和给定值相同的数字，并返回新的数组的长度。
+    // fast開始掃，若不是指定的值的話表示可以留在nums裡，就會往slow放。若是指定的值，slow則不會++，準備下次被覆蓋。
+    int slow=0;
+    for(int fast=0; fast<nums.size(); ++fast)
+        if(nums[fast] != val) nums[slow++] = nums[fast];
+    return slow;
 }
 
 //LC0026 run;
@@ -698,7 +695,7 @@ int LC0026::removeDuplicates(vector<int>& nums) {
     // fast每次進一步，slow若一直跟fast指到的是一樣的，就會不動。當不一樣時再把fast指到的放到slow的下一個，下一個一定是跟slow本身一樣
     // 才會使得之前slow不動。
     for(int fast=0; fast<nums.size(); fast++)
-        if(nums[slow] != nums[fast]) nums[++slow] = nums[fast];
+        if(nums[fast] != nums[slow]) nums[++slow] = nums[fast];
     return nums.size() ? slow+1 : 0;
 
     // 用变量i表示当前覆盖到到位置，由于不能有重复数字，则只需要用当前数字 num 跟上一个覆盖到到数字 nums[i-1] 做个比较，只要 num 大，
