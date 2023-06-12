@@ -1447,19 +1447,22 @@ bool LC0234::isPalindrome(ListNode* head) {
 //ListNode* r = run.reverseList(l.GetListHead());
 //LinkedList::ShowLinkedList(r);
 ListNode* LC0206::reverseList(ListNode* head) {
-    // time(N), iterative
-    ListNode *c=nullptr, *n=nullptr;
+    // 在原链表之前建立一个空的cur，因为首节点会变，然后从head开始，将之后的一个节点移到cur之后，重复此操作直到head成为末节点为止
+    // iterative way
+    ListNode* cur=nullptr;
     while(head) {
-        //把n指到head->next
-        //把n放在head->next的位置
-        n=head->next;
-        head->next=c;
-        c=head;
-        head=n;
+        ListNode* tmp = head->next;
+        head->next = cur;
+        cur = head;
+        head = tmp;
     }
-    return c;
+    return cur;
 
-    // time(N), recursive
+    // 递归解法，代码量更少，递归解法的思路是，不断的进入递归函数，直到head指向倒数第二个节点，因为head指向空或者是最后一个结点都直接返回了，
+    // newHead则指向对head的下一个结点调用递归函数返回的头结点，此时newHead指向最后一个结点，然后head的下一个结点的next指向head本身，这
+    // 个相当于把head结点移动到末尾的操作，因为是回溯的操作，所以head的下一个结点总是在上一轮被移动到末尾了，但head之后的next还没有断开，
+    // 所以可以顺势将head移动到末尾，再把next断开，最后返回newHead即可
+    // recursive way
     if(head==nullptr || head->next==nullptr) return head;
     ListNode *h = reverseList(head->next);
     head->next->next = head;
