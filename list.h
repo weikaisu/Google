@@ -366,6 +366,7 @@ struct LC0344 { void reverseString(vector<char>& s); };
 struct LC0283 { void moveZeroes(vector<int>& nums); };
 /*找出各連續子陣列的範圍*/
 struct LC0228 { vector<string> summaryRanges(vector<int>& nums); };
+struct LC0119 { vector<int> getRow(int rowIndex); };
 struct LC0118 { vector<vector<int>> generate(int numRows); };
 
 // Link List
