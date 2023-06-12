@@ -692,16 +692,22 @@ int LC0027::removeElement(vector<int>& nums, int val) {
 //for(auto i:n) cout << i << ' ';
 //cout << endl;
 int LC0026::removeDuplicates(vector<int>& nums) {
-    int s=nums.size(); if(s<=1) return s;
-    int r=1, p=nums[0];
-    for(int i=1 ; i<nums.size() ; i++) {
-        if(nums[i] == p)
-            s--;
-        else
-            nums[r++]=nums[i];
-        p=nums[i];
-    }
-    return s;
+    // 使用快慢指针来记录遍历的坐标，最开始时两个指针都指向第一个数字，如果两个指针指的数字相同，则快指针向前走一步，如果不同，则两个指针都向
+    // 前走一步，这样当快指针走完整个数组后，慢指针当前的坐标加1就是数组中不同数字的个数
+    int slow=0;
+    // fast每次進一步，slow若一直跟fast指到的是一樣的，就會不動。當不一樣時再把fast指到的放到slow的下一個，下一個一定是跟slow本身一樣
+    // 才會使得之前slow不動。
+    for(int fast=0; fast<nums.size(); fast++)
+        if(nums[slow] != nums[fast]) nums[++slow] = nums[fast];
+    return nums.size() ? slow+1 : 0;
+
+    // 用变量i表示当前覆盖到到位置，由于不能有重复数字，则只需要用当前数字 num 跟上一个覆盖到到数字 nums[i-1] 做个比较，只要 num 大，
+    // 则一定不会有重复（前提是数组必须有序）
+//    int i=0;
+//    for(int &num:nums)
+//        if(i<1 || num > nums[i-1])
+//            nums[i++] = num;
+//    return i;
 }
 
 vector<int> LC0001::twoSum(vector<int>& nums, int target) {

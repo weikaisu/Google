@@ -308,7 +308,7 @@ struct LC0169 { int majorityElement(vector<int>& nums); };
 struct LC0066 { vector<int> plusOne(vector<int>& digits); };
 /*移除指定的值並不改變陣列相對位置*/
 struct LC0027 { int removeElement(vector<int>& nums, int val); };
-/*將重複的字符替換成指定的字符*/
+/*去除重複的字符*/
 struct LC0026 { int removeDuplicates(vector<int>& nums); };
 /*找出陣列裡兩個合為指定值的index*/
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
