@@ -666,6 +666,29 @@ vector<int> LC0066::plusOne(vector<int>& digits) {
     return digits;
 }
 
+vector<int> LC0001::twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> t;
+
+    // find target-nums[i], save nums[i]
+    for(auto i=0 ; i<nums.size(); i++) {
+        auto diff = target - nums[i];
+        if(t.count(diff))
+            return {t[diff], i};
+        t[nums[i]]=i;
+    }
+    return {};
+
+    // find nums[i], save target-nums[i]
+    for(auto i=0 ; i<nums.size() ; i++) {
+        auto diff = target - nums[i];
+        if(t.count(nums[i]))
+            return {t[nums[i] ], i};
+        t[diff] = i;
+    }
+    return {};
+}
+
+/***********  Two Pointers  **********/
 //LC0027 run;
 //vector<int> n{0,1,2,2,3,0,4,2}; // val=2
 //vector<int> n{3,2,2,3}; // val=3
@@ -705,28 +728,6 @@ int LC0026::removeDuplicates(vector<int>& nums) {
 //        if(i<1 || num > nums[i-1])
 //            nums[i++] = num;
 //    return i;
-}
-
-vector<int> LC0001::twoSum(vector<int>& nums, int target) {
-    unordered_map<int, int> t;
-
-    // find target-nums[i], save nums[i]
-    for(auto i=0 ; i<nums.size(); i++) {
-        auto diff = target - nums[i];
-        if(t.count(diff))
-            return {t[diff], i};
-        t[nums[i]]=i;
-    }
-    return {};
-
-    // find nums[i], save target-nums[i]
-    for(auto i=0 ; i<nums.size() ; i++) {
-        auto diff = target - nums[i];
-        if(t.count(nums[i]))
-            return {t[nums[i] ], i};
-        t[diff] = i;
-    }
-    return {};
 }
 
 /***********  Array List  **********/
