@@ -1374,6 +1374,17 @@ vector<string> LC0228::summaryRanges(vector<int>& nums) {
     return res;
 }
 
+int LC0121::maxProfit(vector<int>& prices) {
+    // 只需要遍历一次数组，用一个变量记录遍历过数中的最小值，然后每次计算当前值和这个最小值之间的差值最为利润，然后每次选较大的利润来更新。
+    // 当遍历完成后当前利润即为所求
+    int buy=INT_MAX, prf=0;
+    for(int &price:prices) {
+        buy = std::min(buy, price);
+        prf = std::max(prf, price-buy);
+    }
+    return prf;
+}
+
 vector<int> LC0119::getRow(int rowIndex) {
     // 除了第一个和最后一个数字之外，其他的数字都是上一行左右两个值之和。那么我们只需要两个 for 循环，除了第一个数为1之外，后面的数都是上一次
     // 循环的数值加上它前面位置的数值之和，不停地更新每一个位置的值，便可以得到第n行的数字
