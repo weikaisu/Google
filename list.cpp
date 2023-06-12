@@ -656,13 +656,17 @@ int LC0169::majorityElement(vector<int>& nums) {
 //for(auto n:nums) cout << n << ' ';
 //cout << endl;
 vector<int> LC0066::plusOne(vector<int>& digits) {
-    int c=1;
-    for(int i=digits.size()-1 ; i>=0 ; i--) {
-        int v = digits[i]+c;
-        digits[i] = v % 10;
-        c = v / 10;
+    // 将一个数字的每个位上的数字分别存到一个一维向量中，最高位在最开头，我们需要给这个数字加一，即在末尾数字加一
+    // 将 carry 初始化为1，然后相当于 digits 加了一个0，处理方法跟之前那道题一样
+    int c=1, n=digits.size();
+    for(int i=n-1; i>=0; --i) {
+        c += digits[i];
+        digits[i] = c%10;
+        c /= 10;
+        if(!c) return digits; // 沒有可進的位，那就可以先return了
     }
-    if(c) digits.emplace(digits.begin(), c);
+    if(c)
+        digits.emplace(digits.begin(), c);
     return digits;
 }
 
