@@ -416,6 +416,7 @@ vector<string> LC0500::findWords(vector<string>& words) {
 }
 
 vector<int> LC0496::nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+    // 给了我们一个数组，又给了该数组的一个子集合，让我们求集合中每个数字在原数组中右边第一个较大的数字。
     // 建立每个数字和其右边第一个较大数之间的映射，没有的话就是-1。我们遍历原数组中的所有数字，如果此时栈不为空，
     // 且栈顶元素小于当前数字，说明当前数字就是栈顶元素的右边第一个较大数，那么建立二者的映射，并且去除当前栈顶元素，
     // 最后将当前遍历到的数字压入栈。当所有数字都建立了映射，那么最后我们可以直接通过哈希表快速的找到子集合中数字的右边较大值
@@ -436,10 +437,8 @@ vector<int> LC0496::nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
 
 vector<int> LC0448::findDisappearedNumbers(vector<int>& nums) {
     // 使用額外的空間作hash table來紀錄出現過的
-//    unordered_set<int> set;
+//    unordered_set set(nums.begin(), nums.end());
 //    vector<int> res;
-//    for(auto n:nums)
-//        set.insert(n);
 //    for(int i=1; i<=nums.size(); i++)
 //        if(!set.count(i)) res.push_back(i);
 //    return res;
@@ -603,6 +602,8 @@ bool LC0205::isIsomorphic(string s, string t) {
 }
 
 bool LC0202::isHappy(int n) {
+    // 定义了一种快乐数，就是说对于某一个正整数，如果对其各个位上的数字分别平方，然后再加起来得到一个新的数字，再进行同样的操作，如果最终结果变成了1，
+    // 则说明是快乐数，如果一直循环但不是1的话，就不是快乐数，那么现在任意给我们一个正整数，让我们判断这个数是不是快乐数，题目中给的例子19是快乐数
     // 我们可以用 HashSet 来记录所有出现过的数字，然后每出现一个新数字，
     // 在 HashSet 中查找看是否存在，若不存在则加入表中，若存在则跳出循环，并且判断此数是否为1，
     // 若为1返回true，不为1返回false
@@ -1297,7 +1298,8 @@ string LC0541::reverseStr(string s, int k) {
 }
 
 int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
-    // 历一遍数组，用一个计数器 cnt 来统计1的个数，方法是如果当前数字为0，那么 cnt 重置为0，如果不是0，cnt 自增1，然后每次更新结果 res 即可
+    // 求最大连续1的个数。历一遍数组，用一个计数器 cnt 来统计1的个数，方法是如果当前数字为0，那么 cnt 重置为0，如果不是0，cnt 自增1，
+    // 然后每次更新结果 res 即可
     int res=0, cnt=0;
     for(auto &n:nums) {
         if(n)
@@ -1305,7 +1307,7 @@ int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
         else
             { res = max(res,cnt); cnt=0; }
     }
-    return max(res,cnt);
+    return max(res,cnt); // 最後可能連續1結束，需再做一次max
 
     // 由于是个二进制数组，所以数组中的数字只能是0或1，那么连续1的和跟个数相等，所以可以计算和，通过加上 num，再乘以 num 来计算，如果当前数
     // 字是0，那么 sum 就被重置为0，还是要更新结果 res
