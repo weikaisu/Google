@@ -574,6 +574,8 @@ bool LC0219::containsNearbyDuplicate(vector<int>& nums, int k) {
 }
 
 bool LC0217::containsDuplicate(vector<int>& nums) {
+    // Given an array of integers, find if the array contains any duplicates. Your function should return true
+    // if any value appears at least twice in the array, and it should return false if every element is distinct.
     unordered_set <int> set;
     for(auto n:nums) {
         if(set.count(n)) return true;
@@ -693,6 +695,15 @@ vector<int> LC0001::twoSum(vector<int>& nums, int target) {
 }
 
 /***********  Two Pointers  **********/
+void LC0283::moveZeroes(vector<int>& nums) {
+    // 这道题让我们将一个给定数组中所有的0都移到后面，把非零数前移，要求不能改变非零数的相对应的位置关系，而且不能拷贝额外的数组，那么只能用
+    // 替换法in-place来做，需要用两个指针，一个不停的向后扫，找到非零位置，然后和前面那个指针交换位置即可
+    // 用快慢指針
+    int slow=0;
+    for(int fast=0; fast<nums.size(); ++fast)
+        if(nums[fast]) std::swap(nums[slow++], nums[fast]);
+}
+
 //LC0027 run;
 //vector<int> n{0,1,2,2,3,0,4,2}; // val=2
 //vector<int> n{3,2,2,3}; // val=3
@@ -1350,14 +1361,6 @@ void LC0344::reverseString(vector<char>& s) {
         swap(s[l++],s[r--]);
 }
 
-void LC0283::moveZeroes(vector<int>& nums) {
-    // 这道题让我们将一个给定数组中所有的0都移到后面，把非零数前移，要求不能改变非零数的相对应的位置关系，而且不能拷贝额外的数组，那么只能用
-    // 替换法in-place来做，需要用两个指针，一个不停的向后扫，找到非零位置，然后和前面那个指针交换位置即可
-    for(int i=0, j=0; i<nums.size(); i++)
-        if(nums[i])
-            swap(nums[i], nums[j++]);
-}
-
 vector<string> LC0228::summaryRanges(vector<int>& nums) {
     // 这道题给定我们一个有序数组，让我们总结区间，具体来说就是让我们找出连续的序列，然后首尾两个数字之间用个“->"来连接，那么我只需遍历一遍数
     // 组即可，每次检查下一个数是不是递增的，如果是，则继续往下遍历，如果不是了，我们还要判断此时是一个数还是一个序列，一个数直接存入结果，
@@ -1367,7 +1370,7 @@ vector<string> LC0228::summaryRanges(vector<int>& nums) {
     int i=0, n=nums.size();
     while(i<n) {
         int j=1;
-        while(i+j<n && (long)nums[i+j]-nums[i]==j) j++;
+        while(i+j<n && (long)nums[i+j]-nums[i]==j) j++; //需要用long是因為可能有正大數減負大數的情況
         res.push_back(j==1 ? to_string(nums[i]) : to_string(nums[i]) + "->" + to_string(nums[i+j-1]));
         i+=j;
     }

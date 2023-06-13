@@ -310,6 +310,8 @@ struct LC0066 { vector<int> plusOne(vector<int>& digits); };
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
 // Two Pointers
+/*將陣列裡所有0移到後面*/
+struct LC0283 { void moveZeroes(vector<int>& nums); };
 /*移除指定的值並不改變陣列相對位置*/
 struct LC0027 { int removeElement(vector<int>& nums, int val); };
 /*去除重複的字符*/
@@ -362,8 +364,6 @@ struct LC0463 { int islandPerimeter(vector<vector<int>>& grid); };
 struct LC0414 { int thirdMax(vector<int>& nums); };
 /*反轉字符陣列*/
 struct LC0344 { void reverseString(vector<char>& s); };
-/*將陣列裡所有0移到後面*/
-struct LC0283 { void moveZeroes(vector<int>& nums); };
 /*找出各連續子陣列的範圍*/
 struct LC0228 { vector<string> summaryRanges(vector<int>& nums); };
 struct LC0122 { int maxProfit(vector<int>& prices); };
