@@ -1180,11 +1180,9 @@ int LC0674::findLengthOfLCIS(vector<int>& nums) {
 //    return res;
 
     // 下面这种方法的思路和上面的解法一样，由於每次都和前面一个数字来比较，是可以省略cur變數。注意处理无法取到钱一个数字的情况
-    int res=0, cnt=0;
-    for(int i=0; i<nums.size(); i++) {
-        if (i == 0 || nums[i] > nums[i - 1]) res = std::max(res, ++cnt);
-        else cnt = 1;
-    }
+    int res=1, cnt=1;
+    for(int i=1; i<nums.size(); ++i)
+        (nums[i]>nums[i-1]) ? res = std::max(res, ++cnt) : cnt=1;
     return res;
 }
 
