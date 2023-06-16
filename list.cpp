@@ -874,8 +874,8 @@ bool LC0941::validMountainArray(vector<int>& arr) {
     // 也是潜在的峰值。接下来就要比较这两个峰值是否指向同一个数字，同时i指向的数字不能是第一个，j指向的数字不能是最后一个数字，因为必须要有上坡
     // 和下坡的存在
     int n=arr.size(), i=0, j=n-1;
-    while(i<n-2 && arr[i]<arr[i+1]) i++;
-    while(j>0 && arr[j]<arr[j-1]) j--;
+    while(i<n-1 && arr[i]<arr[i+1]) ++i;
+    while(j>0 && arr[j]<arr[j-1]) --j;
     return i!=0 && j!=n-1 && i==j;
 }
 
