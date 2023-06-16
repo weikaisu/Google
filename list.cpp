@@ -856,13 +856,10 @@ int LC0944::minDeletionSize(vector<string>& strs) {
     // 列上的字符是非递减顺序的，问最少需要删掉多少列。这道题唯一的难点就是读懂晦涩的题意，估计是出自非母语之手的，其他的并没有太大的难度，就
     // 是一个按列来遍历二维数组的操作，若当前位置的字符小于等于下一行同列上的字符，则跳过继续比较下一行和下下一行上的字符。否则说明需要删掉该
     // 列，结果 res 自增1，且 break 掉当前列即可
-    int res = 0;
-    for(int x=0; x<strs[0].size(); x++)
-        for(int y=0; y<strs.size()-1; y++) {
-            if (strs[y][x] <= strs[y + 1][x]) continue;
-            res++;
-            break;
-        }
+    int m=strs.size(), n=strs[0].size(), res=0;
+    for(int x=0; x<n; ++x)
+        for(int y=0; y<m-1; ++y)
+            if(strs[y][x] > strs[y+1][x]) {++res; break;}
     return res;
 }
 
