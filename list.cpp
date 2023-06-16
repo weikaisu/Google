@@ -181,17 +181,22 @@ int LC0961::repeatedNTimes(vector<int>& nums) {
 bool LC0914::hasGroupsSizeX(vector<int>& deck) {
     // 基于最大公约数 Greatest Common Divisor 的解法，写起来很简洁，但需要记住最大公约函数的写法，或者直接使用内置的 gcd 函数（
     // 感觉有点耍赖哈～）。其实原理都差不多，这里是找每种牌数之间的最大公约数，只要这个 gcd 是大于1的，就表示可以找到符合题意的X
+//    int res=0;
+//    unordered_map<int, int> map;
+//    for(auto num:deck) ++map[num];
+//    for(auto m:map)
+//        res = std::gcd(res, m.second);
+//    return res>1;
 
     //輾轉相除法
-    auto gcd_divide = [](const auto &self, int x, int y)->int {
-        return x==0 ? y : self(self, y%x, x);
+    function<int(int,int)> gcd = [&](int x, int y) -> int {
+        return x==0 ? y : gcd(y%x, x);
     };
-
     unordered_map<int,int> map;
-    int res = 0;
-    for(auto &n:deck) ++map[n];
-    for(auto &m:map)
-        res = gcd_divide(gcd_divide, res, m.second);
+    int res=0;
+    for(auto num:deck) ++map[num];
+    for(auto m:map)
+        res = gcd(res, m.second);
     return res>1;
 }
 
@@ -923,7 +928,9 @@ int LC0892::surfaceArea(vector<vector<int>>& grid) {
     // 由于之前做过那道三维物体投影的题 Projection Area of 3D Shapes，所以博主很思维定势的想到是不是也跟投影有关，然后又想当然的认为三维
     // 物体每一个面的面积就是该方向的投影，那么我们把三个方向的投影之和算出来，再乘以2不就是表面积了么？实际上这种方法是错误的，就拿题目中的例
     // 子4来说，当中间的小方块缺失了之后，实际上缺失的地方会产生出四个新的面，而这四个面是应该算在表面积里的，但是用投影的方法是没法算进去的。
-    // 无奈只能另辟蹊径，实际上这道题正确的思路是一个位置一个位置的累加表面积，就类似微积分的感觉，前面提到了当n个小正方体累到一起的表面积是
+    // 无奈只能另辟蹊径，实际上这道题正确的思路是一个位置一个位置的累加表面积，就类似微积分的感觉
+    
+    // 当n个小正方体累到一起的表面积是
     // 4n+1，而这个n就是每个位置的值 grid[i][j]，当你在旁边紧挨着再放一个累加的物体时，二者就会产生重叠，重叠的面数就是二者较矮的那堆正方体
     // 的个数再乘以2，明白了这一点，我们就可以从 (0,0) 位置开始累加，先根据 grid[0][0] 的值算出若仅有该位置的三维物体的表面积，然后向 (0,1)
     // 位置遍历，同样要先根据 grid[0][1] 的值算出若仅有该位置的三维物体的表面积，跟之前 grid[0][0] 的累加，然后再减去遮挡住的面积，通过
