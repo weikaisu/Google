@@ -715,19 +715,6 @@ int LC0013::romanToInt(string s) {
     return ans;
 }
 
-//LC0009 run;
-//cout << run.isPalindrome(1000000001) << endl;
-bool LC0009::isPalindrome(int x) {
-    if(x<0) return false;
-
-    int f=x, b=0;
-    while(x>0 && b<INT32_MAX/10) {
-        b = b*10 + x%10;
-        x/=10;
-    }
-    return f==b;
-}
-
 //LC0006 run;
 //cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
 //convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".

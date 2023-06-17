@@ -252,6 +252,19 @@ string LC0168::convertToTitle(int columnNumber) {
 //    return res;
 }
 
+//LC0009 run;
+//cout << run.isPalindrome(1000000001) << endl;
+bool LC0009::isPalindrome(int x) {
+    if(x<0) return false;
+
+    int front=x, back=0;
+    while(x>0 && back<INT_MAX/10) { // 下一行要*10，所以這一行檢查是否小於INT_MAX/32
+        back = back*10 + x%10;
+        x/=10;
+    }
+    return front == back;
+}
+
 int LC0007::reverse(int x) {
     // Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside
     // the signed 32-bit integer range [-231, 231 - 1], then return 0.
@@ -261,7 +274,7 @@ int LC0007::reverse(int x) {
     // Output: -321
     int res=0;
     while(x) {
-        if(std::abs(res) > INT_MAX/10) return 0;
+        if(std::abs(res) > INT_MAX/10) return 0; // 下一行要*10，所以這一行檢查是否小於INT_MAX/32
         res = res*10 + x%10;
         x /= 10;
     }
