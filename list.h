@@ -378,6 +378,8 @@ struct LC0118 { vector<vector<int>> generate(int numRows); };
  *      for(y)
  *          array[y][x]
  */
+// struct LC1337 { vector<int> kWeakestRows(vector<vector<int>>& mat, int k); }; // tree.h
+struct LC1275 { string tictactoe(vector<vector<int>>& moves); };
 struct LC1260 { vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k); };
 // struct LC1030 { vector<vector<int>> allCellsDistOrder(int rows, int cols, int rCenter, int cCenter); }; // sort.h
 // struct LC0999 { int numRookCaptures(vector<vector<char>>& board); }; // search.h

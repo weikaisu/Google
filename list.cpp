@@ -1266,7 +1266,41 @@ vector<vector<int>> LC0118::generate(int numRows) {
 }
 
 /***********  Matrix  **********/
+string LC1275::tictactoe(vector<vector<int>>& moves) {
+    // 关于井字棋游戏的，这个游戏简单容易上手，是课间十五分钟必备游戏之一，游戏规则很简单，一个人画叉，一个人画圆圈，只要有三个相连的位置，
+    // 包括对角线就算赢。而这道题给了两个玩家的若干操作，让判断当前的棋盘状态，是哪一方赢了，还是没下完，或者是平局。判赢的条件就是找到任意行
+    // 或列，或者对角线有三个相同的符号，若找不到有可能是平局或者没下完，只要判断总步数是否为9，就知道有没有下完了。由于给定的是两个玩家按顺
+    // 序落子的位置，一个比较直接的方法就是分别还原出两个玩家在棋盘上的落子，分别还原出两个 3 by 3 的棋盘的好处是可以不用区分到底是叉还是圆
+    // 圈，只要找三个连续的落子位置就行了，而且可以把查找逻辑放到一个子函数中进行复用。在子函数中，判断各行各列是否有连续三个落子，以及两条对
+    // 角线，若有的话返回 true，否则 false。然后分别对还原出来的数组A和B调用子函数，若有返回的 true，则返回对应的A或B。否则就判断 moves
+    // 数组的长度，若等于9，返回平局 Draw，反之为 Pending
+    function<bool(vector<vector<bool>>)> win = [&](vector<vector<bool>> m) -> bool {
+        for(int i=0; i<3; ++i) {
+            if(m[i][0] && m[i][1] && m[i][2]) return true;
+            if(m[0][i] && m[1][i] && m[2][i]) return true;
+        }
+        if(m[0][0] && m[1][1] && m[2][2]) return true;
+        if(m[2][0] && m[1][1] && m[0][2]) return true;
+        return false;
+    };
+
+    vector<vector<bool>> A(3, vector<bool>(3, false)), B=A;
+
+    for(int i=0; i<moves.size(); ++i)
+        if(i & 1) B[moves[i][0]][moves[i][1]] = true;
+        else A[moves[i][0]][moves[i][1]] = true;
+    if(win(A)) return "A";
+    if(win(B)) return "B";
+    return (moves.size() == 9) ? "Draw" : "Pending";
+}
+
 vector<vector<int>> LC1260::shiftGrid(vector<vector<int>>& grid, int k) {
+    // 移动一个二维数组，移动方法是水平移动，即每个元素向右平移一位，行末尾的元素移动到下一行的开头，数组最后一个元素移动到开头的第一个元素，
+    // 像这样移动k次，返回最终的数组。由于要移动k次，若每次都更新一遍数组的值，实在是不高效，最好直接能计算出最终状态的值，那么关注点就是计算
+    // 一个元素水平移动k次的新位置。由于是二维数组，所以总是存在一个换行的问题，比较麻烦，一个很好的 trick 就是先将数组拉平，变成一维数组，
+    // 这样移动k位就很方便，唯一需要注意是加k后可能超过一维数组的范围，需要当作循环数组来处理。明白了思路，代码就很好写了，新建一个和原数组同
+    // 等大小的数组 res，然后遍历原数组，对于每个位置 (i, j)，计算其在拉平后的一维数组中的位置 i*n + j，然后再加上平移k，为了防止越界，最
+    // 后再对 m*n 取余，得到了其在一维数组中的位置，将其转回二维数组的坐标，并更新结果 res 中的对应位置即可
     int m=grid.size(), n=grid[0].size(), len=m*n;
     if(!(k%len)) return grid; // k是len的倍數，等於沒有shift
     k %= len; // k簡化成len的餘數即可
