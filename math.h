@@ -16,6 +16,8 @@ struct LC0263 { bool isUgly(int n); };
 struct LC0258 { int addDigits(int num); };
 struct LC0171 { int titleToNumber(string columnTitle); };
 struct LC0168 { string convertToTitle(int columnNumber); };
+/*羅馬數字轉整數*/
+struct LC0013 { int romanToInt(string s); };
 /*一個整數的字面數字是否回文*/
 struct LC0009 { bool isPalindrome(int x); };
 struct LC0007 { int reverse(int x); };

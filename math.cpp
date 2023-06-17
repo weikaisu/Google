@@ -252,7 +252,24 @@ string LC0168::convertToTitle(int columnNumber) {
 //    return res;
 }
 
-//LC0009 run;
+//cout << run.romanToInt("MCMXCIV") << endl;
+int LC0013::romanToInt(string s) {
+    // Given a roman numeral, convert it to an integer.
+    unordered_map<char, int> map {
+            {'M', 1000}, {'D', 500},
+            {'C', 100},  {'L', 50},
+            {'X', 10},   {'V', 5},
+            {'I', 1} };
+
+    int res=0, n=s.size();
+    for(int i=0; i<n-1; ++i) {
+        char c=s[i], c_nxt=s[i+1];
+        if(map[c] < map[c_nxt]) res -= map[c];
+        else res += map[c];
+    }
+    return res + map[s[n-1]];
+}
+
 //cout << run.isPalindrome(1000000001) << endl;
 bool LC0009::isPalindrome(int x) {
     if(x<0) return false;

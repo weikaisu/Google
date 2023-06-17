@@ -696,26 +696,6 @@ string LC0014::longestCommonPrefix(vector<string>& strs) {
     return ans;
 }
 
-//LC0013 run;
-//cout << run.romanToInt("MCMXCIV") << endl;
-int LC0013::romanToInt(string s) {
-    unordered_map<char, int> t {
-        {'M', 1000}, {'D', 500},
-        {'C', 100},  {'L', 50},
-        {'X', 10},   {'V', 5},
-        {'I', 1} };
-
-    int ans=0;
-    for(int i=0 ; i<s.size()-1 ; i++) {
-        char c=s[i], c_nxt=s[i+1];
-        if(t[c]<t[c_nxt]) ans-=t[c];
-        else ans+=t[c];
-    }
-    ans+=t[s[s.size()-1]];
-    return ans;
-}
-
-//LC0006 run;
 //cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
 //convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 string LC0006::convert(string s, int numRows) {
