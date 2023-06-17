@@ -528,8 +528,7 @@ string LC0415::addStrings(string num1, string num2) {
         res += c%10+'0';
         c /= 10;
     }
-    std::reverse(res.begin(), res.end());
-    return res;
+    return string(res.rbegin(), res.rend());
 }
 
 vector<string> LC0412::fizzBuzz(int n) {
@@ -605,8 +604,7 @@ string LC0067::addBinary(string a, string b) {
         res += c%2+'0';
         c /= 2;
     }
-    std::reverse(res.begin(), res.end());
-    return res;
+    return string(res.rbegin(), res.rend());
 }
 
 //LC0058 run;

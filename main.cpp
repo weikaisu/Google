@@ -34,9 +34,9 @@ int main() {
 //    ListNode* r = run.deleteDuplicates(l1.GetListHead());
 //    LinkedList::ShowLinkedList(r);
 
-    LC2206 run;
+    LC0069 run;
     vector<int> v{6,17,12,4,20,11};
-    run.divideArray(v);
+    run.mySqrt(8);
 
 
 //    string s {"ABCDE"};

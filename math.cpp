@@ -213,16 +213,13 @@ int LC0171::titleToNumber(string columnTitle) {
     // 这题实际上相当于一种二十六进制转十进制的问题
     // 26 -> 10
     // 其他進位轉十進位：將二進位數、十六進位數的各位數字分別乘以各自基數的(N-1)次方，其相加之和便是相應的十進位數，這是按權相加法。
-    int n = columnTitle.size();
-    double m = 1;
-    double r = 0;
-
-    while(n > 0) {
-        r += (columnTitle[n-1]-'A'+1) * m;
-        n--;
+    int n=columnTitle.size()-1;
+    long res=0, m=1; // m累乘後會可能overflow，過程中用long來計算
+    for(int i=n; i>=0; --i) {
+        res += (columnTitle[i] - 'A' + 1)*m; // 相對於某個值減後需+1
         m *= 26;
     }
-    return static_cast<int> (r);
+    return static_cast<int> (res); // 轉成int回傳。
 }
 
 string LC0168::convertToTitle(int columnNumber) {
