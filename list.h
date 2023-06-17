@@ -327,12 +327,8 @@ struct LC0944 { int minDeletionSize(vector<string>& strs); };
 struct LC0941 { bool validMountainArray(vector<int>& arr); };
 struct LC0908 { int smallestRangeI(vector<int>& nums, int k); };
 struct LC0896 { bool isMonotonic(vector<int>& nums); };
-struct LC0892 { int surfaceArea(vector<vector<int>>& grid); };
-struct LC0883 { int projectionArea(vector<vector<int>>& grid); };
-struct LC0867 { vector<vector<int>> transpose(vector<vector<int>>& matrix); };
 /*有backspace字符的兩list是否是相同的字串*/
 struct LC0844 { bool backspaceCompare(string s, string t); };
-struct LC0832 { vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image); };
 /*有幾組連續字符*/
 struct LC0830 { vector<vector<int>> largeGroupPositions(string s); };
 /*每個離特定字符最近的距離*/
@@ -340,16 +336,12 @@ struct LC0821 { vector<int> shortestToChar(string s, char c); };
 struct LC0812 { double largestTriangleArea(vector<vector<int>>& points); };
 /*一段文字可分幾行*/
 struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
-struct LC0766 { bool isToeplitzMatrix(vector<vector<int>>& matrix); };
 struct LC0724 { int pivotIndex(vector<int>& nums); };
 struct LC0682 { int calPoints(vector<string>& operations); };
 struct LC0674 { int findLengthOfLCIS(vector<int>& nums); };
-struct LC0661 { vector<vector<int>> imageSmoother(vector<vector<int>>& img); };
 struct LC0643 { double findMaxAverage(vector<int>& nums, int k); };
 /*在一系列操作後，二為陣列裡最大數的個數*/
 struct LC0598 { int maxCount(int m, int n, vector<vector<int>>& ops); };
-/*重塑矩陣大小*/
-struct LC0566 { vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c); };
 /*反轉一句話裡的每一個單詞*/
 struct LC0557 { string reverseWords(string s); };
 /*統計出勤紀錄判斷是否合格*/
@@ -358,8 +350,6 @@ struct LC0551 { bool checkRecord(string s); };
 struct LC0541 { string reverseStr(string s, int k); };
 /*求矩陣裡最長連續1的長度*/
 struct LC0485 { int findMaxConsecutiveOnes(vector<int>& nums); };
-/*求二為陣列裡小島的周長*/
-struct LC0463 { int islandPerimeter(vector<vector<int>>& grid); };
 /*回傳陣列裡第三大的數*/
 struct LC0414 { int thirdMax(vector<int>& nums); };
 /*反轉字符陣列*/
@@ -370,6 +360,38 @@ struct LC0122 { int maxProfit(vector<int>& prices); };
 struct LC0121 { int maxProfit(vector<int>& prices); };
 struct LC0119 { vector<int> getRow(int rowIndex); };
 struct LC0118 { vector<vector<int>> generate(int numRows); };
+
+// Matrix
+/*
+ *   **** x
+ *   *
+ *   *
+ *   y
+ *
+ *   一行一行處理：
+ *   for(y)
+ *      for(x)
+ *          array[y][x]
+ *
+ *   一列一列處理：
+ *   for(x)
+ *      for(y)
+ *          array[y][x]
+ */
+struct LC1260 { vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k); };
+// struct LC1030 { vector<vector<int>> allCellsDistOrder(int rows, int cols, int rCenter, int cCenter); }; // sort.h
+// struct LC0999 { int numRookCaptures(vector<vector<char>>& board); }; // search.h
+struct LC0892 { int surfaceArea(vector<vector<int>>& grid); };
+struct LC0883 { int projectionArea(vector<vector<int>>& grid); };
+struct LC0867 { vector<vector<int>> transpose(vector<vector<int>>& matrix); };
+struct LC0832 { vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image); };
+struct LC0766 { bool isToeplitzMatrix(vector<vector<int>>& matrix); };
+// struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); }; // search.h
+struct LC0661 { vector<vector<int>> imageSmoother(vector<vector<int>>& img); };
+/*重塑矩陣大小*/
+struct LC0566 { vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c); };
+/*求二為陣列裡小島的周長*/
+struct LC0463 { int islandPerimeter(vector<vector<int>>& grid); };
 
 // Link List
 /*二進位轉十進位*/

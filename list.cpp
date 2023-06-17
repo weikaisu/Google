@@ -752,23 +752,6 @@ int LC0026::removeDuplicates(vector<int>& nums) {
 }
 
 /***********  Array List  **********/
-/*
- *   **** x
- *   *
- *   *
- *   y
- *
- *   一行一行處理：
- *   for(y)
- *      for(x)
- *          array[y][x]
- *
- *   一列一列處理：
- *   for(x)
- *      for(y)
- *          array[y][x]
- */
-
 int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destination) {
     // 有n个公交站形成了一个环，它们之间的距离用一个数组 distance 表示，其中 distance[i] 表示公交站i和 (i+1)%n 之间的距离。说是公交可以
     // 顺时针和逆时针的开，问给定的任意起点和终点之间的最短距离。对于一道 Easy 题的身价，没有太多的技巧而言，主要就是考察了一个循环数组，求任
@@ -918,70 +901,6 @@ bool LC0896::isMonotonic(vector<int>& nums) {
 //    return (inc==n || dec==n);
 }
 
-int LC0892::surfaceArea(vector<vector<int>>& grid) {
-    // 给了我们一个二维数组 grid，其中 grid[i][j] 表示在位置 (i,j) 上累计的小正方体的个数，实际上就像搭积木一样，由这些小正方体来组成一个
-    // 三维的物体，这里让我们求这个三维物体的表面积。我们知道每个小正方体的表面积是6，若在同一个位置累加两个，表面积就是10，三个累加到了一起
-    // 就是14，其实是有规律的，n个小正方体累在一起，表面积是 4n+2。现在不仅仅是累加在一个小正方体上，而是在 nxn 的区间，累加出一个三维物体。
-    // 由于之前做过那道三维物体投影的题 Projection Area of 3D Shapes，所以博主很思维定势的想到是不是也跟投影有关，然后又想当然的认为三维
-    // 物体每一个面的面积就是该方向的投影，那么我们把三个方向的投影之和算出来，再乘以2不就是表面积了么？实际上这种方法是错误的，就拿题目中的例
-    // 子4来说，当中间的小方块缺失了之后，实际上缺失的地方会产生出四个新的面，而这四个面是应该算在表面积里的，但是用投影的方法是没法算进去的。
-    // 无奈只能另辟蹊径，实际上这道题正确的思路是一个位置一个位置的累加表面积，就类似微积分的感觉
-    
-    // 当n个小正方体累到一起的表面积是
-    // 4n+1，而这个n就是每个位置的值 grid[i][j]，当你在旁边紧挨着再放一个累加的物体时，二者就会产生重叠，重叠的面数就是二者较矮的那堆正方体
-    // 的个数再乘以2，明白了这一点，我们就可以从 (0,0) 位置开始累加，先根据 grid[0][0] 的值算出若仅有该位置的三维物体的表面积，然后向 (0,1)
-    // 位置遍历，同样要先根据 grid[0][1] 的值算出若仅有该位置的三维物体的表面积，跟之前 grid[0][0] 的累加，然后再减去遮挡住的面积，通过
-    // min(grid[0][0],grid[0][1])x2 来得到，这样每次可以计算出水平方向的遮挡面积，同时还需要减去竖直方向的遮挡面积
-    // min(grid[i][j],grid[i-1][j])x2，这样才能算出正确的表面积
-    int m=grid.size(), res=0;
-    for(int y=0; y<m; y++)
-        for(int x=0; x<m; x++) {
-            int val = grid[y][x];
-            if(val) res += 4*val + 2;
-            if(y) res -= std::min(val, grid[y-1][x]) * 2;
-            if(x) res -= std::min(val, grid[y][x-1]) * 2;
-        }
-    return res;
-}
-
-int LC0883::projectionArea(vector<vector<int>>& grid) {
-    // 给了我们一个二维数组 grid，用来表示一个 3D 物体形状，表示方法是 grid[i][j] 表示在 (i, j) 位置上的高度，就像垒积木一样，累出了一个
-    // 三维物体。然后让我们计算三个方向的投影面积之和，所谓的三个方向分别是上方 Top，前方 Front，和侧方 Side。用过一些三维建模软件（例如
-    // Maya， 3DMax）的同学，对这个应该不陌生。我们先来考虑正上方投影面积如何计算，由于题目中说了 grid 数组的宽和高相等，那么上方投影就是一
-    // 个正方形，前提是每个 grid[i][j] 的值都大于0的话。因为若 grid 数组中有0存在，则表示正方形投影会缺少了一块。由于这个大的正方形投影是
-    // 由 nxn 个小的正方形组成，那么实际上我们只要统计出小正方形的个数，那么大正方形投影的面积也就知道了（是不有点微积分的感觉）。所以我们在
-    // 遍历的过程中，只要判断若 grid[i][j] 大于0，则结果 res 自增1即可。下面再来考虑另外两个方向的投影怎么计算，另两个方向的投影的可能是
-    // 不规则图形，参见题目中给的那个图，如果仔细观察的话，其投影图像的每个阶段的高其实就是各行或各列中的最大值，这也不难理解，就像城市中耸立
-    // 的高度不同的大楼，若要描出城市的轮廓，那么描出来的肯定都是每个位置上最高建筑物的轮廓。那么问题就变成了累加各行各列的最大值。我们实际上
-    // 在一次遍历中就能完成，使用了一个小 trick，那就是在第二层 for 循环中，行最大值 rowMax 就是不断用 grid[i][j] 来更新，而列最大值
-    // colMax 就是不断用 grid[j][i] 来更新，巧妙的交换i和j，实现了目标。然后分别把更新出来的行列最大值加到结果 res 中即可
-    int m=grid.size();
-    int res=0;
-    for(int y=0; y<m; y++) {
-        int rowMax=0, colMax=0;
-        for (int x = 0; x < m; x++) {
-            if(grid[y][x]) res++;
-            rowMax = std::max(rowMax, grid[y][x]);
-            colMax = std::max(colMax, grid[x][y]);
-        }
-        res += rowMax + colMax;
-    }
-    return res;
-}
-
-vector<vector<int>> LC0867::transpose(vector<vector<int>>& matrix) {
-    // 转置一个矩阵，在大学的线性代数中，转置操作应该说是非常的常见。所谓矩阵的转置，就是把 mxn 的矩阵变为 nxm 的，并且原本在 A[i][j] 位置
-    // 的数字变到 A[j][i] 上即可，非常的简单直接。而且由于此题又限定了矩阵的大小范围为 [1, 1000]，所以不存在空矩阵的情况，因而不用开始时对
-    // 矩阵进行判空处理，直接去获取矩阵的宽和高即可。又因为之前说了转置会翻转原矩阵的宽和高，所以我们新建一个 nxm 的矩阵，然后遍历原矩阵中的每
-    // 个数，将他们赋值到新矩阵中对应的位置上即可
-    int m=matrix.size(), n=matrix[0].size();
-    vector<vector<int>> res(n, vector<int>(m));
-    for(int y=0; y<m; y++)
-        for(int x=0; x<n; x++)
-            res[x][y] = matrix[y][x];
-    return res;
-}
-
 bool LC0844::backspaceCompare(string s, string t) {
     // 我们使用常数级的空间复杂度，就是说不能新建空的字符串来保存处理之后的结果，那么只能在遍历的过程中同时进行比较，只能使用双指针同时
     // 遍历S和T串了。我们采用从后往前遍历，因为退格是要删除前面的字符，所以倒序遍历要好一些。用变量i和j分别指向S和T串的最后一个字符的位置，
@@ -1006,28 +925,6 @@ bool LC0844::backspaceCompare(string s, string t) {
 //    for(auto &c:s) c=='#' ? strs.size() ? strs.pop_back() : void() : strs.push_back(c);
 //    for(auto &c:t) c=='#' ? strt.size() ? strt.pop_back() : void() : strt.push_back(c);
 //    return strs==strt;
-}
-
-vector<vector<int>> LC0832::flipAndInvertImage(vector<vector<int>>& image) {
-    // 这道题让我们翻转图像，翻转的方法是对于二维数组的每一行，先将所有元素位置翻转一下，然后再按顺序将每个像素值取个反。既然要求这么直接明了，
-    // 那么就按照其说的一步一步来呗，首先翻转每一行，记得一定要加 ‘&’ 号，不然原数组不会被修改。然后在遍历每个数字，让其或上1，达到取反的目的，
-    // 当然还是必须要加 ‘&’ 号，最后返回修改后的A数组即可
-//    for(auto &row:image)
-//        std::reverse(row.begin(), row.end());
-//    for(auto &row:image)
-//        for(auto &e:row)
-//            e ^= 1;
-//    return image;
-
-    // 上面的方法虽然直接了当，但是毕竟修改了原数组A，再来看一种不修改的方法，这里我们新建一个跟A一样长的二维数组，只不过里面的各行还是空的。
-    // 然后我们遍历A数组的各行，但在遍历各行上的数字时，我们采用从后往前的遍历顺序，然后对于每个数字取反在加入结果res中，这样直接将翻转和取
-    // 反同时完成了
-    int n=image.size();
-    vector<vector<int>> res(n);
-    for(int y=0; y<n; y++)
-        for(int x=n-1; x>=0; x--)
-            res[y].push_back(!image[y][x]); // push_back到第y row
-    return res;
 }
 
 vector<vector<int>> LC0830::largeGroupPositions(string s) {
@@ -1105,17 +1002,6 @@ vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
     return vector<int> {l,n};
 }
 
-bool LC0766::isToeplitzMatrix(vector<vector<int>>& matrix) {
-    // 这道题让我们验证一个矩阵是否是托普利兹矩阵Toeplitz Matrix，所谓的这个托普利兹矩阵，就是看每条从左上到右下的对角线是否是值都相等。
-    // 注意矩阵的行数列数不一定相等，要验证所有的对角线。那么其实这道题的本质是让我们斜向遍历矩阵，就是按对角线来。按正常顺序来遍历数组，
-    // 对于每个遍历到的数字，都跟其右下方的数字对比，如果不相同，直接返回false即可。为了防止越界，我们不遍历最后一行和最后一列，遍历完成后，
-    // 返回true
-    for(int y=0; y<matrix.size()-1; y++)
-        for(int x=0; x<matrix[0].size()-1; x++)
-            if(matrix[y][x] != matrix[y+1][x+1]) return false;
-    return true;
-}
-
 int LC0724::pivotIndex(vector<int>& nums) {
     // 给了我们一个数组，让我们求一个中枢点，使得该位置左右两边的子数组之和相等。这道题难度不大，直接按题意去搜索就行了，因为中枢点可能出现的
     // 位置就是数组上的位置，所以我们搜索一遍就可以找出来，我们先求出数组的总和，然后维护一个当前数组之和curSum，然后对于遍历到的位置，用总
@@ -1190,26 +1076,6 @@ int LC0674::findLengthOfLCIS(vector<int>& nums) {
     return res;
 }
 
-vector<vector<int>> LC0661::imageSmoother(vector<vector<int>>& img) {
-    // 给一个图片进行平滑处理，一般来说都是用算子来跟图片进行卷积，但是由于这道题只是个Easy的题目，我们直接用土办法就能解了，就直接对于每一个
-    // 点统计其周围点的个数，然后累加像素值，做个除法就行了，注意边界情况的处理
-    if(img.empty() || img[0].empty()) return {};
-    const int m=img.size(), n=img[0].size();
-    vector<vector<int>> res=img, dirs{ {-1,-1}, {0,-1}, {1,-1}, {-1,0}, {1,0}, {-1,1}, {0,1}, {1,1} }; // {x, y}
-    for(int y=0; y<m; y++)
-        for(int x=0; x<n; x++) {
-            int val = img[y][x], cnt = 1;
-            for(auto dir:dirs) {
-                int col=x+dir[0], raw=y+dir[1];
-                if(col<0 || col>=n || raw<0 || raw>=m) continue;
-                val+=img[raw][col];
-                cnt++;
-            }
-            res[y][x] = val/cnt;
-        }
-    return res;
-}
-
 double LC0643::findMaxAverage(vector<int>& nums, int k) {
     // 这道题给了我们一个数组nums，还有一个数字k，让我们找长度为k且平均值最大的子数组。由于子数组必须是连续的，所以我们不能给数组排序。计算
     // 子数组之和的常用方法应该是建立累加数组，然后我们可以快速计算出任意一个长度为k的子数组，用来更新结果res，从而得到最大的那个
@@ -1245,16 +1111,6 @@ int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {
         n = min(n, op[1]);
     }
     return m*n;
-}
-
-vector<vector<int>> LC0566::matrixReshape(vector<vector<int>>& mat, int r, int c) {
-    // 遍历拉直后的一维数组的坐标，然后分别转换为两个二维数组的坐标进行赋值
-    int m=mat.size(), n=mat[0].size();
-    if(m*n != r*c) return mat;
-    vector<vector<int>> res(r, vector<int>(c));
-    for(int i=0; i<r*c; i++)
-        res[i/c][i%c]=mat[i/n][i%n];
-    return res;
 }
 
 string LC0557::reverseWords(string s) {
@@ -1319,22 +1175,6 @@ int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
 //        res = max(res, sum);
 //    }
 //    return res;
-}
-
-int LC0463::islandPerimeter(vector<vector<int>>& grid) {
-    // 这道题给了我们一个格子图，若干连在一起的格子形成了一个小岛，规定了图中只有一个相连的岛，且岛中没有湖，让我们求岛的周长。我们知道一个格
-    // 子有四条边，但是当两个格子相邻，周围为6，若某个格子四周都有格子，那么这个格子一条边都不算在周长里。那么我们怎么统计出岛的周长呢？
-    // 对于每个岛屿格子先默认加上四条边，然后检查其左面和上面是否有岛屿格子，有的话分别减去两条边，这样也能得到正确的结果
-    if(grid.empty() || grid[0].empty()) return 0;
-    int res=0, m=grid.size(), n=grid[0].size();
-    for(int i=0; i<m; i++)
-        for(int j=0; j<n; j++) {
-            if(!grid[i][j]) continue;
-            res+=4;
-            if(i && grid[i-1][j]) res-=2;
-            if(j && grid[i][j-1]) res-=2;
-        }
-    return res;
 }
 
 int LC0414::thirdMax(vector<int>& nums) {
@@ -1422,6 +1262,164 @@ vector<vector<int>> LC0118::generate(int numRows) {
         for(int j=1; j<i; ++j)
             res[i][j] = res[i-1][j] + res[i-1][j-1];
     }
+    return res;
+}
+
+/***********  Matrix  **********/
+vector<vector<int>> LC1260::shiftGrid(vector<vector<int>>& grid, int k) {
+    int m=grid.size(), n=grid[0].size(), len=m*n;
+    if(!(k%len)) return grid; // k是len的倍數，等於沒有shift
+    k %= len; // k簡化成len的餘數即可
+    vector<vector<int>> res(m, vector<int>(n));
+
+    for(int y=0; y<m; ++y)
+        for(int x=0; x<n; ++x) {
+            int idx = (y*n + x + k) % len;
+            res[idx/n][idx%n] = grid[y][x];
+        }
+    return res;
+}
+
+int LC0892::surfaceArea(vector<vector<int>>& grid) {
+    // 给了我们一个二维数组 grid，其中 grid[i][j] 表示在位置 (i,j) 上累计的小正方体的个数，实际上就像搭积木一样，由这些小正方体来组成一个
+    // 三维的物体，这里让我们求这个三维物体的表面积。我们知道每个小正方体的表面积是6，若在同一个位置累加两个，表面积就是10，三个累加到了一起
+    // 就是14，其实是有规律的，n个小正方体累在一起，表面积是 4n+2。现在不仅仅是累加在一个小正方体上，而是在 nxn 的区间，累加出一个三维物体。
+    // 由于之前做过那道三维物体投影的题 Projection Area of 3D Shapes，所以博主很思维定势的想到是不是也跟投影有关，然后又想当然的认为三维
+    // 物体每一个面的面积就是该方向的投影，那么我们把三个方向的投影之和算出来，再乘以2不就是表面积了么？实际上这种方法是错误的，就拿题目中的例
+    // 子4来说，当中间的小方块缺失了之后，实际上缺失的地方会产生出四个新的面，而这四个面是应该算在表面积里的，但是用投影的方法是没法算进去的。
+    // 无奈只能另辟蹊径，实际上这道题正确的思路是一个位置一个位置的累加表面积，就类似微积分的感觉
+    
+    // 当n个小正方体累到一起的表面积是
+    // 4n+1，而这个n就是每个位置的值 grid[i][j]，当你在旁边紧挨着再放一个累加的物体时，二者就会产生重叠，重叠的面数就是二者较矮的那堆正方体
+    // 的个数再乘以2，明白了这一点，我们就可以从 (0,0) 位置开始累加，先根据 grid[0][0] 的值算出若仅有该位置的三维物体的表面积，然后向 (0,1)
+    // 位置遍历，同样要先根据 grid[0][1] 的值算出若仅有该位置的三维物体的表面积，跟之前 grid[0][0] 的累加，然后再减去遮挡住的面积，通过
+    // min(grid[0][0],grid[0][1])x2 来得到，这样每次可以计算出水平方向的遮挡面积，同时还需要减去竖直方向的遮挡面积
+    // min(grid[i][j],grid[i-1][j])x2，这样才能算出正确的表面积
+    int m=grid.size(), res=0;
+    for(int y=0; y<m; y++)
+        for(int x=0; x<m; x++) {
+            int val = grid[y][x];
+            if(val) res += 4*val + 2;
+            if(y) res -= std::min(val, grid[y-1][x]) * 2;
+            if(x) res -= std::min(val, grid[y][x-1]) * 2;
+        }
+    return res;
+}
+
+int LC0883::projectionArea(vector<vector<int>>& grid) {
+    // 给了我们一个二维数组 grid，用来表示一个 3D 物体形状，表示方法是 grid[i][j] 表示在 (i, j) 位置上的高度，就像垒积木一样，累出了一个
+    // 三维物体。然后让我们计算三个方向的投影面积之和，所谓的三个方向分别是上方 Top，前方 Front，和侧方 Side。用过一些三维建模软件（例如
+    // Maya， 3DMax）的同学，对这个应该不陌生。我们先来考虑正上方投影面积如何计算，由于题目中说了 grid 数组的宽和高相等，那么上方投影就是一
+    // 个正方形，前提是每个 grid[i][j] 的值都大于0的话。因为若 grid 数组中有0存在，则表示正方形投影会缺少了一块。由于这个大的正方形投影是
+    // 由 nxn 个小的正方形组成，那么实际上我们只要统计出小正方形的个数，那么大正方形投影的面积也就知道了（是不有点微积分的感觉）。所以我们在
+    // 遍历的过程中，只要判断若 grid[i][j] 大于0，则结果 res 自增1即可。下面再来考虑另外两个方向的投影怎么计算，另两个方向的投影的可能是
+    // 不规则图形，参见题目中给的那个图，如果仔细观察的话，其投影图像的每个阶段的高其实就是各行或各列中的最大值，这也不难理解，就像城市中耸立
+    // 的高度不同的大楼，若要描出城市的轮廓，那么描出来的肯定都是每个位置上最高建筑物的轮廓。那么问题就变成了累加各行各列的最大值。我们实际上
+    // 在一次遍历中就能完成，使用了一个小 trick，那就是在第二层 for 循环中，行最大值 rowMax 就是不断用 grid[i][j] 来更新，而列最大值
+    // colMax 就是不断用 grid[j][i] 来更新，巧妙的交换i和j，实现了目标。然后分别把更新出来的行列最大值加到结果 res 中即可
+    int m=grid.size();
+    int res=0;
+    for(int y=0; y<m; y++) {
+        int rowMax=0, colMax=0;
+        for (int x = 0; x < m; x++) {
+            if(grid[y][x]) res++;
+            rowMax = std::max(rowMax, grid[y][x]);
+            colMax = std::max(colMax, grid[x][y]);
+        }
+        res += rowMax + colMax;
+    }
+    return res;
+}
+
+vector<vector<int>> LC0867::transpose(vector<vector<int>>& matrix) {
+    // 转置一个矩阵，在大学的线性代数中，转置操作应该说是非常的常见。所谓矩阵的转置，就是把 mxn 的矩阵变为 nxm 的，并且原本在 A[i][j] 位置
+    // 的数字变到 A[j][i] 上即可，非常的简单直接。而且由于此题又限定了矩阵的大小范围为 [1, 1000]，所以不存在空矩阵的情况，因而不用开始时对
+    // 矩阵进行判空处理，直接去获取矩阵的宽和高即可。又因为之前说了转置会翻转原矩阵的宽和高，所以我们新建一个 nxm 的矩阵，然后遍历原矩阵中的每
+    // 个数，将他们赋值到新矩阵中对应的位置上即可
+    int m=matrix.size(), n=matrix[0].size();
+    vector<vector<int>> res(n, vector<int>(m));
+    for(int y=0; y<m; y++)
+        for(int x=0; x<n; x++)
+            res[x][y] = matrix[y][x];
+    return res;
+}
+
+vector<vector<int>> LC0832::flipAndInvertImage(vector<vector<int>>& image) {
+    // 这道题让我们翻转图像，翻转的方法是对于二维数组的每一行，先将所有元素位置翻转一下，然后再按顺序将每个像素值取个反。既然要求这么直接明了，
+    // 那么就按照其说的一步一步来呗，首先翻转每一行，记得一定要加 ‘&’ 号，不然原数组不会被修改。然后在遍历每个数字，让其或上1，达到取反的目的，
+    // 当然还是必须要加 ‘&’ 号，最后返回修改后的A数组即可
+//    for(auto &row:image)
+//        std::reverse(row.begin(), row.end());
+//    for(auto &row:image)
+//        for(auto &e:row)
+//            e ^= 1;
+//    return image;
+
+    // 上面的方法虽然直接了当，但是毕竟修改了原数组A，再来看一种不修改的方法，这里我们新建一个跟A一样长的二维数组，只不过里面的各行还是空的。
+    // 然后我们遍历A数组的各行，但在遍历各行上的数字时，我们采用从后往前的遍历顺序，然后对于每个数字取反在加入结果res中，这样直接将翻转和取
+    // 反同时完成了
+    int n=image.size();
+    vector<vector<int>> res(n);
+    for(int y=0; y<n; y++)
+        for(int x=n-1; x>=0; x--)
+            res[y].push_back(!image[y][x]); // push_back到第y row
+    return res;
+}
+
+bool LC0766::isToeplitzMatrix(vector<vector<int>>& matrix) {
+    // 这道题让我们验证一个矩阵是否是托普利兹矩阵Toeplitz Matrix，所谓的这个托普利兹矩阵，就是看每条从左上到右下的对角线是否是值都相等。
+    // 注意矩阵的行数列数不一定相等，要验证所有的对角线。那么其实这道题的本质是让我们斜向遍历矩阵，就是按对角线来。按正常顺序来遍历数组，
+    // 对于每个遍历到的数字，都跟其右下方的数字对比，如果不相同，直接返回false即可。为了防止越界，我们不遍历最后一行和最后一列，遍历完成后，
+    // 返回true
+    for(int y=0; y<matrix.size()-1; y++)
+        for(int x=0; x<matrix[0].size()-1; x++)
+            if(matrix[y][x] != matrix[y+1][x+1]) return false;
+    return true;
+}
+
+vector<vector<int>> LC0661::imageSmoother(vector<vector<int>>& img) {
+    // 给一个图片进行平滑处理，一般来说都是用算子来跟图片进行卷积，但是由于这道题只是个Easy的题目，我们直接用土办法就能解了，就直接对于每一个
+    // 点统计其周围点的个数，然后累加像素值，做个除法就行了，注意边界情况的处理
+    if(img.empty() || img[0].empty()) return {};
+    const int m=img.size(), n=img[0].size();
+    vector<vector<int>> res=img, dirs{ {-1,-1}, {0,-1}, {1,-1}, {-1,0}, {1,0}, {-1,1}, {0,1}, {1,1} }; // {x, y}
+    for(int y=0; y<m; y++)
+        for(int x=0; x<n; x++) {
+            int val = img[y][x], cnt = 1;
+            for(auto dir:dirs) {
+                int col=x+dir[0], raw=y+dir[1];
+                if(col<0 || col>=n || raw<0 || raw>=m) continue;
+                val+=img[raw][col];
+                cnt++;
+            }
+            res[y][x] = val/cnt;
+        }
+    return res;
+}
+
+vector<vector<int>> LC0566::matrixReshape(vector<vector<int>>& mat, int r, int c) {
+    // 遍历拉直后的一维数组的坐标，然后分别转换为两个二维数组的坐标进行赋值
+    int m=mat.size(), n=mat[0].size();
+    if(m*n != r*c) return mat;
+    vector<vector<int>> res(r, vector<int>(c));
+    for(int i=0; i<r*c; i++)
+        res[i/c][i%c]=mat[i/n][i%n];
+    return res;
+}
+
+int LC0463::islandPerimeter(vector<vector<int>>& grid) {
+    // 这道题给了我们一个格子图，若干连在一起的格子形成了一个小岛，规定了图中只有一个相连的岛，且岛中没有湖，让我们求岛的周长。我们知道一个格
+    // 子有四条边，但是当两个格子相邻，周围为6，若某个格子四周都有格子，那么这个格子一条边都不算在周长里。那么我们怎么统计出岛的周长呢？
+    // 对于每个岛屿格子先默认加上四条边，然后检查其左面和上面是否有岛屿格子，有的话分别减去两条边，这样也能得到正确的结果
+    if(grid.empty() || grid[0].empty()) return 0;
+    int res=0, m=grid.size(), n=grid[0].size();
+    for(int i=0; i<m; i++)
+        for(int j=0; j<n; j++) {
+            if(!grid[i][j]) continue;
+            res+=4;
+            if(i && grid[i-1][j]) res-=2;
+            if(j && grid[i][j-1]) res-=2;
+        }
     return res;
 }
 
