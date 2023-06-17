@@ -259,11 +259,11 @@ int LC0007::reverse(int x) {
     // Output: 321
     // Input: x = -123
     // Output: -321
-    int ans=0, max=INT32_MAX/10, min=INT32_MIN/10;
+    int res=0;
     while(x) {
-        if( ans>max || ans<min ) return 0;
-        ans = ans*10 + x%10;
-        x/=10;
+        if(std::abs(res) > INT_MAX/10) return 0;
+        res = res*10 + x%10;
+        x /= 10;
     }
-    return ans;
+    return res;
 }
