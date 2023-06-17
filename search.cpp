@@ -138,6 +138,20 @@ int LC0035::searchInsert(vector<int>& nums, int target) {
     return l;
 }
 
+int LC0069::mySqrt(int x) {
+    if(x<=1) return x;
+
+    int l=0, r=x/2, target=x;
+    while(l<=r) {
+        int m=l+(r-l)/2;
+        long long sqr = (long long) m*m; // m*m會overflow，需用long long
+        if(target > sqr) l=m+1;
+        else if(target < sqr) r=m-1;
+        else return m;
+    }
+    return r;
+}
+
 /***********  Depth First Search  **********/
 int LC0999::numRookCaptures(vector<vector<char>>& board) {
     // 这道题给了一个 8x8 大小的国际象棋棋盘，上面只能有三种棋子，分别是白方的车，白方的象，和黑方的兵，问白色方的车最多能吃到多个黑方的兵。
