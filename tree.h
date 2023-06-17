@@ -77,29 +77,36 @@ struct LC0530 { int getMinimumDifference(TreeNode* root); };
 struct LC0501 { vector<int> findMode(TreeNode* root); };
 struct LC0108 { TreeNode* sortedArrayToBST(vector<int>& nums); };
 
-/* Heap
+/*********** Heap ***********/
+/*
  * A specialized tree-based data structure which is essentially an almost complete[1] tree that satisfies the heap property:
  * In a max heap, for any given node C, if P is a parent node of C, then the key (the value) of P is greater than or equal to the key of C.
- * In a min heap, the key of P is less than or equal to the key of C*/
+ * In a min heap, the key of P is less than or equal to the key of C
+ */
 struct LC1337 { vector<int> kWeakestRows(vector<vector<int>>& mat, int k); };
-// LC0703
-//struct KthLargest { KthLargest(int k, vector<int>& nums); int add(int val); };
+// struct LC0703 KthLargest { KthLargest(int k, vector<int>& nums); int add(int val); };
 struct LC1046 { int lastStoneWeight(vector<int>& stones); };
 /*給定分數陣列，找出相對排名*/
 struct LC0506 { vector<string> findRelativeRanks(vector<int>& score); };
 
-/* Trie (Prefix tree or Digital Tree )
+/*********** Trie (Prefix tree or Digital Tree ) ***********/
+/*
  * A type of k-ary search tree, a tree data structure used for locating specific keys from within a set.
  * These keys are most often strings, with links between nodes defined not by the entire key, but by individual characters.
  * In order to access a key (to recover its value, change it, or remove it), the trie is traversed depth-first,
- * following the links between nodes, which represent each character in the key.*/
+ * following the links between nodes, which represent each character in the key.
+ */
 
-/* Segment tree (Statistic tree)
+/*********** Segment tree (Statistic tree) */
+/*
  * Used for storing information about intervals, or segments.
  * It allows querying which of the stored segments contain a given point.
- * In principle, a static structure; that is, it's a structure that cannot be modified once it's built*/
+ * In principle, a static structure; that is, it's a structure that cannot be modified once it's built
+ */
 
-/* Fenwick tree (Binary indexed tree)
- * A data structure that can efficiently update elements and calculate prefix sums in a table of numbers */
+/*********** Fenwick tree (Binary indexed tree) ***********/
+ /*
+  * A data structure that can efficiently update elements and calculate prefix sums in a table of numbers
+  */
 
 #endif //GOOGLE_TREE_H

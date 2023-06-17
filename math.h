@@ -4,7 +4,6 @@
 #include "main.h"
 using namespace std;
 
-/***********  Easy  **********/
 struct LC1037 { bool isBoomerang(vector<vector<int>>& points); };
 struct LC0836 { bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2); };
 struct LC0728 { vector<int> selfDividingNumbers(int left, int right); };
@@ -18,7 +17,5 @@ struct LC0258 { int addDigits(int num); };
 struct LC0171 { int titleToNumber(string columnTitle); };
 struct LC0168 { string convertToTitle(int columnNumber); };
 struct LC0007 { int reverse(int x); };
-
-/***********  Medium  **********/
 
 #endif //GOOGLE_MATH_H

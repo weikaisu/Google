@@ -1806,10 +1806,6 @@ int StackArithmetic::calculate(string str) {
     return s.top()-'0';
 }
 
-/***********  Medium  **********/
-
-/***********  Array List  **********/
-
 /***********  Linked List  **********/
 ListNode* LC0002::addTwoNumbers(ListNode* l1, ListNode* l2) {
     // 建立一个新链表，然后把输入的两个链表从头往后撸，每两个相加，添加一个新节点到新链表后面。为了避免两个输入链表同时为空，

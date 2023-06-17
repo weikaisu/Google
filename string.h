@@ -9,7 +9,6 @@
 
 using namespace std;
 
-/***********  Easy  **********/
 /*字串替換*/
 struct LC1309 { string freqAlphabets(string s); };
 /*將日期換算成一年的第幾天*/
@@ -82,6 +81,5 @@ struct LC0013 { int romanToInt(string s); };
 struct LC0009 { bool isPalindrome(int x); };
 /*zigzag掃描轉成line掃描*/
 struct LC0006 { string convert(string s, int numRows); };
-/***********  Medium  **********/
 
 #endif //GOOGLE_STRING_H

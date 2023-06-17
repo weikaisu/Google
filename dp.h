@@ -5,7 +5,7 @@
 #include "main.h"
 using namespace std;
 
-// Dynamic Programming
+/*********** Dynamic Programming ***********/
 struct LC0746 { int minCostClimbingStairs(vector<int>& cost); };
 struct LC0509 { int fib(int n); };
 /*回傳陣列某一區間值之和*/
@@ -13,7 +13,7 @@ struct LC0303 { vector<int> dp; LC0303(vector<int>& nums); int sumRange(int left
 struct LC0070 { int climbStairs(int n); };
 struct LC0053 { int maxSubArray(vector<int>& nums); };
 
-//Greedy
+/*********** Greedy ***********/
 /*給定字串最多能切分出多少個平衡字串*/
 struct LC1221 { int balancedStringSplit(string s); };
 struct LC1217 { int minCostToMoveChips(vector<int>& position); };
