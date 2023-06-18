@@ -419,7 +419,7 @@ vector<string> LC0401::readBinaryWatch(int turnedOn) {
 
 bool LC0342::isPowerOfFour(int n) {
     // 这道题让我们判断一个数是否为4的次方数，那么最直接的方法就是不停的除以4，看最终结果是否为1
-//    while(n && !(n%4))
+//    while(n>0 && !(n%4))
 //        n /= 4;
 //    return n==1;
 

@@ -10,10 +10,13 @@ struct LC0728 { vector<int> selfDividingNumbers(int left, int right); };
 struct LC0507 { bool checkPerfectNumber(int num); };
 struct LC0504 { string convertToBase7(int num); };
 struct LC0492 { vector<int> constructRectangle(int area); };
+// bool LC0342::isPowerOfFour(int n) // bit.h
 struct LC0326 { bool isPowerOfThree(int n); };
+// struct LC0231 { bool isPowerOfTwo(int n); }; // bit.h
 struct LC0292 { bool canWinNim(int n); };
 struct LC0263 { bool isUgly(int n); };
 struct LC0258 { int addDigits(int num); };
+
 struct LC0171 { int titleToNumber(string columnTitle); };
 struct LC0168 { string convertToTitle(int columnNumber); };
 /*羅馬數字轉整數*/

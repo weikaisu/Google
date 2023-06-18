@@ -83,11 +83,11 @@ int LC0374::guessNumber(int n) {
 
 bool LC0367::isPerfectSquare(int num) {
     // 给了我们一个数，让我们判断其是否为完全平方数，使用二分查找法来做，要查找的数为 mid*mid
-    int l=0, r=num;
-    while (l<=r) {
-        long m=l+(r-l)/2, mm=m*m; // 處理平方，用long避免overflow
-        if (num > mm) l=m+1;
-        else if (num < mm) r=m-1;
+    long l=1, r=num+1l, target=num; // x值可能很大，需用long
+    while(l<r) {
+        long m = l+(r-l)/2;
+        if(m*m > target) r=m;
+        else if(m*m < target) l=m+1;
         else return true;
     }
     return false;
@@ -127,29 +127,25 @@ int LC0278::firstBadVersion(int n) {
 //int target=5;
 //cout << run.searchInsert(nums, target) << endl;
 int LC0035::searchInsert(vector<int>& nums, int target) {
-    int l=0, r=nums.size();
-
+    unsigned l=0, r=nums.size();
     while(l<r) {
-        int m=l+(r-l)/2;
-        if(target>nums[m]) l=m+1;
-        else if(target<nums[m]) r=m;
+        unsigned m = l+(r-l)/2;
+        if(nums[m] > target) r=m;
+        else if(nums[m] < target) l=m+1;
         else return m;
     }
     return l;
 }
 
 int LC0069::mySqrt(int x) {
-    if(x<=1) return x;
-
-    int l=0, r=x/2, target=x;
-    while(l<=r) {
-        int m=l+(r-l)/2;
-        long long sqr = (long long) m*m; // m*m會overflow，需用long long
-        if(target > sqr) l=m+1;
-        else if(target < sqr) r=m-1;
+    long l=1, r=1l+x, target=x; // x值可能很大，需用long
+    while(l<r) {
+        long m = l+(r-l)/2;
+        if(m*m > target) r=m;
+        else if(m*m < target) l=m+1;
         else return m;
     }
-    return r;
+    return l-1;
 }
 
 /***********  Depth First Search  **********/
