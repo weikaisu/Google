@@ -83,10 +83,10 @@ vector<int> LC0492::constructRectangle(int area) {
 //    return {area/r, r};
 
     // 不想用开方运算sqrt的话，那就从1开始，看能不能整除，循环的终止条件是看平方值是否小于等于面积。會比使用sqrt性能更好。
-    int res=1;
-    for (int i=1; i*i<=area; i++)
-        if(area%i == 0) res=i;
-    return {area/res, res};
+    int w=1;
+    for(int i=2; i*i<=area; i++)
+        if(area%i == 0) w=i;
+    return vector{area/w, w};
 }
 
 bool LC0326::isPowerOfThree(int n) {

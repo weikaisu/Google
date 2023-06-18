@@ -353,7 +353,7 @@ string LC0405::toHex(int num) {
     // The complement or negation of a one's complement number x is 2^n-x-1. The negative of a one's complement is found
     // by inverting each bit, from 0 to 1 and from 1 to 0.
 
-    // 從大數開始除起，餘數可以一直往結果的字串後面串接，連續除基數，餘數是需不斷往結果的字串前面插入，以6為例。
+    // 從大數開始除起，餘數可以一直往結果的字串前面串接，連續除基數，餘數是需不斷往結果的字串前面插入，以6為例。
     // 6/2 = 3~0
     // 3/2 = 1~1
     // 1/2 = 0~1
