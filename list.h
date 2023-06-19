@@ -152,7 +152,7 @@ struct LC0724 { int pivotIndex(vector<int>& nums); };
 struct LC0682 { int calPoints(vector<string>& operations); };
 struct LC0674 { int findLengthOfLCIS(vector<int>& nums); };
 struct LC0643 { double findMaxAverage(vector<int>& nums, int k); };
-/*在一系列操作後，二為陣列裡最大數的個數*/
+/*在一系列操作後，二維陣列裡最大數的個數*/
 struct LC0598 { int maxCount(int m, int n, vector<vector<int>>& ops); };
 /*反轉一句話裡的每一個單詞*/
 struct LC0557 { string reverseWords(string s); };

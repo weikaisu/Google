@@ -15,6 +15,10 @@ bool LC0836::isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {
     // 求两个矩形是否是重叠，矩形的表示方法是用两个点，左下和右上点来定位的。
     // rec1 [x1, y1, x2, y2], rec2 [x3, y3, x4, y4]
     // 两个矩形在矩形1的右上角重叠 x1<x4 && x3<x2 && y1<y4 && y3<y2
+    //             (x4, y4)
+    //         (x2, y2)
+    //     (x3, y3)
+    // (x1, y1)
     return rec1[0] < rec2[2] && rec2[0] < rec1[2] && rec1[1] < rec2[3] && rec2[1] < rec1[3];
     // 两个矩形在矩形1的左上角重叠 x3<x2 && x1<x4 && y1<y4 && y3<y2
     // 两个矩形在矩形1的左下角重叠 x3<x2 && x1<x4 && y3<y2 && y1<y4
