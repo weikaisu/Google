@@ -31,6 +31,7 @@ struct LC0559 { int maxDepth(Node* root); };
 // struct LC0104 { int maxDepth(TreeNode* root); };
 
 /*********** Breadth First Search ***********/
+struct LC0671 { int findSecondMinimumValue(TreeNode* root); };
 // tree.h
 // struct LC0101 { bool isSymmetric(TreeNode* root); };
 // struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };

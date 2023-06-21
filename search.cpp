@@ -432,6 +432,49 @@ int LC0559::maxDepth(Node* root) {
     return level;
 }
 
+/*********** Breadth First Search ***********/
+int LC0671::findSecondMinimumValue(TreeNode* root) {
+    // 找二叉树中的第二小的结点值，并且给该二叉树做了一些限制，比如对于任意一个结点，要么其没有子结点，要么就同时有两个子结点，而且父结点值是
+    // 子结点值中较小的那个，当然两个子结点值可以相等。那么直接上暴力搜索呗，根据该树的附加条件可知，根结点一定是最小的结点值first，那么我们
+    // 只要找出第二小的值second即可，初始化为整型的最大值。然后对根结点调用递归函数，将first和second当作参数传进去即可。在递归函数中，如果
+    // 当前结点为空，直接返回，若当前结点孩值不等于first，说明其肯定比first要大，然后我们看其是否比second小，小的话就更新second，然后对当
+    // 前结点的左右子结点分别调用递归函数即可
+    // 32 bits INT範圍為-2147483648 ~ 2147483647
+    // recursive way
+//    int first=root->val, second=INT_MAX;
+//    bool found=false;
+//
+//    function<void(TreeNode*)> fun = [&](TreeNode* node) {
+//        if(!node) return;
+//        if(node->val != first) {
+//            second = std::min(second, node->val);
+//            found = true;
+//        }
+//        fun(node->left);
+//        fun(node->right);
+//    };
+//    fun(root);
+//    return found ? second : -1;
+
+    // iterative way
+    int first=root->val, second=INT_MAX;
+    bool found=false;
+    queue<TreeNode*> q{{root}};
+
+    while(q.size()) {
+        TreeNode* node = q.front(); q.pop();
+        if(node->val != first) {
+            second = std::min(second, node->val);
+            found = true;
+        }
+        if(node->left) q.push(node->left);
+        if(node->right) q.push(node->right);
+    }
+
+    return found ? second : -1;
+}
+
+/*********** Search ***********/
 // N個裡面取M個，N是nums的大小，所以不需要另外當參數傳，緊需要傳M即可
 void Search::Permutation(vector<int> nums, int m) {
     vector<vector<int>> res;
