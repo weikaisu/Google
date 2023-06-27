@@ -137,6 +137,7 @@ struct LC0989 { vector<int> addToArrayForm(vector<int>& num, int k); };
 /*刪除字符沒有排序好的column*/
 struct LC0944 { int minDeletionSize(vector<string>& strs); };
 struct LC0941 { bool validMountainArray(vector<int>& arr); };
+struct LC0933 { queue<int>q; LC0933(){}; int ping(int t); };
 struct LC0908 { int smallestRangeI(vector<int>& nums, int k); };
 struct LC0896 { bool isMonotonic(vector<int>& nums); };
 /*有backspace字符的兩list是否是相同的字串*/
