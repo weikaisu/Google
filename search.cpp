@@ -174,6 +174,51 @@ int LC0999::numRookCaptures(vector<vector<char>>& board) {
     return res;
 }
 
+bool LC0993::isCousins(TreeNode* root, int x, int y) {
+    // 定义了一种二叉树数的表兄弟结点，就是不属于同一个父结点，但是深度相同，现在给了两个结点值，问它们代表的结点是否是表兄弟结点。由于表兄弟
+    // 结点一定是属于同一层的，所以可以使用二叉树的层序遍历，就像之前那道 Binary Tree Level Order Traversal 一样。这里额外需要两个布尔
+    // 型变量 isX，isY 来记录x和y是否已经遍历到了。由于是层序遍历，所以 while 中需要有个 for 循环，在循环中，取出队首结点，然后看结点值是
+    // 否等于x或y，是的话标记布尔变量。然后检查当前结点的左右子结点是否分别是x和y，是的话直接返回 false。否则将左右子结点排入队列之中，若存
+    // 在的话。当前层遍历完了之后，检查 isX 和 isY 的值，若同时为 true，表示存在表兄弟结点，返回 true。若只有一个为 true 的话，说明二者不
+    // 在同一层，直接返回 false
+    // iterative way
+//    bool isX=false, isY=false;
+//    queue<TreeNode*> q{{root}};
+//    while(q.size()) {
+//        for(int i=q.size(); i>0; --i) {
+//            TreeNode* node = q.front(); q.pop();
+//            if(node->val == x) isX = true;
+//            if(node->val == y) isY = true;
+//            if(node->left && node->right) {
+//                int left = node->left->val, right = node->right->val;
+//                if((left==x && right==y)||(left==y && right==x)) return false;
+//            }
+//            if(node->left) q.push(node->left);
+//            if(node->right) q.push(node->right);
+//        }
+//        if(isX && isY) return true;
+//        if(isX || isY) return false;
+//    }
+//    return false;
+
+    // recursive way
+    int depthX=0, depthY=0;
+    bool isSameParent=false;
+
+    function<void(TreeNode*, int)> dfs = [&](TreeNode* node, int depth) {
+        if(node->val == x) depthX = depth;
+        if(node->val == y) depthY = depth;
+        if(node->left && node->right) {
+            int left = node->left->val, right = node->right->val;
+            if((left==x && right==y)||(left==y && right==x)) isSameParent = true;
+        }
+        if(node->left) dfs(node->left, depth+1);
+        if(node->right) dfs(node->right, depth+1);
+    };
+    dfs(root, 0);
+    return !isSameParent && depthX == depthY;
+}
+
 bool LC0965::isUnivalTree(TreeNode* root) {
     // 定义了一种单值二叉树，需要二叉树中所有的结点值相同。先给了一棵二叉树，问是不是单值二叉树。其实就是考察遍历二叉树，当然递归的方法在写法
     // 上最简单了。这里可以将每个结点值都跟根结点值进行比较，只要任意一个不相同，则表示不是单值二叉树。

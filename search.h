@@ -18,6 +18,7 @@ struct LC0069 { int mySqrt(int x); };
 
 /*********** Depth First Search ***********/
 struct LC0999 { int numRookCaptures(vector<vector<char>>& board); };
+struct LC0993 { bool isCousins(TreeNode* root, int x, int y); };
 struct LC0965 { bool isUnivalTree(TreeNode* root); };
 struct LC0784 { vector<string> letterCasePermutation(string s); };
 struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); };
