@@ -285,6 +285,25 @@ vector<vector<int>> LC0046::permute(vector<int>& nums) {
 //    return res;
 }
 
+bool LC0872::leafSimilar(TreeNode* root1, TreeNode* root2) {
+    // 定义了一种叶相似树，就是说若两棵树的叶结点按照从左向右的顺序取出来排成序列，若两个序列相同，则说明二者是叶结点相似树。其实本质就是按从
+    // 左到右的顺序打印二叉树的叶结点呗，那么根据这种顺序，我们采用先序遍历遍历比较好，遇到叶结点后直接将叶结点存入数组中，那么对于两个树遍历
+    // 后就分别得到两个包含叶结点的数组，最后再比较一下这两个数组是否相同即可
+    vector<int> leaf1, leaf2;
+    function<void(TreeNode*, vector<int>&)> dfs = [&](TreeNode* node, vector<int> &leaf) {
+        if(!node->left && !node->right) {
+            leaf.push_back(node->val);
+            return;
+        }
+        if(node->left) dfs(node->left, leaf);
+        if(node->right) dfs(node->right, leaf);
+    };
+
+    dfs(root1, leaf1);
+    dfs(root2, leaf2);
+    return leaf1 == leaf2;
+}
+
 vector<int> LC0590::postorder(Node* root) {
     // 求N叉树的后序遍历，由于有了之前那道 Binary Tree Postorder Traversal 的基础，了解了二叉树的后序遍历，则N叉树的后序遍历也就没有
     // 那么难了。首先还是用递归来做，在递归函数中，判空后，遍历子结点数组，对所有的子结点调用递归函数，然后在 for 循环之外在将当前结点值加入

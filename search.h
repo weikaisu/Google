@@ -23,6 +23,7 @@ struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr
 struct LC0077 { vector<vector<int>> combine(int n, int k); };
 struct LC0046 { vector<vector<int>> permute(vector<int>& nums); };
 // tree.h
+struct LC0872 { bool leafSimilar(TreeNode* root1, TreeNode* root2); };
 struct LC0590 { vector<int> postorder(Node* root); };
 struct LC0589 { vector<int> preorder(Node* root); };
 struct LC0572 { bool isSubtree(TreeNode* root, TreeNode* subRoot); };
