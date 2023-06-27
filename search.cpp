@@ -174,6 +174,27 @@ int LC0999::numRookCaptures(vector<vector<char>>& board) {
     return res;
 }
 
+bool LC0965::isUnivalTree(TreeNode* root) {
+    // 定义了一种单值二叉树，需要二叉树中所有的结点值相同。先给了一棵二叉树，问是不是单值二叉树。其实就是考察遍历二叉树，当然递归的方法在写法
+    // 上最简单了。这里可以将每个结点值都跟根结点值进行比较，只要任意一个不相同，则表示不是单值二叉树。
+    // recursive way
+//    if(!root) return true;
+//    if(root->left && root->left->val != root->val) return false;
+//    if(root->right && root->right->val != root->val) return false;
+//    return isUnivalTree(root->left) && isUnivalTree(root->right);
+
+    // iterative way
+    if(!root) return true;
+    queue<TreeNode*> q{{root}};
+    while(q.size()) {
+        TreeNode* node = q.front(); q.pop();
+        if(node->val != root->val) return false;
+        if(node->left) q.push(node->left);
+        if(node->right) q.push(node->right);
+    }
+    return true;
+}
+
 // LC0784 run;
 // vector<string> ans=run.letterCasePermutation("a1b2");
 // for(auto a:ans) cout << a << endl;
