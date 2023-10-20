@@ -271,6 +271,11 @@ TreeNode* LC0226::invertTree(TreeNode* root) {
     return root;
 }
 
+int LC0222::countNodes(TreeNode* root) {
+    // 给定了一棵完全二叉树，让我们求其节点的个数。直接用递归来统计结点的个数，根本不需要考虑什么完全二叉树还是完美二叉树，递归在手，遇 tree 不愁。
+    return root ? (1 + countNodes(root->left) + countNodes(root->right)) : 0;
+}
+
 vector<int> LC0145::postorderTraversal(TreeNode* root) {
     // 改变先序遍历的顺序来实现后序遍历。比起另一種方法會有較少的s.push，所以性能較好。
     if(!root) return {};

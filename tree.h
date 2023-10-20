@@ -60,6 +60,7 @@ struct LC0543 { int diameterOfBinaryTree(TreeNode* root); };
 struct LC0404 { int sumOfLeftLeaves(TreeNode* root); };
 struct LC0257 { vector<string> binaryTreePaths(TreeNode* root); };
 struct LC0226 { TreeNode* invertTree(TreeNode* root); };
+struct LC0222 { int countNodes(TreeNode* root); };
 struct LC0145 { vector<int> postorderTraversal(TreeNode* root); };
 struct LC0144 { vector<int> preorderTraversal(TreeNode* root); };
 struct LC0110 { bool isBalanced(TreeNode* root); };
