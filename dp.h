@@ -6,6 +6,8 @@
 using namespace std;
 
 /*********** Dynamic Programming ***********/
+struct LC1137 { int tribonacci(int n); };
+struct LC1025 { bool divisorGame(int n);};
 struct LC0746 { int minCostClimbingStairs(vector<int>& cost); };
 struct LC0509 { int fib(int n); };
 /*回傳陣列某一區間值之和*/

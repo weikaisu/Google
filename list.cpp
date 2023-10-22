@@ -752,6 +752,10 @@ int LC0026::removeDuplicates(vector<int>& nums) {
 }
 
 /***********  Array List  **********/
+vector<int> LC1103::distributeCandies(int candies, int num_people) {
+    return vector<int>(num_people);
+}
+
 int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destination) {
     // 有n个公交站形成了一个环，它们之间的距离用一个数组 distance 表示，其中 distance[i] 表示公交站i和 (i+1)%n 之间的距离。说是公交可以
     // 顺时针和逆时针的开，问给定的任意起点和终点之间的最短距离。对于一道 Easy 题的身价，没有太多的技巧而言，主要就是考察了一个循环数组，求任

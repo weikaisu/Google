@@ -2,6 +2,14 @@
 #include "dp.h"
 
 /***********  Dynamic Programming  **********/
+int LC1137::tribonacci(int n) {
+    return 0;
+}
+
+bool LC1025::divisorGame(int n) {
+    return true;
+}
+
 int LC0746::minCostClimbingStairs(vector<int>& cost) {
     // 这道题应该算是之前那道 Climbing Stairs 的拓展，这里不是求步数，而是每个台阶上都有一个 cost，让我们求爬到顶端的最小 cost 是多少。
     // 换汤不换药，还是用动态规划 Dynamic Programming 来做。这里定义一个一维的 dp数组，其中 dp[i] 表示爬到第i层的最小 cost，然后来想
