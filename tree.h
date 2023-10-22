@@ -53,6 +53,7 @@ struct TreeNode {
 class tree {};
 
 /***********  Binary Tree  **********/
+struct LC1022 { int sumRootToLeaf(TreeNode* root); };
 struct LC0637 { vector<double> averageOfLevels(TreeNode* root); };
 struct LC0617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };
 struct LC0606 { string tree2str(TreeNode* root); };

@@ -160,6 +160,34 @@ vector<string> LC0506::findRelativeRanks(vector<int>& score) {
 }
 
 /***********  Binary Tree  **********/
+int LC1022::sumRootToLeaf(TreeNode* root) {
+    // 给了一个结点值为0或1的二叉树，让返回所有从根结点到叶结点的路径组成的二进制数字的和。实际上就是一道变形的路径之和的题目，关于路径之和，
+    // LeetCode 有很多道题目，比如 Path Sum IV，Path Sum III，Binary Tree Maximum Path Sum，Path Sum II，Path Sum，和
+    // Minimum Path Sum 等等。还是要用递归来做，就使用先序遍历就可以了，使用一个变量 cur 记录从根结点到当前结点的路径的二进制数对应的十
+    // 进制的值，每当新加一个结点时，当前的数字要左移一位，也就是乘以2，再加上当前的结点值。若当前结点是个叶结点，则说明一条完整的路径已经找
+    // 到了，将数字加入结果 res，然后对左右子结点分别调用递归函数即可
+//    int res=0;
+//    function<void(TreeNode*, int)> fun = [&](TreeNode* node, int sum) {
+//        if(node == nullptr) return;
+//        sum = sum*2 + node->val;
+//        if(!node->left && !node->right)
+//            res += sum;
+//        fun(node->left, sum);
+//        fun(node->right, sum);
+//    };
+//    fun(root, 0);
+//    return res;
+
+    // 也可以写的更简洁一些，让 helper 函数返回路径之和的值，这样在更新完 cur 之和，只要判断是否是叶结点，是的话直接返回 cur，
+    // 否则返回对左右子结点调用递归函数的返回值之和即可
+    function<int(TreeNode*, int)> fun = [&](TreeNode* node, int sum) -> int {
+        if(node == nullptr) return 0;
+        sum = sum*2 + node->val;
+        return node->left == node->right ? sum : fun(node->left, sum) + fun(node->right, sum);
+    };
+    return fun(root, 0);
+}
+
 vector<double> LC0637::averageOfLevels(TreeNode* root) {
     if(!root) return {};
 
