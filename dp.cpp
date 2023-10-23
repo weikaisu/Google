@@ -3,7 +3,17 @@
 
 /***********  Dynamic Programming  **********/
 int LC1137::tribonacci(int n) {
-    return 0;
+    // let first=0, second=1, third=1. return first + second + third
+    int first=0, second=1, third=1;
+    if(n<2) return n;
+    for(int i=2; i<n; i++) { // i從2開始，表示n要從3開始才會做計算
+        int t = first;
+        first = second;
+        second = third;
+        // 先存後加，n-1進來時算的是第n個值
+        third = t + first + second;
+    }
+    return third;
 }
 
 bool LC1025::divisorGame(int n) {
@@ -52,14 +62,25 @@ int LC0746::minCostClimbingStairs(vector<int>& cost) {
 
 int LC0509::fib(int n) {
     // f(n) = f(n-1) + f(n-2)
-    if(n<=1) return n;
-    int sCurr=0, sPre1=1, sPre2=0;
-    for (int i=2; i<=n; i++) {
-        sCurr = sPre1 + sPre2;
-        sPre2 = sPre1;
-        sPre1 = sCurr;
+//    if(n<=1) return n;
+//    int sCurr=0, sPre1=1, sPre2=0;
+//    for (int i=2; i<=n; i++) {
+//        sCurr = sPre1 + sPre2;
+//        sPre2 = sPre1;
+//        sPre1 = sCurr;
+//    }
+//    return sCurr;
+
+    // let first=0, second=1. return first + second
+    int first=0, second=1;
+    if(n<1) return n;
+    for(int i=1; i<n; i++) { // i從1開始，表示n要從2開始才會做計算
+        int tmp = first;
+        first = second;
+        // 先存後加，n-1進來時算的是第n個值
+        second = tmp + first;
     }
-    return sCurr;
+    return second;
 }
 
 LC0303::LC0303(vector<int>& nums) {
