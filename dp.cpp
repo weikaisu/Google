@@ -99,6 +99,8 @@ int LC0303::sumRange(int left, int right) {
 //LC0070 run;
 //cout << run.climbStairs(45) << endl;
 int LC0070::climbStairs(int n) {
+    // 假设梯子有n层，那么如何爬到第n层呢，因为每次只能爬1或2步，那么爬到第n层的方法要么是从第 n-1 层一步上来的，要不就是从 n-2 层2步
+    // 上来的，所以递推公式非常容易的就得出了：dp[n] = dp[n-1] + dp[n-2]
     //iterative
     if(!n) return 0;
     if(1==n) return 1;
@@ -122,14 +124,15 @@ int LC0070::climbStairs(int n) {
 //vector<int> nums{-2,1,-3,4,-1,2,1,-5,4};
 //cout << run.maxSubArray(nums) << endl;
 int LC0053::maxSubArray(vector<int>& nums) {
+    // 求最大子数组之和
     if(!nums.size()) return 0;
     if(1==nums.size()) return nums[0];
 
     int sCur=0, sPre=nums[0], vMax=nums[0];
     for(auto it=next(nums.begin()) ; it!=nums.end() ; it++) {
-        sCur = max(sPre+*it, *it);
-        vMax = max(vMax, sCur);
-        sPre = sCur;
+        sCur = max(sPre+*it, *it); // 如果前面累積的再加上當前的較小，則從當前的重新開始累計
+        vMax = max(vMax, sCur); // 如果當前累積的是更大的值，則取代vMAX
+        sPre = sCur; // 當前的存到已累加的
     }
     return vMax;
 }
@@ -394,15 +397,4 @@ int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
     for(int i=0; i<s.size() && j<g.size(); i++)
         if(s[i]>=g[j]) j++;
     return j;
-}
-
-int LC0409::longestPalindrome(string s) {
-    array<int,128> map; map.fill(0);
-    int even=0, odd=0;
-    for(auto c:s) ++map[c];
-    for(auto v:map) {
-        even += v&(~1); // 清掉last bit取得偶數值，累計多少偶數；
-        odd  |= v&( 1); // 看是否有積數值可作為回文中間那一char
-    }
-    return even+odd;
 }

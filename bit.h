@@ -29,5 +29,7 @@ struct LC0231 { bool isPowerOfTwo(int n); };
 struct LC0191 { int hammingWeight(uint32_t n); };
 struct LC0190 { uint32_t reverseBits(uint32_t n); };
 struct LC0136 { int singleNumber(vector<int>& nums); };
+/*回傳能建立最長的回文字串長度*/
+struct LC0409 { int longestPalindrome(string s); };
 
 #endif //GOOGLE_BIT_H

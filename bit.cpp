@@ -335,6 +335,20 @@ int LC0461::hammingDistance(int x, int y) {
 //    return res;
 }
 
+int LC0409::longestPalindrome(string s) {
+    // 给了一个字符串，让我们找出可以组成的最长的回文串的长度，由于字符顺序可以打乱，所以问题就转化为了求偶数个字符的个数，了解回文串的都知道，
+    // 回文串主要有两种形式，一个是左右完全对称的，比如noon, 还有一种是以中间字符为中心，左右对称，比如 bob，level 等，那么统计出来所有偶数
+    // 个字符的出现总和，然后如果有奇数个字符的话，取出其最大偶数，然后最后结果加1即可
+    array<int,128> map; map.fill(0);
+    int even=0, odd=0;
+    for(auto c:s) ++map[c];
+    for(auto v:map) {
+        even += v&(~1); // 清掉last bit取得偶數值，累計多少偶數；
+        odd  |= v&( 1); // 看是否有積數值可作為回文中間那一char
+    }
+    return even+odd;
+}
+
 string LC0405::toHex(int num) {
     // 0000 1100 ( 12)
     // 1111 0100 (-12)
