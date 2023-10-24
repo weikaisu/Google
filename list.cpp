@@ -753,7 +753,17 @@ int LC0026::removeDuplicates(vector<int>& nums) {
 
 /***********  Array List  **********/
 vector<int> LC1103::distributeCandies(int candies, int num_people) {
-    return vector<int>(num_people);
+    // 有一些糖果要发给n个人，第一轮是第一个人发一个，第二个人发两个，第n个人发n个，第二轮是第一个人发 n+1 个，第二个人发 n+2 个，
+    // 第n个人发 2n 个，以此类推，直到发到某个人时不够目标个数，此时将剩余的糖全给该人，并停止分发。，问最终每个人会得到多少个糖。
+    // 用变量i表示当前人得到的糖数减1，这里减1的原因是想将其也当作数组坐标来用，因为数组坐标都是从0开始的。虽然之后i会累加到很大，
+    // 但是只要对n取余，就是正确的坐标位置，此时该人得到的糖果个数为当前剩余的糖果个数 candies 和 i+1 之间的较小值，然后 candies
+    // 需要减去 i+1，for 循环的执行条件是 candies 大于0，这样当糖果发完了之后就退出了
+    vector<int> res(num_people);
+    for(int i=0; candies>0; i++) {
+        res[i%num_people] += std::min(candies, i+1);
+        candies -= (i+1);
+    }
+    return res;
 }
 
 int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destination) {
