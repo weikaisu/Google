@@ -654,28 +654,30 @@ int LC0028::strStr(string haystack, string needle) {
 //string s{"()[]{}"};
 //cout << run.isValid(s) << endl;
 //https://www.techiedelight.com/convert-char-to-string-cpp/
-bool LC0020::isValid(string s) {
-    deque<char> dq;
-    set<string> t{"{}", "[]", "()"};
-
-    for(auto c:s) {
-        dq.push_front(c);
-        if(dq.size()>=2) {
-            auto it = dq.begin();
-            if(t.count(string(1,*(it+1)) + string(1, *(it)))) {
-                dq.pop_front();
-                dq.pop_front();
-            }
+bool LC0020::isValid(string str) {
+    // 验证输入的字符串是否为括号字符串，包括大括号，中括号和小括号。这里需要用一个栈，开始遍历输入字符串，如果当前字符为左半边括号时，
+    // 则将其压入栈中，如果遇到右半边括号时，若此时栈为空，则直接返回 false，如不为空，则取出栈顶元素，若为对应的左半边括号，则继续循环，
+    // 反之返回 false
+    stack<char> s;
+    for(int i=0; i<str.size(); ++i) {
+        if(str[i]=='(' || str[i]=='[' || str[i]=='{')
+            s.push(str[i]);
+        else {
+            if(s.empty()) return false;
+            if(s.top()=='(' && str[i]!=')') return false;
+            if(s.top()=='[' && str[i]!=']') return false;
+            if(s.top()=='{' && str[i]!='}') return false;
+            s.pop();
         }
     }
-    return dq.size()==0;
-    //cout << "type: "<< typeid(*(it+1)).name() << endl;
+    return s.empty();
 }
 
 //LC0014 run;
 //vector<string> s{{"flower"},{"flow"},{"flight"}};
 //cout << run.longestCommonPrefix(s) << endl;
 string LC0014::longestCommonPrefix(vector<string>& strs) {
+    // 求一系列字符串的共同前缀
     string ans{""};
     int l_idx=0, c_idx=0;
     while(l_idx<strs.size() && c_idx<strs[l_idx].size()) {
@@ -697,6 +699,12 @@ string LC0014::longestCommonPrefix(vector<string>& strs) {
 //cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
 //convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 string LC0006::convert(string s, int numRows) {
+    // The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:
+    // P   A   H   N
+    // A P L S I I G
+    // Y   I   R
+    // then read line by line: "PAHNAPLSIIGYIR"
+    // Write the code that will take a string and make this conversion given a number of rows
     if(numRows<=1 || numRows>= s.size()) return s;
 
     vector<string> t(numRows);
