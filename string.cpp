@@ -595,6 +595,7 @@ bool LC0125::isPalindrome(string s) {
 //LC0067 run;
 //cout << run.addBinary("11","1");
 string LC0067::addBinary(string a, string b) {
+    // Given two binary strings a and b, return  their sum as a binary string.
     int i=a.size()-1, j=b.size()-1, c=0;
     string res;
 
@@ -610,6 +611,9 @@ string LC0067::addBinary(string a, string b) {
 //LC0058 run;
 //cout << run.lengthOfLastWord("luffy is still joyboy") << endl;
 int LC0058::lengthOfLastWord(string& s) {
+    // Given a string s consists of upper/lower-case alphabets and empty space characters ' ',
+    // return the length of last word in the string.
+    // If the last word does not exist, return 0.
     int last=0, curr=0;
     for(auto c:s) {
         if(' '==c) {
@@ -624,6 +628,7 @@ int LC0058::lengthOfLastWord(string& s) {
 //LC0028 run;
 //cout << run.strStr("hello", "ll") << endk;
 int LC0028::strStr(string haystack, string needle) {
+    // Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
     if(!needle.size()) return 0;
 
     int m = haystack.size();
