@@ -175,6 +175,29 @@ struct LC0121 { int maxProfit(vector<int>& prices); };
 struct LC0119 { vector<int> getRow(int rowIndex); };
 struct LC0118 { vector<vector<int>> generate(int numRows); };
 
+/*********** Link List ***********/
+/*二進位轉十進位*/
+struct LC1290 { int getDecimalValue(ListNode* head); };
+/*回傳正中間的node*/
+struct LC0876 { ListNode* middleNode(ListNode* head); };
+/*刪除特定node*/
+struct LC0237 { void deleteNode(ListNode* node); };
+/*node是否回文*/
+struct LC0234 { bool isPalindrome(ListNode* head); };
+/*反轉linked list*/
+struct LC0206 { ListNode* reverseList(ListNode* head); };
+/*移除指定值的所有node*/
+struct LC0203 { ListNode* removeElements(ListNode* head, int val); };
+/*找到兩條list交叉的node*/
+struct LC0160 { ListNode *getIntersectionNode(ListNode *headA, ListNode *headB); };
+/*判斷list是否有cycle*/
+struct LC0141 { bool hasCycle(ListNode *head); };
+/*刪除重複值的node*/
+struct LC0083 { ListNode* deleteDuplicates(ListNode* head); };
+/*合併兩條list*/
+struct LC0021 { ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
+struct LC0002 { ListNode* addTwoNumbers(ListNode* l1, ListNode* l2); };
+
 /*********** Matrix ***********/
 /*
  *   **** x
@@ -208,29 +231,6 @@ struct LC0661 { vector<vector<int>> imageSmoother(vector<vector<int>>& img); };
 struct LC0566 { vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c); };
 /*求二為陣列裡小島的周長*/
 struct LC0463 { int islandPerimeter(vector<vector<int>>& grid); };
-
-/*********** Link List ***********/
-/*二進位轉十進位*/
-struct LC1290 { int getDecimalValue(ListNode* head); };
-/*回傳正中間的node*/
-struct LC0876 { ListNode* middleNode(ListNode* head); };
-/*刪除特定node*/
-struct LC0237 { void deleteNode(ListNode* node); };
-/*node是否回文*/
-struct LC0234 { bool isPalindrome(ListNode* head); };
-/*反轉linked list*/
-struct LC0206 { ListNode* reverseList(ListNode* head); };
-/*移除指定值的所有node*/
-struct LC0203 { ListNode* removeElements(ListNode* head, int val); };
-/*找到兩條list交叉的node*/
-struct LC0160 { ListNode *getIntersectionNode(ListNode *headA, ListNode *headB); };
-/*判斷list是否有cycle*/
-struct LC0141 { bool hasCycle(ListNode *head); };
-/*刪除重複值的node*/
-struct LC0083 { ListNode* deleteDuplicates(ListNode* head); };
-/*合併兩條list*/
-struct LC0021 { ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
-struct LC0002 { ListNode* addTwoNumbers(ListNode* l1, ListNode* l2); };
 
 struct StackArithmetic {
     unordered_map<char,int> priority_map;
