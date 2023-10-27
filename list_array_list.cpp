@@ -1,6 +1,35 @@
 #include "list.h"
 
 /***********  Array List  **********/
+vector<int> LC1299::replaceElements(vector<int>& arr) {
+    // 给了一个数组 arr，说是让把每个数字更新为其右边的数字中最大的一个，最后一个数字变为 -1。既然是一道 Easy 的题目，就不用担心解法会太复
+    // 杂，一般都是较短的行数就能搞定的。让求每个数字右边的数字中最大的一个，当然不能每次都遍历右边所有的数字来找最大值，虽说是 Easy 题目，
+    // 但最好也别这么暴力地解，多少还是要给 OJ 一些尊重的。从左往右不好使的话，可以调个头，从右往左去更新，这样就简单的多了，最后一个数字直
+    // 接更新为 -1，然后只要维护一个从右往左的当前最大值，每次用来更新右往左的对应位置即可，基本没什么难度，只要能想到换个方向更新，基本就迎
+    // 刃而解了
+//    int n=arr.size(), cm=INT_MIN;
+//    vector<int> res(n);
+//    res[n-1] = -1;
+//    for(int i=n-2; i>=0; --i) {
+//        cm = std::max(cm, arr[i+1]);
+//        res[i] = cm;
+//    }
+//    return res;
+
+    // 不新增一個vector，在原本輸入的vector做處理。
+    int n=arr.size();
+    if(!n) return arr;
+
+    int cm=arr[n-1];
+    arr[n-1] = -1;
+    for(int i=n-2; i>=0; --i) {
+        int tmp = arr[i];
+        arr[i] = cm;
+        cm = std::max(cm, tmp);
+    }
+    return arr;
+}
+
 int LC1295::findNumbers(vector<int>& nums) {
     // 给了一个数组，让找出多少个偶数位的数字，所谓偶数位的数字，就是说该多位数要有偶数个位，比如个数位就不是偶数位数字，而十位数就是。
     // 其实这道题就是考察如何统计整数的位数，比较简单直接的方法就是进行一个 while 循环，每次都除以 10，直到原数字变为0为止，这样就知道位数
