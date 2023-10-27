@@ -4,6 +4,7 @@
 #include "main.h"
 using namespace std;
 
+struct LC1175 { int numPrimeArrangements(int n); };
 struct LC1037 { bool isBoomerang(vector<vector<int>>& points); };
 struct LC0836 { bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2); };
 struct LC0728 { vector<int> selfDividingNumbers(int left, int right); };

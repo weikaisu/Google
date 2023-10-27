@@ -1,6 +1,50 @@
 ﻿
 #include "math.h"
 
+int LC1175::numPrimeArrangements(int n) {
+    // 返回数字1到n组成的全排列的个数，使得质数都出现在质数的坐标上（坐标从1开始），并且结果对一个很大的数字取余。
+    // 把质数和非质数分离开来，各个排列，比如有 cnt 个质数，那么其排列的方法总数就是 cnt 的阶乘（中学学过），
+    // 同理，非质数的排列方法就是 n-cnt 的阶乘，然后把二者相乘就行了。所以这道题的难点还是求1到n中所有的质数的个数
+    // 挨个检查 [1, n] 中的每个数字是否是质数，其实只需要要检测 [3, n] 中的所有奇数，因为除了2以外的质数一定是奇数。判定质数的最简单直接的
+    // 方法，就是查找看其是否有非1非其本身的因子，这里可以从3开始检测，只需要检测到 sqrt(i) 就行了，而且只用检测奇因子，若是质数，则 cnt
+    // 自增1。最后分别计算 cnt 和 n-cnt 的阶乘，并相乘，别忘了对超大数取余
+//    long res=1, cnt=1, M=1e9+7;
+//    for(int v=3; v<=n; v+=2) {
+//        bool is_prime=true;
+//        for(int f=3; f*f<=v; f+=2) {
+//            if(v%f==0) {
+//                is_prime=false;
+//                break;
+//            }
+//        }
+//        if(is_prime) ++cnt;
+//    }
+//    for(int i=1; i<=cnt; ++i)
+//        res = res*i%M;
+//    for(int i=1; i<=(n-cnt); ++i)
+//        res = res*i%M;
+//    return res;
+
+    // 更高效的方法是用 埃拉托斯特尼筛法 Sieve of Eratosthenes，在之前的 Count Primes 中也有讲解到。这里实际上就是快速标记所有不是质
+    // 数的位置，然后剩下的就都是质数了，对于每个质数，其乘以另一个大于1的数字得到的数字肯定不是质数，只要其小于等于n，就标记为 false。
+    long res=1, cnt=0, M=1e9+7;
+    vector<bool> prime(n+1, true);
+    prime[0] = false;
+    prime[1] = false;
+    for(int i=2; i*i<=n; ++i) {
+        if(prime[i])
+            for(int f=2; f*i<=n; ++f)
+                prime[f*i] = false;
+    }
+    for(int i=1; i<=n; ++i)
+        if(prime[i]) ++cnt;
+    for(int i=1; i<=cnt; ++i)
+        res = res*i%M;
+    for(int i=1; i<=(n-cnt); ++i)
+        res = res*i%M;
+    return res;
+}
+
 bool LC1037::isBoomerang(vector<vector<int>>& points) {
     // 定义了一种回旋镖就是不在同一条直线上的三个点，现在给了同一平面上的三个点，让判断能否组成一个回旋镖。实际上就是初中的几何问题，判断三点
     // 是否共线，忘记了的话估计不太容易做出来，虽然只是道 Easy 的题目。我们都知道两点能确定一条直线，那么对于三个点 p1，p2，和 p3，
