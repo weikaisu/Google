@@ -161,6 +161,24 @@ vector<int> LC1331::arrayRankTransform(vector<int>& arr) {
     return res;
 }
 
+int LC1287::findSpecialInteger(vector<int>& arr) {
+    // 给了一个有序数组，说是其中有一个数字出现了超过总个数的 25%，让找出这个数字。博主最开始做的时候，直接就用 HashMap 来统计每个数字出现
+    // 的次数了，然后跟总长度的 1/4 比较，大于的话就直接返回该数字就好了
+//    int m = arr.size()/4;
+//    unordered_map<int,int> t;
+//    for(auto a:arr)
+//        if(++t[a] > m) return a;
+//    return -1;
+
+    // 既然给定数组是有序的，说明了相同的数字一定是连在一起的，那么只要看固定区间的首位数字是否相等，相等的话就表示该区间内的所有的数字都是相
+    // 等的。假如数组长度是n，则四分之一就是 n/4，只要判断 n/4 + 1 区间的首位数字是否相同就行了，即 arr[i] 和 arr[i + n/4] 是否相同，
+    // 相同的话直接返回 arr[i] 即可
+    int m = arr.size()/4;
+    for(int i=0; i<arr.size()-m; ++i)
+        if(arr[i] == arr[i+m]) return arr[i];
+    return -1;
+}
+
 vector<vector<int>> LC1200::minimumAbsDifference(vector<int>& arr) {
     // Given an array of distinct integers arr, find all pairs of elements with the minimum absolute difference of
     // any two elements.

@@ -30,6 +30,7 @@ struct LC1365 { vector<int> smallerNumbersThanCurrent(vector<int>& nums); };
 struct LC1356 { vector<int> sortByBits(vector<int>& arr); };
 struct LC1346 { bool checkIfExist(vector<int>& arr); };
 struct LC1331 { vector<int> arrayRankTransform(vector<int>& arr); };
+struct LC1287 { int findSpecialInteger(vector<int>& arr); };
 struct LC1200 { vector<vector<int>> minimumAbsDifference(vector<int>& arr); };
 // struct LC1122 { vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2); } // list.h
 struct LC1051 { int heightChecker(vector<int>& heights); };
