@@ -1,6 +1,17 @@
 #include "list.h"
 
 /***********  Array List  **********/
+vector<int> LC1313::decompressRLElist(vector<int>& nums) {
+    // 给了一个压缩后的数组，压缩的方法是将相同连续的数字的个数和其本身组成个数对儿，放到压缩数组中，以此类推。现在让我们解压缩成原来的数组，
+    // 没啥太大的难度，就是每次取出两个数字，前一个数字是次数，后一个是数字本身，用一个 for 循环，就可以生成给定次数个数字，用这种方法就可以
+    // 解压缩出原数组了
+    vector<int> res;
+    for(int i=0; i<nums.size(); i+=2)
+        for(int j=0; j<nums[i]; ++j)
+            res.push_back(nums[i+1]);
+    return res;
+}
+
 vector<int> LC1304::sumZero(int n) {
     // 给了一个正整数n，让返回一个长度为n的数组，要求是没有重复数字且数字之和为0。
     // 在数组的两端往中间更新，新建一个大小为n的数组，初始化均为0，两端分别赋值为1和 -1，然后往中间一步，赋值为2和 -2，直到中间的位置。
