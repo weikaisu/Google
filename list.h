@@ -130,6 +130,7 @@ struct LC0027 { int removeElement(vector<int>& nums, int val); };
 struct LC0026 { int removeDuplicates(vector<int>& nums); };
 
 /*********** Array List ***********/
+struct LC1266 { int minTimeToVisitAllPoints(vector<vector<int>>& points); };
 struct LC1252 { int oddCells(int m, int n, vector<vector<int>>& indices); };
 struct LC1103 { vector<int> distributeCandies(int candies, int num_people); };
 struct LC1184 { int distanceBetweenBusStops(vector<int>& distance, int start, int destination); };
