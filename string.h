@@ -9,6 +9,7 @@
 
 using namespace std;
 
+struct LC1323 { int maximum69Number (int num); };
 /*字串替換*/
 struct LC1309 { string freqAlphabets(string s); };
 /*將日期換算成一年的第幾天*/
