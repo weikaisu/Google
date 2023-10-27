@@ -4,6 +4,7 @@
 #include "main.h"
 using namespace std;
 
+struct LC1317 { vector<int> getNoZeroIntegers(int n); };
 struct LC1232 { bool checkStraightLine(vector<vector<int>>& coordinates); };
 struct LC1185 { string dayOfTheWeek(int day, int month, int year); };
 struct LC1175 { int numPrimeArrangements(int n); };
