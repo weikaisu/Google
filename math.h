@@ -4,6 +4,7 @@
 #include "main.h"
 using namespace std;
 
+struct LC1185 { string dayOfTheWeek(int day, int month, int year); };
 struct LC1175 { int numPrimeArrangements(int n); };
 struct LC1037 { bool isBoomerang(vector<vector<int>>& points); };
 struct LC0836 { bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2); };
