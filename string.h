@@ -9,6 +9,7 @@
 
 using namespace std;
 
+struct LC1332 { int removePalindromeSub(string s); };
 struct LC1323 { int maximum69Number (int num); };
 /*字串替換*/
 struct LC1309 { string freqAlphabets(string s); };
