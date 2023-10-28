@@ -7,6 +7,7 @@
 using namespace std;
 
 /*********** Binary Search ***********/
+struct LC1351 { int countNegatives(vector<vector<int>>& grid); };
 struct LC0744 { char nextGreatestLetter(vector<char>& letters, char target); };
 struct LC0704 { int search(vector<int>& nums, int target); };
 struct LC0441 { int arrangeCoins(int n); };

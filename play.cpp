@@ -1,17 +1,44 @@
 ﻿#include <iostream>
 #include <vector>
 #include <stack>
+#include <unordered_set>
+#include <unordered_map>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <numeric>
+#include <queue>
+#include <functional>
+#include <array>
+#include <bitset>
 
 using namespace std;
 
 class Play{
 public:
-    void Recursive(vector<int>& nums, int lidx, int ridx) {
-        if(lidx>=ridx) return;
+    int countNegatives(vector<vector<int>>& grid) {
+        int res=0;
+        int m=grid.size(), n=grid[0].size();
+        for(int i=0; i<m; i++) {
+            int q=0, p=n-1, idx=-1;
+            while(q<p) {
+                int mid = q + (p-q)/2;
+                if(grid[i][mid] >= 0) {
+                    q = m + 1;
+                } else {
+                    idx = mid;
+                    p = m;
+                }
+            }
+            if(idx != -1) res += (n-idx);
+        }
+        return res;
+    }
 
-        int m = divide(nums, lidx, ridx);
-        Recursive(nums, lidx, m-1);
-        Recursive(nums, m+1, ridx);
+    int findComplement(int num) {
+        unsigned int mask = UINT_MAX;
+        while(num & mask) mask <<= 1;
+        return ~mask & ~num;
     }
 
     void Iterative(vector<int>& nums) {
