@@ -9,6 +9,7 @@
 
 using namespace std;
 
+struct LC1360 { int daysBetweenDates(string date1, string date2); };
 struct LC1332 { int removePalindromeSub(string s); };
 struct LC1323 { int maximum69Number (int num); };
 /*字串替換*/

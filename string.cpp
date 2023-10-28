@@ -6,6 +6,28 @@
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
+int LC1360::daysBetweenDates(string date1, string date2) {
+    // 给定两个日期，年的范围是[ 1971 , 2100 ] [1971,2100][1971,2100]，问两个日期之间隔了多少天。日期以YY-MM-DD形式给出。
+    array<int,13> days{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    function<bool(int)> isLeapYear = [&](int year) -> bool {
+        return year%400==0 || (year%100 !=0 && year%4 == 0);
+    };
+    function<int(const string)> daysFrom1971 = [&](const string str) -> int {
+        int y, m , d;
+        std::sscanf(str.c_str(), "%d-%d-%d", &y, &m, &d);
+        int res=0;
+        for(int i=1971; i<y; i++)
+            res += (365 + isLeapYear(i));
+        for(int i=1; i<m; i++) {
+            res += days[i];
+            if(i==2) res += isLeapYear(y); //注意！這裡isLeapYear傳的是y，不是i
+        }
+        return res + d;
+    };
+
+    return std::abs(daysFrom1971(date1) - daysFrom1971(date2));
+}
+
 int LC1332::removePalindromeSub(string s) {
     // 给了一个只有字母a和b的字符串，说是每次可以删除一个"回文子序列"，问最少需要删除多少次，可以将给定字符串变为空串。
     // 不是"回文子字串"
