@@ -145,23 +145,9 @@ int LC0278::firstBadVersion(int n) {
 //    return l+1;
 }
 
-//LC0035 run;
-//vector<int> nums{1,3,5,6};
-//int target=5;
-//cout << run.searchInsert(nums, target) << endl;
-int LC0035::searchInsert(vector<int>& nums, int target) {
-    unsigned l=0, r=nums.size();
-    while(l<r) {
-        unsigned m = l+(r-l)/2;
-        if(nums[m] > target) r=m;
-        else if(nums[m] < target) l=m+1;
-        else return m;
-    }
-    return l;
-}
-
 int LC0069::mySqrt(int x) {
-    // 第三类的变形，找最后一个不大于目标值的数，这里细心的童鞋可能会有疑问，在总结贴中第三类博主的 right 用的是开区间，那么这里为啥 right
+    // 第三类的变形
+    // 找最后一个不大于目标值的数，这里细心的童鞋可能会有疑问，在总结贴中第三类博主的 right 用的是开区间，那么这里为啥 right
     // 初始化为x，而不是 x+1 呢？因为总结帖里的 left 和 right 都是数组下标，这里的 left 和 right 直接就是数字本身了，一个数字的平方根
     // 是不可能比起本身还大的，所以不用加1，还有就是这里若x是整型最大值，再加1就会溢出。最后就是返回值是 right-1，因为题目中说了要把小数部
     // 分减去，只有减1才能得到正确的值
@@ -169,10 +155,30 @@ int LC0069::mySqrt(int x) {
     int q=1, p=x/2 + 1; // 左閉右開，平方根一定小於等於x/2
     while(q<p) {
         int m = q + (p-q)/2;
-        if(m <= x/m) q = m + 1;
-        else p = m;
+        if(m <= x/m) q=m+1;
+        else p=m;
     }
     return p-1;
+}
+
+//LC0035 run;
+//vector<int> nums{1,3,5,6};
+//int target=5;
+//cout << run.searchInsert(nums, target) << endl;
+int LC0035::searchInsert(vector<int>& nums, int target) {
+    // 第二类
+    // Given a sorted array and a target value, return the index if the target is found. If not, return the index
+    // where it would be if it were inserted in order.
+    // 遍历一遍原数组，若当前数字大于或等于目标值，则返回当前坐标，如果遍历结束了，说明目标值比数组中任何一个数都要大，则返回数组长度n即可
+    // 更好的方式是用binary search
+
+    int q=0, p=nums.size();
+    while(q<p) {
+        int m = q + (p-q)/2;
+        if(nums[m] < target) q=m+1;
+        else p=m;
+    }
+    return p;
 }
 
 /***********  Depth First Search  **********/

@@ -58,8 +58,8 @@ struct LC0441 { int arrangeCoins(int n); };
 struct LC0374 { int guessNumber(int n); };
 struct LC0367 { bool isPerfectSquare(int num); };
 struct LC0278 { int firstBadVersion(int n); };
-struct LC0035 { int searchInsert(vector<int>& nums, int target); };
 struct LC0069 { int mySqrt(int x); };
+struct LC0035 { int searchInsert(vector<int>& nums, int target); };
 
 /*********** Depth First Search ***********/
 struct LC0999 { int numRookCaptures(vector<vector<char>>& board); };
