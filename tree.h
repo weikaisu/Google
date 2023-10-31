@@ -80,6 +80,19 @@ struct LC0530 { int getMinimumDifference(TreeNode* root); };
 struct LC0501 { vector<int> findMode(TreeNode* root); };
 struct LC0108 { TreeNode* sortedArrayToBST(vector<int>& nums); };
 
+/*********** Complete Binary Tree ***********/
+/*
+ * A binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left
+ * as possible
+ */
+/*********** Perfect Binary Tree ***********/
+/*
+ * A tree with all leaf nodes at the same depth. All internal nodes have degree 2
+ */
+/*********** Full Binary Tree ***********/
+/*
+ * A tree in which every node other than the leaves has two children
+ */
 /*********** Heap ***********/
 /*
  * A specialized tree-based data structure which is essentially an almost complete[1] tree that satisfies the heap property:

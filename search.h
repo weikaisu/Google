@@ -58,8 +58,9 @@ struct LC0441 { int arrangeCoins(int n); };
 struct LC0374 { int guessNumber(int n); };
 struct LC0367 { bool isPerfectSquare(int num); };
 struct LC0278 { int firstBadVersion(int n); };
-struct LC0069 { int mySqrt(int x); };
-struct LC0035 { int searchInsert(vector<int>& nums, int target); };
+// struct LC0268 { int missingNumber(vector<int>& nums); } // list.h, // 第三类
+struct LC0069 { int mySqrt(int x); }; // 第三类的变形
+struct LC0035 { int searchInsert(vector<int>& nums, int target); }; // 第二类
 
 /*********** Depth First Search ***********/
 struct LC0999 { int numRookCaptures(vector<vector<char>>& board); };

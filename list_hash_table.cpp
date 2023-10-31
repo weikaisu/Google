@@ -536,6 +536,10 @@ vector<int> LC0349::intersection(vector<int>& nums1, vector<int>& nums2) {
 //vector<int> v {3,0,1};
 //cout << run.missingNumber(v);
 int LC0268::missingNumber(vector<int>& nums) {
+    // Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing
+    // from the array.
+    // For example. Given nums = [0, 1, 3] return 2.
+
     // 用等差数列的求和公式求出0到n之间所有的数字之和，然后再遍历数组算出给定数字的累积和，然后做减法，差值就是丢失的那个数字
 //    int n = nums.size(), sum=0;
 //    std::for_each(nums.begin(), nums.end(), [&](int num){sum+=num;});
@@ -547,6 +551,16 @@ int LC0268::missingNumber(vector<int>& nums) {
     for(int i=0; i<n; i++)
         if(nums[i]!=i) return i;
     return n;
+
+    // by binary search 第三类
+//    std::sort(nums.begin(), nums.end());
+//    int q=0, p=nums.size();
+//    while(q<p) {
+//        int m = q + (p-q)/2;
+//        if(nums[m] <= m) q=m+1;
+//        else p=m;
+//    }
+//    return p;
 }
 
 bool LC0242::isAnagram(string s, string t) {
