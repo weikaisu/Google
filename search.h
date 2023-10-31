@@ -7,6 +7,50 @@
 using namespace std;
 
 /*********** Binary Search ***********/
+/*
+ * 第一类：查找(=, return m) T，m<T
+ * 第二类：查找第一个不小于(>=, return q) T，最后一个小于(<, return q-1) T，lower_bound，m<T
+ * 第三类：查找第一个大于T(>, return q) ，最后一个不大于(<=, return q-1) T，upper_bound，m<=T
+ * 第四类：用子函数当作判断关系（通常由 mid 计算得出）
+ * 第五类：其他（通常 T 值不固定）
+ *
+ * 二、三还有各自的扩展，应用场景最多，也是最重要的两类
+ * 一、四、五较少
+ * 一最简单，四、五最难
+ *
+ * */
+
+//int find_1(vector<int>& nums, int target) {
+//    int q = 0, p = nums.size();
+//    while (q < p) {
+//        int m = q + (p - q) / 2;
+//        if (nums[m] == target) return m;
+//        else if (nums[m] < target) q = m + 1;
+//        else p = m;
+//    }
+//    return -1;
+//}
+//
+//int find_2(vector<int>& nums, int target) {
+//    int q = 0, p = nums.size();
+//    while (q < p) {
+//        int m = q + (p - q) / 2;
+//        if (nums[m] < target) q = m + 1;
+//        else p = m;
+//    }
+//    return p;
+//}
+//
+//int find_3(vector<int>& nums, int target) {
+//    int q = 0, p = nums.size();
+//    while (q < p) {
+//        int m = q + (p - q) / 2;
+//        if (nums[m] <= target) q = m + 1;
+//        else p = m;
+//    }
+//    return p;
+//}
+
 struct LC1351 { int countNegatives(vector<vector<int>>& grid); };
 struct LC0744 { char nextGreatestLetter(vector<char>& letters, char target); };
 struct LC0704 { int search(vector<int>& nums, int target); };

@@ -161,14 +161,18 @@ int LC0035::searchInsert(vector<int>& nums, int target) {
 }
 
 int LC0069::mySqrt(int x) {
-    long l=1, r=1l+x, target=x; // x值可能很大，需用long
-    while(l<r) {
-        long m = l+(r-l)/2;
-        if(m*m > target) r=m;
-        else if(m*m < target) l=m+1;
-        else return m;
+    // 第三类的变形，找最后一个不大于目标值的数，这里细心的童鞋可能会有疑问，在总结贴中第三类博主的 right 用的是开区间，那么这里为啥 right
+    // 初始化为x，而不是 x+1 呢？因为总结帖里的 left 和 right 都是数组下标，这里的 left 和 right 直接就是数字本身了，一个数字的平方根
+    // 是不可能比起本身还大的，所以不用加1，还有就是这里若x是整型最大值，再加1就会溢出。最后就是返回值是 right-1，因为题目中说了要把小数部
+    // 分减去，只有减1才能得到正确的值
+    if(x<=1) return x; // 後面會除m，這邊得把小於1的情況排除，否則會有除0的情況
+    int q=1, p=x/2 + 1; // 左閉右開，平方根一定小於等於x/2
+    while(q<p) {
+        int m = q + (p-q)/2;
+        if(m <= x/m) q = m + 1;
+        else p = m;
     }
-    return l-1;
+    return p-1;
 }
 
 /***********  Depth First Search  **********/
