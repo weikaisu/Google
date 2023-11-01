@@ -7,7 +7,7 @@ int LC1351::countNegatives(vector<vector<int>>& grid) {
     // 然后统计出负数个数，那么这样的话数组有序的条件就没有被使用，题目中的 Follow up 让在 O(n + m) 的时间复杂度下完成。既然每行每列都
     // 是递减的，那么数组的左上角就是整个数组最大的数，右下角一定是最小的数，若整个数组有正有负的话，左上角就是正数，右下角就是负数
     // 每一行做一次binary search找出第一個負數的位置，就可以得到那行有多少負數。
-    // target is 0。 找到第一個<=0的idx，因為左敝又開，idx會指到第一個負數。
+    // target is 0。 找到第一個<=0的idx，因為左閉又開，idx會指到第一個負數。
     int res=0;
     int m=grid.size(), n=grid[0].size();
     for(int i=0; i<m; i++) {
