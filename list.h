@@ -114,10 +114,6 @@ struct LC0217 { bool containsDuplicate(vector<int>& nums); };
 struct LC0205 { bool isIsomorphic(string s, string t); };
 /*判斷一個數字是否是happy number*/
 struct LC0202 { bool isHappy(int n); };
-/*回傳數量超過一半的那個數*/
-struct LC0169 { int majorityElement(vector<int>& nums); };
-/*用陣列代表一大數，回傳其加1的陣列*/
-struct LC0066 { vector<int> plusOne(vector<int>& digits); };
 /*找出陣列裡兩個合為指定值的index*/
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
@@ -177,10 +173,14 @@ struct LC0414 { int thirdMax(vector<int>& nums); };
 struct LC0344 { void reverseString(vector<char>& s); };
 /*找出各連續子陣列的範圍*/
 struct LC0228 { vector<string> summaryRanges(vector<int>& nums); };
+/*回傳數量超過一半的那個數*/
+struct LC0169 { int majorityElement(vector<int>& nums); };
 struct LC0122 { int maxProfit(vector<int>& prices); };
 struct LC0121 { int maxProfit(vector<int>& prices); };
 struct LC0119 { vector<int> getRow(int rowIndex); };
 struct LC0118 { vector<vector<int>> generate(int numRows); };
+/*用陣列代表一大數，回傳其加1的陣列*/
+struct LC0066 { vector<int> plusOne(vector<int>& digits); };
 
 /*********** Link List ***********/
 /*二進位轉十進位*/

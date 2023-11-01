@@ -633,6 +633,27 @@ vector<string> LC0228::summaryRanges(vector<int>& nums) {
     return res;
 }
 
+int LC0169::majorityElement(vector<int>& nums) {
+    // 将第一个数字假设为过半数，然后把计数器设为1，比较下一个数和此数是否相等，若相等则计数器加一，
+    // 反之减一。然后看此时计数器的值，若为零，则将下一个值设为候选过半数。以此类推直到遍历完整个数组，
+    // 当前候选过半数即为该数组的过半数。
+    // 为啥遇到不同的要计数器减1呢，为啥减到0了又要更换候选者呢？首先是有那个强大的前提存在，
+    // 一定会有一个出现超过半数的数字存在，那么如果计数器减到0了话，说明目前不是候选者数字的个数已经跟候选者的出现个数相同了，
+    // 那么这个候选者已经很 weak，不一定能出现超过半数，此时选择更换当前的候选者。那有可能你会有疑问，
+    // 那万一后面又大量的出现了之前的候选者怎么办，不需要担心，如果之前的候选者在后面大量出现的话，其又会重新变为候选者，
+    // 直到最终验证成为正确的过半数
+    int val=0, cnt=0;
+    for(auto n:nums) {
+        if(!cnt) {
+            val = n;
+            cnt++;
+        } else {
+            (val==n) ? cnt++ : cnt--;
+        }
+    }
+    return val;
+}
+
 int LC0122::maxProfit(vector<int>& prices) {
     // 由于可以无限次买入和卖出。我们都知道炒股想挣钱当然是低价买入高价抛出，那么这里我们只需要从第二天开始，如果当前价格比之前价格高，则把差
     // 值加入利润中，因为我们可以昨天买入，今日卖出，若明日价更高的话，还可以今日买入，明日再抛出。以此类推，遍历完整个数组后即可求得最大利润
@@ -675,4 +696,24 @@ vector<vector<int>> LC0118::generate(int numRows) {
             res[i][j] = res[i-1][j] + res[i-1][j-1];
     }
     return res;
+}
+
+//LC0066 run;
+//vector<int> nums{9,9,9}, ans;
+//ans=run.plusOne(nums);
+//for(auto n:nums) cout << n << ' ';
+//cout << endl;
+vector<int> LC0066::plusOne(vector<int>& digits) {
+    // 将一个数字的每个位上的数字分别存到一个一维向量中，最高位在最开头，我们需要给这个数字加一，即在末尾数字加一
+    // 将 carry 初始化为1，然后相当于 digits 加了一个0，处理方法跟之前那道题一样
+    int c=1, n=digits.size();
+    for(int i=n-1; i>=0; --i) {
+        c += digits[i];
+        digits[i] = c%10;
+        c /= 10;
+        if(!c) return digits; // 沒有可進的位，那就可以先return了
+    }
+    if(c)
+        digits.emplace(digits.begin(), c);
+    return digits;
 }

@@ -38,6 +38,7 @@ bool LC1207::uniqueOccurrences(vector<int>& arr) {
 }
 
 int LC1189::maxNumberOfBalloons(string text){
+    // 找出能從特定字串裡的字符拼出目標字串的數量
     // 用一个 HashMap 来建立每个字符和其出现次数之间的映射就可以了。balloon 中的字符 b，a，n 分别出现了一次，l和o出现了两次，怎么算最多
     // 能拼成多个 balloon 呢，当然要找这些字符出现次数最少的那个，就像木桶盛水一样，最短的那个板子决定了盛水总量。然后遍历 balloon
     // 中的每个字符，取其中的最小值，注意对于l和o字符要将次数除以2，因为它们分别都出现了2次，最终返回这个最小值即可
@@ -66,6 +67,7 @@ int LC1189::maxNumberOfBalloons(string text){
 }
 
 int LC1160::countCharacters(vector<string>& words, string chars) {
+    // 找出能從特定字串裡的字符拼出字串的長度
     // 一个单纯的字母统计问题，建立 chars 字符串中每个字母和其出现次数之间的映射，然后遍历每个单词，拷贝一个 chars 字符串的 HashMap，
     // 然后遍历当前单词的每个字母，对应字母的映射值减1，若为负数了，表示 chars 中缺少必要的单词，标记为 false。若最终为 true，
     // 则将当前单词的长度加入结果 res 中即可
@@ -108,6 +110,7 @@ int LC1128::numEquivDominoPairs(vector<vector<int>>& dominoes) {
     return res;
 }
 vector<int> LC1122::relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+    // 根據另一陣列裡的相對順序排做排序
     // 有两个数组 arr1 和 arr2，其中 arr2 中的所有数字均在 arr1 中，现在让给 arr1 重新排序，使得其按照 arr2 中数字的顺序排列，将不在
     // arr2 中的数字按照大小顺序排在末尾，题目中给的例子可以很好的帮助我们理解题意。由于 arr1 中可能出现重复数字，而相同的数字是要排在一起
     // 的，所以需要统计 arr1 中每个数字出现的次数，又因为最后还需要将不在 arr2 中的数字按顺序排列，那么这里用个 TreeMap 是坠好的，
@@ -129,6 +132,7 @@ vector<int> LC1122::relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
 }
 
 vector<string> LC1002::commonChars(vector<string>& words) {
+    // 找出出現在所有字串的字符
     // 用一个数组 cnt 来记录相同的字母出现的次数，初始化为整型最大值，然后遍历所有的单词，对于每个单词，新建一个大小为 26 的数组t，
     // 并统计每个字符出现的次数，然后遍历0到25各个位置，取 cnt 和 t 对应位置上的较小值来更新 cnt 数组，这样得到就是在所有单词里都出现的
     // 字母的个数，最后再把这些字符转为字符串加入到结果 res 中即可
@@ -165,6 +169,7 @@ int LC0997::findJudge(int n, vector<vector<int>>& trust) {
     return -1;
 }
 int LC0961::repeatedNTimes(vector<int>& nums) {
+    // 找出重複出現n次的值
     // 使用一个 HashMap 来统计每个数字出现的个数，只要某个数字出现了 N 次即符合题意返回即可。但这里我们可以进一步的优化一下，
     // 由于只有一个数字有重复，其他的都是不重复的，所以只要发现某个数字出现次数大于1次，就可以直接返回了
     unordered_map<int,int> map;
@@ -209,6 +214,7 @@ vector<int> LC0888::fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes
 }
 
 bool LC0859::buddyStrings(string s, string goal) {
+    // 字串只做一次兩字符swap是否可等於另一字串
     // 首先字符串A和B长度必须要相等，不相等的话直接返回 false。假如起始时A和B就完全相等，那么只有当A中有重复字符出现的时候，
     // 才能返回 true。快速检测重复字符的方法就是利用 HashSet 的自动去重复功能，将A中所有字符存入 HashSet 中，若有重复字符，
     // 那么最终 HashSet 的大小一定会小于原字符串A的长度。对于A和B长度相等，但是字符串本身不相等的一般情况，
@@ -239,6 +245,7 @@ int LC0804::uniqueMorseRepresentations(vector<string>& words) {
 }
 
 int LC0771::numJewelsInStones(string jewels, string stones) {
+    // 找出同時出現在兩字串的字符個數
     // 我们用HashSet来优化时间复杂度，将珠宝字符串J中的所有字符都放入HashSet中，然后遍历石头字符串中的每个字符，
     // 到HashSet中查找是否存在，存在的话计数器自增1即可
     int res = 0;
@@ -276,6 +283,7 @@ string LC0748::shortestCompletingWord(string licensePlate, vector<string>& words
 }
 
 int LC0697::findShortestSubArray(vector<int>& nums) {
+    // 求最小包含出現頻率最高之元素子陣列長度
     // 只用了一次遍历，思路跟上面的解法很相似，还是要建立数字出现次数的哈希表，还有就是建立每个数字和其第一次出现位置之间的映射，
     // 那么我们当前遍历的位置其实可以看作是尾位置，还是可以计算子数组的长度的。我们遍历数组，累加当前数字出现的次数，如果某个数字是第一次出现，
     // 建立该数字和当前位置的映射，如果当前数字的出现次数等于degree时，当前位置为尾位置，首位置在startIdx中取的，二者做差加1来更新结果res；
@@ -298,6 +306,7 @@ int LC0697::findShortestSubArray(vector<int>& nums) {
 }
 
 vector<int> LC0645::findErrorNums(vector<int>& nums) {
+    // 找出1～n的陣列裡重複的數和消失的那"個"數字
     // 遍历每个数字，然后将其应该出现的位置上的数字变为其相反数，这样如果我们再变为其相反数之前已经成负数了，说明该数字是重复数，
     // 将其将入结果res中，然后再遍历原数组，如果某个位置上的数字为正数，说明该位置对应的数字没有出现过，加入res中即可
     vector<int> res (2, -1);
@@ -311,6 +320,7 @@ vector<int> LC0645::findErrorNums(vector<int>& nums) {
 }
 
 int LC0628::maximumProduct(vector<int>& nums) {
+    // 找出陣列裡三數相乘之最大值
     // 这道题博主刚开始看的时候，心想直接排序，然后最后三个数字相乘不就完了，心想不会这么Easy吧，果然被OJ无情打脸，没有考虑到负数和0的情况。
     // 这道题给了数组的范围，至少三个，那么如果是三个的话，就无所谓了，直接相乘返回即可，但是如果超过了3个，而且有负数存在的话，情况就可能不一
     // 样，我们来考虑几种情况，如果全是负数，三个负数相乘还是负数，为了让负数最大，那么其绝对值就该最小，而负数排序后绝对值小的都在末尾，所以
@@ -366,6 +376,7 @@ vector<string> LC0599::findRestaurant(vector<string>& list1, vector<string>& lis
 }
 
 int LC0594::findLHS(vector<int>& nums) {
+    // 陣列裡最長harmonious子陣列長度
     // 遍历每个数字时，先累加其映射值，然后查找该数字加1是否存在，存在的话用 freq[num] 和 freq[num+1] 的和来更新结果 res，
     // 同时，还要查找该数字减1是否存在，存在的话用 freq[num] 和 freq[num-1] 的和来更新结果 res
     int res = 0 ;
@@ -395,6 +406,7 @@ int LC0575::distributeCandies(vector<int>& candyType) {
 }
 
 vector<string> LC0500::findWords(vector<string>& words) {
+    // 給定的字符串是否能只用鍵盤的某一行打完
     // 把键盘的三行字符分别保存到三个set中，然后遍历每个单词中的每个字符，分别看当前字符是否在三个集合中，
     // 如果在，对应的标识变量变为1，我们统计三个标识变量之和就知道有几个集合参与其中了
     unordered_set<char> row1 {'q','w','e','r','t','y','u','i','o','p'};
@@ -436,6 +448,7 @@ vector<int> LC0496::nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
 }
 
 vector<int> LC0448::findDisappearedNumbers(vector<int>& nums) {
+    // 找出1～n的陣列裡消失的那"些"數字
     // 使用額外的空間作hash table來紀錄出現過的
 //    unordered_set set(nums.begin(), nums.end());
 //    vector<int> res;
@@ -459,10 +472,9 @@ vector<int> LC0448::findDisappearedNumbers(vector<int>& nums) {
 }
 
 string LC0345::reverseVowels(string s) {
-    // 如果两边都是元音字母，那么我们交换
-    // 然後還剩下其中一個是，或兩邊都不是
-    // 如果左邊是，右邊一定不是 -> r--
-    // 剩下左邊一定都不是的情況(左不是右是、左不是右不是) -> l++
+    // 把字串裡的母音對調
+    // 如果两边都是元音字母，那么我们交换 然後還剩下其中一個是，或兩邊都不是
+    // 如果左邊是，右邊一定不是 -> r-- 剩下左邊一定都不是的情況(左不是右是、左不是右不是) -> l++
     array<int,128> map; map.fill(0);
     map['a'] = map['e'] = map['i'] = map['o'] = map['u'] = map['A'] = map['E'] = map['I'] = map['O'] = map['U'] = 1;
     int l=0, r=s.size()-1;
@@ -478,6 +490,7 @@ string LC0345::reverseVowels(string s) {
 }
 
 char LC0389::findTheDifference(string s, string t) {
+    // 判斷隨機加入字串的字符為何
     // 用哈希表来建立字符和个数之间的映射，如果在遍历t的时候某个映射值小于0了，那么返回该字符即可
 //    array<int,128> map; map.fill(0);
 //    for(auto c:s) ++map[c];
@@ -493,6 +506,7 @@ char LC0389::findTheDifference(string s, string t) {
 }
 
 int LC0387::firstUniqChar(string s) {
+    // 找出一字串裡第一個不重複的字符的index
     // 用哈希表建立每个字符和其出现次数的映射，然后按顺序遍历字符串，找到第一个出现次数为1的字符，返回其位置即可
     array<int,128> map; map.fill(0);
     for(auto c:s) ++map[c];
@@ -502,6 +516,10 @@ int LC0387::firstUniqChar(string s) {
 }
 
 bool LC0383::canConstruct(string ransomNote, string magazine) {
+    // 判斷一字串是否能從另一字串重建
+    // Given an arbitrary ransom note string and another string containing letters from all the magazines, write a
+    // function that will return true if the ransom  note can be constructed from the magazines; otherwise,
+    // it will return false.
     // 用哈希Map统计字符的个数
     array<int,128> map; map.fill(0);
     for(auto c:magazine) ++map[c];
@@ -511,6 +529,7 @@ bool LC0383::canConstruct(string ransomNote, string magazine) {
 }
 
 vector<int> LC0350::intersect(vector<int>& nums1, vector<int>& nums2) {
+    // 找两个数组交集的部分（不包含重复数字）
     // 允许返回重复的数字，而且是尽可能多的返回，之前那道题是说有重复的数字只返回一个就行。那么这道题用 HashMap 来建立 nums1
     // 中字符和其出现个数之间的映射, 然后遍历 nums2 数组，如果当前字符在 HashMap 中的个数大于0，则将此字符加入结果 res 中，
     // 然后 HashMap 的对应值自减1
@@ -524,6 +543,7 @@ vector<int> LC0350::intersect(vector<int>& nums1, vector<int>& nums2) {
 }
 
 vector<int> LC0349::intersection(vector<int>& nums1, vector<int>& nums2) {
+    // 找两个数组交集的部分（不包含重复数字）
     // 用个 HashSet 把 nums1 都放进去，然后遍历 nums2 的元素，如果在 HashSet 中存在，
     // 说明是交集的部分，加入结果的 HashSet 中，最后再把结果转为 vector 的形式即可
     unordered_set<int> res, set(nums1.begin(), nums1.end());
@@ -564,6 +584,9 @@ int LC0268::missingNumber(vector<int>& nums) {
 }
 
 bool LC0242::isAnagram(string s, string t) {
+    // Given two strings s and t , write a function to determine if t is an anagram of s. For example,
+    // s = "anagram", t = "nagaram", return true.
+    // s = "rat", t = "car", return false.
     // 先判断两个字符串长度是否相同，不相同直接返回false。然后把s中所有的字符出现个数统计起来，
     // 存入一个大小为26的数组中，因为题目中限定了输入字符串为小写字母组成。然后我们再来统计t字符串，如果发现不匹配则返回false。
     if(s.size()!=t.size()) return false;
@@ -578,6 +601,12 @@ bool LC0242::isAnagram(string s, string t) {
 }
 
 bool LC0219::containsNearbyDuplicate(vector<int>& nums, int k) {
+    // 是之前那道 Contains Duplicate 的延伸，不同之处在于那道题只要判断下数组中是否有重复值，而这道题限制了数组中只许有一组重复的数字，
+    // 而且其坐标差不能超过k。首先需要一个 HashMap，来记录每个数字和其坐标的映射，然后需要一个变量d来记录第一次出现重复数字的坐标差。由于
+    // 题目要求只能有一组重复的数字，所以在遇到重复数字时，首先判断d是否已经存了值，如果d已经有值了，说明之前有过了重复数字，则直接返回 false
+    // 即可。如果没有，则此时给d附上值。在网上看到有些解法在这里就直接判断d和k的关系然后返回结果了，其实这样是不对的。因为题目要求只能有一组
+    // 重复数，就是说如果后面又出现了重复数，就没法继续判断了。所以正确的做法应该是扫描完整个数组后在判断，先看d有没有存入结果，如果没有，则
+    // 说明没出现过重复数， 返回 false 即可。如果d有值，再跟k比较，返回对应的结果。
     unordered_map<int, int> map;
     for(int i=0; i<nums.size(); i++) {
         if(map.count(nums[i]) && i-map[nums[i]] <=k) return true;
@@ -600,6 +629,8 @@ bool LC0217::containsDuplicate(vector<int>& nums) {
 //LC0205 run;
 //cout << run.isIsomorphic("ab", "aa") << endl;
 bool LC0205::isIsomorphic(string s, string t) {
+    // 求同构字符串，就是说原字符串中的每个字符可由另外一个字符替代，可以被其本身替代，相同的字符一定要被同一个字符替代，
+    // 且一个字符不能被多个字符替代，即不能出现一对多的映射
     // 原字符串中的每个字符可由另外一个字符替代，可以被其本身替代，相同的字符一定要被同一个字符替代，
     // 且一个字符不能被多个字符替代，即不能出现一对多的映射。根据一对一映射的特点，需要用两个 HashMap
     // 分别来记录原字符串和目标字符串中字符出现情况，由于 ASCII 码只有 256 个字符，所以可以用一个 256
@@ -644,47 +675,6 @@ bool LC0202::isHappy(int n) {
         n = sum;
     }
     return n==1;
-}
-
-int LC0169::majorityElement(vector<int>& nums) {
-    // 将第一个数字假设为过半数，然后把计数器设为1，比较下一个数和此数是否相等，若相等则计数器加一，
-    // 反之减一。然后看此时计数器的值，若为零，则将下一个值设为候选过半数。以此类推直到遍历完整个数组，
-    // 当前候选过半数即为该数组的过半数。
-    // 为啥遇到不同的要计数器减1呢，为啥减到0了又要更换候选者呢？首先是有那个强大的前提存在，
-    // 一定会有一个出现超过半数的数字存在，那么如果计数器减到0了话，说明目前不是候选者数字的个数已经跟候选者的出现个数相同了，
-    // 那么这个候选者已经很 weak，不一定能出现超过半数，此时选择更换当前的候选者。那有可能你会有疑问，
-    // 那万一后面又大量的出现了之前的候选者怎么办，不需要担心，如果之前的候选者在后面大量出现的话，其又会重新变为候选者，
-    // 直到最终验证成为正确的过半数
-    int val=0, cnt=0;
-    for(auto n:nums) {
-        if(!cnt) {
-            val = n;
-            cnt++;
-        } else {
-            (val==n) ? cnt++ : cnt--;
-        }
-    }
-    return val;
-}
-
-//LC0066 run;
-//vector<int> nums{9,9,9}, ans;
-//ans=run.plusOne(nums);
-//for(auto n:nums) cout << n << ' ';
-//cout << endl;
-vector<int> LC0066::plusOne(vector<int>& digits) {
-    // 将一个数字的每个位上的数字分别存到一个一维向量中，最高位在最开头，我们需要给这个数字加一，即在末尾数字加一
-    // 将 carry 初始化为1，然后相当于 digits 加了一个0，处理方法跟之前那道题一样
-    int c=1, n=digits.size();
-    for(int i=n-1; i>=0; --i) {
-        c += digits[i];
-        digits[i] = c%10;
-        c /= 10;
-        if(!c) return digits; // 沒有可進的位，那就可以先return了
-    }
-    if(c)
-        digits.emplace(digits.begin(), c);
-    return digits;
 }
 
 vector<int> LC0001::twoSum(vector<int>& nums, int target) {
