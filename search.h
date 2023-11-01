@@ -9,8 +9,8 @@ using namespace std;
 /*********** Binary Search ***********/
 /*
  * 第一类：查找(=, return m) T，m<T
- * 第二类：查找第一个不小于(>=, return q) T，最后一个小于(<, return q-1) T，lower_bound，m<T
- * 第三类：查找第一个大于T(>, return q) ，最后一个不大于(<=, return q-1) T，upper_bound，m<=T
+ * 第二类：查找第一个不小于(>=, return p) T，最后一个小于(<, return p-1) T，lower_bound，m<T
+ * 第三类：查找第一个大于T(>, return p) ，最后一个不大于(<=, return p-1) T，upper_bound，m<=T
  * 第四类：用子函数当作判断关系（通常由 mid 计算得出）
  * 第五类：其他（通常 T 值不固定）
  *
@@ -25,7 +25,7 @@ using namespace std;
 //    while (q < p) {
 //        int m = q + (p - q) / 2;
 //        if (nums[m] == target) return m;
-//        else if (nums[m] < target) q = m + 1;
+//        else if (nums[m] < target) q = m + 1;  // 因為是遞增，這裡更新的是q
 //        else p = m;
 //    }
 //    return -1;
@@ -35,7 +35,7 @@ using namespace std;
 //    int q = 0, p = nums.size();
 //    while (q < p) {
 //        int m = q + (p - q) / 2;
-//        if (nums[m] < target) q = m + 1;
+//        if (nums[m] < target) q = m + 1;  // 因為是遞增，這裡更新的是q
 //        else p = m;
 //    }
 //    return p;
@@ -45,13 +45,13 @@ using namespace std;
 //    int q = 0, p = nums.size();
 //    while (q < p) {
 //        int m = q + (p - q) / 2;
-//        if (nums[m] <= target) q = m + 1;
+//        if (nums[m] <= target) q = m + 1;  // 因為是遞增，這裡更新的是q
 //        else p = m;
 //    }
 //    return p;
 //}
 
-struct LC1351 { int countNegatives(vector<vector<int>>& grid); };
+struct LC1351 { int countNegatives(vector<vector<int>>& grid); }; // 第二类
 struct LC0744 { char nextGreatestLetter(vector<char>& letters, char target); };
 struct LC0704 { int search(vector<int>& nums, int target); };
 struct LC0441 { int arrangeCoins(int n); };
