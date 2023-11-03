@@ -120,6 +120,8 @@ struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 /*********** Two Pointers ***********/
 /*將陣列裡所有0移到後面*/
 struct LC0283 { void moveZeroes(vector<int>& nums); };
+/*字串是否回文*/
+//struct LC0125 { bool isPalindrome(string s); }; // string.h
 /*移除指定的值並不改變陣列相對位置*/
 struct LC0027 { int removeElement(vector<int>& nums, int val); };
 /*去除重複的字符*/

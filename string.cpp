@@ -534,6 +534,10 @@ bool LC0520::detectCapitalUse(string word) {
 }
 
 string LC0482::licenseKeyFormatting(string s, int k) {
+    // 这道题让我们对注册码进行格式化，正确的注册码的格式是每四个字符后面跟一个短杠，每一部分的长度为K，第一部分长度可以小于K，另外，
+    // 字母必须是大写的。
+    // **Input:** S = "2-4A0r7-4k", K = 4
+    // **Output:** "24A0-R74K"
     // 正确的注册码的格式是每K个字符后面跟一个短杠，每一部分的长度为K，第一部分长度可以小于K，另外，字母必须是大写的。那么由于第一部分可以
     // 不为K，那么我们可以反过来想，我们从S的尾部往前遍历，把字符加入结果res，每K个后面加一个短杠，那么最后遍历完再把res翻转一下即可，
     // 注意翻转之前要把结尾的短杠去掉(如果有的话)
@@ -561,6 +565,10 @@ bool LC0459::repeatedSubstringPattern(string s) {
 }
 
 int LC0434::countSegments(string s) {
+    // Count the number of segments in a string, where a segment is defined to be a
+    // contiguous sequence of non-space characters.
+    // **Input:** "Hello, my name is John"
+    // **Output:** 5
     // 遍历字符串，遇到空格直接跳过，如果不是空格，则计数器加1，然后用个while循环找到下一个空格的位置，这样就遍历完了一个单词，
     // 再重复上面的操作直至结束
     int res = 0;
@@ -578,8 +586,8 @@ int LC0434::countSegments(string s) {
 }
 
 string LC0415::addStrings(string num1, string num2) {
+    // Given two non-negative numbers num1 and num2 represented as string, return the sum of num1 and num2.
     // 一位一位相加，然后算和算进位，最后根据进位情况看需不需要补一个高位
-
     int i=num1.size()-1, j=num2.size()-1, c=0;
     string res;
 
@@ -593,6 +601,7 @@ string LC0415::addStrings(string num1, string num2) {
 }
 
 vector<string> LC0412::fizzBuzz(int n) {
+    // Write a program that outputs the string representation of numbers from 1 to  n.
     // 这道题真心没有什么可讲的，就是分情况处理就行了。
     // 注意！i%15需先括號起來再判斷是否為0
     vector<string> res;
@@ -606,6 +615,8 @@ vector<string> LC0412::fizzBuzz(int n) {
 }
 
 bool LC0392::isSubsequence(string s, string t) {
+    // Given a string s and a string t, check if s is subsequence of t.
+    // s = "abc", t = "ahbgdc", Return true.
     // 用两个指针分别指向字符串s和t，然后如果字符相等，则i和j自增1，反之只有j自增1，最后看i是否等于s的长度，等于说明s已经遍历完了，
     // 而且字符都有在t中出现过
     int i=0;
@@ -617,6 +628,9 @@ bool LC0392::isSubsequence(string s, string t) {
 //LC0290 run;
 //cout << run.wordPattern("abba", "dog cat cat dog") << endl;
 bool LC0290::wordPattern(string pattern, string s) {
+    // Given a pattern and a string str, find if str follows the same pattern.
+    // Input: pattern = "abba", str = "dog cat cat dog"
+    // Output: true
     // 首先检查其是否在 HashMap 中出现，若出现，其映射的单词若不是此时对应的单词，则返回 false。
     // 如果没有在 HashMap 中出现，我们还要遍历一遍 HashMap，看新遇到的单词是否已经是其中的映射，
     // 若已经有其他映射，直接返回 false，如果没有，再跟新遇到的字符建立映射。最后循环退出后，要检查此时的 i 是否和 n 相同，
@@ -646,6 +660,7 @@ bool LC0125::isPalindrome(string s) {
     if(s.empty()) return true;
     int l=0, r=s.size()-1;
     while(l<r) {
+        // isalnum是否為字母或數字
         if(!isalnum(s[l])) l++;
         else if(!isalnum(s[r])) r--;
         else if (tolower(s[l++]) != tolower(s[r--])) return false;
@@ -660,7 +675,7 @@ string LC0067::addBinary(string a, string b) {
     int i=a.size()-1, j=b.size()-1, c=0;
     string res;
 
-    while( i>=0 || j>=0 || c) {
+    while(i>=0 || j>=0 || c) {
         c += i>=0 ? a[i--]-'0' : 0;
         c += j>=0 ? b[j--]-'0' : 0;
         res += c%2+'0';
@@ -690,30 +705,31 @@ int LC0058::lengthOfLastWord(string& s) {
 //cout << run.strStr("hello", "ll") << endk;
 int LC0028::strStr(string haystack, string needle) {
     // Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-    if(!needle.size()) return 0;
-
     int m = haystack.size();
     int n = needle.size();
-    if(m==n) return haystack==needle ? 0 : -1;
-
-    for(int i=0 ; i<=m-n ; i++) {
-        int j;
-        for(j=0 ; j<n ; j++) {
-            if(haystack[i+j]!=needle[j]) break;
-        }
-        if(j==n) return i;
-    }
-    return -1;
-
-    // simplified
-    for(int i=0 ; ; i++) {
-        for(int j=0 ; ; j++) {
-            if(j==needle.size())  return i;
-            if(i+j==haystack.size()) return -1;
-            if(haystack[i+j] != needle[j]) break;
+    for(int i=0; ; i++) {
+        for (int j=0;; j++) {
+            if (j == n) return i; // 第一檢查j是否走到n，否則會拿needle[n]來做比較
+            if (i + j == m) return -1; // 第二檢查是否走到m，否則會拿到haystack[m]來做比較
+            if (haystack[i + j] != needle[j]) break;
         }
     }
     return -1;
+
+//    if(!needle.size()) return 0;
+//
+//    int m = haystack.size();
+//    int n = needle.size();
+//    if(m==n) return haystack==needle ? 0 : -1;
+//
+//    for(int i=0 ; i<=m-n ; i++) {
+//        int j;
+//        for(j=0 ; j<n ; j++) {
+//            if(haystack[i+j]!=needle[j]) break;
+//        }
+//        if(j==n) return i;
+//    }
+//    return -1;
 }
 
 //LC0020 run;
