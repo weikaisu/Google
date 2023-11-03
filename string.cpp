@@ -744,22 +744,20 @@ bool LC0020::isValid(string str) {
 //cout << run.longestCommonPrefix(s) << endl;
 string LC0014::longestCommonPrefix(vector<string>& strs) {
     // 求一系列字符串的共同前缀
-    string ans{""};
-    int l_idx=0, c_idx=0;
-    while(l_idx<strs.size() && c_idx<strs[l_idx].size()) {
-        char p, c=strs[l_idx][c_idx];
-        if(!l_idx) p=c;
-        else if(p!=c) break;
-
-        if(l_idx==strs.size()-1) {
-            l_idx=0;
-            c_idx++;
-            ans+=p;
-        } else {
-            l_idx++;
+    string res;
+    int row=0, col=0;
+    while(row<strs.size() && col<strs[row].size()) {
+        char p, c=strs[row][col];
+        if(!row) p=c;
+        if(p!=c) break;
+        if(row != strs.size()-1) row++;
+        else {
+            row=0;
+            col++;
+            res += p;
         }
     }
-    return ans;
+    return res;
 }
 
 //cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
@@ -773,19 +771,20 @@ string LC0006::convert(string s, int numRows) {
     // Write the code that will take a string and make this conversion given a number of rows
     if(numRows<=1 || numRows>= s.size()) return s;
 
-    vector<string> t(numRows);
+    vector<string> lines(numRows);
     int row=0, step=1;
-
     for(int i=0 ; i<s.size() ; i++) {
+        lines[row] += s[i];
         if(row == 0)  step = 1;
         if(row == numRows-1) step = -1;
-        cout << row << ' ' << s[i] << endl;
-        t[row] += s[i];
         row += step;
     }
 
-    string ans;
-    for(int i=0 ; i<numRows ; i++) ans+=t[i];
+    string res;
+    for(auto l:lines) res += l;
+    return res;
 
-    return ans;
+//    string ans;
+//    for(int i=0 ; i<numRows ; i++) ans+=line[i];
+//    return ans;
 }
