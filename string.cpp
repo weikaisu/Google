@@ -406,7 +406,11 @@ int LC0929::numUniqueEmails(vector<string>& emails) {
 }
 
 vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
-    // 把每个单词都提取出来，然后统计其在两个句子中出现的个数，若最终若某个单词的统计数为1，则其一定是符合题意的。
+    // A word is  uncommon  if it appears exactly once in one of the sentences, and does not appear in the other sentence.
+    // Return a list of all uncommon words.
+    // Input: A = "this apple is sweet", B = "this apple is sour"
+    // Output: ["sweet","sour"]
+    // 把每个单词都提取出来，然后统计其在两个句子中出现的个数，最终若某个单词的统计数为1，则其一定是符合题意的。
     // 所以我们可以先将两个字符串拼接起来，中间用一个空格符隔开，这样提取单词就更方便一些。在 Java 中，可以使用 split()
     // 函数来快速分隔单词，但是在 C++ 中就没这么好命，只能使用字符串流 istringstream，并用一个 while 循环来一个一个提取。
     // 当建立好了单词和其出现次数的映射之后，再遍历一遍 HashMap，将映射值为1的单词存入结果 res 即可
@@ -420,6 +424,14 @@ vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
 }
 
 string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
+    // Input:
+    // paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
+    // banned = ["hit"]
+    // Output: "ball"
+    // Explanation:
+    // "hit" occurs 3 times, but it is a banned word.
+    // "ball" occurs twice (and no other word does), so it is the most frequent non-banned word in the paragraph.
+    // Note that words in the paragraph are not case sensitive
     // 给了我们一个字符串，是一个句子，里面有很多单词，并且还有标点符号，然后又给了我们一个类似黑名单功能的一个字符串数组，
     // 让我们在返回句子中出现的频率最高的一个单词。要求非常简单明了，那么思路也就简单粗暴一些吧。
     // 因为我们返回的单词不能是黑名单中的，所以我们对于每一个统计的单词肯定都需要去黑名单中检查，为了提高效率，
@@ -500,6 +512,12 @@ string LC0709::toLowerCase(string s) {
 }
 
 int LC0696::countBinarySubstrings(string s) {
+    // Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0's and 1's,
+    // and all the 0's and all the 1's in these substrings are grouped consecutively.
+    // Input: "00110011"
+    // Output: 6
+    // Explanation: There are 6 substrings that have equal number of consecutive 1's and 0's:
+    // "0011", "01", "1100", "10", "0011", and "01".
     // 这道题给了我们一个二进制字符串，然后我们统计具有相同0和1的个数，且0和1各自都群组在一起(即0和1不能交替出现)的子字符串的个数，
     // 题目中的两个例子也很能说明问题。那么我们来分析题目中的第一个例子00110011，符合要求的子字符串要求0和1同时出现，那么当第一个1出
     // 现的时候，前面由于前面有两个0，所以肯定能组成01，再遇到下一个1时，此时1有2个，0有2个，能组成0011，下一个遇到0时，此时0的个数重
@@ -521,6 +539,9 @@ int LC0696::countBinarySubstrings(string s) {
 }
 
 int LC0521::findLUSlength(string a, string b) {
+    // Longest Uncommon Subsequence I
+    // The longest uncommon subsequence is defined as the longest subsequence of one of these strings and this
+    // subsequence should not be any subsequence of the other strings.
     // 如果两个字符串相等，那么一定有共同子序列，反之，如果两个字符串不等，那么较长的那个字符串就是最长非共同子序列
     return a==b ? -1 : max(a.size(), b.size());
 }
