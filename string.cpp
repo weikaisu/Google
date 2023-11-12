@@ -825,3 +825,23 @@ string LC0006::convert(string s, int numRows) {
 //    for(int i=0 ; i<numRows ; i++) ans+=line[i];
 //    return ans;
 }
+
+int LC0003::lengthOfLongestSubstring(string s) {
+    // Given a string s, find the length of the longest substring without repeating characters.
+    // Input: s = "abcabcbb"
+    // Output: 3
+    // Explanation: The answer is "abc", with the length of 3.
+    // 需要一个变量 left 来指向滑动窗口的左边界，这样，如果当前遍历到的字符从未出现过，那么直接扩大右边界，如果之前出现过，那么就分两种情况，
+    // 在或不在滑动窗口内，如果不在滑动窗口内，那么就没事，当前字符可以加进来，如果在的话，就需要先在滑动窗口内去掉这个已经出现过的字符了，
+    // 去掉的方法并不需要将左边界 left 一位一位向右遍历查找，由于 HashMap 已经保存了该重复字符最后出现的位置，所以直接移动 left 指针就可以
+    // 了。维护一个结果 res，每次用出现过的窗口大小来更新结果 res，就可以得到最终结果啦
+    array<int,128> map; map.fill(-1);
+    int res=0, lidx=-1, ridx=0;
+    while(ridx<s.size()) {
+        lidx = std::max(lidx, map[s[ridx]]);
+        map[s[ridx]] = ridx;
+        res = std::max(res, ridx-lidx);
+        ridx++;
+    }
+    return res;
+}

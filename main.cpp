@@ -20,8 +20,10 @@ int main() {
 //    Play play;
 //    play.Iterative(v);
 
-//    TreeNode *root;
-//    root->BuildTree(root);
+    TreeNode *root;
+    root->BuildTree(root);
+    LC1022 run;
+    run.sumRootToLeaf(root);
 //    root->TraverseBottomUp(root);
 //    root->CleanTree(root);
 
@@ -34,9 +36,9 @@ int main() {
 //    ListNode* r = run.deleteDuplicates(l1.GetListHead());
 //    LinkedList::ShowLinkedList(r);
 
-    LC0069 run;
+//    LC0069 run;
     vector<int> v{6,17,12,4,20,11};
-    run.mySqrt(8);
+//    run.mySqrt(8);
 
 
 //    string s {"ABCDE"};
