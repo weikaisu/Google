@@ -80,5 +80,6 @@ struct LC0020 { bool isValid(string s); };
 struct LC0014 { string longestCommonPrefix(vector<string>& strs); };
 /*zigzag掃描轉成line掃描*/
 struct LC0006 { string convert(string s, int numRows); };
+struct LC0003 { int lengthOfLongestSubstring(string s); };
 
 #endif //GOOGLE_STRING_H

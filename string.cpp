@@ -31,6 +31,9 @@ int LC1360::daysBetweenDates(string date1, string date2) {
 int LC1332::removePalindromeSub(string s) {
     // 给了一个只有字母a和b的字符串，说是每次可以删除一个"回文子序列"，问最少需要删除多少次，可以将给定字符串变为空串。
     // 不是"回文子字串"
+    // Input: s = "ababa"
+    // Output: 1
+    // Explanation: s is already a palindrome, so its entirety can be removed in a single step.
     // 每次移除所有相同的字母，因为相同的字母话，不管多少个，一定是回文串。
     // 又因为题目中说了只有a和b两个字母，那么最多只需要2次就可以清空字符串。
     // 再想想什么情况下可以小于2，当给定字符串是空串的话，不用移除，当然题目中限定了字符串长度至少为1。
@@ -58,6 +61,8 @@ int LC1323::maximum69Number(int num) {
     // 给了一个只含有6和9的正整数，现在说是可以将6变成9，或者将9变成6，最多可以变换一次，让返回可以得到的最大的数字。既然要得到最大的数字，
     // 那么肯定是把6变成9得到的数字最大，而且尽量去变高位上的数字。所以方法就是从高位开始遍历，若遇到6，则变为9即可，变换了之后直接 break
     // 掉就行了，因为最多只能变换一次。为了能方便从高位开始遍历，可以将给定的数字转为字符串开始遍历，之后变换完了之后再转为整型数就可以了
+    // Input: num = 9669
+    // Output: 9969
     string str = std::to_string(num);
     for(char &c:str)
         if(c == '6') {
@@ -68,6 +73,13 @@ int LC1323::maximum69Number(int num) {
 }
 
 string LC1309::freqAlphabets(string s) {
+    // You are given a string s formed by digits and '#'. We want to map s to English lowercase characters as follows:
+    // Characters ('a' to 'i') are represented by ('1' to '9') respectively.
+    // Characters ('j' to 'z') are represented by ('10#' to '26#') respectively.
+    // Return  the string formed after mapping.
+    // Input: s = "10#11#12"
+    // Output: "jkab"
+    // Explanation: "j" -> "10#" , "k" -> "11#" , "a" -> "1" , "b" -> "2".
     // 暴力解的时间复杂度也就是O(n)，循环一遍字符串即可。循环时，查看当前位加二的位置是否为井号，如果是，就将当前位与后一位组合起来，查看其对
     // 应的字符，并将该字符加入返回结果，同时下标加二继续循环。反之，如果当前位后2位不是井号，那么将当前位数字对应的字符加入返回结果即可
     string res;
@@ -86,6 +98,10 @@ string LC1309::freqAlphabets(string s) {
 }
 
 int LC1154::dayOfYear(string date) {
+    // Given a string date representing a Gregorian calendar date formatted as YYYY-MM-DD, return the day number of the year.
+    // Input: date = "2019-01-09"
+    // Output: 9
+    // Explanation: Given date is the 9th day of the year in 2019.
     // 这里唯一的难点就是判断闰年了吧。先用个数组列出非闰年各个月的天数，然后分别从给定 date 字符串中提取出年月日，并转为整型数。然后将当前月
     // 之前的天数都累加到结果 res 中，接下来判断当前月是否大于2月，没有的话都不用判断闰年了。超过了2月就要判断当前年是否是闰年，判断方法很简
     // 单，若能被 400 整除，一定是闰年，或着不能被 100 整除，但能被4整除的也是闰年。是闰年的话就再多加一天，最后再加上当前的天数返回即可
@@ -100,6 +116,10 @@ int LC1154::dayOfYear(string date) {
 }
 
 string LC1108::defangIPaddr(string address) {
+    // Given a valid (IPv4) IP address, return a defanged version of that IP address.
+    // A defanged IP address replaces every period "." with "[.]".
+    // Input: address = "1.1.1.1"
+    // Output: "1[.]1[.]1[.]1"
     // 直接遍历原字符串，遇到点了，就直接把 [.] 加入，否则就加入当前字符即可
     string res;
     for(auto &c:address) {
@@ -116,6 +136,11 @@ string LC1108::defangIPaddr(string address) {
 }
 
 vector<string> LC1078::findOcurrences(string text, string first, string second) {
+    // Given words first and second, consider occurrences in some text of the form "first second third", where second
+    // comes immediately after first, and third comes immediately after second.
+    // For each such occurrence, add "third" to the answer, and return the answer.
+    // Input: text = "alice is a good girl she is a good student", first = "a", second = "good"
+    // Output: ["girl","student"]
     // 我们并不用保存所有的单词，因为这里只关心前两个单词是啥，所以可以使用两个变量 pre2 和 pre 来记录前面的两个单词，当其分别等于 first
     // 和 second 的时候，将当前单词加入结果 res 中，并且 pre2 赋值为 pre，pre赋值为当前单词即可
     vector<string> res;
@@ -130,6 +155,11 @@ vector<string> LC1078::findOcurrences(string text, string first, string second) 
 }
 
 string LC1071::gcdOfStrings(string str1, string str2) {
+    // For two strings s and t, we say "t divides s" if and only if s = t + ... + t
+    // (t concatenated with itself 1 or more times)
+    // Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
+    // Input: str1 = "ABCABC", str2 = "ABC"
+    // Output: "ABC"
     // 由于 str1 和 str2 可以被同一个x串整除，那么 str1+str2 和 str2+str1 一定是相同的，不信大家可以自行带例子去验证。而且最大的x的长
     // 度是 str1 和 str2 长度的最大公约数相同（是不是感觉很神奇，求大佬证明），这样的话直接浓缩到一行就搞定了
 //    return (str1 + str2 == str2 + str1) ? str1.substr(0, gcd(str1.size(), str2.size())) : "";
@@ -166,6 +196,12 @@ string LC1071::gcdOfStrings(string str1, string str2) {
 }
 
 string LC1047::removeDuplicates(string s) {
+    // Input: "abbaca"
+    // Output: "ca"
+    // Explanation:
+    // For example, in "abbaca" we could remove "bb" since the letters are adjacent and equal, and this is the only
+    // possible move.  The result of this move is that the string is "aaca", of which only "aa" is possible, so the
+    // final string is "ca".
     // 这道题给了一个字符串，让移除所有相邻的重复字符，注意之前不相邻的字符可以在其他字符移除后变的相邻，从而形成的新的相邻的重复字符，所以只
     // 是简单移除一次不能保证能得到最终的结果。这里需要借助栈的思路来做，可以用字符串来模拟栈的后入先出的特性。遍历每个字符，若 res 不空，且
     // 最后一个字符和当前字符相同，则移除掉 res 的最后一个字符，否则将当前字符加入 res 中，这样最后剩下的即为所求
@@ -190,6 +226,11 @@ string LC1047::removeDuplicates(string s) {
 }
 
 string LC1021::removeOuterParentheses(string s) {
+    // Input: "(()())(())"
+    // Output: "()()()"
+    // Explanation:
+    // The input string is "(()())(())", with primitive decomposition "(()())" + "(())".
+    // After removing outer parentheses of each part, this is "()()" + "()" = "()()()".
     // 可以写的更简洁一些，并不需要等到找到整个合法括号子串后再加入结果 res，而是在遍历的过程中就加入。因为这里的括号分为两种，一种是合法子串
     // 的最外层括号，这种不能加到结果 res，另一种是其他位置上的括号，这种要加到 res。所以只要区分出这两种情况，就知道当前括号要不要加，区别
     // 的方法还是根据 cnt，当遇到左括号时，若此时 cnt 大于0，则一定不是合法子串的起始位置，可以加入 res，之后 cnt 自增1；同理，若遇到右括
@@ -251,6 +292,11 @@ vector<string> LC0937::reorderLogFiles(vector<string>& logs) {
     // 字的话，说明当前日志是数字型的，加入数组 digitLogs 中，并继续循环。如果不是的话，将两部分分开，存入到一个二维数组 data 中。之后要
     // 对 data 数组进行排序，并需要重写排序规则，要根据日志内容排序，若日志内容相等，则根据标识符排序。最后把排序好的日志按顺序合并，存入结
     // 果 res 中，最后别忘了把数字型日志也加入 res
+    // Input: logs = ["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]
+    // Output: ["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"]
+    // Explanation:
+    // The letter-log contents are all different, so their ordering is "art can", "art zero", "own kit dig".
+    // The digit-logs have a relative order of "dig1 8 1 5 1", "dig2 3 6".
 //    vector<string> res, dig;
 //    vector<vector<string>> let;
 //    for(auto &log:logs) {
@@ -289,6 +335,9 @@ bool LC0925::isLongPressedName(string name, string typed) {
     // 虽然后者中a和b的出现次数都大于等于前者，但还是要返回 false。博主最先想的方法是用两个指针i和j分别提取 name 和 typed 字符串中每个字
     // 母出现的次数，如果 typed 中的次数小于 name 中的次数，则直接返回 false 即可，最终循环结束后，i和j应该分别为 name 和 typed 的长度，
     // 此时返回 true，否则返回 false
+    // Input: name = "alex", typed = "aaleex"
+    // Output: true
+    // Explanation: 'a' and 'e' in 'alex' were long pressed.
 //    int i=0, j=0, m=name.size(), n=typed.size();
 //    while(i<m || j<n) {
 //        if(name[i]!=typed[j]) return false;
@@ -302,6 +351,11 @@ bool LC0925::isLongPressedName(string name, string typed) {
 }
 
 string LC0917::reverseOnlyLetters(string s) {
+    // Given a string S, return the "reversed" string where all characters that are not a letter stay in the same place,
+    // and all letters reverse their positions.
+    // Input: "ab-cd"
+    // Output: "dc-ba"
+    // 给了一个由字母和其他字符组成的字符串，让我们只翻转其中的字母
     // 使用两个指针i和j，分别指向S串的开头和结尾。当i指向非字母字符时，指针i自增1，否则若j指向非字母字符时，指针j自减1，
     // 若i和j都指向字母时，则交换 S[i] 和 S[j] 的位置，同时i自增1，j自减1，这样也可以实现只翻转字母的目的
     int l=0, r=s.size()-1;
@@ -332,6 +386,11 @@ string LC0824::toGoatLatin(string sentence) {
 
 bool LC0953::isAlienSorted(vector<string>& words, string order) {
     // 把順序當作字母的ASCII碼來排序
+    // Given a sequence of words written in the alien language, and the order of the alphabet, return true if and only
+    // if the given words are sorted lexicographicaly in this alien language.
+    // Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
+    // Output: true
+    // Explanation: As 'h' comes before 'l' in this language, then the sequence is sorted.
     array<unsigned,26> map{};
     for(unsigned i=0; i<order.size(); i++)
         map[order[i]-'a']=i;
@@ -539,7 +598,7 @@ int LC0696::countBinarySubstrings(string s) {
 }
 
 int LC0521::findLUSlength(string a, string b) {
-    // Longest Uncommon Subsequence I
+    // Longest Uncommon Subsequence I.
     // The longest uncommon subsequence is defined as the longest subsequence of one of these strings and this
     // subsequence should not be any subsequence of the other strings.
     // 如果两个字符串相等，那么一定有共同子序列，反之，如果两个字符串不等，那么较长的那个字符串就是最长非共同子序列
