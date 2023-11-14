@@ -36,5 +36,6 @@ struct LC0561 { int arrayPairSum(vector<int>& nums); };
 struct LC0495 { int findPoisonedDuration(vector<int>& timeSeries, int duration); };
 /*分發糖果給小孩*/
 struct LC0455 { int findContentChildren(vector<int>& g, vector<int>& s); };
+struct LC0011 { int maxArea(vector<int>& height); };
 
 #endif //GOOGLE_DP_H

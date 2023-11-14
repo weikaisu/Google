@@ -398,3 +398,25 @@ int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
         if(s[i]>=g[j]) j++;
     return j;
 }
+
+int LC0011::maxArea(vector<int>& height) {
+    // You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints
+    // of the ith line are (i, 0) and (i, height[i]).
+    // Find two lines that together with the x-axis form a container, such that the container contains the most water.
+    // Return the maximum amount of water a container can store.
+    // Input: height = [1,8,6,2,5,4,8,3,7]
+    // Output: 49
+    // Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area
+    // of water (blue section) the container can contain is 49.
+    // 水的容量為兩邊中較小的高度x水底板的寬度，一開始從0, n-1最大底板寬度開始算起，當縮小底板寬度時選擇高度較小的一邊縮，看是否能更新到高度
+    // 再高一點。進一步的優化為，遇到相同高度時直接更新，不需要再計算水容量來做比較。
+
+    int res=0, l=0, r=height.size()-1;
+    while(l<r) {
+        int h = std::min(height[l], height[r]);
+        res = std::max(res, h*(r-l));
+        while(l<r && h==height[l]) l++;
+        while(l<r && h==height[r]) r--;
+    }
+    return res;
+}
