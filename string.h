@@ -78,6 +78,7 @@ struct LC0028 { int strStr(string haystack, string needle); };
 struct LC0020 { bool isValid(string s); };
 /*最長的common prefix*/
 struct LC0014 { string longestCommonPrefix(vector<string>& strs); };
+struct LC0008 { int myAtoi(string s); };
 /*zigzag掃描轉成line掃描*/
 struct LC0006 { string convert(string s, int numRows); };
 struct LC0003 { int lengthOfLongestSubstring(string s); };

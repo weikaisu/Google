@@ -856,6 +856,26 @@ string LC0014::longestCommonPrefix(vector<string>& strs) {
     return res;
 }
 
+int LC0008::myAtoi(string s) {
+    // Converts a string to a 32-bit signed integer
+    // 1. 若字符串开头是空格，则跳过所有空格，到第一个非空格字符，如果没有，则返回0.
+    // 2. 若第一个非空格字符是符号 +/-，则标记 sign 的真假，这道题还有个局限性，那就是在 c++ 里面，+-1 和-+1 都是认可的，都是 -1，而在此题里，则会返回0.
+    // 3. 若下一个字符不是数字，则返回0，完全不考虑小数点和自然数的情况，不过这样也好，起码省事了不少。
+    // 4. 如果下一个字符是数字，则转为整型存下来，若接下来再有非数字出现，则返回目前的结果。
+    // 5. 还需要考虑边界问题，如果超过了整型数的范围[-2^31, 2^31-1], 2^31=2,147,483,648，则用边界值替代当前值。
+    if(s.empty()) return 0;
+    int sign=1, val=0, i=0, n=s.size();
+    while(i<n && s[i]==' ') i++;
+    if(i<n && (s[i]=='+' || s[i]=='-'))
+        sign = s[i++]=='+' ? 1 : -1;
+    while(i<n && s[i]>='0' && s[i]<='9') {
+        if(val > INT_MAX/10 || (val == INT_MAX/10 && s[i]-'0' > 7))
+            return (sign==1) ? INT_MAX : INT_MIN;
+        val = 10*val + (s[i++]-'0');
+    }
+    return sign*val;
+}
+
 //cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
 //convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 string LC0006::convert(string s, int numRows) {
