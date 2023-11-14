@@ -14,6 +14,7 @@ struct LC0509 { int fib(int n); };
 struct LC0303 { vector<int> dp; LC0303(vector<int>& nums); int sumRange(int left, int right); };
 struct LC0070 { int climbStairs(int n); };
 struct LC0053 { int maxSubArray(vector<int>& nums); };
+struct LC0005 { string longestPalindrome(string s); };
 
 /*********** Greedy ***********/
 /*給定字串最多能切分出多少個平衡字串*/

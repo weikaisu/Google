@@ -137,6 +137,30 @@ int LC0053::maxSubArray(vector<int>& nums) {
     return vMax;
 }
 
+string LC0005::longestPalindrome(string s) {
+    // Given a string s, return the longest palindromic substring in s.
+    // Input: s = "babad"
+    // Output: "bab"
+    // Explanation: "aba" is also a valid answer.
+    // 维护一个二维数组 dp，其中 dp[i][j] 表示字符串区间 [i, j] 是否为回文串，当 i = j 时，只有一个字符，肯定是回文串，如果 i = j + 1，
+    // 说明是相邻字符，此时需要判断 s[i] 是否等于 s[j]，如果i和j不相邻，即 i - j >= 2 时，除了判断 s[i] 和 s[j] 相等之外，
+    // dp[i + 1][j - 1] 若为真，就是回文串
+    if (s.empty()) return "";
+    int n = s.size(), left = 0, len = 1;
+    vector<vector<bool>> dp(n, vector<bool>(n));
+    for (int i = 0; i < n; ++i) {
+        dp[i][i] = true;
+        for (int j = 0; j < i; ++j) {
+            dp[i][j] = (s[i]==s[j] && (i-j<2 || dp[i-1][j+1]));
+            if(dp[i][j] && len < i-j+1) {
+                len = i - j + 1;
+                left = j;
+            }
+        }
+    }
+    return s.substr(left, len);
+}
+
 /***********  Greedy  **********/
 int LC1221::balancedStringSplit(string s) {
     // 这道题给了一个只有L和R两个字符的字符串，并且定义了一种平衡字符串，即L和R的个数相同，现在问最多能将字符串分为多少个这样的平衡字符串。
