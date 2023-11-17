@@ -409,3 +409,40 @@ void LC0088::merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
         nums1[i--] = (m >= 0 && nums1[m] > nums2[n]) ? nums1[m--] : nums2[n--];
     }
 }
+
+vector<vector<int>> LC0015::threeSum(vector<int>& nums) {
+    // Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that
+    // i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+    // Notice that the solution set must not contain duplicate triplets.
+    // 要找出三个数且和为0，那么除了三个数全是0的情况之外，肯定会有负数和正数，还是要先 fix 一个数，然后去找另外两个数，
+    // 只要找到两个数且和为第一个 fix 数的相反数就行了
+    // 如果数组是有序的，那么就可以用双指针以线性时间复杂度来遍历所有满足题意的两个数组合
+    // 对原数组进行排序，然后开始遍历排序后的数组，这里注意不是遍历到最后一个停止，而是到倒数第三个
+    // 当遍历到正数的时候就break因为数组现在是有序的了，如果第一个要 fix 的数就是正数了，则后面的数字就都是正数，就永远不会出现和为0的情况了
+    // 加上重复就跳过的处理，处理方法是从第二个数开始，如果和前面的数字相等，就跳过
+    // 用两个指针分别指向 fix 数字之后开始的数组首尾两个数，如果两个数和正好为 target，则将这两个数和 fix 的数一起存入结果中
+    // 跳过重复数字的步骤了，两个指针都需要检测重复数字
+    // 如果两数之和小于 target，则将左边那个指针i右移一位，使得指向的数字增大一些
+    // 如果两数之和大于 target，则将右边那个指针j左移一位，使得指向的数字减小一些
+    vector<vector<int>> res;
+    std::sort(nums.begin(), nums.end());
+    if(nums.empty() || nums.front()>0 || nums.back()<0) return {};
+    int n=nums.size();
+    for(int p=0; p<n-2; p++) {
+        if(nums[p]>0) break;
+        if(p>0 && nums[p]==nums[p-1]) continue;
+        int diff = 0-nums[p], i = p+1, j = n-1;
+        while(i<j) {
+            if(nums[i]+nums[j] == diff) {
+                res.push_back({nums[p], nums[i], nums[j]});
+                while(i<j && nums[i]==nums[i+1]) i++;
+                while(i<j && nums[j]==nums[j-1]) j--;
+                i++; j--;
+            } else if (nums[i]+nums[j] < diff)
+                i++;
+            else
+                j--;
+        }
+    }
+    return res;
+}
