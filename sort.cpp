@@ -410,6 +410,37 @@ void LC0088::merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
     }
 }
 
+int LC0016::threeSumClosest(vector<int>& nums, int target) {
+    // Given an integer array nums of length n and an integer target, find three integers in nums such that the sum
+    // is closest to target.
+    // Return the sum of the three integers.
+    // You may assume that each input would have exactly one solution.
+    // 保证当前三数和跟给定值之间的差的绝对值最小，所以需要定义一个变量 min_diff 用来记录差的绝对值，然后还是要先将数组排个序，然后开始遍
+    // 历数组，思路跟那道三数之和很相似，都是先确定一个数，然后用两个指针 l 和 r 来滑动寻找另外两个数，每确定两个数，求出此三数之和，
+    // 然后算和给定值的差的绝对值存在 diff 中，然后和 min_diff 比较并更新 min_diff 和结果 res 即可
+    std::sort(nums.begin(), nums.end());
+    int res = nums[0]+nums[1]+nums[2];
+    int n=nums.size();
+    int min_diff = std::abs(target - res);
+    for(int p=0; p<n-2; p++) {
+        if(p>0 && nums[p]==nums[p-1]) continue;
+        int l = p+1, r = n-1;
+        while(l<r) {
+            int sum = nums[p] + nums[l] + nums[r];
+            int diff = std::abs(target - sum);
+            if(diff < min_diff) {
+                min_diff = diff;
+                res = sum;
+            }
+            if(sum<target)
+                l++;
+            else
+                r--;
+        }
+    }
+    return res;
+}
+
 vector<vector<int>> LC0015::threeSum(vector<int>& nums) {
     // Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that
     // i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
@@ -424,24 +455,25 @@ vector<vector<int>> LC0015::threeSum(vector<int>& nums) {
     // 跳过重复数字的步骤了，两个指针都需要检测重复数字
     // 如果两数之和小于 target，则将左边那个指针i右移一位，使得指向的数字增大一些
     // 如果两数之和大于 target，则将右边那个指针j左移一位，使得指向的数字减小一些
-    vector<vector<int>> res;
     std::sort(nums.begin(), nums.end());
+    vector<vector<int>> res;
     if(nums.empty() || nums.front()>0 || nums.back()<0) return {};
     int n=nums.size();
     for(int p=0; p<n-2; p++) {
         if(nums[p]>0) break;
         if(p>0 && nums[p]==nums[p-1]) continue;
-        int diff = 0-nums[p], i = p+1, j = n-1;
-        while(i<j) {
-            if(nums[i]+nums[j] == diff) {
-                res.push_back({nums[p], nums[i], nums[j]});
-                while(i<j && nums[i]==nums[i+1]) i++;
-                while(i<j && nums[j]==nums[j-1]) j--;
-                i++; j--;
-            } else if (nums[i]+nums[j] < diff)
-                i++;
+        int l = p+1, r = n-1;
+        int diff = 0-nums[p];
+        while(l<r) {
+            if(nums[l]+nums[r] == diff) {
+                res.push_back({nums[p], nums[l], nums[r]});
+                while(l<r && nums[l]==nums[l+1]) l++;
+                while(l<r && nums[r]==nums[r-1]) r--;
+                l++; r--;
+            } else if (nums[l]+nums[r] < diff)
+                l++;
             else
-                j--;
+                r--;
         }
     }
     return res;

@@ -55,6 +55,7 @@ struct LC0747 { int dominantIndex(vector<int>& nums); };
 // struct LC0217 { bool containsDuplicate(vector<int>& nums); } // list.h
 // struct LC0169 { int majorityElement(vector<int>& nums); }; // list.h
 struct LC0088 { void merge(vector<int>& nums1, int m, vector<int>& nums2, int n); };
+struct LC0016 { int threeSumClosest(vector<int>& nums, int target); };
 struct LC0015 { vector<vector<int>> threeSum(vector<int>& nums); };
 
 #endif //GOOGLE_SORT_H
