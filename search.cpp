@@ -203,6 +203,42 @@ vector<vector<int>> LC0046::permute(vector<int>& nums) {
 //    return res;
 }
 
+vector<string> LC0017::letterCombinations(string digits) {
+    // Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number
+    // could represent. Return the answer in any order.
+    // Input: digits = "23"
+    // Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+    if(digits.empty()) return {};
+    vector<string> map{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    vector<string> res;
+
+    function<void(int,string)> dfs = [&](int pos, string cur) {
+        if(pos == digits.size()) { res.push_back(cur); return; }
+        string str = map[digits[pos]-'0'];
+        for(int i=0; i<str.size(); i++)
+            dfs(pos+1, cur+str[i]);
+    };
+
+    dfs(0, "");
+    return res;
+
+    // iterative way
+    // 用迭代 Iterative 来解，在遍历 digits 中所有的数字时，先建立一个临时的字符串数组cur，然后跟上面解法的操作一样，通过数字到 dict
+    // 中取出字符串 str，然后遍历取出字符串中的所有字符，再遍历当前结果 res 中的每一个字符串，将字符加到后面，并加入到临时字符串数组cur中。
+    // 取出的字符串 str 遍历完成后，将临时字符串数组赋值给结果 res
+//    if(digits.empty()) return {};
+//    vector<string> map{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+//    vector<string> res{""}; // res後續不是藉由push_back放入，需先初始化
+//    for(int i=0; i<digits.size(); i++) {
+//        vector<string> cur;
+//        string str = map[digits[i]-'0'];
+//        for(int j=0; j<str.size(); j++)
+//            for(string s:res) cur.push_back(s+str[j]);
+//        res = cur;
+//    }
+//    return res;
+}
+
 bool LC0872::leafSimilar(TreeNode* root1, TreeNode* root2) {
     // 定义了一种叶相似树，就是说若两棵树的叶结点按照从左向右的顺序取出来排成序列，若两个序列相同，则说明二者是叶结点相似树。其实本质就是按从
     // 左到右的顺序打印二叉树的叶结点呗，那么根据这种顺序，我们采用先序遍历遍历比较好，遇到叶结点后直接将叶结点存入数组中，那么对于两个树遍历

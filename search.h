@@ -71,6 +71,7 @@ struct LC0784 { vector<string> letterCasePermutation(string s); };
 struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); };
 struct LC0077 { vector<vector<int>> combine(int n, int k); };
 struct LC0046 { vector<vector<int>> permute(vector<int>& nums); };
+struct LC0017 { vector<string> letterCombinations(string digits); };
 // tree.h
 struct LC0872 { bool leafSimilar(TreeNode* root1, TreeNode* root2); };
 struct LC0590 { vector<int> postorder(Node* root); };
