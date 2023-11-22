@@ -165,9 +165,39 @@ vector<vector<int>> LC0077::combine(int n, int k) {
     return res;
 }
 
+vector<vector<int>> LC0047::permuteUnique(vector<int>& nums) {
+    // Input: nums = [1,1,2]
+    // Output: [[1,1,2], [1,2,1], [2,1,1]]
+    int n = nums.size();
+    vector<vector<int>> res;
+    vector<int> cur;
+    vector<bool> used(n, false);
+    std::sort(nums.begin(), nums.end());
+
+    function<void(int)> dfs = [&](int pos) {
+        if(pos==n)
+            { res.push_back(cur); return; }
+        for(int i=0; i<n; i++) {
+            // 第一個，已經有放進curr裡了
+            if(used[i]) continue;
+            // 第二個，排序後前面一個同樣的值一定會被先用到，當會出現跟前面一樣，前面卻是沒有used時就表示這一組已經放進res過了
+            if(i>0 && nums[i]==nums[i-1] && !used[i-1])continue;
+            used[i] = true;
+            cur.push_back(nums[i]);
+            dfs(pos+1);
+            cur.pop_back();
+            used[i] = false;
+        }
+    };
+
+    dfs(0);
+    return res;
+}
+
 vector<vector<int>> LC0046::permute(vector<int>& nums) {
     // N個裡面取M個，這裡N等於M，可以利用原本的nums當作cur
     // 每兩兩swap就是一種可能的組合。
+    // 可以每兩兩swap是因為N等於M
     int n = nums.size();
     vector<vector<int>> res;
 
@@ -211,6 +241,8 @@ vector<string> LC0017::letterCombinations(string digits) {
     if(digits.empty()) return {};
     vector<string> map{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     vector<string> res;
+    // vector<bool> used(nums.size(), false); 不需要used是因為for裡面每個位置要挑出來的字母來自不同的集合，不需要記是否用過
+    // vector<int> cur; 把cur當作參數傳
 
     function<void(int,string)> dfs = [&](int pos, string cur) {
         if(pos == digits.size()) { res.push_back(cur); return; }
@@ -219,7 +251,7 @@ vector<string> LC0017::letterCombinations(string digits) {
             dfs(pos+1, cur+str[i]);
     };
 
-    dfs(0, "");
+    dfs(0, ""); // 字串可以直接用""來表示初始化一個空字串，vector無法如此，因此當要傳的是vector時需先宣告
     return res;
 
     // iterative way

@@ -70,6 +70,7 @@ struct LC0965 { bool isUnivalTree(TreeNode* root); };
 struct LC0784 { vector<string> letterCasePermutation(string s); };
 struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); };
 struct LC0077 { vector<vector<int>> combine(int n, int k); };
+struct LC0047 { vector<vector<int>> permuteUnique(vector<int>& nums); };
 struct LC0046 { vector<vector<int>> permute(vector<int>& nums); };
 struct LC0017 { vector<string> letterCombinations(string digits); };
 // tree.h
