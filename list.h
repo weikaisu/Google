@@ -92,7 +92,7 @@ struct LC0496 { vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& 
 struct LC0448 { vector<int> findDisappearedNumbers(vector<int>& nums); };
 /*把字串裡的母音對調*/
 struct LC0345 { string reverseVowels(string s); };
-/*判斷隨機加入字串的字符為何*/
+/*t是s重排後加上一字符產生，找出那一字符*/
 struct LC0389 { char findTheDifference(string s, string t); };
 /*找出一字串裡第一個不重複的字符的index*/
 struct LC0387 { int firstUniqChar(string s); };
