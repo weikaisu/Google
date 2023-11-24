@@ -490,6 +490,8 @@ string LC0345::reverseVowels(string s) {
 }
 
 char LC0389::findTheDifference(string s, string t) {
+    // Input: s = "abcd" t = "abcde"
+    // Output: e
     // 判斷隨機加入字串的字符為何
     // 用哈希表来建立字符和个数之间的映射，如果在遍历t的时候某个映射值小于0了，那么返回该字符即可
 //    array<int,128> map; map.fill(0);

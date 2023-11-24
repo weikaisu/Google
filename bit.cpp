@@ -2,6 +2,11 @@
 #include "bit.h"
 
 vector<int> LC2595::evenOddBit(int n) {
+    // Input: n = 17
+    // Output: [2,0]
+    // Explanation: The binary representation of 17 is 10001.
+    // It contains 1 on the 0th and 4th indices.
+    // There are 2 even and 0 odd indices.
     // You are given a positive integer n.
     // Let even denote the number of even indices in the binary representation of n (0-indexed) with value 1.
     // Let odd denote the number of odd indices in the binary representation of n (0-indexed) with value 1.
@@ -21,6 +26,13 @@ vector<int> LC2595::evenOddBit(int n) {
 }
 
 int LC2220::minBitFlips(int start, int goal) {
+    // Input: start = 10, goal = 7 Output: 3
+    // Explanation: The binary representation of 10 and 7 are 1010 and 0111 respectively. We can convert 10 to 7 in 3 steps:
+    // Flip the first bit from the right: 1010 -> 1011.
+    // Flip the third bit from the right: 1011 -> 1111.
+    // Flip the fourth bit from the right: 1111 -> 0111.
+    // It can be shown we cannot convert 10 to 7 in less than 3 steps. Hence, we return 3.
+
     // A bit flip of a number x is choosing a bit in the binary representation of x and flipping
     // it from either 0 to 1 or 1 to 0.
     // For example, for x = 7, the binary representation is 111 and we may choose any bit (including
@@ -34,6 +46,10 @@ int LC2220::minBitFlips(int start, int goal) {
 }
 
 bool LC2206::divideArray(vector<int>& nums) {
+    // Input: nums = [3,2,3,2,2,2] Output: true
+    // Explanation:
+    // There are 6 elements in nums, so they should be divided into 6 / 2 = 3 pairs.
+    // If nums is divided into the pairs (2, 2), (3, 3), and (2, 2), it will satisfy all the conditions.
     // You are given an integer array nums consisting of 2 * n integers.
     // You need to divide nums into n pairs such that:
     // Each element belongs to exactly one pair.
@@ -56,6 +72,14 @@ bool LC2206::divideArray(vector<int>& nums) {
 }
 
 int LC1863::subsetXORSum(vector<int>& nums) {
+    // Input: nums = [1,3]
+    // Output: 6
+    // Explanation: The 4 subsets of [1,3] are:
+    // The empty subset has an XOR total of 0.
+    // [1] has an XOR total of 1.
+    // [3] has an XOR total of 3.
+    // [1,3] has an XOR total of 1 XOR 3 = 2.
+    // 0 + 1 + 3 + 2 = 6
     // The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty.
     // For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 = 1.
     // Given an array nums, return the sum of all XOR totals for every subset of nums.
@@ -85,6 +109,10 @@ int LC1863::subsetXORSum(vector<int>& nums) {
 }
 
 string LC1763::longestNiceSubstring(string s) {
+    // Input: s = "YazaAay"
+    // Output: "aAa"
+    // Explanation: "aAa" is a nice string because 'A/a' is the only letter of the alphabet in s, and both 'A' and 'a' appear.
+    // "aAa" is the longest nice substring.
     // A string s is nice if, for every letter of the alphabet that s contains, it appears both in uppercase and
     // lowercase. For example, "abABB" is nice because 'A' and 'a' appear, and 'B' and 'b' appear. However, "abA"
     // is not because 'b' appears, but 'B' does not.
@@ -127,12 +155,15 @@ string LC1763::longestNiceSubstring(string s) {
 }
 
 vector<int> LC1720::decode(vector<int>& encoded, int first) {
+    // Input: encoded = [1,2,3], first = 1
+    // Output: [1,0,2,1]
+    // Explanation: If arr = [1,0,2,1], then first = 1 and encoded = [1 XOR 0, 0 XOR 2, 2 XOR 1] = [1,2,3]
     // There is a hidden integer array arr that consists of n non-negative integers.
-    //It was encoded into another integer array encoded of length n - 1, such that encoded[i] = arr[i] XOR arr[i + 1].
+    // It was encoded into another integer array encoded of length n - 1, such that encoded[i] = arr[i] XOR arr[i + 1].
     // For example, if arr = [1,0,2,1], then encoded = [1,2,3].
-    //You are given the encoded array. You are also given an integer first, that is the first element of arr,
+    // You are given the encoded array. You are also given an integer first, that is the first element of arr,
     // i.e. arr[0].
-    //Return the original array arr. It can be proved that the answer exists and is unique.
+    // Return the original array arr. It can be proved that the answer exists and is unique.
 
     // a XOR b = c -> c XOR a = b, c XOR b = a
     // 把first讓入res的第一個，一路XOR回去
@@ -147,6 +178,10 @@ vector<int> LC1720::decode(vector<int>& encoded, int first) {
 }
 
 int LC1486::xorOperation(int n, int start){
+    // Input: n = 5, start = 0
+    // Output: 8
+    // Explanation: Array nums is equal to [0, 2, 4, 6, 8] where (0 ^ 2 ^ 4 ^ 6 ^ 8) = 8.
+    // Where "^" corresponds to bitwise XOR operator.
     // You are given an integer n and an integer start.
     // Define an array nums where nums[i] = start + 2 * i (0-indexed) and n == nums.length.
     // Return the bitwise XOR of all elements of nums.
@@ -158,6 +193,14 @@ int LC1486::xorOperation(int n, int start){
 }
 
 int LC1342::numberOfSteps(int num) {
+    // Input: num = 14 Output: 6
+    // Explanation:
+    // Step 1) 14 is even; divide by 2 and obtain 7.
+    // Step 2) 7 is odd; subtract 1 and obtain 6.
+    // Step 3) 6 is even; divide by 2 and obtain 3.
+    // Step 4) 3 is odd; subtract 1 and obtain 2.
+    // Step 5) 2 is even; divide by 2 and obtain 1.
+    // Step 6) 1 is odd; subtract 1 and obtain 0.
     // 使用遞歸的方式
     if(num==0 || num==1)
         return num;
@@ -175,6 +218,12 @@ int LC1342::numberOfSteps(int num) {
 }
 
 int LC1009::bitwiseComplement(int n) {
+    // Input: time = [30,20,150,100,40]
+    // Output: 3
+    // Explanation: Three pairs have a total duration divisible by 60:
+    // (time[0] = 30, time[2] = 150): total duration 180
+    // (time[1] = 20, time[3] = 100): total duration 120
+    // (time[1] = 20, time[4] = 40): total duration 60
     // 下面的这种解法用到了一些补码的性质，那就是一个二进制数加上其补码，则每个位置上都会变成1，且位数和原数相同。这样的话我们
     // 就可以先求出这个各位上全是1的数，然后再做减法，就可以得到补码了
     int sum=1;
@@ -193,6 +242,8 @@ int LC1009::bitwiseComplement(int n) {
 }
 
 int LC0868::binaryGap(int n) {
+    // Input: 5 Output: 2
+    // Explanation: 5 in binary is 0b101.
     // 也可以只用一个循环来完成，而且不用 pos 数组，只用一个变量 last 来记录上一个遍历到的 '1' 的位置，初始化为 -1。那么在遍历的过程中，
     // 若遇到了 '1'，则判断 last 是否大于等于0，是的话则表示之前已经遇到了 '1'，那么当前位置i减去 last，即为两个 '1' 之间的距离，
     // 用来更新结果 res，然后再更新 last 为当前位置i，继续遍历即可
@@ -222,6 +273,12 @@ int LC0868::binaryGap(int n) {
 }
 
 int LC0762::countPrimeSetBits(int left, int right) {
+    // Input: L = 6, R = 10 Output: 4
+    // Explanation:
+    // 6 -> 110 (2 set bits, 2 is prime)
+    // 7 -> 111 (3 set bits, 3 is prime)
+    // 9 -> 1001 (2 set bits , 2 is prime)
+    // 10-> 1010 (2 set bits , 2 is prime)
     // 由于题目中给了数的大小范围 R <= 10^6 < 2^20，那么我们统计出来的非零位个数cnt只需要检测是否是20以内的质数即可，
     // 所以我们将20以内的质数都放入一个HashSet中，然后统计出来cnt后，直接在HashSet中查找有没有即可
     int res = 0;
@@ -256,6 +313,8 @@ int LC0762::countPrimeSetBits(int left, int right) {
 }
 
 bool LC0693::hasAlternatingBits(int n) {
+    // Input: 5 Output: True
+    // Explanation: The binary representation of 5 is: 101
     // 先将n右移两位，再和原来的n亦或，得到的新n其实就是除了最高位，其余都是0的数，然后再和自身减1的数相‘与’，如果是0就返回true，
     // 反之false。比如n是10101，那么n/4是101，二者相‘亦或’，得到10000，此时再减1，为1111，二者相‘与’得0，
     return 0 == ((n^=(n>>2)) & (n-1));
@@ -295,6 +354,9 @@ bool LC0693::hasAlternatingBits(int n) {
 }
 
 int LC0476::findComplement(int num) {
+    // Input: 5
+    // Output: 2
+    // Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.
     // 由于位操作里面的取反符号～本身就可以翻转位，但是如果直接对num取反的话就是每一位都翻转了，
     // 而最高位1之前的0是不能翻转的，所以我们只要用一个mask来标记最高位1前面的所有0的位置，
     // 然后对mask取反后，与上对num取反的结果即可
@@ -315,6 +377,11 @@ int LC0476::findComplement(int num) {
 }
 
 int LC0461::hammingDistance(int x, int y) {
+    // Input: x = 1, y = 4 Output: 2
+    // Explanation:
+    // 1   (0 0 0 1)
+    // 4   (0 1 0 0)
+    //        ↑   ↑
     // 遍历每一位的方法并不高效，还可以进一步优化，假如数为num, num & (num - 1)可以快速地移除最右边的bit 1，
     // 一直循环到num为0, 总的循环数就是num中bit 1的个数
     int z = x^y, res = 0;
@@ -336,6 +403,8 @@ int LC0461::hammingDistance(int x, int y) {
 }
 
 int LC0409::longestPalindrome(string s) {
+    // Input: s = "abccccdd" Output: 7
+    // Explanation: One longest palindrome that can be built is "dccaccd", whose length is 7.
     // 给了一个字符串，让我们找出可以组成的最长的回文串的长度，由于字符顺序可以打乱，所以问题就转化为了求偶数个字符的个数，了解回文串的都知道，
     // 回文串主要有两种形式，一个是左右完全对称的，比如noon, 还有一种是以中间字符为中心，左右对称，比如 bob，level 等，那么统计出来所有偶数
     // 个字符的出现总和，然后如果有奇数个字符的话，取出其最大偶数，然后最后结果加1即可
@@ -350,6 +419,9 @@ int LC0409::longestPalindrome(string s) {
 }
 
 string LC0405::toHex(int num) {
+    // Input: 26
+    //Output: "1a"
+
     // 0000 1100 ( 12)
     // 1111 0100 (-12)
     // 1111 0011 (1's complement)
@@ -385,6 +457,8 @@ string LC0405::toHex(int num) {
 }
 
 vector<string> LC0401::readBinaryWatch(int turnedOn) {
+    // Input: n = 1
+    // Output: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", "0:08", "0:16", "0:32"]
     // 利用到了bitset这个类，可以将任意进制数转为二进制，而且又用到了count函数，用来统计1的个数。那么时针从0遍历到11，分针从0遍历到59，
     // 然后我们把时针的数组左移6位加上分针的数值，然后统计1的个数，即为亮灯的个数，我们遍历所有的情况，当其等于num的时候，存入结果res中
     // 寫法漂亮但執行速度會慢些
@@ -442,6 +516,8 @@ bool LC0342::isPowerOfFour(int n) {
 }
 
 vector<int> LC0338::countBits(int n) {
+    // Input: 5
+    // Output: [0,1,1,2,1,2]
     // 利用了 built-in 的函数 bitset 的 count 函数可以直接返回1的个数
 //    vector<int> res;
 //    for(int i=0; i<=n; i++)
@@ -477,6 +553,8 @@ bool LC0266::canPermutePalindrome(string s) {
 }
 
 bool LC0231::isPowerOfTwo(int n) {
+    // Input: 16
+    // Output: true
     // 2的次方数都只有一个1，剩下的都是0，所以我们的解题思路就有了，我们只要每次判断最低位是否为1，然后向右移位，最后统计1的个数即可判断是否
     // 是2的次方数
 //    int cnt=0;
@@ -492,6 +570,8 @@ bool LC0231::isPowerOfTwo(int n) {
 }
 
 int LC0191::hammingWeight(uint32_t n) {
+    // Input:  00000000000000000000000000001011
+    // Output: 3
     // Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as
     // cthe Hamming weight).
     int res=0;
@@ -502,6 +582,8 @@ int LC0191::hammingWeight(uint32_t n) {
 }
 
 uint32_t LC0190::reverseBits(uint32_t n) {
+    // Input:  11111111111111111111111111111101
+    // Output: 10111111111111111111111111111111
     // 把要翻转的数从右向左一位位的取出来，如果取出来的是1，将结果 res 左移一位并且加上1；如果取出来的是0，将结果 res 左移一位，
     // 然后将n右移一位即可
 //    uint32_t res = 0;
@@ -520,6 +602,8 @@ uint32_t LC0190::reverseBits(uint32_t n) {
 }
 
 int LC0136::singleNumber(vector<int>& nums) {
+    // Input: [4,1,2,1,2]
+    // Output: 4
     // 用位操作 Bit Operation 逻辑异或来解此题
     int res = 0;
     for(auto &num:nums)
