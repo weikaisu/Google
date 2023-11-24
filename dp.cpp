@@ -17,6 +17,8 @@ int LC1137::tribonacci(int n) {
 }
 
 bool LC1025::divisorGame(int n) {
+    // Input: 2 Output: true
+    // Explanation: Alice chooses 1, and Bob has no more moves.
     // 最初有一个数字N，每次每个人选一个小于N且能整除N的数字x，并将N替换为 N-x，依次进行，直到某个人没法进行了，则算输了。
     // 现在给个任意的N，且爱丽丝先走，问爱丽丝能否赢得游戏。先来分析一个下得到什么数字的时候会输，答案是当N变成1的时候，
     // 此时没法找到小于N的因子了，则输掉游戏。博主看到题后的第一个反应就是用递归，因为调用递归得到的结果是对手的胜负，若递归返回 false，
@@ -41,6 +43,8 @@ bool LC1025::divisorGame(int n) {
 }
 
 int LC0746::minCostClimbingStairs(vector<int>& cost) {
+    // Input: cost = [10, 15, 20] Output: 15
+    // Explanation: Cheapest is start on cost[1], pay that cost and go to the top.
     // 这道题应该算是之前那道 Climbing Stairs 的拓展，这里不是求步数，而是每个台阶上都有一个 cost，让我们求爬到顶端的最小 cost 是多少。
     // 换汤不换药，还是用动态规划 Dynamic Programming 来做。这里定义一个一维的 dp数组，其中 dp[i] 表示爬到第i层的最小 cost，然后来想
     // dp[i] 如何推导。来思考一下如何才能到第i层呢？是不是只有两种可能性，一个是从第 i-2 层上直接跳上来，一个是从第 i-1 层上跳上来。不会
@@ -84,6 +88,10 @@ int LC0509::fib(int n) {
 }
 
 LC0303::LC0303(vector<int>& nums) {
+    // Given nums = [-2, 0, 3, -5, 2, -1]
+    // sumRange(0, 2) -> 1
+    // sumRange(2, 5) -> -1
+    // sumRange(0, 5) -> -3
     // 这道题让我们检索一个数组的某个区间的所有数字之和，题目中给了两条条件，首先数组内容不会变化，其次有很多的区间和检索。那么我们用传统的遍
     // 历相加来求每次区间和检索，十分的不高效，而且无法通过 OJ。所以这道题的难点就在于是否能想到来用建立累计直方图的思想来建立一个累计和的
     // 数组dp，並通过增加一位 dp 的长度，来避免在 sumRange 中检测i是否为0
@@ -124,7 +132,10 @@ int LC0070::climbStairs(int n) {
 //vector<int> nums{-2,1,-3,4,-1,2,1,-5,4};
 //cout << run.maxSubArray(nums) << endl;
 int LC0053::maxSubArray(vector<int>& nums) {
-    // 求最大子数组之和
+    // Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest
+    // sum and return  its sum.
+    // Input: nums = [-2,1,-3,4,-1,2,1,-5,4] Output: 6
+    // Explanation: [4,-1,2,1] has the largest sum = 6.
     if(!nums.size()) return 0;
     if(1==nums.size()) return nums[0];
 
@@ -139,8 +150,7 @@ int LC0053::maxSubArray(vector<int>& nums) {
 
 string LC0005::longestPalindrome(string s) {
     // Given a string s, return the longest palindromic substring in s.
-    // Input: s = "babad"
-    // Output: "bab"
+    // Input: s = "babad" Output: "bab"
     // Explanation: "aba" is also a valid answer.
     // 维护一个二维数组 dp，其中 dp[i][j] 表示字符串区间 [i, j] 是否为回文串，当 i = j 时，只有一个字符，肯定是回文串，如果 i = j + 1，
     // 说明是相邻字符，此时需要判断 s[i] 是否等于 s[j]，如果i和j不相邻，即 i - j >= 2 时，除了判断 s[i] 和 s[j] 相等之外，
@@ -163,6 +173,8 @@ string LC0005::longestPalindrome(string s) {
 
 /***********  Greedy  **********/
 int LC1221::balancedStringSplit(string s) {
+    // Input: s = "RLRRLLRLRL" Output: 4
+    // Explanation: s can be split into "RL", "RRLL", "RL", "RL", each substring contains same number of 'L' and 'R'.
     // 这道题给了一个只有L和R两个字符的字符串，并且定义了一种平衡字符串，即L和R的个数相同，现在问最多能将字符串分为多少个这样的平衡字符串。
     // 博主看到这题以后第一反应就觉得这是一道验证合法括号个数的题目，就像之前的那道 Valid Parentheses，这里的L就可以看作是左括号，R可以看
     // 作是右括号，其实这道题比验证合法括号更简单一些，因为合法括号不仅仅需要左右括号个数相同，而且任何时候右括号的个数不能多于左括号，而这道
@@ -177,6 +189,10 @@ int LC1221::balancedStringSplit(string s) {
 }
 
 int LC1217::minCostToMoveChips(vector<int>& position) {
+    // Input: position = [1,2,3] Output: 1
+    // Explanation: First step: Move the chip at position 3 to position 1 with cost = 0.
+    // Second step: Move the chip at position 2 to position 1 with cost = 1.
+    // Total cost is 1.
     // 有一堆筹码，第i个筹码所在的位置是 position[i]，现在需要将所有的筹码移动到一摞，规则是：左右移动两个位置没有 cost，左右移动一个位置
     // 需要花费1个 cost，问移动到同一摞需要的最少花费是多少。最终结果位置必定在某一个已经存在的筹码的位置，那么这里其实就可以遍历所有给定筹
     // 码的位置，然后统计每个位置的花费。但其实这里还可以进一步优化，若有很多筹码都在同一个位置，那么显然按筹码遍历就不是很高效了，因为同一摞
@@ -205,6 +221,8 @@ int LC1217::minCostToMoveChips(vector<int>& position) {
 }
 
 bool LC1013::canThreePartsEqualSum(vector<int>& arr) {
+    // Input: arr = [0,2,1,-6,6,-7,9,1,2,0,1] Output: true
+    // Explanation: 0 + 2 + 1 = -6 + 6 - 7 + 9 + 1 = 2 + 0 + 1
     // 给了我们一个数组，问能不能将该数组分成非空的三个部分，且每个部分的和相同。其实就是分成三个子数组，既然每个部分的和相同，说明数组的数字
     // 总和一定是3的倍数，若不是，则一定无法分。先求出数组的数字之和，除以3就是每个部分之和 target，然后进行数组的遍历，用一个变量 cur 来累
     // 积当前和，cnt 来表示已经成功分割的部分。每次累加到 target 的时候，cnt 自增1，且 cur 清零0，最终只要 cnt 的个数大于等于3就可以返回
@@ -278,6 +296,7 @@ int LC0976::largestPerimeter(vector<int>& nums) {
 }
 
 vector<int> LC0942::diStringMatch(string s) {
+    // Input: "IDID" Output: [0,4,1,3,2]
     // 这道题给了一个只有 'D' 和 'I' 两个字母组成的字符串，表示一种 pattern，其中 'D' 表示需要下降 Decrease，即当前数字大于下个数字，
     // 同理，'i' 表示需要上升 Increase，即当前数字小于下个数字，让返回符合这个要求的任意一个数组，还有个要求是该数组必须是 [0, n]
     // 之间的所有数字的一种全排列，其中n是给定 pattern 字符串的长度。这表明了返回数组不能有重复数字，这里一会上升一会下降的，很容易产生重复
@@ -295,6 +314,12 @@ vector<int> LC0942::diStringMatch(string s) {
 }
 
 bool LC0860::lemonadeChange(vector<int>& bills) {
+    // Input: [5,5,10,10,20] Output: false
+    // Explanation:
+    // From the first two customers in order, we collect two $5 bills.
+    // For the next two customers in order, we collect a $10 bill and give back a $5 bill.
+    // For the last customer, we can't give change of $15 back because we only have two $10 bills.
+    // Since not every customer received correct change, the answer is false.
     // 这道题说是有很多柠檬，每个卖5刀，顾客可能会提供5刀，10刀，20刀的钞票，我们刚开始的时候并没有零钱，只有收到顾客的5刀，或者 10 刀可以
     // 来给顾客找钱，当然如果第一个顾客就给 10 刀或者 20 刀，那么是无法找零的，这里就问最终是否能够都成功找零。
     // 只关心当前还剩余的5刀和 10 刀钞票的个数，用两个变量 five 和 ten 来记录。然后遍历所有的钞票，假如遇到5刀钞票，则 five 自增1，若遇
@@ -318,6 +343,9 @@ bool LC0860::lemonadeChange(vector<int>& bills) {
 }
 
 bool LC0717::isOneBitCharacter(vector<int>& bits) {
+    // Input: bits = [1, 1, 1, 0] Output: False
+    // Explanation:
+    // The only way to decode it is two-bit character and two-bit character. So the last character is NOT one-bit character.
     // 这道题说有两种特殊的字符，一种是两位字符，只能是二进制的11和10，另一种是单个位字符，只能是二进制的0。现在给了我们一个只包含0和1的数
     // 组，问我们能否将其正确的分割，使得最后一个字符是个单个位字符。这道题可以使用贪婪算法来做，因为两种字符互不干扰，只要我们遍历到了数字1，
     // 那么其必定是两位字符，所以后面一位也得跟着，而遍历到了数字0，那么就必定是单个位字符。所以我们可以用一个变量i来记录当前遍历到的位置，
@@ -349,6 +377,8 @@ bool LC0717::isOneBitCharacter(vector<int>& bits) {
 }
 
 bool LC0680::validPalindrome(string s) {
+    // Input:"abca" Output: True
+    // Explanation: You could delete the character 'c'.
     // 这道题的字符串中只含有小写字母，而且这道题允许删除一个字符，那么当遇到不匹配的时候，我们到底是删除左边的字符，还是右边的字符呢，
     // 我们的做法是两种情况都要算一遍，只要有一种能返回true，那么结果就返回true。我们可以写一个子函数来判断字符串中的某一个范围内的
     // 子字符串是否为回文串
@@ -368,6 +398,8 @@ bool LC0680::validPalindrome(string s) {
 }
 
 bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {
+    // return if n new flowers can be planted in it without violating the no-adjacent-flowers rule
+    // Input: flowerbed = [1,0,0,0,1], n = 1 Output: True
     // 这道题给了我们一个01数组，其中1表示已经放了花，0表示可以放花的位置，但是有个限制条件是不能有相邻的花。那么我们来看如果是一些简单的例
     // 子，如果有3个连续的零，000，能放几盆花呢，其实是要取决约左右的位置的，如果是10001，那么只能放1盆，如果左右是边界的花，那么就能放
     // 两盆，101。可以直接通过修改flowerbed的值来做，我们遍历花床，如果某个位置为0，我们就看其前面一个和后面一个位置的值，注意处理首位置和
@@ -387,6 +419,8 @@ bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {
 }
 
 int LC0561::arrayPairSum(vector<int>& nums) {
+    // Input: [1,4,3,2] Output: 4
+    // Explanation: [[1,2], [3,4]] and the maximum sum of pairs is 4.
     // 这道题让我们分割数组，两两一对，让每对中较小的数的和最大。这题难度不大，用贪婪算法就可以了。由于我们要最大化每对中的较小值之和，那么肯
     // 定是每对中两个数字大小越接近越好，因为如果差距过大，而我们只取较小的数字，那么大数字就浪费掉了。明白了这一点，我们只需要给数组排个序，
     // 然后按顺序的每两个就是一对，我们取出每对中的第一个数即为较小值累加起来即可
@@ -398,6 +432,12 @@ int LC0561::arrayPairSum(vector<int>& nums) {
 }
 
 int LC0495::findPoisonedDuration(vector<int>& timeSeries, int duration) {
+    // Input: [1,2], 2 Output: 3
+    // Explanation: At time point 1, Teemo starts attacking Ashe and makes Ashe be poisoned.
+    // This poisoned status will last 2 seconds until the end of time point 2.
+    // However, at the beginning of time point 2, Teemo attacks Ashe again who is already in poisoned status.
+    // Since the poisoned status won't add up together, though the second poisoning attack will still work at time point 2, it will stop at the end of time point 3.
+    // So you finally need to output 3.
     // 使用贪心算法，比较相邻两个时间点的时间差，如果小于duration，就加上这个差，如果大于或等于，就加上duration即可
     if(timeSeries.empty()) return 0;
     int res = 0;
@@ -409,6 +449,10 @@ int LC0495::findPoisonedDuration(vector<int>& timeSeries, int duration) {
 }
 
 int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
+    // Input: [1,2,3], [1,1] Output: 1
+    // Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.
+    // And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.
+    // You need to output 1.
     // 这道题给了我们一堆cookie，每个cookie的大小不同，还有一堆小朋友，每个小朋友的胃口也不同的，问我们当前的cookie最多能满足几个小朋友。
     // 这是典型的利用贪婪算法的题目，我们可以首先对两个数组进行排序，让小的在前面。然后我们先拿最小的cookie给胃口最小的小朋友，看能否满足，
     // 能的话，我们结果res自加1，然后再拿下一个cookie去满足下一位小朋友；如果当前cookie不能满足当前小朋友，那么我们就用下一块稍大一点的
@@ -424,14 +468,14 @@ int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
 }
 
 int LC0011::maxArea(vector<int>& height) {
-    // You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints
-    // of the ith line are (i, 0) and (i, height[i]).
-    // Find two lines that together with the x-axis form a container, such that the container contains the most water.
-    // Return the maximum amount of water a container can store.
     // Input: height = [1,8,6,2,5,4,8,3,7]
     // Output: 49
     // Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area
     // of water (blue section) the container can contain is 49.
+    // You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints
+    // of the ith line are (i, 0) and (i, height[i]).
+    // Find two lines that together with the x-axis form a container, such that the container contains the most water.
+    // Return the maximum amount of water a container can store.
     // 水的容量為兩邊中較小的高度x水底板的寬度，一開始從0, n-1最大底板寬度開始算起，當縮小底板寬度時選擇高度較小的一邊縮，看是否能更新到高度
     // 再高一點。進一步的優化為，遇到相同高度時直接更新，不需要再計算水容量來做比較。
 
