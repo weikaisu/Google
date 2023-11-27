@@ -2,6 +2,11 @@
 
 /***********  Array List  **********/
 vector<int> LC1313::decompressRLElist(vector<int>& nums) {
+    // Input: nums = [1,2,3,4]
+    // Output: [2,4,4,4]
+    // Explanation: The first pair [1,2] means we have freq = 1 and val = 2 so we generate the array [2].
+    // The second pair [3,4] means we have freq = 3 and val = 4 so we generate [4,4,4].
+    // At the end the concatenation [2] + [4,4,4] is [2,4,4,4].
     // 给了一个压缩后的数组，压缩的方法是将相同连续的数字的个数和其本身组成个数对儿，放到压缩数组中，以此类推。现在让我们解压缩成原来的数组，
     // 没啥太大的难度，就是每次取出两个数字，前一个数字是次数，后一个是数字本身，用一个 for 循环，就可以生成给定次数个数字，用这种方法就可以
     // 解压缩出原数组了
@@ -13,6 +18,8 @@ vector<int> LC1313::decompressRLElist(vector<int>& nums) {
 }
 
 vector<int> LC1304::sumZero(int n) {
+    // Input: n = 5 Output: [-7,-1,1,3,4]
+    // Explanation: These arrays also are accepted [-5,-1,1,2,3] , [-3,-1,2,-2,4].
     // 给了一个正整数n，让返回一个长度为n的数组，要求是没有重复数字且数字之和为0。
     // 在数组的两端往中间更新，新建一个大小为n的数组，初始化均为0，两端分别赋值为1和 -1，然后往中间一步，赋值为2和 -2，直到中间的位置。
     // 若最中间只有一个数字，则保持为0不变，不会产生重复也不影响数字和
@@ -35,6 +42,15 @@ vector<int> LC1304::sumZero(int n) {
 }
 
 vector<int> LC1299::replaceElements(vector<int>& arr) {
+    // Input: arr = [17,18,5,4,6,1]
+    // Output:      [18,6,6,6,1,-1]
+    // Explanation:
+    // index 0 --> the greatest element to the right of index 0 is index 1 (18).
+    // index 1 --> the greatest element to the right of index 1 is index 4 (6).
+    // index 2 --> the greatest element to the right of index 2 is index 4 (6).
+    // index 3 --> the greatest element to the right of index 3 is index 4 (6).
+    // index 4 --> the greatest element to the right of index 4 is index 5 (1).
+    // index 5 --> there are no elements to the right of index 5, so we put -1.
     // 给了一个数组 arr，说是让把每个数字更新为其右边的数字中最大的一个，最后一个数字变为 -1。既然是一道 Easy 的题目，就不用担心解法会太复
     // 杂，一般都是较短的行数就能搞定的。让求每个数字右边的数字中最大的一个，当然不能每次都遍历右边所有的数字来找最大值，虽说是 Easy 题目，
     // 但最好也别这么暴力地解，多少还是要给 OJ 一些尊重的。从左往右不好使的话，可以调个头，从右往左去更新，这样就简单的多了，最后一个数字直
@@ -64,6 +80,13 @@ vector<int> LC1299::replaceElements(vector<int>& arr) {
 }
 
 int LC1295::findNumbers(vector<int>& nums) {
+    // Input: nums = [12,345,2,6,7896] Output: 2
+    // Explanation: 12 contains 2 digits (even number of digits).
+    // 345 contains 3 digits (odd number of digits).
+    // 2 contains 1 digit (odd number of digits).
+    // 6 contains 1 digit (odd number of digits).
+    // 7896 contains 4 digits (even number of digits).
+    // Therefore only 12 and 7896 contain an even number of digits.
     // 给了一个数组，让找出多少个偶数位的数字，所谓偶数位的数字，就是说该多位数要有偶数个位，比如个数位就不是偶数位数字，而十位数就是。
     // 其实这道题就是考察如何统计整数的位数，比较简单直接的方法就是进行一个 while 循环，每次都除以 10，直到原数字变为0为止，这样就知道位数
     // 了。可以对数组中的每个数字都进行如下的操作，就可以知道是否是偶数位的数字了
@@ -93,6 +116,11 @@ int LC1295::findNumbers(vector<int>& nums) {
 }
 
 int LC1281::subtractProductAndSum(int n) {
+    // Input: n = 234 Output: 15
+    // Explanation:
+    // Product of digits = 2 * 3 * 4 = 24
+    // Sum of digits = 2 + 3 + 4 = 9
+    // Result = 24 - 9 = 15
     // 给了一个正整数n，让求其每一位的数字的乘积减去每一位数字的和，并不算一道难题，只要知道如何取出每一位上的数字基本上就可以秒解，也符合
     // 其 Easy 的身价。取每一位上的数字就用一个 while 循环，只要n大于0就一直循环，通过对 10 取余就可以取出个位上的数字，将其乘到 prod 中，
     // 加到 sum 中，然后n自除以 10，就可以去掉已经取出的数字，然后再进行上述的操作，直到每一位的数字都被取出并处理了，最后返回 prod 减去
@@ -108,6 +136,11 @@ int LC1281::subtractProductAndSum(int n) {
 }
 
 int LC1266::minTimeToVisitAllPoints(vector<vector<int>>& points) {
+    // Input: points = [[1,1],[3,4],[-1,0]] Output: 7
+    // Explanation: One optimal path is [1,1] -> [2,2] -> [3,3] -> [3,4] -> [2,3] -> [1,2] -> [0,1] -> [-1,0]
+    // Time from [1,1] to [3,4] = 3 seconds
+    // Time from [3,4] to [-1,0] = 4 seconds
+    // Total time = 7 seconds
     // 给了一堆二维平面上的点，让按照顺序去连接点，这里的连线不但可以走水平和竖直，还能走斜线，都算作一步，问按顺序连上所有的点需要多少步。
     // 这里让按顺序连点也就简单了不少，也算对得起 Easy 的身价，只要分析出两个点之间的最小步数怎么算就可以解题了。题目中说可以水平，竖直，
     // 和对角线走，那么就按照题目中的例子来分析吧，若仔细观察可以发现，假如两个点的横纵坐标的差值相等的话（都是绝对值），那么只要纯走对角线
@@ -122,6 +155,10 @@ int LC1266::minTimeToVisitAllPoints(vector<vector<int>>& points) {
 }
 
 int LC1252::oddCells(int m, int n, vector<vector<int>>& indices) {
+    // Input: m = 2, n = 3, indices = [[0,1],[1,1]] Output: 6
+    // Explanation: Initial matrix = [[0,0,0],[0,0,0]].
+    // After applying first increment it becomes [[1,2,1],[0,1,0]].
+    // The final matrix is [[1,3,1],[1,3,1]], which contains 6 odd numbers.
     // 给了一个大小为 m by n 的矩阵，初始化均为0，又给了一个坐标数组 indices，说是对于其中的每个坐标 (r, c)，将对应的行和列上的数字分别
     // 自增1，最后问数组中有多少个数字是奇数。当然最简单暴力的解法就是就是遍历每个坐标，分别将对应的行列上的数字自增1，然后最后再判断奇偶，
     // 虽然这是一道 Easy 的题目，但博主还是怀疑这种方法可能会超时，所以根本就没有尝试。对于每个坐标都遍历一次行和列，实在是不太高效，因为该
@@ -141,6 +178,12 @@ int LC1252::oddCells(int m, int n, vector<vector<int>>& indices) {
 }
 
 vector<int> LC1103::distributeCandies(int candies, int num_people) {
+    // Input: candies = 7, num_people = 4 Output: [1,2,3,1]
+    // Explanation:
+    // On the first turn, ans[0] += 1, and the array is [1,0,0,0].
+    // On the second turn, ans[1] += 2, and the array is [1,2,0,0].
+    // On the third turn, ans[2] += 3, and the array is [1,2,3,0].
+    // On the fourth turn, ans[3] += 1 (because there is only one candy left), and the final array is [1,2,3,1].
     // 有一些糖果要发给n个人，第一轮是第一个人发一个，第二个人发两个，第n个人发n个，第二轮是第一个人发 n+1 个，第二个人发 n+2 个，
     // 第n个人发 2n 个，以此类推，直到发到某个人时不够目标个数，此时将剩余的糖全给该人，并停止分发。，问最终每个人会得到多少个糖。
     // 用变量i表示当前人得到的糖数减1，这里减1的原因是想将其也当作数组坐标来用，因为数组坐标都是从0开始的。虽然之后i会累加到很大，
@@ -155,6 +198,8 @@ vector<int> LC1103::distributeCandies(int candies, int num_people) {
 }
 
 int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destination) {
+    // Input: distance = [1,2,3,4], start = 0, destination = 1 Output: 1
+    // Explanation: Distance between 0 and 1 is 1 or 9, minimum is 1.
     // 有n个公交站形成了一个环，它们之间的距离用一个数组 distance 表示，其中 distance[i] 表示公交站i和 (i+1)%n 之间的距离。说是公交可以
     // 顺时针和逆时针的开，问给定的任意起点和终点之间的最短距离。对于一道 Easy 题的身价，没有太多的技巧而言，主要就是考察了一个循环数组，求任
     // 意两个点之间的距离，由于两个方向都可以到达，那么两个方向的距离加起来就正好是整个数组之和，所以只要求出一个方向的距离，另一个用总长度减
@@ -179,6 +224,8 @@ int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destin
 }
 
 void LC1089::duplicateZeros(vector<int>& arr) {
+    // Input: [1,0,2,3,0,4,5,0] Output: void
+    // Explanation: After calling your function, the input array is modified to: [1,0,0,2,3,0,0,4]
     // 这道题给了一个数字数组，让将每个0都复制一个，然后将数字右移一位，数组的长度还是保持不变，右移出范围的数字就移除掉。这不是一道难题，比较
     // 直接的做法就是新建一个结果数组 res，然后遍历给定数组 arr，for 循环条件加上一个 res 的长度小于n，将当前遍历到的数字加入 res，然后判
     // 断若当前数字是0，且此时 res 长度小于n，则再加个0到 res 中，最后把 arr 更新为 res 即可
@@ -201,6 +248,10 @@ void LC1089::duplicateZeros(vector<int>& arr) {
 }
 
 vector<bool> LC1018::prefixesDivBy5(vector<int>& nums) {
+    // Input: [0,1,1] Output: [true,false,false]
+    // Explanation:
+    // The input numbers in binary are 0, 01, 011; which are 0, 1, and 3 in base-10.  Only the first number is divisible
+    // by 5, so answer[0] is true.
     // 给了一个只由0和1组成的数组，问从0开始每个子数组表示的二进制数是否可以整除5，二进制数是从高位到低位的。既然是一道 Easy 的题目，也就不
     // 用太多的技巧，直接按顺序遍历即可。首先对于第一个数字，可以快速知道其是否可以整除5，当子数组新加一位，实际上相当于之前的数字左移了一位，
     // 也就相当于乘以了2，所以新的子数组表示的数字就是之前的数字乘以2再加上新加进来的数字，然后就可以判断是否可以整除5了。但是需要注意的一点
@@ -216,6 +267,8 @@ vector<bool> LC1018::prefixesDivBy5(vector<int>& nums) {
 }
 
 vector<int> LC0989::addToArrayForm(vector<int>& num, int k) {
+    // Input: A = [1,2,0,0], K = 34 Output: [1,2,3,4]
+    // Explanation: 1200 + 34 = 1234
     // 给了一个数组A，说是可以表示一个正整数，高位在开头，又给了一个正数K，让用数组A表示的正整数加上K，并还用数组来表示相加的后的结果。这种
     // 用不同的数据结构玩加法的题，之前也出现过，比如 Add Two Numbers，Plus One，Add Binary，和 Add Strings。但其实都是万变不离其宗，
     // 都是要一位一位的相加，并且处理好进位的问题。这里由于高位是在数组开头，而相加是要从低位开始的，所以从数组的后面往前开始遍历，用当前位上
@@ -237,6 +290,10 @@ vector<int> LC0989::addToArrayForm(vector<int>& num, int k) {
 }
 
 int LC0944::minDeletionSize(vector<string>& strs) {
+    // Input: A = ["cba","daf","ghi"] Output: 1
+    // Explanation:
+    // After choosing D = {1}, each column ["c","d","g"] and ["a","f","i"] are in non-decreasing sorted order.
+    // If we chose D = {}, then a column ["b","a","h"] would not be in non-decreasing sorted order.
     // 这道题给了一个字符串数组，里面的字符串长度均相同，这样如果将每个字符串看作一个字符数组的话，于是就可以看作的一个二维数组，题目要求所有
     // 列上的字符是非递减顺序的，问最少需要删掉多少列。这道题唯一的难点就是读懂晦涩的题意，估计是出自非母语之手的，其他的并没有太大的难度，就
     // 是一个按列来遍历二维数组的操作，若当前位置的字符小于等于下一行同列上的字符，则跳过继续比较下一行和下下一行上的字符。否则说明需要删掉该
@@ -249,6 +306,9 @@ int LC0944::minDeletionSize(vector<string>& strs) {
 }
 
 bool LC0941::validMountainArray(vector<int>& arr) {
+    // Input: [2,1] Output: false
+    // Input: [3,5,5] Output: false
+    // Input: [0,3,2,1] Output: true
     // 定义了一种山形数组，长度大于等于3，并且存在一个峰值，左右两边的数字都必须严格递减，不允许有相等的值存在。就是说从开头遍历，一定是严格递
     // 增的，直到到达峰值，然后严格递减到末尾，那么可以从开头进行 while 循环，若当前数字小于右边的数字，则i自增1，为了避免溢出，i只能遍历到
     // 倒数第二个数字，这样当循环结束的时候，i指向的数字是大于等于右边的数字，是潜在的峰值，当然这里是不能相等的，但此时不需要判断。同样的操作
@@ -262,6 +322,17 @@ bool LC0941::validMountainArray(vector<int>& arr) {
 }
 
 int LC0933::ping(int t) {
+    // Input:
+    // ["RecentCounter", "ping", "ping", "ping", "ping"]
+    // [[], [1], [100], [3001], [3002]]
+    // Output:
+    // [null, 1, 2, 3, 3]
+    // Explanation:
+    // RecentCounter recentCounter = new RecentCounter();
+    // recentCounter.ping(1);     // requests = [1], range is [-2999,1], return 1
+    // recentCounter.ping(100);   // requests = [1, 100], range is [-2900,100], return 2
+    // recentCounter.ping(3001);  // requests = [1, 100, 3001], range is [1,3001], return 3
+    // recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002], range is [2,3002], return 3
     // 实现一个 RecentCounter 类，里面有一个 ping 函数，输入给定了一个时间t，让我们求在 [t-3000, t] 时间范围内有多少次 ping。题目中限
     // 定了每次的给的时间一定会比上一次的时间大，而且只关心这个大小为 3001 的时间窗口范围内的次数，则利用滑动窗口 Sliding Window 来做就是
     // 个很不错的选择。由于数字是不断加入的，可以使用一个 queue，每当要加入一个新的时间点t时，先从队列开头遍历，若前面的时间不在当前的时间窗
@@ -272,6 +343,8 @@ int LC0933::ping(int t) {
 }
 
 int LC0908::smallestRangeI(vector<int>& nums, int k) {
+    // Input: A = [0,10], K = 2 Output: 6 Explanation: B = [2,8]
+    // Input: A = [1,3,6], K = 3 Output: 0 Explanation: B = [3,3,3] or B = [4,4,4]
     // 给了一个非负数的数组，和一个非负数K，说是数组中的每一个数字都可以加上 [-K, K] 范围内的任意一个数字，问新数组的最大值最小值之间的差值
     // 最小是多少。这道题的难度是 Easy，理论上应该是可以无脑写代码的，但其实很容易想的特别复杂。本题的解题标签是 Math，这种类型的题目基本上
     // 就是一种脑筋急转弯的题目，有时候一根筋转不过来就怎么也做不出来。首先来想，既然是要求新数组的最大值和最小值之间的关系，那么肯定是跟原数
@@ -290,6 +363,7 @@ int LC0908::smallestRangeI(vector<int>& nums, int k) {
 }
 
 bool LC0896::isMonotonic(vector<int>& nums) {
+    // Input: [1,2,2,3] Output: true
     // 判断一个数组是否单调，单调数组就是说这个数组的数字要么是递增的，要么是递减的，不存在一会儿递增一会儿递减的情况，即不会有山峰存在。
     // 这里不是严格的递增或递减，是允许有相同的数字的。那么我们直接将相邻的两个数字比较一下即可，使用两个标识符，inc 和 dec，初始化均为
     // true，我们开始时假设这个数组既是递增的又是递减的，当然这是不可能的，我们会在后面对其进行更新。在遍历数组的时候，只要发现某个数字大
@@ -314,6 +388,8 @@ bool LC0896::isMonotonic(vector<int>& nums) {
 }
 
 bool LC0844::backspaceCompare(string s, string t) {
+    // Input: S = "ab#c", T = "ad#c" Output: true
+    // Explanation: Both S and T become "ac".
     // 我们使用常数级的空间复杂度，就是说不能新建空的字符串来保存处理之后的结果，那么只能在遍历的过程中同时进行比较，只能使用双指针同时
     // 遍历S和T串了。我们采用从后往前遍历，因为退格是要删除前面的字符，所以倒序遍历要好一些。用变量i和j分别指向S和T串的最后一个字符的位置，
     // 然后还需要两个变量 cnt1 和 cnt2 来分别记录S和T串遍历过程中连续出现的井号的个数，因为在连续井号后，要连续删除前面的字母，
@@ -340,6 +416,8 @@ bool LC0844::backspaceCompare(string s, string t) {
 }
 
 vector<vector<int>> LC0830::largeGroupPositions(string s) {
+    // Input: "abbxxxxzzy" Output: [[3,6]]
+    // Explanation: "xxxx" is the single large group with starting  3 and ending positions 6.
     // 这道题给了我们一个全小写的字符串，说是重复出现的字符可以当作一个群组，如果重复次数大于等于3次，可以当作一个大群组，
     // 让我们找出所有大群组的起始和结束位置。那么实际上就是让我们计数连续重复字符的出现次数，由于要连续，所以我们可以使用双指针来做，
     // 一个指针指向重复部分的开头，一个往后遍历计数，只要不相同了就停止，然后看次数是否大于等3，是的话就将双指针位置存入结果res中，并更新指针
@@ -354,6 +432,8 @@ vector<vector<int>> LC0830::largeGroupPositions(string s) {
 }
 
 vector<int> LC0821::shortestToChar(string s, char c) {
+    // Input: S = "loveleetcode", C = 'e'
+    // Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
     // 对于每个是字符C的位置，然后分别像左右两边扩散，不停是更新距离，这样当所有的字符C的点都扩散完成之后，
     // 每个非字符C位置上的数字就是到字符C的最短距离了
     int n=s.size();
@@ -385,6 +465,9 @@ vector<int> LC0821::shortestToChar(string s, char c) {
 }
 
 double LC0812::largestTriangleArea(vector<vector<int>>& points) {
+    // Input: points = [[0,0],[0,1],[1,0],[0,2],[2,0]] Output: 2
+    // Explanation:
+    // The five points are show in the figure below. The red triangle is the largest.
     // 这道题给了我们一系列的二维平面上的点，让我们找出任意三个点能组成的最大三角形的面积。那么我们只能遍历所有的三角形面积，然后找出最大的那
     // 个。貌似这道题也没有啥特别简便的方法，不遍历不行啊。
     double res=0;
@@ -401,6 +484,12 @@ double LC0812::largestTriangleArea(vector<vector<int>>& points) {
 }
 
 vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
+    // Input: widths = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+    // S = "abcdefghijklmnopqrstuvwxyz"
+    // Output: [3, 60]
+    // Explanation:
+    // All letters have the same length of 10. To write all 26 letters,
+    // we need two full lines and one line with 60 units.
     // 这道题给了我们一个字符串，让我们把里面的字母写下来，规定了每一行的长度为100，然后每个字母的长度可以在widths数组中查询，
     // 说是如果某一个字母加上后超过了长度100的限制，那么就移动到下一行，问我们最终需要多少行，和最后一行的长度。这道题并没有太大的难度和技巧，
     // 就是楞头写呗，遍历所有的字母，然后查表得到其宽度，然后看加上这个新宽度是否超了100，超了的话，行数计数器自增1，
@@ -415,6 +504,10 @@ vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
 }
 
 int LC0724::pivotIndex(vector<int>& nums) {
+    // Input: nums = [1, 7, 3, 6, 5, 6] Output: 3
+    // Explanation:
+    // The sum of the numbers to the left of index 3 (nums[3] = 6) is equal to the sum of numbers to the right of index 3.
+    // Also, 3 is the first index where this occurs.
     // 给了我们一个数组，让我们求一个中枢点，使得该位置左右两边的子数组之和相等。这道题难度不大，直接按题意去搜索就行了，因为中枢点可能出现的
     // 位置就是数组上的位置，所以我们搜索一遍就可以找出来，我们先求出数组的总和，然后维护一个当前数组之和curSum，然后对于遍历到的位置，用总
     // 和减去当前数字，看得到的结果是否是curSum的两倍，是的话，那么当前位置就是中枢点，返回即可；否则就将当前数字加到curSum中继续遍历，遍
@@ -428,6 +521,13 @@ int LC0724::pivotIndex(vector<int>& nums) {
 }
 
 int LC0682::calPoints(vector<string>& operations) {
+    // Input: ["5","2","C","D","+"] Output: 30
+    // Explanation:
+    // Round 1: You could get 5 points. The sum is: 5.
+    // Round 2: You could get 2 points. The sum is: 7.
+    // Operation 1: The round 2's data was invalid. The sum is: 5.
+    // Round 3: You could get 10 points (the round 2's data has been removed). The sum is: 15.
+    // Round 4: You could get 5 + 10 = 15 points. The sum is: 30.
     // Integer (one round's score): Directly represents the number of points you get in this round.
     // "+" (one round's score): Represents that the points you get in this round are the sum of the last two validround's points.
     // "D" (one round's score): Represents that the points you get in this round are the doubled data of the last valid round's points.
@@ -469,6 +569,9 @@ bool LC0657::judgeCircle(string moves) {
 }
 
 int LC0674::findLengthOfLCIS(vector<int>& nums) {
+    // Input: [1,3,5,4,7] Output: 3
+    // Explanation: The longest continuous increasing subsequence is [1,3,5], its length is 3.
+    // Even though [1,3,5,7] is also an increasing subsequence, it's not a continuous one where 5 and 7 are separated by 4.
     // 这道题让我们求一个数组的最长连续递增序列，由于有了连续这个条件，跟之前那道 Number of Longest Increasing Subsequence 比起来，
     // 其实难度就降低了很多。可以使用一个计数器，如果遇到大的数字，计数器自增1；如果是一个小的数字，则计数器重置为1。用一个变量 cur 来表示
     // 前一个数字，初始化为整型最大值，当前遍历到的数字 num 就和 cur 比较就行了，每次用 cnt 来更新结果 res
@@ -489,6 +592,8 @@ int LC0674::findLengthOfLCIS(vector<int>& nums) {
 }
 
 double LC0643::findMaxAverage(vector<int>& nums, int k) {
+    // Input: [1,12,-5,-6,50,3], k = 4 Output: 12.75
+    // Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
     // 这道题给了我们一个数组nums，还有一个数字k，让我们找长度为k且平均值最大的子数组。由于子数组必须是连续的，所以我们不能给数组排序。计算
     // 子数组之和的常用方法应该是建立累加数组，然后我们可以快速计算出任意一个长度为k的子数组，用来更新结果res，从而得到最大的那个
 //    const int n=nums.size();
@@ -516,6 +621,24 @@ double LC0643::findMaxAverage(vector<int>& nums, int k) {
 }
 
 int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {
+    // Input: m = 3, n = 3 operations = [[2,2],[3,3]] Output: 4
+    // Explanation:
+    // Initially, M =
+    // [[0, 0, 0],
+    //  [0, 0, 0],
+    //  [0, 0, 0]]
+    //
+    // After performing [2,2], M =
+    // [[1, 1, 0],
+    //  [1, 1, 0],
+    //  [0, 0, 0]]
+    //
+    // After performing [3,3], M =
+    // [[2, 2, 1],
+    //  [2, 2, 1],
+    //  [1, 1, 1]]
+    //
+    // So the maximum integer in M is 2, and there are four of it in M. So return 4.
     // 每次在 ops 中给定我们一个横纵坐标，将这个子矩形范围内的数字全部自增1，让我们求最大数字的个数。原数组初始化均为0，那么如果 ops 为空，
     // 没有任何操作，那么直接返回 m*n 即可，每次用 ops 中的值来更新m和n，取其中较小值，这样遍历完成后，m和n就是最大数矩阵的边界了
     for(auto &op:ops) {
@@ -526,6 +649,8 @@ int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {
 }
 
 string LC0557::reverseWords(string s) {
+    // Input: "Let's take LeetCode contest"
+    // Output: "s'teL ekat edoCteeL tsetnoc"
     // 用两个指针，分别指向每个单词的开头和结尾位置，确定了单词的首尾位置后，再用两个指针对单词进行首尾交换即可，有点像验证回文字符串的方法
     int start=0, end=0, n = s.size();
     while(start<n && end<n) {
@@ -538,6 +663,8 @@ string LC0557::reverseWords(string s) {
 }
 
 bool LC0551::checkRecord(string s) {
+    // 'A' : Absent. 'L' : Late. 'P' : Present.
+    // Input: "PPALLP" Output: True
     // 判断学生的出勤率是否是优秀，判断标准是不能缺勤两次和不能连续迟到三次，那么最直接的方法就是分别记录缺勤和连续迟到的次数，
     // 如果当前遇到缺勤，那么缺勤计数器自增1，如果此时次数大于1了，说明已经不是优秀了，直接返回false，否则连续迟到计数器清零。
     // 如果当前遇到迟到，那么连续迟到计数器自增1，如果此时连续迟到计数器大于1了，说明已经不是优秀了，直接返回false。如果遇到正常出勤了，
@@ -560,6 +687,7 @@ bool LC0551::checkRecord(string s) {
 }
 
 string LC0541::reverseStr(string s, int k) {
+    // Input: s = "abcdefg", k = 2 Output: "bacdfeg"
     // 每2k个字符来遍历原字符串s，然后进行翻转，翻转的结尾位置是取i+k和末尾位置之间的较小值
     for(int i=0; i<s.size(); i+=2*k) {
         reverse(s.begin()+i, min(s.begin()+i+k, s.end()));
@@ -568,6 +696,9 @@ string LC0541::reverseStr(string s, int k) {
 }
 
 int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
+    // Input: [1,1,0,1,1,1] Output: 3
+    // Explanation: The first two digits or the last three digits are consecutive 1s.
+    // The maximum number of consecutive 1s is 3.
     // 求最大连续1的个数。历一遍数组，用一个计数器 cnt 来统计1的个数，方法是如果当前数字为0，那么 cnt 重置为0，如果不是0，cnt 自增1，
     // 然后每次更新结果 res 即可
     int res=0, cnt=0;
@@ -590,6 +721,10 @@ int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
 }
 
 int LC0414::thirdMax(vector<int>& nums) {
+    // Input: [3, 2, 1] Output: 1
+    // Explanation: The third maximum is 1.
+    // Input: [1, 2] Output: 2
+    // Explanation: The third maximum does not exist, so the maximum (2) is returned instead.
     // 这道题让我们求数组中第三大的数，如果不存在的话那么就返回最大的数，题目中说明了这里的第三大不能和第二大相同，必须是严格的小于，而并非小
     // 于等于。这道题并不是很难，如果知道怎么求第二大的数，那么求第三大的数的思路都是一样的。那么我们用三个变量first, second, third来分别
     // 保存第一大，第二大，和第三大的数，然后我们遍历数组，如果遍历到的数字大于当前第一大的数first，那么三个变量各自错位赋值，如果当前数字大
@@ -612,12 +747,17 @@ int LC0414::thirdMax(vector<int>& nums) {
 }
 
 void LC0344::reverseString(vector<char>& s) {
+    // Input: ["h","e","l","l","o"]
+    // Output: ["o","l","l","e","h"]
     int l=0, r=s.size()-1;
     while(l<r)
         swap(s[l++],s[r--]);
 }
 
 vector<string> LC0228::summaryRanges(vector<int>& nums) {
+    // Input:  [0,2,3,4,6,8,9]
+    // Output: ["0","2->4","6","8->9"]
+    // Explanation: 2,3,4 form a continuous range; 8,9 form a continuous range.
     // 这道题给定我们一个有序数组，让我们总结区间，具体来说就是让我们找出连续的序列，然后首尾两个数字之间用个“->"来连接，那么我只需遍历一遍数
     // 组即可，每次检查下一个数是不是递增的，如果是，则继续往下遍历，如果不是了，我们还要判断此时是一个数还是一个序列，一个数直接存入结果，
     // 序列的话要存入首尾数字和箭头“->"。我们需要两个变量i和j，其中i是连续序列起始数字的位置，j是连续数列的长度，当j为1时，说明只有一个数字，
@@ -634,6 +774,7 @@ vector<string> LC0228::summaryRanges(vector<int>& nums) {
 }
 
 int LC0169::majorityElement(vector<int>& nums) {
+    // Input: nums = [2,2,1,1,1,2,2] Output: 2
     // 将第一个数字假设为过半数，然后把计数器设为1，比较下一个数和此数是否相等，若相等则计数器加一，
     // 反之减一。然后看此时计数器的值，若为零，则将下一个值设为候选过半数。以此类推直到遍历完整个数组，
     // 当前候选过半数即为该数组的过半数。
@@ -655,6 +796,10 @@ int LC0169::majorityElement(vector<int>& nums) {
 }
 
 int LC0122::maxProfit(vector<int>& prices) {
+    // Input: prices = [7,1,5,3,6,4] Output: 7
+    // Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+    // Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+    // Total profit is 4 + 3 = 7.
     // 由于可以无限次买入和卖出。我们都知道炒股想挣钱当然是低价买入高价抛出，那么这里我们只需要从第二天开始，如果当前价格比之前价格高，则把差
     // 值加入利润中，因为我们可以昨天买入，今日卖出，若明日价更高的话，还可以今日买入，明日再抛出。以此类推，遍历完整个数组后即可求得最大利润
     int prf=0;
@@ -665,6 +810,9 @@ int LC0122::maxProfit(vector<int>& prices) {
 }
 
 int LC0121::maxProfit(vector<int>& prices) {
+    // Input: prices = [7,1,5,3,6,4] Output: 5
+    // Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+    // Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
     // 只需要遍历一次数组，用一个变量记录遍历过数中的最小值，然后每次计算当前值和这个最小值之间的差值最为利润，然后每次选较大的利润来更新。
     // 当遍历完成后当前利润即为所求
     int buy=INT_MAX, prf=0;
@@ -676,6 +824,7 @@ int LC0121::maxProfit(vector<int>& prices) {
 }
 
 vector<int> LC0119::getRow(int rowIndex) {
+    // Input: 5 Output: [1,4,6,4,1]
     // 除了第一个和最后一个数字之外，其他的数字都是上一行左右两个值之和。那么我们只需要两个 for 循环，除了第一个数为1之外，后面的数都是上一次
     // 循环的数值加上它前面位置的数值之和，不停地更新每一个位置的值，便可以得到第n行的数字
     vector<int> res(rowIndex+1, 0);
@@ -687,6 +836,15 @@ vector<int> LC0119::getRow(int rowIndex) {
 }
 
 vector<vector<int>> LC0118::generate(int numRows) {
+    // Input: 5
+    // Output:
+    // [
+    //      [1],
+    //     [1,1],
+    //    [1,2,1],
+    //   [1,3,3,1],
+    //  [1,4,6,4,1]
+    // ]
     // 杨辉三角是二项式系数的一种写法，如果熟悉杨辉三角的五个性质，那么很好生成，可参见我的上一篇博文Pascal's Triangle II。具体生成算是：
     // 每一行的首个和结尾一个数字都是1，从第三行开始，中间的每个数字都是上一行的左右两个数字之和。
     vector<vector<int>> res(numRows, vector<int>());
@@ -704,6 +862,8 @@ vector<vector<int>> LC0118::generate(int numRows) {
 //for(auto n:nums) cout << n << ' ';
 //cout << endl;
 vector<int> LC0066::plusOne(vector<int>& digits) {
+    // Input: digits = [1,2,3] Output: [1,2,4]
+    // Explanation: The array represents the integer 123.
     // 将一个数字的每个位上的数字分别存到一个一维向量中，最高位在最开头，我们需要给这个数字加一，即在末尾数字加一
     // 将 carry 初始化为1，然后相当于 digits 加了一个0，处理方法跟之前那道题一样
     int c=1, n=digits.size();

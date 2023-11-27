@@ -41,6 +41,7 @@ public:
 };
 
 /*********** Hash Table ***********/
+/*求合法(字元都是來自allowed)字串的數量*/
 struct LC1684 { int countConsistentStrings(string allowed, vector<string>& words); };
 /*陣列裡每個字符出現的頻率是否都不同*/
 struct LC1207 { bool uniqueOccurrences(vector<int>& arr); };
@@ -114,7 +115,7 @@ struct LC0217 { bool containsDuplicate(vector<int>& nums); };
 struct LC0205 { bool isIsomorphic(string s, string t); };
 /*判斷一個數字是否是happy number*/
 struct LC0202 { bool isHappy(int n); };
-/*找出陣列裡兩個合為指定值的index*/
+/*找出陣列裡兩個合為target的idx*/
 struct LC0001 { vector<int> twoSum(vector<int>& nums, int target); };
 
 /*********** Two Pointers ***********/
@@ -128,36 +129,57 @@ struct LC0027 { int removeElement(vector<int>& nums, int val); };
 struct LC0026 { int removeDuplicates(vector<int>& nums); };
 
 /*********** Array List ***********/
+/*給定一個壓縮後的陣列，將其解壓縮*/
 struct LC1313 { vector<int> decompressRLElist(vector<int>& nums); };
+/*回傳一有n個數值的陣列，陣列值的和為0*/
 struct LC1304 { vector<int> sumZero(int n); };
+/*將陣列裡每個數字更新為其右邊數字裡最大的數*/
 struct LC1299 { vector<int> replaceElements(vector<int>& arr);};
+/*求一陣列裡有多少個位數為偶數*/
 struct LC1295 { int findNumbers(vector<int>& nums); };
+/*求一數所有位數"積"跟"和"的差值*/
 struct LC1281 { int subtractProductAndSum(int n); };
+/*求經過所有點需花的時間*/
 struct LC1266 { int minTimeToVisitAllPoints(vector<vector<int>>& points); };
+/*矩陣經過一系列操作後會產生奇數的數量*/
 struct LC1252 { int oddCells(int m, int n, vector<vector<int>>& indices); };
+/*candies顆糖分給num_people人，求最後每人得幾顆*/
 struct LC1103 { vector<int> distributeCandies(int candies, int num_people); };
+/*給定站與站之間距離的矩陣，回傳指定起訖站之間的最短距離*/
 struct LC1184 { int distanceBetweenBusStops(vector<int>& distance, int start, int destination); };
+/*重複矩陣裡的0值*/
 struct LC1089 { void duplicateZeros(vector<int>& arr); };
+/*01陣列每個子陣列是否能被5整除*/
 struct LC1018 { vector<bool> prefixesDivBy5(vector<int>& nums); };
+/*矩陣num跟整數k做相加*/
 struct LC0989 { vector<int> addToArrayForm(vector<int>& num, int k); };
 /*刪除字符沒有排序好的column*/
 struct LC0944 { int minDeletionSize(vector<string>& strs); };
+/*判斷一陣列是否是合法的山型陣列*/
 struct LC0941 { bool validMountainArray(vector<int>& arr); };
+/*給定一時間t，求[t-3000, t]時間範圍內有多少次ping*/
 struct LC0933 { queue<int>q; LC0933(){}; int ping(int t); };
+/*求陣列值經過處理後最大/小值之間的差值*/
 struct LC0908 { int smallestRangeI(vector<int>& nums, int k); };
+/*判斷一陣列是否單調遞增或遞減*/
 struct LC0896 { bool isMonotonic(vector<int>& nums); };
 /*有backspace字符的兩list是否是相同的字串*/
 struct LC0844 { bool backspaceCompare(string s, string t); };
-/*有幾組連續字符*/
+/*回傳連續字符起訖idx*/
 struct LC0830 { vector<vector<int>> largeGroupPositions(string s); };
-/*每個離特定字符最近的距離*/
+/*回傳每個idx離特定字符最近的距離*/
 struct LC0821 { vector<int> shortestToChar(string s, char c); };
+/*給定一系列二維平面的點，求能維出最大三角形面積*/
 struct LC0812 { double largestTriangleArea(vector<vector<int>>& points); };
-/*一段文字可分幾行*/
+/*回傳一段文字可分幾行、最後一行長度*/
 struct LC0806 { vector<int> numberOfLines(vector<int>& widths, string s); };
+/*給定一陣列，回傳其左右子陣列值和相等的idx*/
 struct LC0724 { int pivotIndex(vector<int>& nums); };
+/*給定一系列操作，回傳累積後的分數*/
 struct LC0682 { int calPoints(vector<string>& operations); };
+/*找出最長連續增長子序列，並回傳其長度*/
 struct LC0674 { int findLengthOfLCIS(vector<int>& nums); };
+/*找出平均值最大的子陣列，並回傳其值*/
 struct LC0643 { double findMaxAverage(vector<int>& nums, int k); };
 /*在一系列操作後，二維陣列裡最大數的個數*/
 struct LC0598 { int maxCount(int m, int n, vector<vector<int>>& ops); };
@@ -177,9 +199,13 @@ struct LC0344 { void reverseString(vector<char>& s); };
 struct LC0228 { vector<string> summaryRanges(vector<int>& nums); };
 /*回傳數量超過一半的那個數*/
 struct LC0169 { int majorityElement(vector<int>& nums); };
+/*求買賣股票最大獲利值，能買賣多次*/
 struct LC0122 { int maxProfit(vector<int>& prices); };
+/*求買賣股票最大獲利值，只能買賣一次*/
 struct LC0121 { int maxProfit(vector<int>& prices); };
+/*回傳第numRows層的Pascal三角形的值*/
 struct LC0119 { vector<int> getRow(int rowIndex); };
+/*產生numRows層的Pascal三角形*/
 struct LC0118 { vector<vector<int>> generate(int numRows); };
 /*用陣列代表一大數，回傳其加1的陣列*/
 struct LC0066 { vector<int> plusOne(vector<int>& digits); };
@@ -291,7 +317,7 @@ private:
 //        for(auto& [k,v]:l) {
 //            if(k == key) return v;
 //        }
-//        return -1;
+//        return -1;--
 //    }
 //    void remove(int key) {
 //        auto& l = t[key%1000];
