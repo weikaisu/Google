@@ -79,7 +79,7 @@ struct LC0657 { bool judgeCircle(string moves); };
 struct LC0645 { vector<int> findErrorNums(vector<int>& nums); };
 /*找出陣列裡三數相乘之最大值*/
 struct LC0628 { int maximumProduct(vector<int>& nums); };
-/*從兩個字串陣列裡找出相同字串的最小index*/
+/*從兩個字串陣列找到idx之和最小的相同字串*/
 struct LC0599 { vector<string> findRestaurant(vector<string>& list1, vector<string>& list2); };
 /*陣列裡最長harmonious子陣列長度*/
 struct LC0594 { int findLHS(vector<int>& nums); };
@@ -231,6 +231,7 @@ struct LC0141 { bool hasCycle(ListNode *head); };
 struct LC0083 { ListNode* deleteDuplicates(ListNode* head); };
 /*合併兩條list*/
 struct LC0021 { ListNode* mergeTwoLists(ListNode* l1, ListNode* l2); };
+/*兩個list相加*/
 struct LC0002 { ListNode* addTwoNumbers(ListNode* l1, ListNode* l2); };
 
 /*********** Matrix ***********/

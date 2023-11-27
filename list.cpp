@@ -7,6 +7,8 @@
 
 /***********  Two Pointers  **********/
 void LC0283::moveZeroes(vector<int>& nums) {
+    /*將陣列裡所有0移到後面*/
+    // Input: nums = [0,1,0,3,12] Output: [1,3,12,0,0]
     // 这道题让我们将一个给定数组中所有的0都移到后面，把非零数前移，要求不能改变非零数的相对应的位置关系，而且不能拷贝额外的数组，那么只能用
     // 替换法in-place来做，需要用两个指针，一个不停的向后扫，找到非零位置，然后和前面那个指针交换位置即可
     // 用快慢指針
@@ -23,6 +25,11 @@ void LC0283::moveZeroes(vector<int>& nums) {
 //for(auto i:n) cout << i << ' ';
 //cout << endl;
 int LC0027::removeElement(vector<int>& nums, int val) {
+    /*移除指定的值並不改變陣列相對位置*/
+    // Input: nums = [3,2,2,3], val = 3
+    // Output: 2, nums = [2,2,_,_]
+    // Explanation: Your function should return k = 2, with the first two elements of nums being 2.
+    // It does not matter what you leave beyond the returned k (hence they are underscores).
     // 除一个数组中和给定值相同的数字，并返回新的数组的长度。
     // fast開始掃，若不是指定的值的話表示可以留在nums裡，就會往slow放。若是指定的值，slow則不會++，準備下次被覆蓋。
     int slow=0;
@@ -38,6 +45,11 @@ int LC0027::removeElement(vector<int>& nums, int val) {
 //for(auto i:n) cout << i << ' ';
 //cout << endl;
 int LC0026::removeDuplicates(vector<int>& nums) {
+    /*去除重複的字符*/
+    // Input: nums = [1,1,2]
+    // Output: 2, nums = [1,2,_]
+    // Explanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
+    // It does not matter what you leave beyond the returned k (hence they are underscores).
     // 使用快慢指针来记录遍历的坐标，最开始时两个指针都指向第一个数字，如果两个指针指的数字相同，则快指针向前走一步，如果不同，则两个指针都向
     // 前走一步，这样当快指针走完整个数组后，慢指针当前的坐标加1就是数组中不同数字的个数
     int slow=0;

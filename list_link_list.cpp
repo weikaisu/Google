@@ -6,6 +6,7 @@
 //LC1290 run;
 //cout << run.getDecimalValue(l2.GetListHead()) << endl;
 int LC1290::getDecimalValue(ListNode* head) {
+    /*二進位轉十進位*/
     auto fun = [](const auto &self, ListNode* node, int &m) -> int {
         if(!node->next) return node->val;
         int v =  self(self, node->next, m);
@@ -19,6 +20,7 @@ int LC1290::getDecimalValue(ListNode* head) {
 }
 
 ListNode* LC0876::middleNode(ListNode* head) {
+    /*回傳正中間的node*/
     ListNode *slow=head, *fast=head;
 
     while(fast->next && fast->next->next) {
@@ -30,6 +32,7 @@ ListNode* LC0876::middleNode(ListNode* head) {
 }
 
 void LC0237::deleteNode(ListNode* node) {
+    /*刪除特定node*/
     // 先把当前节点的值用下一个节点的值覆盖了，然后我们删除下一个节点即可
     ListNode *n = node->next;
     node->val = n->val;
@@ -38,6 +41,7 @@ void LC0237::deleteNode(ListNode* node) {
 }
 
 bool LC0234::isPalindrome(ListNode* head) {
+    /*node是否回文*/
     if(!head || !head->next) return true;
     stack<int> s;
 
@@ -80,6 +84,7 @@ bool LC0234::isPalindrome(ListNode* head) {
 //ListNode* r = run.reverseList(l.GetListHead());
 //LinkedList::ShowLinkedList(r);
 ListNode* LC0206::reverseList(ListNode* head) {
+    /*反轉linked list*/
     // 在原链表之前建立一个空的cur，因为首节点会变，然后从head开始，将之后的一个节点移到cur之后，重复此操作直到head成为末节点为止
     // iterative way
     ListNode* cur=nullptr;
@@ -108,6 +113,7 @@ ListNode* LC0206::reverseList(ListNode* head) {
 //ListNode* r = run.removeElements(l2.GetListHead(), 7);
 //LinkedList::ShowLinkedList(r);
 ListNode* LC0203::removeElements(ListNode* head, int val) {
+    /*移除指定值的所有node*/
     if(!head) return head;
 
     ListNode dummy(0);
@@ -130,6 +136,7 @@ ListNode* LC0203::removeElements(ListNode* head, int val) {
 }
 
 ListNode* LC0160::getIntersectionNode(ListNode *headA, ListNode *headB) {
+    /*找到兩條list交叉的node*/
     if(!headA || !headB) return nullptr;
 
     // slower way
@@ -191,6 +198,7 @@ ListNode* LC0160::getIntersectionNode(ListNode *headA, ListNode *headB) {
 }
 
 bool LC0141::hasCycle(ListNode *head) {
+    /*判斷list是否有cycle*/
     // time(N) space(N)
     unordered_set<ListNode*> set;
     while(head!=nullptr) {
@@ -218,6 +226,7 @@ bool LC0141::hasCycle(ListNode *head) {
 //ListNode* r = run.deleteDuplicates(l1.GetListHead());
 //LinkedList::ShowLinkedList(r);
 ListNode* LC0083::deleteDuplicates(ListNode* head) {
+    /*刪除重複值的node*/
     if(!head || !head->next) return head;
 
     unordered_set<int> set;
@@ -245,6 +254,7 @@ ListNode* LC0083::deleteDuplicates(ListNode* head) {
 //ListNode* r = run.mergeTwoLists(l1.GetListHead(), l2.GetListHead());
 //LinkedList::ShowLinkedList(r);
 ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
+    /*合併兩條list*/
     // time(N), iterative
     ListNode head(0);
     ListNode *tail=&head;
@@ -274,6 +284,7 @@ ListNode* LC0021::mergeTwoLists(ListNode* l1, ListNode* l2) {
 }
 
 ListNode* LC0002::addTwoNumbers(ListNode* l1, ListNode* l2) {
+    /*兩個list相加*/
     // 建立一个新链表，然后把输入的两个链表从头往后撸，每两个相加，添加一个新节点到新链表后面。为了避免两个输入链表同时为空，
     // 我们建立一个 dummy 结点，将两个结点相加生成的新结点按顺序加到 dummy 结点之后，由于 dummy 结点本身不能变，所以用一个指针 cur
     // 来指向新链表的最后一个结点。好，可以开始让两个链表相加了，这道题好就好在最低位在链表的开头，所以可以在遍历链表的同时按从低到高的顺

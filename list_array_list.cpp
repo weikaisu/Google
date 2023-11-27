@@ -2,6 +2,7 @@
 
 /***********  Array List  **********/
 vector<int> LC1313::decompressRLElist(vector<int>& nums) {
+    /*給定一個壓縮後的陣列，將其解壓縮*/
     // Input: nums = [1,2,3,4]
     // Output: [2,4,4,4]
     // Explanation: The first pair [1,2] means we have freq = 1 and val = 2 so we generate the array [2].
@@ -18,6 +19,7 @@ vector<int> LC1313::decompressRLElist(vector<int>& nums) {
 }
 
 vector<int> LC1304::sumZero(int n) {
+    /*回傳一有n個數值的陣列，陣列值的和為0*/
     // Input: n = 5 Output: [-7,-1,1,3,4]
     // Explanation: These arrays also are accepted [-5,-1,1,2,3] , [-3,-1,2,-2,4].
     // 给了一个正整数n，让返回一个长度为n的数组，要求是没有重复数字且数字之和为0。
@@ -42,6 +44,7 @@ vector<int> LC1304::sumZero(int n) {
 }
 
 vector<int> LC1299::replaceElements(vector<int>& arr) {
+    /*將陣列裡每個數字更新為其右邊數字裡最大的數*/
     // Input: arr = [17,18,5,4,6,1]
     // Output:      [18,6,6,6,1,-1]
     // Explanation:
@@ -80,6 +83,7 @@ vector<int> LC1299::replaceElements(vector<int>& arr) {
 }
 
 int LC1295::findNumbers(vector<int>& nums) {
+    /*求一陣列裡有多少個位數為偶數*/
     // Input: nums = [12,345,2,6,7896] Output: 2
     // Explanation: 12 contains 2 digits (even number of digits).
     // 345 contains 3 digits (odd number of digits).
@@ -116,6 +120,7 @@ int LC1295::findNumbers(vector<int>& nums) {
 }
 
 int LC1281::subtractProductAndSum(int n) {
+    /*求一數所有位數"積"跟"和"的差值*/
     // Input: n = 234 Output: 15
     // Explanation:
     // Product of digits = 2 * 3 * 4 = 24
@@ -136,6 +141,7 @@ int LC1281::subtractProductAndSum(int n) {
 }
 
 int LC1266::minTimeToVisitAllPoints(vector<vector<int>>& points) {
+    /*求經過所有點需花的時間*/
     // Input: points = [[1,1],[3,4],[-1,0]] Output: 7
     // Explanation: One optimal path is [1,1] -> [2,2] -> [3,3] -> [3,4] -> [2,3] -> [1,2] -> [0,1] -> [-1,0]
     // Time from [1,1] to [3,4] = 3 seconds
@@ -155,6 +161,7 @@ int LC1266::minTimeToVisitAllPoints(vector<vector<int>>& points) {
 }
 
 int LC1252::oddCells(int m, int n, vector<vector<int>>& indices) {
+    /*矩陣經過一系列操作後會產生奇數的數量*/
     // Input: m = 2, n = 3, indices = [[0,1],[1,1]] Output: 6
     // Explanation: Initial matrix = [[0,0,0],[0,0,0]].
     // After applying first increment it becomes [[1,2,1],[0,1,0]].
@@ -178,6 +185,7 @@ int LC1252::oddCells(int m, int n, vector<vector<int>>& indices) {
 }
 
 vector<int> LC1103::distributeCandies(int candies, int num_people) {
+    /*candies顆糖分給num_people人，求最後每人得幾顆*/
     // Input: candies = 7, num_people = 4 Output: [1,2,3,1]
     // Explanation:
     // On the first turn, ans[0] += 1, and the array is [1,0,0,0].
@@ -198,6 +206,7 @@ vector<int> LC1103::distributeCandies(int candies, int num_people) {
 }
 
 int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destination) {
+    /*給定站與站之間距離的矩陣，回傳指定起訖站之間的最短距離*/
     // Input: distance = [1,2,3,4], start = 0, destination = 1 Output: 1
     // Explanation: Distance between 0 and 1 is 1 or 9, minimum is 1.
     // 有n个公交站形成了一个环，它们之间的距离用一个数组 distance 表示，其中 distance[i] 表示公交站i和 (i+1)%n 之间的距离。说是公交可以
@@ -224,6 +233,7 @@ int LC1184::distanceBetweenBusStops(vector<int>& distance, int start, int destin
 }
 
 void LC1089::duplicateZeros(vector<int>& arr) {
+    /*重複矩陣裡的0值*/
     // Input: [1,0,2,3,0,4,5,0] Output: void
     // Explanation: After calling your function, the input array is modified to: [1,0,0,2,3,0,0,4]
     // 这道题给了一个数字数组，让将每个0都复制一个，然后将数字右移一位，数组的长度还是保持不变，右移出范围的数字就移除掉。这不是一道难题，比较
@@ -248,6 +258,7 @@ void LC1089::duplicateZeros(vector<int>& arr) {
 }
 
 vector<bool> LC1018::prefixesDivBy5(vector<int>& nums) {
+    /*01陣列每個子陣列是否能被5整除*/
     // Input: [0,1,1] Output: [true,false,false]
     // Explanation:
     // The input numbers in binary are 0, 01, 011; which are 0, 1, and 3 in base-10.  Only the first number is divisible
@@ -267,6 +278,7 @@ vector<bool> LC1018::prefixesDivBy5(vector<int>& nums) {
 }
 
 vector<int> LC0989::addToArrayForm(vector<int>& num, int k) {
+    /*矩陣num跟整數k做相加*/
     // Input: A = [1,2,0,0], K = 34 Output: [1,2,3,4]
     // Explanation: 1200 + 34 = 1234
     // 给了一个数组A，说是可以表示一个正整数，高位在开头，又给了一个正数K，让用数组A表示的正整数加上K，并还用数组来表示相加的后的结果。这种
@@ -290,6 +302,7 @@ vector<int> LC0989::addToArrayForm(vector<int>& num, int k) {
 }
 
 int LC0944::minDeletionSize(vector<string>& strs) {
+    /*刪除字符沒有排序好的column*/
     // Input: A = ["cba","daf","ghi"] Output: 1
     // Explanation:
     // After choosing D = {1}, each column ["c","d","g"] and ["a","f","i"] are in non-decreasing sorted order.
@@ -306,6 +319,7 @@ int LC0944::minDeletionSize(vector<string>& strs) {
 }
 
 bool LC0941::validMountainArray(vector<int>& arr) {
+    /*判斷一陣列是否是合法的山型陣列*/
     // Input: [2,1] Output: false
     // Input: [3,5,5] Output: false
     // Input: [0,3,2,1] Output: true
@@ -322,6 +336,7 @@ bool LC0941::validMountainArray(vector<int>& arr) {
 }
 
 int LC0933::ping(int t) {
+    /*給定一時間t，求[t-3000, t]時間範圍內有多少次ping*/
     // Input:
     // ["RecentCounter", "ping", "ping", "ping", "ping"]
     // [[], [1], [100], [3001], [3002]]
@@ -343,6 +358,7 @@ int LC0933::ping(int t) {
 }
 
 int LC0908::smallestRangeI(vector<int>& nums, int k) {
+    /*求陣列值經過處理後最大/小值之間的差值*/
     // Input: A = [0,10], K = 2 Output: 6 Explanation: B = [2,8]
     // Input: A = [1,3,6], K = 3 Output: 0 Explanation: B = [3,3,3] or B = [4,4,4]
     // 给了一个非负数的数组，和一个非负数K，说是数组中的每一个数字都可以加上 [-K, K] 范围内的任意一个数字，问新数组的最大值最小值之间的差值
@@ -363,6 +379,7 @@ int LC0908::smallestRangeI(vector<int>& nums, int k) {
 }
 
 bool LC0896::isMonotonic(vector<int>& nums) {
+    /*判斷一陣列是否單調遞增或遞減*/
     // Input: [1,2,2,3] Output: true
     // 判断一个数组是否单调，单调数组就是说这个数组的数字要么是递增的，要么是递减的，不存在一会儿递增一会儿递减的情况，即不会有山峰存在。
     // 这里不是严格的递增或递减，是允许有相同的数字的。那么我们直接将相邻的两个数字比较一下即可，使用两个标识符，inc 和 dec，初始化均为
@@ -388,6 +405,7 @@ bool LC0896::isMonotonic(vector<int>& nums) {
 }
 
 bool LC0844::backspaceCompare(string s, string t) {
+    /*有backspace字符的兩list是否是相同的字串*/
     // Input: S = "ab#c", T = "ad#c" Output: true
     // Explanation: Both S and T become "ac".
     // 我们使用常数级的空间复杂度，就是说不能新建空的字符串来保存处理之后的结果，那么只能在遍历的过程中同时进行比较，只能使用双指针同时
@@ -416,6 +434,7 @@ bool LC0844::backspaceCompare(string s, string t) {
 }
 
 vector<vector<int>> LC0830::largeGroupPositions(string s) {
+    /*回傳連續字符起訖idx*/
     // Input: "abbxxxxzzy" Output: [[3,6]]
     // Explanation: "xxxx" is the single large group with starting  3 and ending positions 6.
     // 这道题给了我们一个全小写的字符串，说是重复出现的字符可以当作一个群组，如果重复次数大于等于3次，可以当作一个大群组，
@@ -432,6 +451,7 @@ vector<vector<int>> LC0830::largeGroupPositions(string s) {
 }
 
 vector<int> LC0821::shortestToChar(string s, char c) {
+    /*回傳每個idx離特定字符最近的距離*/
     // Input: S = "loveleetcode", C = 'e'
     // Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
     // 对于每个是字符C的位置，然后分别像左右两边扩散，不停是更新距离，这样当所有的字符C的点都扩散完成之后，
@@ -465,6 +485,7 @@ vector<int> LC0821::shortestToChar(string s, char c) {
 }
 
 double LC0812::largestTriangleArea(vector<vector<int>>& points) {
+    /*給定一系列二維平面的點，求能維出最大三角形面積*/
     // Input: points = [[0,0],[0,1],[1,0],[0,2],[2,0]] Output: 2
     // Explanation:
     // The five points are show in the figure below. The red triangle is the largest.
@@ -484,6 +505,7 @@ double LC0812::largestTriangleArea(vector<vector<int>>& points) {
 }
 
 vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
+    /*回傳一段文字可分幾行、最後一行長度*/
     // Input: widths = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
     // S = "abcdefghijklmnopqrstuvwxyz"
     // Output: [3, 60]
@@ -504,6 +526,7 @@ vector<int> LC0806::numberOfLines(vector<int>& widths, string s) {
 }
 
 int LC0724::pivotIndex(vector<int>& nums) {
+    /*給定一陣列，回傳其左右子陣列值和相等的idx*/
     // Input: nums = [1, 7, 3, 6, 5, 6] Output: 3
     // Explanation:
     // The sum of the numbers to the left of index 3 (nums[3] = 6) is equal to the sum of numbers to the right of index 3.
@@ -521,6 +544,7 @@ int LC0724::pivotIndex(vector<int>& nums) {
 }
 
 int LC0682::calPoints(vector<string>& operations) {
+    /*給定一系列操作，回傳累積後的分數*/
     // Input: ["5","2","C","D","+"] Output: 30
     // Explanation:
     // Round 1: You could get 5 points. The sum is: 5.
@@ -550,6 +574,8 @@ int LC0682::calPoints(vector<string>& operations) {
 }
 
 bool LC0657::judgeCircle(string moves) {
+    /*給定方向陣列判斷最終是否能走回原點*/
+    // Input: "UD" Output: true
     // 使用了哈希表来建立字符和其出现的次数之间的映射，最后直接比较对应的字符出现的次数是否相等即可
     array<int,26> map; map.fill(0);
     for(auto &c:moves)
@@ -569,6 +595,7 @@ bool LC0657::judgeCircle(string moves) {
 }
 
 int LC0674::findLengthOfLCIS(vector<int>& nums) {
+    /*找出最長連續增長子序列，並回傳其長度*/
     // Input: [1,3,5,4,7] Output: 3
     // Explanation: The longest continuous increasing subsequence is [1,3,5], its length is 3.
     // Even though [1,3,5,7] is also an increasing subsequence, it's not a continuous one where 5 and 7 are separated by 4.
@@ -592,6 +619,7 @@ int LC0674::findLengthOfLCIS(vector<int>& nums) {
 }
 
 double LC0643::findMaxAverage(vector<int>& nums, int k) {
+    /*找出平均值最大的子陣列，並回傳其值*/
     // Input: [1,12,-5,-6,50,3], k = 4 Output: 12.75
     // Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
     // 这道题给了我们一个数组nums，还有一个数字k，让我们找长度为k且平均值最大的子数组。由于子数组必须是连续的，所以我们不能给数组排序。计算
@@ -621,6 +649,7 @@ double LC0643::findMaxAverage(vector<int>& nums, int k) {
 }
 
 int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {
+    /*在一系列操作後，二維陣列裡最大數的個數*/
     // Input: m = 3, n = 3 operations = [[2,2],[3,3]] Output: 4
     // Explanation:
     // Initially, M =
@@ -649,6 +678,7 @@ int LC0598::maxCount(int m, int n, vector<vector<int>>& ops) {
 }
 
 string LC0557::reverseWords(string s) {
+    /*反轉一句話裡的每一個單詞*/
     // Input: "Let's take LeetCode contest"
     // Output: "s'teL ekat edoCteeL tsetnoc"
     // 用两个指针，分别指向每个单词的开头和结尾位置，确定了单词的首尾位置后，再用两个指针对单词进行首尾交换即可，有点像验证回文字符串的方法
@@ -663,6 +693,7 @@ string LC0557::reverseWords(string s) {
 }
 
 bool LC0551::checkRecord(string s) {
+    /*統計出勤紀錄判斷是否合格*/
     // 'A' : Absent. 'L' : Late. 'P' : Present.
     // Input: "PPALLP" Output: True
     // 判断学生的出勤率是否是优秀，判断标准是不能缺勤两次和不能连续迟到三次，那么最直接的方法就是分别记录缺勤和连续迟到的次数，
@@ -687,6 +718,7 @@ bool LC0551::checkRecord(string s) {
 }
 
 string LC0541::reverseStr(string s, int k) {
+    /*每2k個字符反轉k個字符*/
     // Input: s = "abcdefg", k = 2 Output: "bacdfeg"
     // 每2k个字符来遍历原字符串s，然后进行翻转，翻转的结尾位置是取i+k和末尾位置之间的较小值
     for(int i=0; i<s.size(); i+=2*k) {
@@ -696,6 +728,7 @@ string LC0541::reverseStr(string s, int k) {
 }
 
 int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
+    /*求矩陣裡最長連續1的長度*/
     // Input: [1,1,0,1,1,1] Output: 3
     // Explanation: The first two digits or the last three digits are consecutive 1s.
     // The maximum number of consecutive 1s is 3.
@@ -721,6 +754,7 @@ int LC0485::findMaxConsecutiveOnes(vector<int>& nums) {
 }
 
 int LC0414::thirdMax(vector<int>& nums) {
+    /*回傳陣列裡第三大的數*/
     // Input: [3, 2, 1] Output: 1
     // Explanation: The third maximum is 1.
     // Input: [1, 2] Output: 2
@@ -747,6 +781,7 @@ int LC0414::thirdMax(vector<int>& nums) {
 }
 
 void LC0344::reverseString(vector<char>& s) {
+    /*反轉字符陣列*/
     // Input: ["h","e","l","l","o"]
     // Output: ["o","l","l","e","h"]
     int l=0, r=s.size()-1;
@@ -755,6 +790,7 @@ void LC0344::reverseString(vector<char>& s) {
 }
 
 vector<string> LC0228::summaryRanges(vector<int>& nums) {
+    /*找出各連續子陣列的範圍*/
     // Input:  [0,2,3,4,6,8,9]
     // Output: ["0","2->4","6","8->9"]
     // Explanation: 2,3,4 form a continuous range; 8,9 form a continuous range.
@@ -774,6 +810,7 @@ vector<string> LC0228::summaryRanges(vector<int>& nums) {
 }
 
 int LC0169::majorityElement(vector<int>& nums) {
+    /*回傳數量超過一半的那個數*/
     // Input: nums = [2,2,1,1,1,2,2] Output: 2
     // 将第一个数字假设为过半数，然后把计数器设为1，比较下一个数和此数是否相等，若相等则计数器加一，
     // 反之减一。然后看此时计数器的值，若为零，则将下一个值设为候选过半数。以此类推直到遍历完整个数组，
@@ -796,6 +833,7 @@ int LC0169::majorityElement(vector<int>& nums) {
 }
 
 int LC0122::maxProfit(vector<int>& prices) {
+    /*求買賣股票最大獲利值，能買賣多次*/
     // Input: prices = [7,1,5,3,6,4] Output: 7
     // Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
     // Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
@@ -810,6 +848,7 @@ int LC0122::maxProfit(vector<int>& prices) {
 }
 
 int LC0121::maxProfit(vector<int>& prices) {
+    /*求買賣股票最大獲利值，只能買賣一次*/
     // Input: prices = [7,1,5,3,6,4] Output: 5
     // Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
     // Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
@@ -824,6 +863,7 @@ int LC0121::maxProfit(vector<int>& prices) {
 }
 
 vector<int> LC0119::getRow(int rowIndex) {
+    /*回傳第numRows層的Pascal三角形的值*/
     // Input: 5 Output: [1,4,6,4,1]
     // 除了第一个和最后一个数字之外，其他的数字都是上一行左右两个值之和。那么我们只需要两个 for 循环，除了第一个数为1之外，后面的数都是上一次
     // 循环的数值加上它前面位置的数值之和，不停地更新每一个位置的值，便可以得到第n行的数字
@@ -836,6 +876,7 @@ vector<int> LC0119::getRow(int rowIndex) {
 }
 
 vector<vector<int>> LC0118::generate(int numRows) {
+    /*產生numRows層的Pascal三角形*/
     // Input: 5
     // Output:
     // [
@@ -862,6 +903,7 @@ vector<vector<int>> LC0118::generate(int numRows) {
 //for(auto n:nums) cout << n << ' ';
 //cout << endl;
 vector<int> LC0066::plusOne(vector<int>& digits) {
+    /*用陣列代表一大數，回傳其加1的陣列*/
     // Input: digits = [1,2,3] Output: [1,2,4]
     // Explanation: The array represents the integer 123.
     // 将一个数字的每个位上的数字分别存到一个一维向量中，最高位在最开头，我们需要给这个数字加一，即在末尾数字加一
