@@ -3,6 +3,7 @@
 
 /***********  Dynamic Programming  **********/
 int LC1137::tribonacci(int n) {
+    /*三元的斐波那契数*/
     // let first=0, second=1, third=1. return first + second + third
     int first=0, second=1, third=1;
     if(n<2) return n;
@@ -17,6 +18,7 @@ int LC1137::tribonacci(int n) {
 }
 
 bool LC1025::divisorGame(int n) {
+    /*求一個數字遊戲是否能贏*/
     // Input: 2 Output: true
     // Explanation: Alice chooses 1, and Bob has no more moves.
     // 最初有一个数字N，每次每个人选一个小于N且能整除N的数字x，并将N替换为 N-x，依次进行，直到某个人没法进行了，则算输了。
@@ -43,6 +45,7 @@ bool LC1025::divisorGame(int n) {
 }
 
 int LC0746::minCostClimbingStairs(vector<int>& cost) {
+    /*求1步或2步爬到第n層的最小cost*/
     // Input: cost = [10, 15, 20] Output: 15
     // Explanation: Cheapest is start on cost[1], pay that cost and go to the top.
     // 这道题应该算是之前那道 Climbing Stairs 的拓展，这里不是求步数，而是每个台阶上都有一个 cost，让我们求爬到顶端的最小 cost 是多少。
@@ -65,6 +68,7 @@ int LC0746::minCostClimbingStairs(vector<int>& cost) {
 }
 
 int LC0509::fib(int n) {
+    /*二元的斐波那契数*/
     // f(n) = f(n-1) + f(n-2)
 //    if(n<=1) return n;
 //    int sCurr=0, sPre1=1, sPre2=0;
@@ -88,6 +92,7 @@ int LC0509::fib(int n) {
 }
 
 LC0303::LC0303(vector<int>& nums) {
+    /*回傳陣列某一區間值之和*/
     // Given nums = [-2, 0, 3, -5, 2, -1]
     // sumRange(0, 2) -> 1
     // sumRange(2, 5) -> -1
@@ -107,6 +112,7 @@ int LC0303::sumRange(int left, int right) {
 //LC0070 run;
 //cout << run.climbStairs(45) << endl;
 int LC0070::climbStairs(int n) {
+    /*求1步或2步爬到第n層的方式*/
     // 假设梯子有n层，那么如何爬到第n层呢，因为每次只能爬1或2步，那么爬到第n层的方法要么是从第 n-1 层一步上来的，要不就是从 n-2 层2步
     // 上来的，所以递推公式非常容易的就得出了：dp[n] = dp[n-1] + dp[n-2]
     //iterative
@@ -132,6 +138,7 @@ int LC0070::climbStairs(int n) {
 //vector<int> nums{-2,1,-3,4,-1,2,1,-5,4};
 //cout << run.maxSubArray(nums) << endl;
 int LC0053::maxSubArray(vector<int>& nums) {
+    /*求最大連續子数组之和*/
     // Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest
     // sum and return  its sum.
     // Input: nums = [-2,1,-3,4,-1,2,1,-5,4] Output: 6
@@ -149,6 +156,7 @@ int LC0053::maxSubArray(vector<int>& nums) {
 }
 
 string LC0005::longestPalindrome(string s) {
+    /*求最長回文子字串*/
     // Given a string s, return the longest palindromic substring in s.
     // Input: s = "babad" Output: "bab"
     // Explanation: "aba" is also a valid answer.
@@ -173,6 +181,7 @@ string LC0005::longestPalindrome(string s) {
 
 /***********  Greedy  **********/
 int LC1221::balancedStringSplit(string s) {
+    /*給定字串最多能切分出多少個平衡字串*/
     // Input: s = "RLRRLLRLRL" Output: 4
     // Explanation: s can be split into "RL", "RRLL", "RL", "RL", each substring contains same number of 'L' and 'R'.
     // 这道题给了一个只有L和R两个字符的字符串，并且定义了一种平衡字符串，即L和R的个数相同，现在问最多能将字符串分为多少个这样的平衡字符串。
@@ -189,6 +198,7 @@ int LC1221::balancedStringSplit(string s) {
 }
 
 int LC1217::minCostToMoveChips(vector<int>& position) {
+    /*求最小cost將所有籌碼(chip)移動到一起*/
     // Input: position = [1,2,3] Output: 1
     // Explanation: First step: Move the chip at position 3 to position 1 with cost = 0.
     // Second step: Move the chip at position 2 to position 1 with cost = 1.
@@ -221,6 +231,7 @@ int LC1217::minCostToMoveChips(vector<int>& position) {
 }
 
 bool LC1013::canThreePartsEqualSum(vector<int>& arr) {
+    /*能否切出三個陣列和均相等的子陣列*/
     // Input: arr = [0,2,1,-6,6,-7,9,1,2,0,1] Output: true
     // Explanation: 0 + 2 + 1 = -6 + 6 - 7 + 9 + 1 = 2 + 0 + 1
     // 给了我们一个数组，问能不能将该数组分成非空的三个部分，且每个部分的和相同。其实就是分成三个子数组，既然每个部分的和相同，说明数组的数字
@@ -243,6 +254,7 @@ bool LC1013::canThreePartsEqualSum(vector<int>& arr) {
 }
 
 int LC1005::largestSumAfterKNegations(vector<int>& nums, int k) {
+    /*求經過k次將陣列某一數切換正負號後能得到陣列最大和*/
     // Given an integer array nums and an integer k, modify the array in the following way:
     // choose an index i and replace nums[i] with -nums[i].
     // You should apply this process exactly k times. You may choose the same index i multiple times.
@@ -274,6 +286,7 @@ int LC1005::largestSumAfterKNegations(vector<int>& nums, int k) {
 }
 
 int LC0976::largestPerimeter(vector<int>& nums) {
+    /*回傳能圍成的三角形最大週長*/
     // Given an integer array nums, return the largest perimeter of a triangle with a non-zero area,
     // formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, return 0.
     // Input: nums = [2,1,2]
@@ -296,6 +309,7 @@ int LC0976::largestPerimeter(vector<int>& nums) {
 }
 
 vector<int> LC0942::diStringMatch(string s) {
+    /*根據字符規定返回整數陣列*/
     // Input: "IDID" Output: [0,4,1,3,2]
     // 这道题给了一个只有 'D' 和 'I' 两个字母组成的字符串，表示一种 pattern，其中 'D' 表示需要下降 Decrease，即当前数字大于下个数字，
     // 同理，'i' 表示需要上升 Increase，即当前数字小于下个数字，让返回符合这个要求的任意一个数组，还有个要求是该数组必须是 [0, n]
@@ -314,6 +328,7 @@ vector<int> LC0942::diStringMatch(string s) {
 }
 
 bool LC0860::lemonadeChange(vector<int>& bills) {
+    /*是否可以正確地找零錢*/
     // Input: [5,5,10,10,20] Output: false
     // Explanation:
     // From the first two customers in order, we collect two $5 bills.
@@ -343,6 +358,7 @@ bool LC0860::lemonadeChange(vector<int>& bills) {
 }
 
 bool LC0717::isOneBitCharacter(vector<int>& bits) {
+    /*0/1陣列切分後最後一個是否為0字符*/
     // Input: bits = [1, 1, 1, 0] Output: False
     // Explanation:
     // The only way to decode it is two-bit character and two-bit character. So the last character is NOT one-bit character.
@@ -377,6 +393,7 @@ bool LC0717::isOneBitCharacter(vector<int>& bits) {
 }
 
 bool LC0680::validPalindrome(string s) {
+    /*頂多刪一字符是否可成回文*/
     // Input:"abca" Output: True
     // Explanation: You could delete the character 'c'.
     // 这道题的字符串中只含有小写字母，而且这道题允许删除一个字符，那么当遇到不匹配的时候，我们到底是删除左边的字符，还是右边的字符呢，
@@ -398,6 +415,7 @@ bool LC0680::validPalindrome(string s) {
 }
 
 bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {
+    /*01陣列裡是否可以插入指定1的數量*/
     // return if n new flowers can be planted in it without violating the no-adjacent-flowers rule
     // Input: flowerbed = [1,0,0,0,1], n = 1 Output: True
     // 这道题给了我们一个01数组，其中1表示已经放了花，0表示可以放花的位置，但是有个限制条件是不能有相邻的花。那么我们来看如果是一些简单的例
@@ -419,6 +437,7 @@ bool LC0605::canPlaceFlowers(vector<int>& flowerbed, int n) {
 }
 
 int LC0561::arrayPairSum(vector<int>& nums) {
+    /*求兩兩一對較小數的和最大*/
     // Input: [1,4,3,2] Output: 4
     // Explanation: [[1,2], [3,4]] and the maximum sum of pairs is 4.
     // 这道题让我们分割数组，两两一对，让每对中较小的数的和最大。这题难度不大，用贪婪算法就可以了。由于我们要最大化每对中的较小值之和，那么肯
@@ -432,6 +451,7 @@ int LC0561::arrayPairSum(vector<int>& nums) {
 }
 
 int LC0495::findPoisonedDuration(vector<int>& timeSeries, int duration) {
+    /*被攻擊後持續中毒的秒數*/
     // Input: [1,2], 2 Output: 3
     // Explanation: At time point 1, Teemo starts attacking Ashe and makes Ashe be poisoned.
     // This poisoned status will last 2 seconds until the end of time point 2.
@@ -449,6 +469,7 @@ int LC0495::findPoisonedDuration(vector<int>& timeSeries, int duration) {
 }
 
 int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
+    /*分發糖果給小孩*/
     // Input: [1,2,3], [1,1] Output: 1
     // Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.
     // And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.
@@ -468,6 +489,7 @@ int LC0455::findContentChildren(vector<int>& g, vector<int>& s) {
 }
 
 int LC0011::maxArea(vector<int>& height) {
+    /*給一包含各種高度的陣列，求能裝載最大水量*/
     // Input: height = [1,8,6,2,5,4,8,3,7]
     // Output: 49
     // Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area

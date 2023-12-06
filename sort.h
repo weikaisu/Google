@@ -48,6 +48,7 @@ struct LC0747 { int dominantIndex(vector<int>& nums); };
 // struct LC0506 { vector<string> findRelativeRanks(vector<int>& score); }
 // struct LC0455 { int findContentChildren(vector<int>& g, vector<int>& s); } // dp.h
 // struct LC0414 { int thirdMax(vector<int>& nums); } // list.h
+/*t是s重排後加上一字符產生，找出那一字符*/
 // struct LC0389 { char findTheDifference(string s, string t); } // list.h
 // struct LC0350 { vector<int> intersect(vector<int>& nums1, vector<int>& nums2); } // list.h
 // struct LC0349 { vector<int> intersection(vector<int>& nums1, vector<int>& nums2); } // list.h

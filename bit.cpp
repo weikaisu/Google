@@ -2,6 +2,7 @@
 #include "bit.h"
 
 vector<int> LC2595::evenOddBit(int n) {
+    /*求一數積偶位數各有多少是1*/
     // Input: n = 17
     // Output: [2,0]
     // Explanation: The binary representation of 17 is 10001.
@@ -26,6 +27,7 @@ vector<int> LC2595::evenOddBit(int n) {
 }
 
 int LC2220::minBitFlips(int start, int goal) {
+    /*求最少flip次數將start變成goal的值*/
     // Input: start = 10, goal = 7 Output: 3
     // Explanation: The binary representation of 10 and 7 are 1010 and 0111 respectively. We can convert 10 to 7 in 3 steps:
     // Flip the first bit from the right: 1010 -> 1011.
@@ -46,6 +48,7 @@ int LC2220::minBitFlips(int start, int goal) {
 }
 
 bool LC2206::divideArray(vector<int>& nums) {
+    /*判斷一陣列是否能分成n對pair，每對值相同*/
     // Input: nums = [3,2,3,2,2,2] Output: true
     // Explanation:
     // There are 6 elements in nums, so they should be divided into 6 / 2 = 3 pairs.
@@ -72,6 +75,7 @@ bool LC2206::divideArray(vector<int>& nums) {
 }
 
 int LC1863::subsetXORSum(vector<int>& nums) {
+    /*求陣列所有subset做XOR之和*/
     // Input: nums = [1,3]
     // Output: 6
     // Explanation: The 4 subsets of [1,3] are:
@@ -109,6 +113,7 @@ int LC1863::subsetXORSum(vector<int>& nums) {
 }
 
 string LC1763::longestNiceSubstring(string s) {
+    /*求最長子字串字符大小寫全包含*/
     // Input: s = "YazaAay"
     // Output: "aAa"
     // Explanation: "aAa" is a nice string because 'A/a' is the only letter of the alphabet in s, and both 'A' and 'a' appear.
@@ -155,6 +160,7 @@ string LC1763::longestNiceSubstring(string s) {
 }
 
 vector<int> LC1720::decode(vector<int>& encoded, int first) {
+    /*用XOR來做編碼，求編碼前的原始資料*/
     // Input: encoded = [1,2,3], first = 1
     // Output: [1,0,2,1]
     // Explanation: If arr = [1,0,2,1], then first = 1 and encoded = [1 XOR 0, 0 XOR 2, 2 XOR 1] = [1,2,3]
@@ -178,6 +184,7 @@ vector<int> LC1720::decode(vector<int>& encoded, int first) {
 }
 
 int LC1486::xorOperation(int n, int start){
+    /*求n次做XOR運算後的值*/
     // Input: n = 5, start = 0
     // Output: 8
     // Explanation: Array nums is equal to [0, 2, 4, 6, 8] where (0 ^ 2 ^ 4 ^ 6 ^ 8) = 8.
@@ -193,6 +200,7 @@ int LC1486::xorOperation(int n, int start){
 }
 
 int LC1342::numberOfSteps(int num) {
+    /*偶數除2，積數減1，給定一數求多少步驟可變0*/
     // Input: num = 14 Output: 6
     // Explanation:
     // Step 1) 14 is even; divide by 2 and obtain 7.
@@ -218,6 +226,7 @@ int LC1342::numberOfSteps(int num) {
 }
 
 int LC1009::bitwiseComplement(int n) {
+    /*求陣列裡有幾組數字相加後能被60整除*/
     // Input: time = [30,20,150,100,40]
     // Output: 3
     // Explanation: Three pairs have a total duration divisible by 60:
@@ -242,6 +251,7 @@ int LC1009::bitwiseComplement(int n) {
 }
 
 int LC0868::binaryGap(int n) {
+    /*求一整數二進制兩個1之間最大距離*/
     // Input: 5 Output: 2
     // Explanation: 5 in binary is 0b101.
     // 也可以只用一个循环来完成，而且不用 pos 数组，只用一个变量 last 来记录上一个遍历到的 '1' 的位置，初始化为 -1。那么在遍历的过程中，
@@ -273,6 +283,7 @@ int LC0868::binaryGap(int n) {
 }
 
 int LC0762::countPrimeSetBits(int left, int right) {
+    /*給定一範圍，統計有多少整數其二進制1的個數為質數*/
     // Input: L = 6, R = 10 Output: 4
     // Explanation:
     // 6 -> 110 (2 set bits, 2 is prime)
@@ -313,6 +324,7 @@ int LC0762::countPrimeSetBits(int left, int right) {
 }
 
 bool LC0693::hasAlternatingBits(int n) {
+    /*判斷一個數的二進制1和0是否交替出現*/
     // Input: 5 Output: True
     // Explanation: The binary representation of 5 is: 101
     // 先将n右移两位，再和原来的n亦或，得到的新n其实就是除了最高位，其余都是0的数，然后再和自身减1的数相‘与’，如果是0就返回true，
@@ -354,6 +366,7 @@ bool LC0693::hasAlternatingBits(int n) {
 }
 
 int LC0476::findComplement(int num) {
+    /*求一個數的補數*/
     // Input: 5
     // Output: 2
     // Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.
@@ -377,6 +390,7 @@ int LC0476::findComplement(int num) {
 }
 
 int LC0461::hammingDistance(int x, int y) {
+    /*兩數之間二進制對應位數不同的個數*/
     // Input: x = 1, y = 4 Output: 2
     // Explanation:
     // 1   (0 0 0 1)
@@ -403,6 +417,7 @@ int LC0461::hammingDistance(int x, int y) {
 }
 
 int LC0409::longestPalindrome(string s) {
+    /*回傳能建立最長的回文字串長度*/
     // Input: s = "abccccdd" Output: 7
     // Explanation: One longest palindrome that can be built is "dccaccd", whose length is 7.
     // 给了一个字符串，让我们找出可以组成的最长的回文串的长度，由于字符顺序可以打乱，所以问题就转化为了求偶数个字符的个数，了解回文串的都知道，
@@ -419,6 +434,7 @@ int LC0409::longestPalindrome(string s) {
 }
 
 string LC0405::toHex(int num) {
+    /*將十進位整數轉成十六進位表示*/
     // Input: 26
     //Output: "1a"
 
@@ -457,6 +473,7 @@ string LC0405::toHex(int num) {
 }
 
 vector<string> LC0401::readBinaryWatch(int turnedOn) {
+    /*給一二進制手錶的亮燈數，列出可能的時間*/
     // Input: n = 1
     // Output: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", "0:08", "0:16", "0:32"]
     // 利用到了bitset这个类，可以将任意进制数转为二进制，而且又用到了count函数，用来统计1的个数。那么时针从0遍历到11，分针从0遍历到59，
@@ -506,6 +523,7 @@ vector<string> LC0401::readBinaryWatch(int turnedOn) {
 }
 
 bool LC0342::isPowerOfFour(int n) {
+    /*判斷一個數是否為4的次方數*/
     // 这道题让我们判断一个数是否为4的次方数，那么最直接的方法就是不停的除以4，看最终结果是否为1
 //    while(n>0 && !(n%4))
 //        n /= 4;
@@ -516,6 +534,7 @@ bool LC0342::isPowerOfFour(int n) {
 }
 
 vector<int> LC0338::countBits(int n) {
+    /*統計0到n每個數二進制1的個數*/
     // Input: 5
     // Output: [0,1,1,2,1,2]
     // 利用了 built-in 的函数 bitset 的 count 函数可以直接返回1的个数
@@ -541,6 +560,7 @@ vector<int> LC0338::countBits(int n) {
 }
 
 bool LC0266::canPermutePalindrome(string s) {
+    /*判斷一個字串是否重排後可形成回文*/
     // Given a string, determine if a permutation of the string could form a palindrome.
     // 判断一个字符串的全排列有没有是回文字符串的
     // 建立一个 256 大小的 bitset，每个字母根据其 ASCII 码值的不同都有其对应的位置，然后我们遍历整个字符串，遇到一个字符，就将其对应的位
@@ -553,6 +573,7 @@ bool LC0266::canPermutePalindrome(string s) {
 }
 
 bool LC0231::isPowerOfTwo(int n) {
+    /*判斷一個數是否為2的次方數*/
     // Input: 16
     // Output: true
     // 2的次方数都只有一个1，剩下的都是0，所以我们的解题思路就有了，我们只要每次判断最低位是否为1，然后向右移位，最后统计1的个数即可判断是否
@@ -570,6 +591,7 @@ bool LC0231::isPowerOfTwo(int n) {
 }
 
 int LC0191::hammingWeight(uint32_t n) {
+    /*求整數裡有多少bit是1*/
     // Input:  00000000000000000000000000001011
     // Output: 3
     // Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as
@@ -582,6 +604,7 @@ int LC0191::hammingWeight(uint32_t n) {
 }
 
 uint32_t LC0190::reverseBits(uint32_t n) {
+    /*反轉整數裡bits的位置*/
     // Input:  11111111111111111111111111111101
     // Output: 10111111111111111111111111111111
     // 把要翻转的数从右向左一位位的取出来，如果取出来的是1，将结果 res 左移一位并且加上1；如果取出来的是0，将结果 res 左移一位，
@@ -602,6 +625,7 @@ uint32_t LC0190::reverseBits(uint32_t n) {
 }
 
 int LC0136::singleNumber(vector<int>& nums) {
+    /*找出陣列裡唯一出現一次的數字*/
     // Input: [4,1,2,1,2]
     // Output: 4
     // 用位操作 Bit Operation 逻辑异或来解此题
