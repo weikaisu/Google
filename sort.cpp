@@ -238,6 +238,7 @@ int LC1051::heightChecker(vector<int>& heights) {
 }
 
 vector<vector<int>> LC1030::allCellsDistOrder(int rows, int cols, int rCenter, int cCenter) {
+    /*求給定矩陣大小內每個元素局離rCenter/cCenter的距離*/
     // You are given four integers row, cols, rCenter, and cCenter. There is a rows x cols matrix and you
     // are on the cell with the coordinates (rCenter, cCenter).
     // Return the coordinates of all cells in the matrix, sorted by their distance from (rCenter, cCenter)

@@ -64,10 +64,12 @@ struct LC0069 { int mySqrt(int x); }; // 第三类的变形
 struct LC0035 { int searchInsert(vector<int>& nums, int target); }; // 第二类
 
 /*********** Depth First Search ***********/
+/*求給定象棋盤中車(rook)能吃到多少卒(pawn)*/
 struct LC0999 { int numRookCaptures(vector<vector<char>>& board); };
 struct LC0993 { bool isCousins(TreeNode* root, int x, int y); };
 struct LC0965 { bool isUnivalTree(TreeNode* root); };
 struct LC0784 { vector<string> letterCasePermutation(string s); };
+/*找矩陣中相同區間問題，給一起使座標將相鄰相同的值做修改*/
 struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); };
 struct LC0077 { vector<vector<int>> combine(int n, int k); };
 struct LC0047 { vector<vector<int>> permuteUnique(vector<int>& nums); };

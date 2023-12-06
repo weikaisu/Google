@@ -2,6 +2,18 @@
 
 /***********  Depth First Search  **********/
 int LC0999::numRookCaptures(vector<vector<char>>& board) {
+    /*求給定象棋盤中車(rook)能吃到多少卒(pawn)*/
+    // one white rook 'R' and some number of white bishops 'B', black pawns 'p', and empty squares '.'.
+    // Input: board =
+    // [[".",".",".",".",".",".",".","."],
+    //  [".",".",".","p",".",".",".","."],
+    //  [".",".",".","R",".",".",".","p"],
+    //  [".",".",".",".",".",".",".","."],
+    //  [".",".",".",".",".",".",".","."],
+    //  [".",".",".","p",".",".",".","."],
+    //  [".",".",".",".",".",".",".","."],
+    //  [".",".",".",".",".",".",".","."]]
+    // Output: 3
     // 这道题给了一个 8x8 大小的国际象棋棋盘，上面只能有三种棋子，分别是白方的车，白方的象，和黑方的兵，问白色方的车最多能吃到多个黑方的兵。
     // 在国际象棋中，车是可以上下左右走的，若某条路径上先遇到了白方的象，则该路上没法吃兵了，若先遇上了兵，可以吃，但此时后面若还有兵，不能
     // 连续吃。搞懂了题意其实很简单了，首先遍历棋盘，找到白方车的位置。利用深度优先遍历 DFS 的思想，用方向数组，每次加上方向的偏移，若没有越
@@ -113,6 +125,14 @@ vector<string> LC0784::letterCasePermutation(string s) {
 }
 
 vector<vector<int>> LC0733::floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+    /*找矩陣中相同區間問題，給一起使座標將相鄰相同的值做修改*/
+    // sr = 1, sc = 1, color = 2
+    // [[1,1,1],   [[2,2,2],
+    //  [1,1,0], -> [2,2,0],
+    //  [1,0,1]]    [2,0,1]]
+    // Explanation: From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel), all pixels
+    // connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.
+    // Note the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.
     // 这道题给了一个用二维数组表示的图像，不同的数字代表不同的颜色，给了一个起始点坐标，还有一个新的颜色，让我们把起始点的颜色以及其相邻的
     // 同样的颜色都换成新的颜色。实际上就是一个找相同区间的题，可以用 BFS 或者 DFS 来做。先来看 BFS 的解法，使用一个队列 queue 来辅助，
     // 首先将给定点放入队列中，然后进行 while 循环，条件是 queue 不为空，然后进行类似层序遍历的方法，取出队首元素，将其赋值为新的颜色，

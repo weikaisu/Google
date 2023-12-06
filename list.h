@@ -251,17 +251,30 @@ struct LC0002 { ListNode* addTwoNumbers(ListNode* l1, ListNode* l2); };
  *      for(y)
  *          array[y][x]
  */
+
+/*回傳前k行最弱的rows*/
 // struct LC1337 { vector<int> kWeakestRows(vector<vector<int>>& mat, int k); }; // tree.h
+/*井字遊戲給定一系列操作，求誰贏或平手*/
 struct LC1275 { string tictactoe(vector<vector<int>>& moves); };
+/*矩陣內元素向右移動k次*/
 struct LC1260 { vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k); };
+/*求給定矩陣大小內每個元素局離rCenter/cCenter的距離*/
 // struct LC1030 { vector<vector<int>> allCellsDistOrder(int rows, int cols, int rCenter, int cCenter); }; // sort.h
+/*求給定象棋盤中車(rook)能吃到多少卒(pawn)*/
 // struct LC0999 { int numRookCaptures(vector<vector<char>>& board); }; // search.h
+/*求一個三維積木堆的表面積*/
 struct LC0892 { int surfaceArea(vector<vector<int>>& grid); };
+/*求一三維物體在三個方向投影面積之和*/
 struct LC0883 { int projectionArea(vector<vector<int>>& grid); };
+/*求轉置後的矩陣*/
 struct LC0867 { vector<vector<int>> transpose(vector<vector<int>>& matrix); };
+/*求矩陣水平方向翻轉後每個元素取反數*/
 struct LC0832 { vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image); };
+/*問一矩陣每條從左上到右下對角線的值是否都相等*/
 struct LC0766 { bool isToeplitzMatrix(vector<vector<int>>& matrix); };
+/*找矩陣中相同區間問題，給一起使座標將相鄰相同的值做修改*/
 // struct LC0733 { vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color); }; // search.h
+/*求矩陣每一元素跟相鄰元素算平均*/
 struct LC0661 { vector<vector<int>> imageSmoother(vector<vector<int>>& img); };
 /*重塑矩陣大小*/
 struct LC0566 { vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c); };

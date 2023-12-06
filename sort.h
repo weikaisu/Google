@@ -34,6 +34,7 @@ struct LC1287 { int findSpecialInteger(vector<int>& arr); };
 struct LC1200 { vector<vector<int>> minimumAbsDifference(vector<int>& arr); };
 // struct LC1122 { vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2); } // list.h
 struct LC1051 { int heightChecker(vector<int>& heights); };
+/*求給定矩陣大小內每個元素局離rCenter/cCenter的距離*/
 struct LC1030 { vector<vector<int>> allCellsDistOrder(int rows, int cols, int rCenter, int cCenter); };
 struct LC0977 { vector<int> sortedSquares(vector<int>& nums); };
 struct LC0922 { vector<int> sortArrayByParityII(vector<int>& nums); };
