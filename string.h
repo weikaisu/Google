@@ -9,8 +9,11 @@
 
 using namespace std;
 
+/*求兩個日期間的天數*/
 struct LC1360 { int daysBetweenDates(string date1, string date2); };
+/*每次從給定字串刪除一個回文子"序列"，求刪多少次可以將字串清空*/
 struct LC1332 { int removePalindromeSub(string s); };
+/*做一次數字6換成9可得到的最大數字*/
 struct LC1323 { int maximum69Number (int num); };
 /*字串替換*/
 struct LC1309 { string freqAlphabets(string s); };
@@ -81,6 +84,7 @@ struct LC0014 { string longestCommonPrefix(vector<string>& strs); };
 struct LC0008 { int myAtoi(string s); };
 /*zigzag掃描轉成line掃描*/
 struct LC0006 { string convert(string s, int numRows); };
+/*求最長長度無重複字母子字串之長度*/
 struct LC0003 { int lengthOfLongestSubstring(string s); };
 
 #endif //GOOGLE_STRING_H

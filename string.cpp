@@ -7,6 +7,7 @@
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
 
 int LC1360::daysBetweenDates(string date1, string date2) {
+    /*求兩個日期間的天數*/
     // 给定两个日期，年的范围是[ 1971 , 2100 ] [1971,2100][1971,2100]，问两个日期之间隔了多少天。日期以YY-MM-DD形式给出。
     array<int,13> days{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     function<bool(int)> isLeapYear = [&](int year) -> bool {
@@ -29,6 +30,7 @@ int LC1360::daysBetweenDates(string date1, string date2) {
 }
 
 int LC1332::removePalindromeSub(string s) {
+    /*每次從給定字串刪除一個回文子"序列"，求刪多少次可以將字串清空*/
     // 给了一个只有字母a和b的字符串，说是每次可以删除一个"回文子序列"，问最少需要删除多少次，可以将给定字符串变为空串。
     // 不是"回文子字串"
     // Input: s = "ababa"
@@ -58,6 +60,7 @@ int LC1332::removePalindromeSub(string s) {
 }
 
 int LC1323::maximum69Number(int num) {
+    /*做一次數字6換成9可得到的最大數字*/
     // 给了一个只含有6和9的正整数，现在说是可以将6变成9，或者将9变成6，最多可以变换一次，让返回可以得到的最大的数字。既然要得到最大的数字，
     // 那么肯定是把6变成9得到的数字最大，而且尽量去变高位上的数字。所以方法就是从高位开始遍历，若遇到6，则变为9即可，变换了之后直接 break
     // 掉就行了，因为最多只能变换一次。为了能方便从高位开始遍历，可以将给定的数字转为字符串开始遍历，之后变换完了之后再转为整型数就可以了
@@ -73,6 +76,7 @@ int LC1323::maximum69Number(int num) {
 }
 
 string LC1309::freqAlphabets(string s) {
+    /*字串替換*/
     // You are given a string s formed by digits and '#'. We want to map s to English lowercase characters as follows:
     // Characters ('a' to 'i') are represented by ('1' to '9') respectively.
     // Characters ('j' to 'z') are represented by ('10#' to '26#') respectively.
@@ -98,6 +102,7 @@ string LC1309::freqAlphabets(string s) {
 }
 
 int LC1154::dayOfYear(string date) {
+    /*將日期換算成一年的第幾天*/
     // Given a string date representing a Gregorian calendar date formatted as YYYY-MM-DD, return the day number of the year.
     // Input: date = "2019-01-09"
     // Output: 9
@@ -116,6 +121,7 @@ int LC1154::dayOfYear(string date) {
 }
 
 string LC1108::defangIPaddr(string address) {
+    /*將IP裡的.換成指定字串*/
     // Given a valid (IPv4) IP address, return a defanged version of that IP address.
     // A defanged IP address replaces every period "." with "[.]".
     // Input: address = "1.1.1.1"
@@ -136,6 +142,7 @@ string LC1108::defangIPaddr(string address) {
 }
 
 vector<string> LC1078::findOcurrences(string text, string first, string second) {
+    /*回傳文章裡按給定順序的下一個單字*/
     // Given words first and second, consider occurrences in some text of the form "first second third", where second
     // comes immediately after first, and third comes immediately after second.
     // For each such occurrence, add "third" to the answer, and return the answer.
@@ -155,6 +162,7 @@ vector<string> LC1078::findOcurrences(string text, string first, string second) 
 }
 
 string LC1071::gcdOfStrings(string str1, string str2) {
+    /*最大公約字串*/
     // For two strings s and t, we say "t divides s" if and only if s = t + ... + t
     // (t concatenated with itself 1 or more times)
     // Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
@@ -196,6 +204,7 @@ string LC1071::gcdOfStrings(string str1, string str2) {
 }
 
 string LC1047::removeDuplicates(string s) {
+    /*移除相鄰相同字符*/
     // Input: "abbaca"
     // Output: "ca"
     // Explanation:
@@ -226,6 +235,7 @@ string LC1047::removeDuplicates(string s) {
 }
 
 string LC1021::removeOuterParentheses(string s) {
+    /*把所有合法的子串的最外层的括号去掉*/
     // Input: "(()())(())"
     // Output: "()()()"
     // Explanation:
@@ -263,6 +273,7 @@ string LC1021::removeOuterParentheses(string s) {
 }
 
 vector<string> LC0937::reorderLogFiles(vector<string>& logs) {
+    /*排序log裡的字串*/
     // We can break this problem into two tasks: 1) Parition 2) Sort letter-logs
 
     // Partition: letter-logs at the front, digit-logs at the back.
@@ -318,6 +329,7 @@ vector<string> LC0937::reorderLogFiles(vector<string>& logs) {
 }
 
 bool LC0925::isLongPressedName(string name, string typed) {
+    /*某一單字是否是因為另一單字的字符長按的結果*/
     // 直接用j遍历 typed 中每个字母，i初识时指向 name 的第一个字母，假如i小于m，且 name[i] 等于 typed[j-1] 时，则i自增1，否则的话，
     // 若此时j为0（说明第一个字母就不匹配），或者 typed[j] 不等于 typed[j - 1]（说明出现了无法匹配的新字母），则直接返回 false。循环退
     // 出后若i等于m则返回 true，否则返回 false
@@ -351,6 +363,7 @@ bool LC0925::isLongPressedName(string name, string typed) {
 }
 
 string LC0917::reverseOnlyLetters(string s) {
+    /*按規定調整字串裡字符位置*/
     // Given a string S, return the "reversed" string where all characters that are not a letter stay in the same place,
     // and all letters reverse their positions.
     // Input: "ab-cd"
@@ -368,6 +381,7 @@ string LC0917::reverseOnlyLetters(string s) {
 }
 
 string LC0824::toGoatLatin(string sentence) {
+    /*轉譯字串根據對應的單詞表*/
     // 将一句话转为山羊拉丁文，有几个规则，如果单词是元音开头的，那么直接在但此后加ma，如果是非元音开头的单词，那么把首字母移到末尾，
     // 并且加ma。还有就是根据当前是第几个单词，后面加几个a，估计是为了模仿羊叫声，拉长音，感觉更像绵羊音一样。此题难度不是很大，
     // 就照题目要求来做，不需要啥特别的技巧。首先为了快速检测开头字母是否为元音，我们将所有元音加入一个HashSet，注意大小写的元音都要加进去。
@@ -385,6 +399,7 @@ string LC0824::toGoatLatin(string sentence) {
 }
 
 bool LC0953::isAlienSorted(vector<string>& words, string order) {
+    /*是否按指定字典排序*/
     // 把順序當作字母的ASCII碼來排序
     // Given a sequence of words written in the alien language, and the order of the alphabet, return true if and only
     // if the given words are sorted lexicographicaly in this alien language.
@@ -419,6 +434,7 @@ bool LC0953::isAlienSorted(vector<string>& words, string order) {
 }
 
 int LC0929::numUniqueEmails(vector<string>& emails) {
+    /*email address去重*/
     // 使用lose lose hash function
     // http://www.cse.yorku.ca/~oz/hash.html
     // 來對email產生特定的值，最後再看去重後有幾個
@@ -465,6 +481,7 @@ int LC0929::numUniqueEmails(vector<string>& emails) {
 }
 
 vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
+    /*沒有同時出現在兩字串的單字*/
     // A word is  uncommon  if it appears exactly once in one of the sentences, and does not appear in the other sentence.
     // Return a list of all uncommon words.
     // Input: A = "this apple is sweet", B = "this apple is sour"
@@ -483,6 +500,7 @@ vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
 }
 
 string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
+    /*字串裡出現次數最多的單字*/
     // Input:
     // paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
     // banned = ["hit"]
@@ -544,6 +562,7 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
 }
 
 bool LC0796::rotateString(string s, string goal) {
+    /*是否可經由選轉子字串來等於另一字串*/
     // 一行完成的方法，就是我们其实可以在A之后再加上一个A，这样如果新的字符串(A+A)中包含B的话，说明A一定能通过偏移得到B。
     // 就比如题目中的例子，A="abcde", B="bcdea"，那么A+A="abcdeabcde"，里面是包括B的，所以返回true即可
 //    return s.size()==goal.size() && (s+s).find(goal) != string::npos;
@@ -560,6 +579,7 @@ bool LC0796::rotateString(string s, string goal) {
 }
 
 string LC0709::toLowerCase(string s) {
+    /*將字串裡所有字符轉成小寫*/
     // 小写字母比其对应的大写字母的ASCII码大32，所以我们只需要遍历字符串，对于所有的大写字母，统统加上32即可
     for(auto &c:s)
         if(c >= 'A' && c <='Z') c+=32;
@@ -571,6 +591,7 @@ string LC0709::toLowerCase(string s) {
 }
 
 int LC0696::countBinarySubstrings(string s) {
+    /*0/1出現字數相同的子字串*/
     // Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0's and 1's,
     // and all the 0's and all the 1's in these substrings are grouped consecutively.
     // Input: "00110011"
@@ -598,6 +619,7 @@ int LC0696::countBinarySubstrings(string s) {
 }
 
 int LC0521::findLUSlength(string a, string b) {
+    /*最長不一樣的子字串*/
     // Longest Uncommon Subsequence I.
     // The longest uncommon subsequence is defined as the longest subsequence of one of these strings and this
     // subsequence should not be any subsequence of the other strings.
@@ -606,6 +628,7 @@ int LC0521::findLUSlength(string a, string b) {
 }
 
 bool LC0520::detectCapitalUse(string word) {
+    /*判斷大寫字符是否正確使用*/
     // 给了我们一个单词，让我们检测大写格式是否正确，规定了三种正确方式，要么都是大写或小写，要么首字母大写，其他情况都不正确。
     // 那么我们要做的就是统计出单词中所有大写字母的个数cnt，再来判断是否属于这三种情况，如果cnt为0，说明都是小写，正确；
     // 如果cnt和单词长度相等，说明都是大写，正确；如果cnt为1，且首字母为大写，正确，其他情况均返回false
@@ -614,6 +637,7 @@ bool LC0520::detectCapitalUse(string word) {
 }
 
 string LC0482::licenseKeyFormatting(string s, int k) {
+    /*重新格式化字串*/
     // 这道题让我们对注册码进行格式化，正确的注册码的格式是每四个字符后面跟一个短杠，每一部分的长度为K，第一部分长度可以小于K，另外，
     // 字母必须是大写的。
     // **Input:** S = "2-4A0r7-4k", K = 4
@@ -629,6 +653,7 @@ string LC0482::licenseKeyFormatting(string s, int k) {
 }
 
 bool LC0459::repeatedSubstringPattern(string s) {
+    /*字串是否可用字串裡的子字串來重複組成*/
     // 这道题给了我们一个字符串，问其是否能拆成n个重复的子串。那么既然能拆分成多个子串，那么每个子串的长度肯定不能大于原字符串长度的一半，
     // 那么我们可以从原字符串长度的一半遍历到1，如果当前长度能被总长度整除，说明可以分成若干个子字符串，我们将这些子字符串拼接起来看跟原字符
     // 串是否相等。 如果拆完了都不相等，返回false
@@ -645,6 +670,7 @@ bool LC0459::repeatedSubstringPattern(string s) {
 }
 
 int LC0434::countSegments(string s) {
+    /*計算字串裡segment的數量*/
     // Count the number of segments in a string, where a segment is defined to be a
     // contiguous sequence of non-space characters.
     // **Input:** "Hello, my name is John"
@@ -666,6 +692,7 @@ int LC0434::countSegments(string s) {
 }
 
 string LC0415::addStrings(string num1, string num2) {
+    /*十進位字串相加*/
     // Given two non-negative numbers num1 and num2 represented as string, return the sum of num1 and num2.
     // 一位一位相加，然后算和算进位，最后根据进位情况看需不需要补一个高位
     int i=num1.size()-1, j=num2.size()-1, c=0;
@@ -681,6 +708,7 @@ string LC0415::addStrings(string num1, string num2) {
 }
 
 vector<string> LC0412::fizzBuzz(int n) {
+    /*分情況設置字串*/
     // Write a program that outputs the string representation of numbers from 1 to  n.
     // 这道题真心没有什么可讲的，就是分情况处理就行了。
     // 注意！i%15需先括號起來再判斷是否為0
@@ -695,6 +723,7 @@ vector<string> LC0412::fizzBuzz(int n) {
 }
 
 bool LC0392::isSubsequence(string s, string t) {
+    /*是否是另一字串的子字串*/
     // Given a string s and a string t, check if s is subsequence of t.
     // s = "abc", t = "ahbgdc", Return true.
     // 用两个指针分别指向字符串s和t，然后如果字符相等，则i和j自增1，反之只有j自增1，最后看i是否等于s的长度，等于说明s已经遍历完了，
@@ -708,6 +737,7 @@ bool LC0392::isSubsequence(string s, string t) {
 //LC0290 run;
 //cout << run.wordPattern("abba", "dog cat cat dog") << endl;
 bool LC0290::wordPattern(string pattern, string s) {
+    /*字串pattern是否相同*/
     // Given a pattern and a string str, find if str follows the same pattern.
     // Input: pattern = "abba", str = "dog cat cat dog"
     // Output: true
@@ -732,6 +762,7 @@ bool LC0290::wordPattern(string pattern, string s) {
 }
 
 bool LC0125::isPalindrome(string s) {
+    /*字串是否回文*/
     // 所谓回文，就是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。但是这里，加入了空格和非字母数字的字符，
     // 增加了些难度，但其实原理还是很简单：只需要建立两个指针，left和right, 分别从字符的开头和结尾处开始遍历整个字符串，
     // 如果遇到非字母数字的字符就跳过，继续往下找，直到找到下一个字母数字或者结束遍历，如果遇到大写字母，就将其转为小写。
@@ -751,6 +782,7 @@ bool LC0125::isPalindrome(string s) {
 //LC0067 run;
 //cout << run.addBinary("11","1");
 string LC0067::addBinary(string a, string b) {
+    /*二進位字串相加*/
     // Given two binary strings a and b, return  their sum as a binary string.
     int i=a.size()-1, j=b.size()-1, c=0;
     string res;
@@ -767,6 +799,7 @@ string LC0067::addBinary(string a, string b) {
 //LC0058 run;
 //cout << run.lengthOfLastWord("luffy is still joyboy") << endl;
 int LC0058::lengthOfLastWord(string& s) {
+    /*字串裡最後一個單字長度*/
     // Given a string s consists of upper/lower-case alphabets and empty space characters ' ',
     // return the length of last word in the string.
     // If the last word does not exist, return 0.
@@ -784,6 +817,7 @@ int LC0058::lengthOfLastWord(string& s) {
 //LC0028 run;
 //cout << run.strStr("hello", "ll") << endk;
 int LC0028::strStr(string haystack, string needle) {
+    /*子字串第一次出現在字串的位置*/
     // Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
     int m = haystack.size();
     int n = needle.size();
@@ -817,6 +851,7 @@ int LC0028::strStr(string haystack, string needle) {
 //cout << run.isValid(s) << endl;
 //https://www.techiedelight.com/convert-char-to-string-cpp/
 bool LC0020::isValid(string str) {
+    /*左右括號是否合法*/
     // 验证输入的字符串是否为括号字符串，包括大括号，中括号和小括号。这里需要用一个栈，开始遍历输入字符串，如果当前字符为左半边括号时，
     // 则将其压入栈中，如果遇到右半边括号时，若此时栈为空，则直接返回 false，如不为空，则取出栈顶元素，若为对应的左半边括号，则继续循环，
     // 反之返回 false
@@ -839,6 +874,7 @@ bool LC0020::isValid(string str) {
 //vector<string> s{{"flower"},{"flow"},{"flight"}};
 //cout << run.longestCommonPrefix(s) << endl;
 string LC0014::longestCommonPrefix(vector<string>& strs) {
+    /*最長的common prefix*/
     // 求一系列字符串的共同前缀
     string res;
     int row=0, col=0;
@@ -879,6 +915,7 @@ int LC0008::myAtoi(string s) {
 //cout << run.letterCasePermutation("PAYPALISHIRING") << endl;
 //convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 string LC0006::convert(string s, int numRows) {
+    /*zigzag掃描轉成line掃描*/
     // The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:
     // P   A   H   N
     // A P L S I I G
@@ -906,6 +943,7 @@ string LC0006::convert(string s, int numRows) {
 }
 
 int LC0003::lengthOfLongestSubstring(string s) {
+    /*求最長長度無重複字母子字串之長度*/
     // Given a string s, find the length of the longest substring without repeating characters.
     // Input: s = "abcabcbb"
     // Output: 3
