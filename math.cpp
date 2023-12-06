@@ -1,6 +1,11 @@
 ﻿#include "math.h"
 
 vector<int> LC1317::getNoZeroIntegers(int n) {
+    /*求兩個不為零數之和為給定的數*/
+    // Input: n = 11 Output: [2,9]
+    // Explanation: Let a = 2 and b = 9.
+    // Both a and b are no-zero integers, and a + b = 11 = n.
+    // Note that there are other valid answers as [8, 3] that can be accepted.
     // 给定的正整数转化为两个不含零位的正整数之和，不含零位是指数字的个十百千位等都不是零。既然是 Easy 的题目，一般来说不会有太复杂的解法，
     // 通常来说暴力搜索的方法就可以。这道题也不例外，既然让返回任意一组解，就可以按遍历 {1, n-1}, {2, n-2}, {3, n-3} 等等的顺序来检验是
     // 否符合题意。检验是否含有零位可以放到一个子函数中，方法也非常直接，每次通过对 10 取余来获得最低位，判断其是否为0，然后原数字再自除以 10
@@ -39,6 +44,8 @@ vector<int> LC1317::getNoZeroIntegers(int n) {
 };
 
 bool LC1232::checkStraightLine(vector<vector<int>>& coordinates) {
+    /*判斷一組二維座標的點是否共線*/
+    // Input: coordinates = [[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]] Output: true
     // 给了一堆二维坐标上的点，问这些点是否在一条直线上。初中的时候应该就学过两点确定一条直线，同时还有如何判断三点共线的问题，本质上就是判断
     // 三点中任意两个点组成的直线的斜率是否相同。计算两个点组成的直线的斜率，就是二者的纵坐标之差除以横坐标之差，但用除法的话就存在一个除数为0
     // 的问题，所以在比较两条直线的斜率是否相等时，将其变为乘法的形式，能有效的避免除数为0的情况。这道题说了给定的点的个数至少有两个，则可以用
@@ -54,6 +61,8 @@ bool LC1232::checkStraightLine(vector<vector<int>>& coordinates) {
 }
 
 string LC1185::dayOfTheWeek(int day, int month, int year) {
+    /*求給定日期對應的是星期幾*/
+    // Input: day = 31, month = 8, year = 2019 Output: "Saturday"
     // 给定了一个任意的年月日，让求该日期是星期几。博主最开始想的方法是需要知道一个特定的日期是星期几，然后推算给定的日期跟这一天相差的天数，
     // 从而推算出给定的日期是星期几。由于限定了年份不早于 1971 年，则可以用 1970 年 12 月 31 日这个当作确定日期，通过查询得知为星期四，
     // 那么 1971 年1月1日距离这个确定日期为1天，则应该为星期五，在星期数组中坐标应该为5，注意是以 Sunday 开始的。所以天数应该初始化为4
@@ -81,6 +90,10 @@ string LC1185::dayOfTheWeek(int day, int month, int year) {
 }
 
 int LC1175::numPrimeArrangements(int n) {
+    /*求1～n的排列數，質數必須在質數的idx上*/
+    // Input: n = 5 Output: 12
+    // Explanation: For example [1,2,5,4,3] is a valid permutation, but [5,2,3,4,1] is not
+    // because the prime number 5 is at index 1.
     // 返回数字1到n组成的全排列的个数，使得质数都出现在质数的坐标上（坐标从1开始），并且结果对一个很大的数字取余。
     // 把质数和非质数分离开来，各个排列，比如有 cnt 个质数，那么其排列的方法总数就是 cnt 的阶乘（中学学过），
     // 同理，非质数的排列方法就是 n-cnt 的阶乘，然后把二者相乘就行了。所以这道题的难点还是求1到n中所有的质数的个数
@@ -125,6 +138,8 @@ int LC1175::numPrimeArrangements(int n) {
 }
 
 bool LC1037::isBoomerang(vector<vector<int>>& points) {
+    /*判斷三點是否不共線，因此能構成一回力標的三個頂點*/
+    // Input: points = [[1,1],[2,3],[3,2]] Output: true
     // 定义了一种回旋镖就是不在同一条直线上的三个点，现在给了同一平面上的三个点，让判断能否组成一个回旋镖。实际上就是初中的几何问题，判断三点
     // 是否共线，忘记了的话估计不太容易做出来，虽然只是道 Easy 的题目。我们都知道两点能确定一条直线，那么对于三个点 p1，p2，和 p3，
     // 只要 p1 和 p2 连接而成的直线和 p1 和 p3 连接而成的直线重合，则表示三点共线。如何判断直线重合呢，最简单的方法就是看斜率是否相等，
@@ -135,6 +150,8 @@ bool LC1037::isBoomerang(vector<vector<int>>& points) {
 }
 
 bool LC0836::isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {
+    /*判斷兩個矩形是否重疊*/
+    // Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3] Output: true
     // 求两个矩形是否是重叠，矩形的表示方法是用两个点，左下和右上点来定位的。
     // rec1 [x1, y1, x2, y2], rec2 [x3, y3, x4, y4]
     // 两个矩形在矩形1的右上角重叠 x1<x4 && x3<x2 && y1<y4 && y3<y2
@@ -150,6 +167,8 @@ bool LC0836::isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {
 }
 
 vector<int> LC0728::selfDividingNumbers(int left, int right) {
+    /*求一範圍內所有的自整除數字*/
+    // Input: left = 47, right = 85 Output: [48,55,66,77]
     // 找一个给定范围内的所有的自整除数字，所谓的自整除数字就是该数字可以整除其每一个位上的数字。既然这道题是Easy类，那么一般来说不需要
     // 用tricky的方法，直接暴力搜索就行了，遍历区间内的所有数字，然后调用子函数判断其是否是自整除数，是的话就加入结果res中。在子函数中，
     // 我们先把数字转为字符串，然后遍历每个字符，只要其为0，或者num无法整除该位上的数字，就返回false，循环结束后返回true
@@ -164,6 +183,10 @@ vector<int> LC0728::selfDividingNumbers(int left, int right) {
 }
 
 bool LC0507::checkPerfectNumber(int num) {
+    /*判斷一數是否為完美數*/
+    // Input: num = 28 Output: true
+    // Explanation: 28 = 1 + 2 + 4 + 7 + 14
+    // 1, 2, 4, 7, and 14 are all divisors of 28.
     // 让我们判断给定数字是否为完美数字，并给来完美数字的定义，就是一个整数等于除其自身之外的所有的因子之和。那么由于不能包含自身，所以n必
     // 定大于1。其实这道题跟之前的判断质数的题蛮类似的，都是要找因子。由于1肯定是因子，可以提前加上，那么我们找其他因子的范围是[2, sqrt(n)]。
     // 我们遍历这之间所有的数字，如果可以被n整除，那么我们把i和num/i都加上，对于n如果是平方数的话，那么我们此时相同的因子加来两次，所以我们
@@ -182,6 +205,9 @@ bool LC0507::checkPerfectNumber(int num) {
 }
 
 string LC0504::convertToBase7(int num) {
+    /*十進制轉七進制*/
+    // Input: num = 100 Output: "202"
+    // Input: num = -7 Output: "-10"
     // 给了我们一个数，让我们转为七进制的数，而且这个可正可负。那么我们想如果给一个十进制的100，怎么转为七进制。我会先用100除以49，
     // 商2余2。在除以7，商0余2，于是就得到七进制的202。其实我们还可以反过来算，先用100除以7，商14余2，然后用14除以7，商2余0，
     // 再用2除以7，商0余2，这样也可以得到202。这种方法更适合于代码实现，要注意的是，我们要处理好负数的情况
@@ -202,6 +228,8 @@ string LC0504::convertToBase7(int num) {
 }
 
 vector<int> LC0492::constructRectangle(int area) {
+    /*根據面積求矩形的長跟寬，長寬差距盡量小*/
+    // Input: area = 122122 Output: [427,286]
     // 根据面积来求出矩形的长和宽，要求长和宽的差距尽量的小，那么就是说越接近正方形越好。那么我们肯定是先来判断一下是不是正方行，对面积开方，
     // 如果得到的不是整数，说明不是正方形。那么我们取最近的一个整数，看此时能不能整除，如果不行，就自减1，再看能否整除。最坏的情况就是面积是
     // 质数，最后减到了1，那么返回结果即可
@@ -217,6 +245,7 @@ vector<int> LC0492::constructRectangle(int area) {
 }
 
 bool LC0326::isPowerOfThree(int n) {
+    /*判斷一個數是否為3的次方數*/
     // 让我们判断一个数是不是3的次方数，在LeetCode中，有一道类似的题目Power of Two，那道题有个非常简单的方法，由于2的次方数实在太有特点，
     // 最高位为1，其他位均为0，所以特别容易，而3的次方数没有显著的特点，最直接的方法就是不停地除以3，看最后的迭代商是否为1，要注意考虑输入是
     // 负数和0的情况
@@ -235,6 +264,7 @@ bool LC0326::isPowerOfThree(int n) {
 }
 
 bool LC0292::canWinNim(int n) {
+    /*判斷拿石子遊戲是否會贏*/
     // 给我们一堆石子，每次可以拿一个两个或三个，两个人轮流拿，拿到最后一个石子的人获胜，现在给我们一堆石子的个数，问我们能不能赢。那么我们
     // 就从最开始分析，由于是我们先拿，那么3个以内(包括3个)的石子，我们直接赢，如果共4个，那么我们一定输，因为不管我们取几个，下一个人一次
     // 都能取完。如果共5个，我们赢，因为我们可以取一个，然后变成4个让别人取，根据上面的分析我们赢，所以我们列出1到10个的情况如下
@@ -262,6 +292,7 @@ bool LC0292::canWinNim(int n) {
 }
 
 bool LC0263::isUgly(int n) {
+    /*判斷一個數是否為醜數*/
     // 这道题让我们检测一个数是否为丑陋数，所谓丑陋数就是其质数因子只能是 2，3，5。那么最直接的办法就是不停的除以这些质数，如果剩余的数字
     // 是1的话就是丑陋数了。
     // 此方法性能較好，可以當非丑陋数時會更快回傳。
@@ -282,6 +313,12 @@ bool LC0263::isUgly(int n) {
 }
 
 int LC0258::addDigits(int num) {
+    /*求不斷相加一數所有位數之值*/
+    // Input: num = 38 Output: 2
+    // Explanation: The process is
+    // 38 --> 3 + 8 --> 11
+    // 11 --> 1 + 1 --> 2
+    // Since 2 has only one digit, return it.
     // 求数根，所谓树根，就是将大于10的数的各个位上的数字相加，若结果还大于0的话，则继续相加，直到数字小于10为止
     while(num >= 10) {
         int sum=0;
@@ -335,6 +372,8 @@ int LC0258::addDigits(int num) {
 //string s = "A";
 //cout << run.titleToNumber(s) << endl;
 int LC0171::titleToNumber(string columnTitle) {
+    /*字母轉數字，26進位轉10進位問題*/
+    // Input: columnTitle = "ZY" Output: 701
     // 这题实际上相当于一种二十六进制转十进制的问题
     // 26 -> 10
     // 其他進位轉十進位：將二進位數、十六進位數的各位數字分別乘以各自基數的(N-1)次方，其相加之和便是相應的十進位數，這是按權相加法。
@@ -348,6 +387,8 @@ int LC0171::titleToNumber(string columnTitle) {
 }
 
 string LC0168::convertToTitle(int columnNumber) {
+    /*數字轉字母，10進位轉26進位問題*/
+    // Input: columnNumber = 701 Output: "ZY"
     // 这题实际上相当于一种十进制转二十六进制的问题
     // 10 -> 26
     // 整數部分用除基取余法，小數部分用乘基取整法，然後將整數與小數部分拼接成一個數作為轉換的最後結果
@@ -376,6 +417,9 @@ string LC0168::convertToTitle(int columnNumber) {
 
 //cout << run.romanToInt("MCMXCIV") << endl;
 int LC0013::romanToInt(string s) {
+    /*羅馬數字轉整數*/
+    // Input: s = "MCMXCIV" Output: 1994
+    // Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
     // Given a roman numeral, convert it to an integer.
     unordered_map<char, int> map {
             {'M', 1000}, {'D', 500},
@@ -394,6 +438,9 @@ int LC0013::romanToInt(string s) {
 
 //cout << run.isPalindrome(1000000001) << endl;
 bool LC0009::isPalindrome(int x) {
+    /*一個整數的字面數字是否回文*/
+    // Input: x = 121 Output: true
+    // Explanation: 121 reads as 121 from left to right and from right to left.
     if(x<0) return false;
 
     int front=x, back=0;
@@ -405,6 +452,7 @@ bool LC0009::isPalindrome(int x) {
 }
 
 int LC0007::reverse(int x) {
+    /*翻轉一數的各個位數*/
     // Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside
     // the signed 32-bit integer range [-231, 231 - 1], then return 0.
     // Input: x = 123
