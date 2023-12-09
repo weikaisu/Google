@@ -1,4 +1,4 @@
-#include "sort.h"
+﻿#include "sort.h"
 
 //反覆從未排序數列中找出最小值，將它與左邊的數做交換。
 void Sort::SelectSort(vector<int> &nums) {

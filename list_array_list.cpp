@@ -1,4 +1,4 @@
-#include "list.h"
+﻿#include "list.h"
 
 /***********  Array List  **********/
 vector<int> LC1313::decompressRLElist(vector<int>& nums) {

@@ -1,4 +1,4 @@
-#include "list.h"
+﻿#include "list.h"
 
 /***********  Hash Table  **********/
 int LC1684::countConsistentStrings(string allowed, vector<string>& words) {
