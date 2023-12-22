@@ -2,7 +2,15 @@
 
 /***********  Binary Search  **********/
 int LC1351::countNegatives(vector<vector<int>>& grid) {
+    /*求有序矩陣裡負數的個數*/
     // 第二类
+    // Input: grid = [
+    //  [ 4, 3, 2,-1],
+    //  [ 3, 2, 1,-1],
+    //  [ 1, 1,-1,-2],
+    //  [-1,-1,-2,-3]]
+    // Output: 8
+    // Explanation : There are 8 negatives number in the matrix.
     // 给了一个有序的二维数组，这里的排序方式是每行都是递减的，同时每列也都是递减的，现在让找出数组中负数的个数。当然你可以遍历整个数组，
     // 然后统计出负数个数，那么这样的话数组有序的条件就没有被使用，题目中的 Follow up 让在 O(n + m) 的时间复杂度下完成。既然每行每列都
     // 是递减的，那么数组的左上角就是整个数组最大的数，右下角一定是最小的数，若整个数组有正有负的话，左上角就是正数，右下角就是负数
@@ -23,7 +31,11 @@ int LC1351::countNegatives(vector<vector<int>>& grid) {
 }
 
 char LC0744::nextGreatestLetter(vector<char>& letters, char target) {
-    // 了我们一堆有序的字母，然后又给了我们一个target字母，让我们求字母数组中第一个大于target的字母，数组是循环的，如果没有，那就返回第一
+    /*求有序字母陣列中第一個大於target的字母*/
+    // Input: letters = ["c","f","j"], target = "c"
+    // Output: "f"
+    // Explanation : The smallest character that is lexicographically greater than 'c' in letters is 'f'.
+    // 给了我们一堆有序的字母，然后又给了我们一个target字母，让我们求字母数组中第一个大于target的字母，数组是循环的，如果没有，那就返回第一
     // 个字母。像这种在有序数组中找数字，二分法简直不要太适合啊。题目中说了数组至少有两个元素，那么我们首先用数组的尾元素来跟target比较，
     // 如果target大于等于尾元素的话，直接返回数组的首元素即可。否则就利用二分法来做，这里是查找第一个大于目标值的数组，博主之前做过二分法的
     // 总结，参见这个帖子LeetCode Binary Search Summary 二分搜索法小结
@@ -42,6 +54,10 @@ char LC0744::nextGreatestLetter(vector<char>& letters, char target) {
 }
 
 int LC0704::search(vector<int>& nums, int target) {
+    /*從有序陣列中找target，若無回傳-1*/
+    // Input: nums = [-1,0,3,5,9,12], target = 9
+    // Output: 4
+    // Explanation : 9 exists in nums and its index is 4
     // Given a sorted (in ascending order) integer array nums of n elements and a target value, write a function to
     // search target in nums. If target exists, then return its index, otherwise return -1.
     int l=0, r=nums.size();
@@ -55,6 +71,14 @@ int LC0704::search(vector<int>& nums, int target) {
 }
 
 int LC0441::arrangeCoins(int n) {
+    /*n個硬幣按規律排列求可排幾列*/
+    // Input: n = 8
+    // Output: 3
+    // $
+    // $ $
+    // $ $ $
+    // $ $
+    // Explanation : Because the 4th row is incomplete, we return 3.
     // 给了我们n个硬币，让我们按一定规律排列，第一行放1个，第二行放2个，以此类推，问我们有多少行能放满。通过分析题目中的例子可以得知最后一
     // 行只有两种情况，放满和没放满。由于是按等差数列排放的，我们可以快速计算出前i行的硬币总数。我们先来看一种O(n)的方法，非常简单粗暴，
     // 就是从第一行开始，一行一行的从n中减去，如果此时剩余的硬币没法满足下一行需要的硬币数了，我们之间返回当前行数即可
@@ -88,6 +112,9 @@ int guess(int num) {
     return 0;
 };
 int LC0374::guessNumber(int n) {
+    /*猜介於1～n之間的一數*/
+    // Input: n = 10 (pick = 6)
+    // Output: 6
     // 猜价格的问题，根据对方说高了还是低了来缩小范围，虽然是道 Easy 题，无脑线性遍历还是会超时 Time Limit Exceeded，所以更快速的方法
     // 就是折半搜索法，原理很简单，属于博主之前的总结帖 LeetCode Binary Search Summary 二分搜索法小结 中的第四类-用子函数当作判断关系
     if (!guess(n)) return n;
@@ -102,6 +129,10 @@ int LC0374::guessNumber(int n) {
 }
 
 bool LC0367::isPerfectSquare(int num) {
+    /*求一數是否為完全平方數*/
+    // Input: num = 14
+    // Output: false
+    // Explanation : We return false because 3.742 * 3.742 = 14 and 3.742 is not an integer.
     // 给了我们一个数，让我们判断其是否为完全平方数，使用二分查找法来做，要查找的数为 mid*mid
     long l=1, r=num+1l, target=num; // x值可能很大，需用long
     while(l<r) {
@@ -119,7 +150,14 @@ bool LC0367::isPerfectSquare(int num) {
 }
 bool isBadVersion(int version) {return true;};
 int LC0278::firstBadVersion(int n) {
+    /*給一系列版本求從那一版本之後是壞的*/
     // 第二类
+    // Input: n = 5, bad = 4 Output: 4
+    // Explanation :
+    //	call isBadVersion(3) -> false
+    //	call isBadVersion(5) -> true
+    //	call isBadVersion(4) -> true
+    //	Then 4 is the first bad version.
     // 有一系列版本，其中有一个版本是坏的，而且后面跟着的全是坏的，给了一个 API 函数可以用来判定当前版本是否是坏的，让我们尽可能少的调用这个
     // API，找出第一个坏版本。那么这种搜索题最先开始考虑用二分查找法把，效率高嘛。由于这题很有规律，好版本和坏版本一定有个边界，那么用二分法
     // 来找这个边界，对 mid 值调用API函数，如果是坏版本，说明边界在左边，则把 mid 赋值给 right，如果是好版本，则说明边界在右边，则把
@@ -144,7 +182,10 @@ int LC0278::firstBadVersion(int n) {
 }
 
 int LC0069::mySqrt(int x) {
+    /*求平方根*/
     // 第三类的变形
+    // Input: x = 8 Output: 2
+    // Explanation : The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
     // 找最后一个不大于目标值的数，这里细心的童鞋可能会有疑问，在总结贴中第三类博主的 right 用的是开区间，那么这里为啥 right
     // 初始化为x，而不是 x+1 呢？因为总结帖里的 left 和 right 都是数组下标，这里的 left 和 right 直接就是数字本身了，一个数字的平方根
     // 是不可能比起本身还大的，所以不用加1，还有就是这里若x是整型最大值，再加1就会溢出。最后就是返回值是 right-1，因为题目中说了要把小数部
@@ -164,7 +205,10 @@ int LC0069::mySqrt(int x) {
 //int target=5;
 //cout << run.searchInsert(nums, target) << endl;
 int LC0035::searchInsert(vector<int>& nums, int target) {
+    /*從有序陣列中找第一個大於等於target，若無回傳數組長度n*/
     // 第二类
+    // Input: nums = [1,3,5,6], target = 2  Output: 1
+    // Input: nums = [1,3,5,6], target = 7, Output: 4
     // Given a sorted array and a target value, return the index if the target is found. If not, return the index
     // where it would be if it were inserted in order.
     // 遍历一遍原数组，若当前数字大于或等于目标值，则返回当前坐标，如果遍历结束了，说明目标值比数组中任何一个数都要大，则返回数组长度n即可

@@ -39,6 +39,8 @@ int LC0999::numRookCaptures(vector<vector<char>>& board) {
 }
 
 bool LC0993::isCousins(TreeNode* root, int x, int y) {
+    /*判斷兩結點是否為表兄弟結點*/
+    // Two nodes of a binary tree are cousins if they have the same depth with different parents.
     // 定义了一种二叉树数的表兄弟结点，就是不属于同一个父结点，但是深度相同，现在给了两个结点值，问它们代表的结点是否是表兄弟结点。由于表兄弟
     // 结点一定是属于同一层的，所以可以使用二叉树的层序遍历，就像之前那道 Binary Tree Level Order Traversal 一样。这里额外需要两个布尔
     // 型变量 isX，isY 来记录x和y是否已经遍历到了。由于是层序遍历，所以 while 中需要有个 for 循环，在循环中，取出队首结点，然后看结点值是
@@ -84,6 +86,7 @@ bool LC0993::isCousins(TreeNode* root, int x, int y) {
 }
 
 bool LC0965::isUnivalTree(TreeNode* root) {
+    /*判斷樹裡所有結點值是否均相同*/
     // 定义了一种单值二叉树，需要二叉树中所有的结点值相同。先给了一棵二叉树，问是不是单值二叉树。其实就是考察遍历二叉树，当然递归的方法在写法
     // 上最简单了。这里可以将每个结点值都跟根结点值进行比较，只要任意一个不相同，则表示不是单值二叉树。
     // recursive way
@@ -107,9 +110,11 @@ bool LC0965::isUnivalTree(TreeNode* root) {
 // LC0784 run;
 // vector<string> ans=run.letterCasePermutation("a1b2");
 // for(auto a:ans) cout << a << endl;
-// Input: s = "a1b2"
-// Output: ["a1b2","a1B2","A1b2","A1B2"]
 vector<string> LC0784::letterCasePermutation(string s) {
+    /*字母大小寫排列組合*/
+    // Input: s = "a1b2"
+    // Output: ["a1b2","a1B2","A1b2","A1B2"]
+    // 给了我们一个只包含字母和数字的字符串，让我们将字母以大小写进行全排列
     vector<string> ans;
     function<void(int)> dfs = [&](int d) {
         if(d==s.size()) { ans.push_back(s); return; }
@@ -169,6 +174,11 @@ vector<vector<int>> LC0733::floodFill(vector<vector<int>>& image, int sr, int sc
 }
 
 vector<vector<int>> LC0077::combine(int n, int k) {
+    /*n取k做組合*/
+    // Input: n = 4, k = 2
+    // Output: [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]
+    // Explanation : There are 4 choose 2 = 6 total combinations.
+    // Note that combinations are unordered, i.e., [1, 2] and [2, 1] are considered to be the same combination.
     vector<int> cur;
     vector<vector<int>> res;
 
@@ -186,6 +196,7 @@ vector<vector<int>> LC0077::combine(int n, int k) {
 }
 
 vector<vector<int>> LC0047::permuteUnique(vector<int>& nums) {
+    /*給一陣列裡元素所有的排列*/
     // Input: nums = [1,1,2]
     // Output: [[1,1,2], [1,2,1], [2,1,1]]
     int n = nums.size();
@@ -215,6 +226,7 @@ vector<vector<int>> LC0047::permuteUnique(vector<int>& nums) {
 }
 
 vector<vector<int>> LC0046::permute(vector<int>& nums) {
+    /*n取n做排列*/
     // N個裡面取M個，這裡N等於M，可以利用原本的nums當作cur
     // 每兩兩swap就是一種可能的組合。
     // 可以每兩兩swap是因為N等於M
@@ -254,6 +266,8 @@ vector<vector<int>> LC0046::permute(vector<int>& nums) {
 }
 
 vector<string> LC0017::letterCombinations(string digits) {
+    /*求電話按鍵上的字母組合*/
+    // 求电话号码的字母组合，即数字2到9中每个数字可以代表若干个字母，然后给一串数字，求出所有可能的组合
     // Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number
     // could represent. Return the answer in any order.
     // Input: digits = "23"
@@ -292,6 +306,7 @@ vector<string> LC0017::letterCombinations(string digits) {
 }
 
 bool LC0872::leafSimilar(TreeNode* root1, TreeNode* root2) {
+    /*判斷兩顆樹是否相似*/
     // 定义了一种叶相似树，就是说若两棵树的叶结点按照从左向右的顺序取出来排成序列，若两个序列相同，则说明二者是叶结点相似树。其实本质就是按从
     // 左到右的顺序打印二叉树的叶结点呗，那么根据这种顺序，我们采用先序遍历遍历比较好，遇到叶结点后直接将叶结点存入数组中，那么对于两个树遍历
     // 后就分别得到两个包含叶结点的数组，最后再比较一下这两个数组是否相同即可
@@ -311,6 +326,7 @@ bool LC0872::leafSimilar(TreeNode* root1, TreeNode* root2) {
 }
 
 vector<int> LC0590::postorder(Node* root) {
+    /*求樹的後序遍歷結果*/
     // 求N叉树的后序遍历，由于有了之前那道 Binary Tree Postorder Traversal 的基础，了解了二叉树的后序遍历，则N叉树的后序遍历也就没有
     // 那么难了。首先还是用递归来做，在递归函数中，判空后，遍历子结点数组，对所有的子结点调用递归函数，然后在 for 循环之外在将当前结点值加入
     // 结果 res 数组，这样才能保证是后序遍历的顺序
@@ -341,6 +357,7 @@ vector<int> LC0590::postorder(Node* root) {
 }
 
 vector<int> LC0589::preorder(Node* root) {
+    /*求樹的前序遍歷結果*/
     // 求N叉树的前序遍历，有之前那道Binary Tree Preorder Traversal的基础，知道了二叉树的前序遍历的方法，很容易就可以写出N叉树的前序遍
     // 历。先来看递归的解法，主要实现一个递归函数即可，判空之后，将当前结点值加入结果res中，然后遍历子结点数组中所有的结点，对每个结点都调
     // 用递归函数即可
@@ -371,6 +388,7 @@ vector<int> LC0589::preorder(Node* root) {
 }
 
 bool LC0572::isSubtree(TreeNode* root, TreeNode* subRoot) {
+    /*判斷一樹是否為另一樹的子樹*/
     // 这道题让我们求一个数是否是另一个树的子树，从题目中的第二个例子中可以看出，子树必须是从叶结点开始的，中间某个部分的不能算是子树，
     // 那么我们转换一下思路，是不是从s的某个结点开始，跟t的所有结构都一样，那么问题就转换成了判断两棵树是否相同，也就是Same Tree的问题了，
     // 这点想通了其实代码就很好写了，用递归来写十分的简洁，我们先从s的根结点开始，跟t比较，如果两棵树完全相同，那么返回true，否则就分别对s的
@@ -405,6 +423,7 @@ bool LC0572::isSubtree(TreeNode* root, TreeNode* subRoot) {
 }
 
 int LC0563::findTilt(TreeNode* root) {
+    /*求樹的坡度*/
     // 求二叉树的坡度，某个结点的坡度的定义为该结点的左子树之和与右子树之和的差的绝对值，这道题让我们求所有结点的坡度之和。我开始的想法就是
     // 老老实实的按定义去做，用先序遍历，对于每个遍历到的结点，先计算坡度，根据定义就是左子树之和与右子树之和的差的绝对值，然后返回的是当前结
     // 点的tilt加上对其左右子结点调用求坡度的递归函数即可。其中求子树之和用另外一个函数来求，也是用先序遍历来求结点之和，为了避免重复运算，
@@ -434,6 +453,7 @@ int LC0563::findTilt(TreeNode* root) {
 }
 
 int LC0559::maxDepth(Node* root) {
+    /*求n叉樹的最大深度*/
     // 求一个N叉树的最大深度
     // recursive way
 //    int mx=1;
@@ -459,6 +479,7 @@ int LC0559::maxDepth(Node* root) {
 
 /*********** Breadth First Search ***********/
 int LC0671::findSecondMinimumValue(TreeNode* root) {
+    /*找二叉樹裡第二小的結點*/
     // 找二叉树中的第二小的结点值，并且给该二叉树做了一些限制，比如对于任意一个结点，要么其没有子结点，要么就同时有两个子结点，而且父结点值是
     // 子结点值中较小的那个，当然两个子结点值可以相等。那么直接上暴力搜索呗，根据该树的附加条件可知，根结点一定是最小的结点值first，那么我们
     // 只要找出第二小的值second即可，初始化为整型的最大值。然后对根结点调用递归函数，将first和second当作参数传进去即可。在递归函数中，如果

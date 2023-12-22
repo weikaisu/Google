@@ -66,6 +66,7 @@ struct LC0222 { int countNodes(TreeNode* root); };
 struct LC0145 { vector<int> postorderTraversal(TreeNode* root); };
 struct LC0144 { vector<int> preorderTraversal(TreeNode* root); };
 struct LC0110 { bool isBalanced(TreeNode* root); };
+/*求2叉樹的最大深度*/
 struct LC0104 { int maxDepth(TreeNode* root); };
 struct LC0101 { bool isSymmetric(TreeNode* root); };
 struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };

@@ -232,6 +232,7 @@ bool LC0110::isBalanced(TreeNode* root) {
 }
 
 int LC0104::maxDepth(TreeNode* root) {
+    /*求2叉樹的最大深度*/
     // 求二叉树的最大深度问题用到深度优先搜索 Depth First Search，递归的完美应用，跟求二叉树的最小深度问题原理相同
     if(!root) return 0;
     return 1 + std::max(maxDepth(root->left), maxDepth(root->right));
