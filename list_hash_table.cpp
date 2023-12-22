@@ -643,7 +643,6 @@ vector<int> LC0349::intersection(vector<int>& nums1, vector<int>& nums2) {
     return vector<int>(res.begin(), res.end());
 }
 
-//LC0268 run;
 //vector<int> v {3,0,1};
 //cout << run.missingNumber(v);
 int LC0268::missingNumber(vector<int>& nums) {

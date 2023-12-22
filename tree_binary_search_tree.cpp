@@ -2,6 +2,7 @@
 
 /***********  Binary Search Tree  **********/
 int LC0938::rangeSumBST(TreeNode* root, int low, int high) {
+    /*求BST在某範圍內結點之和*/
     // 由于 BST 具有 左<根<右 的特点，所以就可以进行剪枝，若当前结点值小于L，则说明其左子树所有结点均小于L，可以直接将左子树剪去；同理，
     // 若当前结点值大于R，则说明其右子树所有结点均大于R，可以直接将右子树剪去。否则说明当前结点值正好在区间内，将其值累加上，并分别对左右子
     // 结点调用递归函数即可
@@ -15,6 +16,7 @@ int LC0938::rangeSumBST(TreeNode* root, int low, int high) {
 }
 
 TreeNode* LC0897::increasingBST(TreeNode* root) {
+    /*重新排序BST，最左結點變成root*/
     // 给了一棵二叉树，让我们对其进行重排序，使得最左结点变为根结点，而且整个树不能有左子结点，如题目中的例子所示，排序后的结果是一条向右下方
     // 延伸的直线。如果我们仔细观察题目中的例子，可以发现遍历顺序其实是 左->根->右，就是中序遍历的顺序，虽然题目中没说是二叉搜索树，但这并不
     // 影响我们进行中序遍历。我们先从最简单的例子开始分析，当 root 为空时，直接返回空，当 root 没有左右子结点时，也是直接返回 root。当 root
@@ -60,6 +62,7 @@ TreeNode* LC0897::increasingBST(TreeNode* root) {
 }
 
 int LC0783::minDiffInBST(TreeNode* root) {
+    /*求BST任兩結點的最小差值*/
     // the same as LC0530
     // recursive way
 //    int mn=INT_MAX;
@@ -95,6 +98,7 @@ int LC0783::minDiffInBST(TreeNode* root) {
 }
 
 TreeNode* LC0700::searchBST(TreeNode* root, int val) {
+    /*在BST內搜索val*/
     // 这道题让我们搜索一个二叉搜索树，既然是二叉搜索树，而不是普通的二叉树，那么我们肯定要利用二叉搜索树特定的性质来解题，即左<根<右。那么就
     // 是说任意一个结点的左子树中的所有结点均小于当前结点，其右子树中的所有结点均大于当前结点。那么这不就是一个天然的二分么，当仁不让的二分搜
     // 索法呼之欲出啊。首先判空，如果当前结点不存在，直接返回空。如果当前结点值等于目标值，返回当前结点。接下来就看如果当前结点值大于目标值，
@@ -112,6 +116,7 @@ TreeNode* LC0700::searchBST(TreeNode* root, int val) {
 }
 
 bool LC0653::findTarget(TreeNode* root, int k) {
+    /*判斷BST裡是否有兩結點之和為k*/
     // 遍历二叉树就行，然后用一个HashSet，在递归函数函数中，如果node为空，返回false。如果k减去当前结点值在HashSet中存在，直接返回true；
     // 否则就将当前结点值加入HashSet，然后对左右子结点分别调用递归函数并且或起来返回即可
     // recursive
@@ -140,6 +145,7 @@ bool LC0653::findTarget(TreeNode* root, int k) {
 }
 
 int LC0530::getMinimumDifference(TreeNode* root) {
+    /*求BST任兩結點的最小差值*/
     // 给了我们一棵二叉搜索树，让我们求任意个节点值之间的最小绝对差。由于BST的左<根<右的性质可知，如果按照中序遍历会得到一个有序数组，那么最
     // 小绝对差肯定在相邻的两个节点值之间产生。所以我们的做法就是对BST进行中序遍历，然后当前节点值和之前节点值求绝对差并更新结果res。这里需
     // 要注意的就是在处理第一个节点值时，由于其没有前节点，所以不能求绝对差。这里我们用变量pre来表示前节点值，这里由于题目中说明了所以节点值
@@ -178,6 +184,7 @@ int LC0530::getMinimumDifference(TreeNode* root) {
 }
 
 vector<int> LC0501::findMode(TreeNode* root) {
+    /*求BST裡所有的眾數(modes, the most frequently occurred elements)*/
     // 求二分搜索树中的众数，这里定义的二分搜索树中左根右结点之间的关系是小于等于的，有些题目中是严格小于的，所以一定要看清题目要求。所谓的
     // 众数就是出现最多次的数字，可以有多个，那么这道题比较直接点思路就是利用一个哈希表来记录数字和其出现次数之前的映射，然后维护一个变量mx
     // 来记录当前最多的次数值，这样在遍历完树之后，根据这个mx值就能把对应的元素找出来。那么用这种方法的话就不需要用到二分搜索树的性质了，随
@@ -272,6 +279,7 @@ vector<int> LC0501::findMode(TreeNode* root) {
 }
 
 TreeNode* LC0108::sortedArrayToBST(vector<int>& nums) {
+    /*將有序陣列轉成BST*/
     // 将有序数组转为二叉搜索树，所谓二叉搜索树，是一种始终满足左<根<右的特性，如果将二叉搜索树按中序遍历的话，得到的就是一个有序数组了。那么
     // 反过来，我们可以得知，根节点应该是有序数组的中间点，从中间点分开为左右两个有序数组，在分别找出其中间点作为原中间点的左右两个子节点，这
     // 不就是是二分查找法的核心思想么。所以这道题考的就是二分查找法

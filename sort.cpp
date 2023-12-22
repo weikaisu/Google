@@ -1,6 +1,7 @@
 ﻿#include "sort.h"
 
 vector<int> LC1365::smallerNumbersThanCurrent(vector<int>& nums) {
+    /*求陣列裡的每個元素有多少小於其的元素*/
     // Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
     // That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
     // Return the answer in an array.
@@ -40,6 +41,14 @@ vector<int> LC1365::smallerNumbersThanCurrent(vector<int>& nums) {
 }
 
 vector<int> LC1356::sortByBits(vector<int>& arr) {
+    /*排序一陣列根據每元素二進制時1的數量*/
+    // Input: arr = [0,1,2,3,4,5,6,7,8]
+    // Output: [0, 1, 2, 4, 8, 3, 5, 6, 7]
+    // Explantion : [0] is the only integer with 0 bits.
+    // [1, 2, 4, 8] all have 1 bit.
+    // [3, 5, 6] have 2 bits.
+    // [7] has 3 bits.
+    // The sorted array by bits is[0, 1, 2, 4, 8, 3, 5, 6, 7]
     // given an integer array arr. Sort the integers in the array in ascending order by the number of 1's
     // in their binary representation and in case of two or more integers have the same number of 1's you
     // have to sort them in ascending order
@@ -101,6 +110,7 @@ vector<int> LC1356::sortByBits(vector<int>& arr) {
 }
 
 bool LC1346::checkIfExist(vector<int>& arr) {
+    /*判斷一個陣列裡是否有一個元素是另一個元素的兩倍*/
     // Given an array arr of integers, check if there exist two indices i and j such that :
     // i != j
     // 0 <= i, j < arr.length
@@ -135,6 +145,7 @@ bool LC1346::checkIfExist(vector<int>& arr) {
 }
 
 vector<int> LC1331::arrayRankTransform(vector<int>& arr) {
+    /*求陣列裡每個元素對應的rank(值大小順序)*/
     // Given an array of integers arr, replace each element with its rank.
     // The rank represents how large the element is. The rank has the following rules:
     // Rank is an integer starting from 1.
@@ -162,6 +173,7 @@ vector<int> LC1331::arrayRankTransform(vector<int>& arr) {
 }
 
 int LC1287::findSpecialInteger(vector<int>& arr) {
+    /*找出在陣列裡出現超過25%的那個數*/
     // 给了一个有序数组，说是其中有一个数字出现了超过总个数的 25%，让找出这个数字。博主最开始做的时候，直接就用 HashMap 来统计每个数字出现
     // 的次数了，然后跟总长度的 1/4 比较，大于的话就直接返回该数字就好了
 //    int m = arr.size()/4;
@@ -180,6 +192,7 @@ int LC1287::findSpecialInteger(vector<int>& arr) {
 }
 
 vector<vector<int>> LC1200::minimumAbsDifference(vector<int>& arr) {
+    /*求陣列裡所有差值為最小的pair*/
     // Given an array of distinct integers arr, find all pairs of elements with the minimum absolute difference of
     // any two elements.
     // Return a list of pairs in ascending order(with respect to pairs), each pair [a, b] follows
@@ -211,6 +224,7 @@ vector<vector<int>> LC1200::minimumAbsDifference(vector<int>& arr) {
 }
 
 int LC1051::heightChecker(vector<int>& heights) {
+    /*需移動陣列裡多少元素能讓陣列按序排列*/
     // A school is trying to take an annual photo of all the students. The students are asked to stand in a
     // single file line in non-decreasing order by height. Let this ordering be represented by the integer
     // array expected where expected[i] is the expected height of the ith student in line.
@@ -277,6 +291,7 @@ vector<vector<int>> LC1030::allCellsDistOrder(int rows, int cols, int rCenter, i
 }
 
 vector<int> LC0977::sortedSquares(vector<int>& nums) {
+    /*回傳元素平方後的排序陣列*/
     // Given an integer array nums sorted in non-decreasing order, return an array of the squares of each
     // number sorted in non-decreasing order.
     // Input: nums = [-4,-1,0,3,10]
@@ -302,6 +317,7 @@ vector<int> LC0977::sortedSquares(vector<int>& nums) {
 }
 
 vector<int> LC0922::sortArrayByParityII(vector<int>& nums) {
+    /*按偶數在偶數位置、積數在積數位置的方式排序*/
     // Given an array of integers nums, half of the integers in nums are o\dd, and the other half are even.
     // Sort the array so that whenever nums[i] is odd, i is odd, and whenever nums[i] is even, i is even.
     // Return any answer array that satisfies this condition.
@@ -337,6 +353,7 @@ vector<int> LC0922::sortArrayByParityII(vector<int>& nums) {
 }
 
 vector<int> LC0905::sortArrayByParity(vector<int>& nums) {
+    /*按所有偶數在前積數在後的方式排序*/
     // Given an integer array nums, move all the even integers at the beginning of the array followed by all the odd integers.
     // Return any array that satisfies this condition.
     // Input: nums = [3,1,2,4]
@@ -358,6 +375,7 @@ vector<int> LC0905::sortArrayByParity(vector<int>& nums) {
 }
 
 int LC0747::dominantIndex(vector<int>& nums) {
+    /*求陣列裡最大且大於所有其他元素二倍的元素index*/
     // You are given an integer array nums where the largest integer is unique.
     // Determine whether the largest element in the array is at least twice as much as every other number in
     // the array. If it is, return the index of the largest element, or return -1 otherwise.
@@ -396,6 +414,11 @@ int LC0747::dominantIndex(vector<int>& nums) {
 }
 
 void LC0088::merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+    /*合併兩個排序好的陣列到其中一個*/
+    // Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+    // Output: [1, 2, 2, 3, 5, 6]
+    // Explanation : The arrays we are merging are[1, 2, 3] and [2, 5, 6].
+    // The result of the merge is[1, 2, 2, 3, 5, 6] with the underlined elements coming from nums1.
     // You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n,
     // representing the number of elements in nums1 and nums2 respectively.
     // Merge nums1 and nums2 into a single array sorted in non-decreasing order.
@@ -412,6 +435,10 @@ void LC0088::merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
 }
 
 int LC0016::threeSumClosest(vector<int>& nums, int target) {
+    /*找出陣列裡和最接近target的三數*/
+    // Input: nums = [-1, 2, 1, -4], target = 1
+    // Output : 2
+    // Explanation : The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
     // Given an integer array nums of length n and an integer target, find three integers in nums such that the sum
     // is closest to target.
     // Return the sum of the three integers.
@@ -443,6 +470,15 @@ int LC0016::threeSumClosest(vector<int>& nums, int target) {
 }
 
 vector<vector<int>> LC0015::threeSum(vector<int>& nums) {
+    /*回傳所有三數和為0的組合*/
+    // Input: nums = [-1,0,1,2,-1,-4]
+    // Output: [[-1, -1, 2], [-1, 0, 1]]
+    // Explanation :
+    //    nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+    //    nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+    //    nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+    //    The distinct triplets are[-1, 0, 1] and [-1, -1, 2].
+    //    Notice that the order of the output and the order of the triplets does not matter.
     // Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that
     // i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
     // Notice that the solution set must not contain duplicate triplets.

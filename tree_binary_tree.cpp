@@ -2,6 +2,7 @@
 
 /***********  Binary Tree  **********/
 int LC1022::sumRootToLeaf(TreeNode* root) {
+    /*求所有從root到leaf組成二進制數字的和*/
     // 给了一个结点值为0或1的二叉树，让返回所有从根结点到叶结点的路径组成的二进制数字的和。实际上就是一道变形的路径之和的题目，关于路径之和，
     // LeetCode 有很多道题目，比如 Path Sum IV，Path Sum III，Binary Tree Maximum Path Sum，Path Sum II，Path Sum，和
     // Minimum Path Sum 等等。还是要用递归来做，就使用先序遍历就可以了，使用一个变量 cur 记录从根结点到当前结点的路径的二进制数对应的十
@@ -30,6 +31,7 @@ int LC1022::sumRootToLeaf(TreeNode* root) {
 }
 
 vector<double> LC0637::averageOfLevels(TreeNode* root) {
+    /*求tree裡各level的平均值*/
     if(!root) return {};
 
     vector<double> ans;
@@ -53,6 +55,7 @@ vector<double> LC0637::averageOfLevels(TreeNode* root) {
 }
 
 TreeNode* LC0617::mergeTrees(TreeNode* root1, TreeNode* root2) {
+    /*合併兩tree，新結點值為兩tree同位置結點值之和*/
     if(!root1) return root2; if(!root2) return root1;
 
     // merge root2 to root1
@@ -64,6 +67,7 @@ TreeNode* LC0617::mergeTrees(TreeNode* root1, TreeNode* root2) {
 }
 
 string LC0606::tree2str(TreeNode* root) {
+    /*求先序走訪tree後組成的字串*/
     if(!root) return "";
 
     const string m = to_string(root->val);
@@ -79,6 +83,9 @@ string LC0606::tree2str(TreeNode* root) {
 }
 
 int LC0543::diameterOfBinaryTree(TreeNode* root) {
+    /*求tree的直徑*/
+    // The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
+    // This path may or may not pass through the root.
     auto diameter = [](const auto &self, TreeNode *root, int &len) -> int {
         if(!root) return -1;
         int left_len  = self(self, root->left,  len) +1;
@@ -93,6 +100,7 @@ int LC0543::diameterOfBinaryTree(TreeNode* root) {
 }
 
 int LC0404::sumOfLeftLeaves(TreeNode* root) {
+    /*求tree所有leaves之和*/
     int sum = 0;
     if(!root) return sum;
 
@@ -102,6 +110,7 @@ int LC0404::sumOfLeftLeaves(TreeNode* root) {
 }
 
 vector<string> LC0257::binaryTreePaths(TreeNode* root) {
+    /*求所有從root到leaf構成的路徑*/
     // 给我们一个二叉树，让返回所有根到叶节点的路径，跟之前那道 Path Sum II 很类似，比那道稍微简单一些，不需要计算路径和，
     // 只需要无脑返回所有的路径即可，那么思路还是用递归来解，博主之前就强调过，玩树的题目，十有八九都是递归，而递归的核心就是不停的 DFS
     // 到叶结点，然后在回溯回去。在递归函数中，当遇到叶结点的时候，即没有左右子结点，那么此时一条完整的路径已经形成了，
@@ -118,6 +127,7 @@ vector<string> LC0257::binaryTreePaths(TreeNode* root) {
 }
 
 TreeNode* LC0226::invertTree(TreeNode* root) {
+    /*鏡相（左右）翻轉二叉樹*/
     // 翻转二叉树，递归的方法，写法非常简洁，五行代码搞定，交换当前左右节点，并直接调用递归即可
 //    if(!root) return nullptr;
 //    TreeNode* node = root->left;
@@ -141,11 +151,13 @@ TreeNode* LC0226::invertTree(TreeNode* root) {
 }
 
 int LC0222::countNodes(TreeNode* root) {
+    /*求tree的結點個數*/
     // 给定了一棵完全二叉树，让我们求其节点的个数。直接用递归来统计结点的个数，根本不需要考虑什么完全二叉树还是完美二叉树，递归在手，遇 tree 不愁。
     return root ? (1 + countNodes(root->left) + countNodes(root->right)) : 0;
 }
 
 vector<int> LC0145::postorderTraversal(TreeNode* root) {
+    /*後序遍歷tree*/
     // 改变先序遍历的顺序来实现后序遍历。比起另一種方法會有較少的s.push，所以性能較好。
     if(!root) return {};
     vector<int> res;
@@ -177,6 +189,7 @@ vector<int> LC0145::postorderTraversal(TreeNode* root) {
 }
 
 vector<int> LC0144::preorderTraversal(TreeNode* root) {
+    /*前序遍歷tree*/
     // 使用了一个辅助结点p，这种写法其实可以看作是一个模版，对应的还有中序和后序的模版写法，形式很统一，方便于记忆。辅助结点p初始化为根结点，
     // while 循环的条件是栈不为空或者辅助结点p不为空，在循环中首先判断如果辅助结点p存在，那么先将p加入栈中，然后将p的结点值加入结果 res 中，
     // 此时p指向其左子结点。否则如果p不存在的话，表明没有左子结点，取出栈顶结点，将p指向栈顶结点的右子结点
@@ -217,6 +230,7 @@ vector<int> LC0144::preorderTraversal(TreeNode* root) {
 //cout << run.isBalanced(root) << endl;
 //root->CleanTree(root);
 bool LC0110::isBalanced(TreeNode* root) {
+    /*判斷tree是否平衡*/
     auto getTreeHeight = [](const auto &self, TreeNode* root, bool &isBalanse) -> int {
         if(!root) return 0;
         int lHeight = self(self, root->left, isBalanse);
@@ -254,6 +268,7 @@ int LC0104::maxDepth(TreeNode* root) {
 }
 
 bool LC0101::isSymmetric(TreeNode* root) {
+    /*判斷tree是否平衡*/
     // 判断二叉树是否是平衡树，比如有两个节点n1, n2，我们需要比较n1的左子节点的值和n2的右子节点的值是否相等，同时还要比较n1的右子节点的
     // 值和n2的左子结点的值是否相等，以此类推比较完所有的左右两个节点。
     function<bool(TreeNode*, TreeNode*)> bfs = [&](TreeNode* l, TreeNode* r) -> bool {
@@ -285,12 +300,14 @@ bool LC0101::isSymmetric(TreeNode* root) {
 }
 
 bool LC0100::isSameTree(TreeNode* p, TreeNode* q) {
+    /*判斷兩tree是否一樣*/
     if(!p && !q) return true;
     if(!p || !q || (p->val!=q->val)) return false;
     return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
 }
 
 vector<int> LC0094::inorderTraversal(TreeNode* root) {
+    /*中序遍歷tree*/
     // 递归方法，十分直接，对左子结点调用递归函数，根节点访问值，右子节点再调用递归函数
 //    if(root==nullptr) return {};
 //    vector<int> res;

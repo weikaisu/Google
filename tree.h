@@ -54,31 +54,54 @@ struct TreeNode {
 class tree {};
 
 /***********  Binary Tree  **********/
+/*求所有從root到leaf組成二進制數字的和*/
 struct LC1022 { int sumRootToLeaf(TreeNode* root); };
+/*求tree裡各level的平均值*/
 struct LC0637 { vector<double> averageOfLevels(TreeNode* root); };
+/*合併兩tree，新結點值為兩tree同位置結點值之和*/
 struct LC0617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };
+/*求先序走訪tree後組成的字串*/
 struct LC0606 { string tree2str(TreeNode* root); };
+/*求tree的直徑*/
 struct LC0543 { int diameterOfBinaryTree(TreeNode* root); };
+/*求tree所有leaves之和*/
 struct LC0404 { int sumOfLeftLeaves(TreeNode* root); };
+/*求所有從root到leaf構成的路徑*/
 struct LC0257 { vector<string> binaryTreePaths(TreeNode* root); };
+/*鏡相（左右）翻轉二叉樹*/
 struct LC0226 { TreeNode* invertTree(TreeNode* root); };
+/*求tree的結點個數*/
 struct LC0222 { int countNodes(TreeNode* root); };
+/*後序遍歷tree*/
 struct LC0145 { vector<int> postorderTraversal(TreeNode* root); };
+/*前序遍歷tree*/
 struct LC0144 { vector<int> preorderTraversal(TreeNode* root); };
+/*判斷tree是否平衡*/
 struct LC0110 { bool isBalanced(TreeNode* root); };
 /*求2叉樹的最大深度*/
 struct LC0104 { int maxDepth(TreeNode* root); };
+/*判斷tree是否平衡*/
 struct LC0101 { bool isSymmetric(TreeNode* root); };
+/*判斷兩tree是否一樣*/
 struct LC0100 { bool isSameTree(TreeNode* p, TreeNode* q); };
+/*中序遍歷tree*/
 struct LC0094 { vector<int> inorderTraversal(TreeNode* root); };
 /***********  Binary Search Tree  **********/
+/*求BST在某範圍內結點之和*/
 struct LC0938 { int rangeSumBST(TreeNode* root, int low, int high); };
+/*重新排序BST，最左結點變成root*/
 struct LC0897 { TreeNode* increasingBST(TreeNode* root); };
+/*求BST任兩結點的最小差值*/
 struct LC0783 { int minDiffInBST(TreeNode* root); };
+/*在BST內搜索val*/
 struct LC0700 { TreeNode* searchBST(TreeNode* root, int val); };
+/*判斷BST裡是否有兩結點之和為k*/
 struct LC0653 { bool findTarget(TreeNode* root, int k); };
+/*求BST任兩結點的最小差值*/
 struct LC0530 { int getMinimumDifference(TreeNode* root); };
+/*求BST裡所有的眾數(modes, the most frequently occurred elements)*/
 struct LC0501 { vector<int> findMode(TreeNode* root); };
+/*將有序陣列轉成BST*/
 struct LC0108 { TreeNode* sortedArrayToBST(vector<int>& nums); };
 
 /*********** Complete Binary Tree ***********/
@@ -102,7 +125,9 @@ struct LC0108 { TreeNode* sortedArrayToBST(vector<int>& nums); };
  */
 /*回傳前k行最弱的rows*/
 struct LC1337 { vector<int> kWeakestRows(vector<vector<int>>& mat, int k); };
+/*求第K大的元素*/
 // struct LC0703 KthLargest { KthLargest(int k, vector<int>& nums); int add(int val); };
+/*從陣列裡持續挑兩數出來相減，問最後減剩的值*/
 struct LC1046 { int lastStoneWeight(vector<int>& stones); };
 /*給定分數陣列，找出相對排名*/
 struct LC0506 { vector<string> findRelativeRanks(vector<int>& score); };
