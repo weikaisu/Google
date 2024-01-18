@@ -60,45 +60,6 @@ vector<int> LC1337::kWeakestRows(vector<vector<int>>& mat, int k) {
 //    return res;
 }
 
-// LC0703
-struct KthLargest {
-    /*求第K大的元素*/
-    // 让我们在数据流中求第K大的元素，跟之前那道Kth Largest Element in an Array很类似，但不同的是，那道题的数组是确定的，不会再增加元
-    // 素，这样确定第K大的数字就比较简单。而这道题的数组是不断在变大的，所以每次第K大的数字都在不停的变化。那么我们其实只关心前K大个数字就可
-    // 以了，所以我们可以使用一个最小堆来保存前K个数字，当再加入新数字后，最小堆会自动排序，然后把排序后的最小的那个数字去除，则堆中还是K个数
-    // 字，返回的时候只需返回堆顶元素即可
-    priority_queue<int, vector<int>, greater<int>> pq;
-    int min_k;
-    KthLargest(int k, vector<int>& nums) {
-        min_k = k;
-        for(int &num:nums) {
-            pq.push(num);
-            if(pq.size()>min_k) pq.pop();
-        }
-    };
-    int add(int val) {
-        pq.push(val);
-        if(pq.size()>min_k) pq.pop();
-        return pq.top();
-    };
-
-    // use multiset, 較慢
-//    multiset<int> pq;
-//    int min_k;
-//    KthLargest(int k, vector<int>& nums) {
-//        min_k = k;
-//        for(int &num:nums) {
-//            pq.insert(num);
-//            if(pq.size()>min_k) pq.erase(pq.begin());
-//        }
-//    }
-//    int add(int val) {
-//        pq.insert(val);
-//        if(pq.size()>min_k) pq.erase(pq.begin());
-//        return *pq.begin();
-//    }
-};
-
 int LC1046::lastStoneWeight(vector<int>& stones) {
     /*從陣列裡持續挑兩數出來相減，問最後減剩的值*/
     // 给了一堆重量不同的石头，每次选出两个最重的出来相互碰撞，若二者重量相同，则直接湮灭了，啥也不剩，否则剩一个重量为二者差值的石头。然后继
@@ -127,6 +88,45 @@ int LC1046::lastStoneWeight(vector<int>& stones) {
 //    }
 //    return pq.empty() ? 0 : *pq.begin();
 }
+
+// LC0703
+struct KthLargest {
+    /*求第K大的元素*/
+    // 让我们在数据流中求第K大的元素，跟之前那道Kth Largest Element in an Array很类似，但不同的是，那道题的数组是确定的，不会再增加元
+    // 素，这样确定第K大的数字就比较简单。而这道题的数组是不断在变大的，所以每次第K大的数字都在不停的变化。那么我们其实只关心前K大个数字就可
+    // 以了，所以我们可以使用一个最小堆来保存前K个数字，当再加入新数字后，最小堆会自动排序，然后把排序后的最小的那个数字去除，则堆中还是K个数
+    // 字，返回的时候只需返回堆顶元素即可
+    priority_queue<int, vector<int>, greater<int>> pq;
+    int min_k;
+    KthLargest(int k, vector<int>& nums) {
+        min_k = k;
+        for (int& num : nums) {
+            pq.push(num);
+            if (pq.size() > min_k) pq.pop();
+        }
+    };
+    int add(int val) {
+        pq.push(val);
+        if (pq.size() > min_k) pq.pop();
+        return pq.top();
+    };
+
+    // use multiset, 較慢
+//    multiset<int> pq;
+//    int min_k;
+//    KthLargest(int k, vector<int>& nums) {
+//        min_k = k;
+//        for(int &num:nums) {
+//            pq.insert(num);
+//            if(pq.size()>min_k) pq.erase(pq.begin());
+//        }
+//    }
+//    int add(int val) {
+//        pq.insert(val);
+//        if(pq.size()>min_k) pq.erase(pq.begin());
+//        return *pq.begin();
+//    }
+};
 
 vector<string> LC0506::findRelativeRanks(vector<int>& score) {
     // 这道题给了我们一组分数，让我们求相对排名，前三名分别是金银铜牌，后面的就是名次数，利用map的自动排序的功能，不过map是升序排列的，所以

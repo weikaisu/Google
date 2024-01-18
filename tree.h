@@ -125,10 +125,10 @@ struct LC0108 { TreeNode* sortedArrayToBST(vector<int>& nums); };
  */
 /*回傳前k行最弱的rows*/
 struct LC1337 { vector<int> kWeakestRows(vector<vector<int>>& mat, int k); };
-/*求第K大的元素*/
-// struct LC0703 KthLargest { KthLargest(int k, vector<int>& nums); int add(int val); };
 /*從陣列裡持續挑兩數出來相減，問最後減剩的值*/
 struct LC1046 { int lastStoneWeight(vector<int>& stones); };
+/*求第K大的元素*/
+// struct LC0703 KthLargest { KthLargest(int k, vector<int>& nums); int add(int val); };
 /*給定分數陣列，找出相對排名*/
 struct LC0506 { vector<string> findRelativeRanks(vector<int>& score); };
 

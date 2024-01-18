@@ -119,10 +119,13 @@ void Sort::heapify(vector<int>& nums, int n, int i) {
     // n elements, i is the root, if its child is greater than it, swap.
     int root=i, lchild=2*i+1, rchild=2*i+2;
 
+    // 把自己跟lchild/rchild比較，跟最大的那個做swap
+    // 確保每個parent都比lchild/rchild大
     if(lchild<n && nums[lchild]>nums[root]) root=lchild;
     if(rchild<n && nums[rchild]>nums[root]) root=rchild;
     if(root != i) {
         std::swap(nums[root], nums[i]);
+        // 把較小的值繼續往下放直到leaf
         heapify(nums, n, root);
     }
 }
@@ -133,9 +136,10 @@ void Sort::HeapSort(vector<int>& nums) {
     int i, n=nums.size();
     if(n<2) return;
 
+    // 從最後一個parent往root確認每個parent都比lchild/rchild大
     for(i=n/2-1; i>=0; i--)
         heapify(nums, n, i);
-    // swaps first and last node
+    // 當root為最大值後，持續將root放到最後，vector就會變成一個排序好的vector
     for(i=n-1; i>=0; i--) {
         std::swap(nums[0], nums[i]);
         heapify(nums, i, 0);
