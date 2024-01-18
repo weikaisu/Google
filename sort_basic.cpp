@@ -4,15 +4,17 @@
 void Sort::SelectSort(vector<int> &nums) {
     for(int i=0; i<nums.size()-1; i++)
         for(int j=i+1 ; j<nums.size() ; j++)
-            if(nums[i]>nums[j]) swap (nums[i],nums[j]);
+            if(nums[i]>nums[j]) std::swap (nums[i],nums[j]);
 }
 
 //將第i張紙牌加入「前i−1張排序過」的紙牌組合，得到i張排序過的紙牌組合。
 void Sort::InsertSort(vector<int> &nums) {
     for(int i=1 ; i<nums.size() ; i++) {
         int j=i, p=nums[j];
-        for( ; j && nums[j]<nums[j-1] ; j--)
-            nums[j]=nums[j-1];
+        while (j && p < nums[j-1]) {
+            nums[j] = nums[j - 1];
+            j--;
+        }
         nums[j]=p;
     }
 }
@@ -23,7 +25,7 @@ void Sort::BubbleSort(vector<int> &nums) {
         swapped = false;
         for(int i=0 ; i<nums.size()-1; i++)
             if(nums[i]>nums[i+1]) {
-                swap(nums[i], nums[i+1]);
+                std::swap(nums[i], nums[i+1]);
                 swapped=true;
             }
     }
@@ -36,10 +38,10 @@ int Sort::divide(vector<int> &nums, int lidx, int ridx) {
     i=j=lidx;
 
     while(j < ridx) {
-        if(nums[j] < p) swap(nums[i++], nums[j]);
+        if(nums[j] < p) std::swap(nums[i++], nums[j]);
         j++;
     }
-    swap(nums[i], nums[ridx]);
+    std::swap(nums[i], nums[ridx]);
 
     return i;
 }
@@ -120,7 +122,7 @@ void Sort::heapify(vector<int>& nums, int n, int i) {
     if(lchild<n && nums[lchild]>nums[root]) root=lchild;
     if(rchild<n && nums[rchild]>nums[root]) root=rchild;
     if(root != i) {
-        swap(nums[root], nums[i]);
+        std::swap(nums[root], nums[i]);
         heapify(nums, n, root);
     }
 }
@@ -135,7 +137,7 @@ void Sort::HeapSort(vector<int>& nums) {
         heapify(nums, n, i);
     // swaps first and last node
     for(i=n-1; i>=0; i--) {
-        swap(nums[0], nums[i]);
+        std::swap(nums[0], nums[i]);
         heapify(nums, i, 0);
     }
 }
