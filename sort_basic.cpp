@@ -115,17 +115,19 @@ void Sort::MergeSortIterative(vector<int>& nums) {
         }
 }
 
-void Sort::heapify(vector<int>& nums, int n, int i) {
-    // n elements, i is the root, if its child is greater than it, swap.
-    int root=i, lchild=2*i+1, rchild=2*i+2;
+void Sort::heapify(vector<int>& nums, int n, int node) {
+    // n elements, node is the root, if its child is greater than it, swap.
+    // heapify 的功能為確保以node為root以下滿足heap條件
+    int root=node, lchild=2*node+1, rchild=2*node+2;
 
     // 把自己跟lchild/rchild比較，跟最大的那個做swap
     // 確保每個parent都比lchild/rchild大
     if(lchild<n && nums[lchild]>nums[root]) root=lchild;
     if(rchild<n && nums[rchild]>nums[root]) root=rchild;
-    if(root != i) {
-        std::swap(nums[root], nums[i]);
+    if(root != node) {
+        std::swap(nums[root], nums[node]);
         // 把較小的值繼續往下放直到leaf
+        // 要繼續往下的原因是確保swap過後正個subtree仍滿足heap條件
         heapify(nums, n, root);
     }
 }
@@ -136,7 +138,8 @@ void Sort::HeapSort(vector<int>& nums) {
     int i, n=nums.size();
     if(n<2) return;
 
-    // 從最後一個parent往root確認每個parent都比lchild/rchild大
+    // 從最後一個parent往root確認每個內部node以下都滿足heap條件
+    // 從最後一個往回處理是為了確保最大值可以拋到root
     for(i=n/2-1; i>=0; i--)
         heapify(nums, n, i);
     // 當root為最大值後，持續將root放到最後，vector就會變成一個排序好的vector

@@ -16,6 +16,10 @@ public:
     void MergeSortRecursive(vector<int>& nums, int lidx, int ridx);
     void MergeSortIterative(vector<int>& nums);
     void HeapSort(vector<int>& nums);
+    // HeapSort是給定一堆資料做排序，而Heap(priority_queue)是會有push/pop
+    // push : 放到最後，往parent一路比大小上去
+    // pop  : 取出首個，把最後一個放到首位，開始遞歸做heapify
+    // 所以在Heap(priority_queue)裡是pop會用到heapify
 
 private:
     // for quickSort
