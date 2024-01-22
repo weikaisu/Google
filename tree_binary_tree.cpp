@@ -3,6 +3,10 @@
 /***********  Binary Tree  **********/
 int LC1022::sumRootToLeaf(TreeNode* root) {
     /*求所有從root到leaf組成二進制數字的和*/
+    // 遞歸
+    // 1. 求到每一node累積的和
+    // 2. 當沒有左右子樹時表示可以將目前累積的和存入res
+    // 3. 沒有利用到回傳值
     // 给了一个结点值为0或1的二叉树，让返回所有从根结点到叶结点的路径组成的二进制数字的和。实际上就是一道变形的路径之和的题目，关于路径之和，
     // LeetCode 有很多道题目，比如 Path Sum IV，Path Sum III，Binary Tree Maximum Path Sum，Path Sum II，Path Sum，和
     // Minimum Path Sum 等等。还是要用递归来做，就使用先序遍历就可以了，使用一个变量 cur 记录从根结点到当前结点的路径的二进制数对应的十
@@ -32,6 +36,9 @@ int LC1022::sumRootToLeaf(TreeNode* root) {
 
 vector<double> LC0637::averageOfLevels(TreeNode* root) {
     /*求tree裡各level的平均值*/
+    // 用queue取代遞歸
+    // 1. 累加每一level裡node的val後求平均
+    // 2. 在每一level放入平均值
     if(!root) return {};
 
     vector<double> ans;
@@ -56,6 +63,12 @@ vector<double> LC0637::averageOfLevels(TreeNode* root) {
 
 TreeNode* LC0617::mergeTrees(TreeNode* root1, TreeNode* root2) {
     /*合併兩tree，新結點值為兩tree同位置結點值之和*/
+    // 遞歸
+    // 1. 同步走訪兩tree的node
+    // 2. 選一不為null的node來放合併後的val
+    // 3. 以此node連接左右子樹
+    // 4. 回傳此node
+    // 新root長出來的tree是連結至原本兩tree裡的node，原本的node是會被修改的
     if(!root1) return root2; if(!root2) return root1;
 
     // merge root2 to root1
@@ -68,17 +81,20 @@ TreeNode* LC0617::mergeTrees(TreeNode* root1, TreeNode* root2) {
 
 string LC0606::tree2str(TreeNode* root) {
     /*求先序走訪tree後組成的字串*/
+    // 遞歸
+    // 1. 求在每個node會轉成的字元
+    // 2. 回傳在這個node之後會組成的字串
     if(!root) return "";
 
     const string m = to_string(root->val);
     const string l = tree2str(root->left);
     const string r = tree2str(root->right);
 
-    // case : s
+    // case : m
     if(!root->left && !root->right) return m;
-    // case : s(l)
+    // case : m(l)
     if(!root->right) return m+"("+l+")";
-    // general: s(l)(r)
+    // general: m(l)(r)
     return m+"("+l+")"+"("+r+")";
 }
 
@@ -86,17 +102,20 @@ int LC0543::diameterOfBinaryTree(TreeNode* root) {
     /*求tree的直徑*/
     // The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
     // This path may or may not pass through the root.
-    auto diameter = [](const auto &self, TreeNode *root, int &len) -> int {
-        if(!root) return -1;
-        int left_len  = self(self, root->left,  len) +1;
-        int right_len = self(self, root->right, len) +1;
-        len = max(len, left_len+right_len);
-        return max(left_len, right_len);
+    // 遞歸
+    // 1. 求以每個node為中心左右子樹長度和
+    // 2. 回傳每個node左右子樹較長的len
+    int res = 0;
+    function <int(TreeNode*)> fun = [&](TreeNode* node) -> int {
+        // 若子node為null需要把原本要+1的長度-1回來
+        if (node == nullptr) return -1;
+        int l_len = fun(node->left) + 1;
+        int r_len = fun(node->right) + 1;
+        res = std::max(res, l_len + r_len);
+        return std::max(l_len, r_len);
     };
-
-    int len = 0;
-    diameter(diameter, root, len);
-    return len;
+    fun(root);
+    return res;
 }
 
 int LC0404::sumOfLeftLeaves(TreeNode* root) {
