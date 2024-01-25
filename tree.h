@@ -64,7 +64,7 @@ struct LC0617 { TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2); };
 struct LC0606 { string tree2str(TreeNode* root); };
 /*求tree的直徑*/
 struct LC0543 { int diameterOfBinaryTree(TreeNode* root); };
-/*求tree所有leaves之和*/
+/*求tree所有left leaves之和*/
 struct LC0404 { int sumOfLeftLeaves(TreeNode* root); };
 /*求所有從root到leaf構成的路徑*/
 struct LC0257 { vector<string> binaryTreePaths(TreeNode* root); };

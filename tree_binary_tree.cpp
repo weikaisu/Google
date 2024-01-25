@@ -119,17 +119,30 @@ int LC0543::diameterOfBinaryTree(TreeNode* root) {
 }
 
 int LC0404::sumOfLeftLeaves(TreeNode* root) {
-    /*求tree所有leaves之和*/
-    int sum = 0;
-    if(!root) return sum;
+    /*求tree所有left leaves之和*/
+    // 遞歸
+    // 1. 看每個node是否有left leave，有的話把其val累加起來
+    // 2. 沒有利用到回傳值
+    int res = 0;
 
-    if(root->left && !root->left->left && !root->left->right)
-        sum += root->left->val;
-    return sum + sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
+    function<void(TreeNode*)> fun = [&](TreeNode* node) {
+        if (node == nullptr) return;
+        if (node->left && node->left->left == nullptr && node->left->right == nullptr)
+            res += node->left->val;
+        fun(node->left);
+        fun(node->right);
+    };
+
+    fun(root);
+    return res;
 }
 
 vector<string> LC0257::binaryTreePaths(TreeNode* root) {
     /*求所有從root到leaf構成的路徑*/
+    // 遞歸
+    // 1. 在每個node求此node的val加上後面子樹可能形成的路徑
+    // 2. 若此node沒有左右子tree，其val則為字串的最後一個字元
+    // 2. 回傳以此node為開始的所有字串
     // 给我们一个二叉树，让返回所有根到叶节点的路径，跟之前那道 Path Sum II 很类似，比那道稍微简单一些，不需要计算路径和，
     // 只需要无脑返回所有的路径即可，那么思路还是用递归来解，博主之前就强调过，玩树的题目，十有八九都是递归，而递归的核心就是不停的 DFS
     // 到叶结点，然后在回溯回去。在递归函数中，当遇到叶结点的时候，即没有左右子结点，那么此时一条完整的路径已经形成了，
@@ -148,6 +161,9 @@ vector<string> LC0257::binaryTreePaths(TreeNode* root) {
 TreeNode* LC0226::invertTree(TreeNode* root) {
     /*鏡相（左右）翻轉二叉樹*/
     // 翻转二叉树，递归的方法，写法非常简洁，五行代码搞定，交换当前左右节点，并直接调用递归即可
+    // 遞歸
+    // 1. 在每一個node交換其左右子node
+    // 2. 再回傳此node去接上新的parent
 //    if(!root) return nullptr;
 //    TreeNode* node = root->left;
 //    root->left = invertTree(root->right);
@@ -172,12 +188,17 @@ TreeNode* LC0226::invertTree(TreeNode* root) {
 int LC0222::countNodes(TreeNode* root) {
     /*求tree的結點個數*/
     // 给定了一棵完全二叉树，让我们求其节点的个数。直接用递归来统计结点的个数，根本不需要考虑什么完全二叉树还是完美二叉树，递归在手，遇 tree 不愁。
+    // 遞歸
+    // 1. 在每一個node求此node加上左右子樹的node數
+    // 2. 回傳包含此node之後有的node數
     return root ? (1 + countNodes(root->left) + countNodes(root->right)) : 0;
 }
 
 vector<int> LC0145::postorderTraversal(TreeNode* root) {
     /*後序遍歷tree*/
     // 改变先序遍历的顺序来实现后序遍历。比起另一種方法會有較少的s.push，所以性能較好。
+    // 先将先序遍历的根-左-右顺序变为根-右-左，再翻转变为后序遍历的左-右-根，翻转还是
+    // 改变结果 res 的加入顺序，然后把更新辅助结点p的左右顺序换一下即可
     if(!root) return {};
     vector<int> res;
     stack<TreeNode*> s;
@@ -340,14 +361,18 @@ vector<int> LC0094::inorderTraversal(TreeNode* root) {
 
     // 从根节点开始，先将根节点压入栈，然后再将其所有左子结点压入栈，然后取出栈顶节点，保存节点值，再将当前指针移到其右子节点上，若存在右子节
     // 点，则在下次循环时又可将其所有左子结点压入栈中。这样就保证了访问顺序为左-根-右
+    if (!root) return {};
     vector<int> res;
-    stack<TreeNode*>  s;
-    TreeNode *p = root;
+    stack<TreeNode*>  s; // s用來放走過但還沒取值的node
+    TreeNode *p = root; // p表示目前走到的node
+    // 迴圈裡
+    // 1. 決定下一個要走訪的node, p!=null
+    // 2. 把走訪過得node取值, s.size()!=0
     while(s.size() || p) {
         if(p) { // 當p有值時表示需先繼續走訪左子樹
             s.push(p);
             p = p->left;
-        } else { // 當p無值時表示取val，並開始走訪右子樹
+        } else { // 當p走到leaves、無值時表示需回退，從s裡撈出上一個node取val，並開始走訪右子樹
             p = s.top(); s.pop();
             res.push_back(p->val);
             p = p->right;
