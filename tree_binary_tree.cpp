@@ -194,76 +194,6 @@ int LC0222::countNodes(TreeNode* root) {
     return root ? (1 + countNodes(root->left) + countNodes(root->right)) : 0;
 }
 
-vector<int> LC0145::postorderTraversal(TreeNode* root) {
-    /*後序遍歷tree*/
-    // 改变先序遍历的顺序来实现后序遍历。比起另一種方法會有較少的s.push，所以性能較好。
-    // 先将先序遍历的根-左-右顺序变为根-右-左，再翻转变为后序遍历的左-右-根，翻转还是
-    // 改变结果 res 的加入顺序，然后把更新辅助结点p的左右顺序换一下即可
-    if(!root) return {};
-    vector<int> res;
-    stack<TreeNode*> s;
-    TreeNode* p = root;
-    while(s.size() || p) {
-        if(p) {
-            s.push(p);
-            res.insert(res.begin(), p->val);
-            p = p->right;
-        } else {
-            p = s.top(); s.pop();
-            p = p->left;
-        }
-    }
-    return res;
-
-    // 改变先序遍历的顺序来实现后序遍历，跟LC0144相同的作法，只是改用res.insert()的方式
-//    if(!root) return {};
-//    vector<int> res;
-//    stack<TreeNode*> s({root});
-//    while(s.size()) {
-//        TreeNode* node=s.top(); s.pop();
-//        res.insert(res.begin(), node->val);
-//        if(node->left) s.push(node->left);
-//        if(node->right) s.push(node->right);
-//    }
-//    return res;
-}
-
-vector<int> LC0144::preorderTraversal(TreeNode* root) {
-    /*前序遍歷tree*/
-    // 使用了一个辅助结点p，这种写法其实可以看作是一个模版，对应的还有中序和后序的模版写法，形式很统一，方便于记忆。辅助结点p初始化为根结点，
-    // while 循环的条件是栈不为空或者辅助结点p不为空，在循环中首先判断如果辅助结点p存在，那么先将p加入栈中，然后将p的结点值加入结果 res 中，
-    // 此时p指向其左子结点。否则如果p不存在的话，表明没有左子结点，取出栈顶结点，将p指向栈顶结点的右子结点
-    if(!root) return {};
-    vector<int> res;
-    stack<TreeNode*> s;
-    TreeNode* p = root;
-    while(s.size() || p) {
-        if(p) {
-            s.push(p);
-            res.push_back(p->val);
-            p = p->left;
-        } else {
-            p = s.top(); s.pop();
-            p = p->right;
-        }
-    }
-    return res;
-
-    // 用到stack来辅助运算。由于先序遍历的顺序是"根-左-右", 算法为：
-    //1. 把根节点 push 到栈中
-    //2. 循环检测栈是否为空，若不空，则取出栈顶元素，保存其值，然后看其右子节点是否存在，若存在则 push 到栈中。再看其左子节点，若存在，则 push 到栈中。
-    /*if(!root) return {};
-    vector<int> res;
-    stack<TreeNode*> s{{root}};
-    while(s.size()) {
-        TreeNode* n=s.top(); s.pop();
-        res.push_back(n->val);
-        if(n->right) s.push(n->right);
-        if(n->left) s.push(n->left);
-    }
-    return res;*/
-}
-
 //TreeNode *root;
 //root->BuildTree(root);
 //LC110 run;
@@ -271,23 +201,28 @@ vector<int> LC0144::preorderTraversal(TreeNode* root) {
 //root->CleanTree(root);
 bool LC0110::isBalanced(TreeNode* root) {
     /*判斷tree是否平衡*/
-    auto getTreeHeight = [](const auto &self, TreeNode* root, bool &isBalanse) -> int {
-        if(!root) return 0;
-        int lHeight = self(self, root->left, isBalanse);
-        int rHeight = self(self, root->right, isBalanse);
-        if(abs(lHeight-rHeight)>1) isBalanse=false;
-        return max(lHeight, rHeight)+1;
+    // 遞歸
+    // 1. 在每一個結點看左右子樹的高度差是否大於1
+    // 2. 回傳左右子樹較大的高度+1
+    if (root == nullptr) return true;
+    bool isBalanced = true;
+    function<int(TreeNode*)> fun = [&](TreeNode* node) -> int {
+        if (node == nullptr) return 0;
+        int lh = fun(node->left);
+        int rh = fun(node->right);
+        if (std::abs(lh - rh) > 1) isBalanced = false;
+        return std::max(lh, rh) + 1;
     };
-
-    if(!root) return true;
-    bool isBalance = true;
-    getTreeHeight(getTreeHeight, root, isBalance);
-    return isBalance;
+    fun(root);
+    return isBalanced;
 }
 
 int LC0104::maxDepth(TreeNode* root) {
     /*求2叉樹的最大深度*/
     // 求二叉树的最大深度问题用到深度优先搜索 Depth First Search，递归的完美应用，跟求二叉树的最小深度问题原理相同
+    // 遞歸
+    // 1. 在每一個結點算子樹的高度加1
+    // 2. 回傳左右子樹較大的高度+1
     if(!root) return 0;
     return 1 + std::max(maxDepth(root->left), maxDepth(root->right));
 
@@ -311,14 +246,15 @@ bool LC0101::isSymmetric(TreeNode* root) {
     /*判斷tree是否平衡*/
     // 判断二叉树是否是平衡树，比如有两个节点n1, n2，我们需要比较n1的左子节点的值和n2的右子节点的值是否相等，同时还要比较n1的右子节点的
     // 值和n2的左子结点的值是否相等，以此类推比较完所有的左右两个节点。
-    function<bool(TreeNode*, TreeNode*)> bfs = [&](TreeNode* l, TreeNode* r) -> bool {
-        if(!l && !r) return true;
-        if(!l || !r || l->val!=r->val) return false;
-        return bfs(l->left, r->right) && bfs(l->right, r->left);
+    // 遞歸
+    // 1. 在每二個對應的結點看val是否相等、左右/右左子樹是否對稱
+    // 2. 回傳左右 && 右左子樹對稱狀況
+    function<bool(TreeNode*, TreeNode*)> fun = [&](TreeNode* l, TreeNode* r) -> bool {
+        if (l == nullptr && r == nullptr) return true;
+        if (l == nullptr || r == nullptr || l->val != r->val) return false;
+        return fun(l->left, r->right) && fun(l->right, r->left);
     };
-
-    if(!root) return true;
-    return bfs(root->left, root->right);
+    return fun(root->left, root->right);
 
     // 借助队列queue
 //    queue<TreeNode*> q;
@@ -341,6 +277,9 @@ bool LC0101::isSymmetric(TreeNode* root) {
 
 bool LC0100::isSameTree(TreeNode* p, TreeNode* q) {
     /*判斷兩tree是否一樣*/
+    // 遞歸
+    // 1. 在每二個對應的結點看val是否相等、左左/右右子樹是否相等
+    // 2. 回傳左右 && 右右子樹相等狀況
     if(!p && !q) return true;
     if(!p || !q || (p->val!=q->val)) return false;
     return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
@@ -349,34 +288,96 @@ bool LC0100::isSameTree(TreeNode* p, TreeNode* q) {
 vector<int> LC0094::inorderTraversal(TreeNode* root) {
     /*中序遍歷tree*/
     // 递归方法，十分直接，对左子结点调用递归函数，根节点访问值，右子节点再调用递归函数
-//    if(root==nullptr) return {};
-//    vector<int> res;
-//    function<void(TreeNode*)> dfs = [&](TreeNode* root) -> void {
-//        if(root->left) dfs(root->left);
-//        res.push_back(root->val);
-//        if(root->right) dfs(root->right);
-//    };
-//    dfs(root);
-//    return res;
+ //   vector<int> res{};
+ //   function<void(TreeNode*)> fun = [&](TreeNode* node) {
+ //       if (node == nullptr) return;
+ //       fun(node->left);
+ //       res.push_back(node->val);
+ //       fun(node->right);
+ //   };
+ //   fun(root);
+ //   return res;
 
     // 从根节点开始，先将根节点压入栈，然后再将其所有左子结点压入栈，然后取出栈顶节点，保存节点值，再将当前指针移到其右子节点上，若存在右子节
     // 点，则在下次循环时又可将其所有左子结点压入栈中。这样就保证了访问顺序为左-根-右
     if (!root) return {};
     vector<int> res;
     stack<TreeNode*>  s; // s用來放走過但還沒取值的node
-    TreeNode *p = root; // p表示目前走到的node
+    TreeNode* p = root; // p表示目前走到的node
     // 迴圈裡
     // 1. 決定下一個要走訪的node, p!=null
     // 2. 把走訪過得node取值, s.size()!=0
-    while(s.size() || p) {
-        if(p) { // 當p有值時表示需先繼續走訪左子樹
+    while (s.size() || p) {
+        if (p) { // 當p有值時表示需先繼續走訪左子樹
             s.push(p);
             p = p->left;
-        } else { // 當p走到leaves、無值時表示需回退，從s裡撈出上一個node取val，並開始走訪右子樹
+        }
+        else { // 當p走到leaves、無值時表示需回退，從s裡撈出上一個node取val，並開始走訪右子樹
             p = s.top(); s.pop();
             res.push_back(p->val);
             p = p->right;
         }
     }
+    return res;
+}
+
+vector<int> LC0144::preorderTraversal(TreeNode* root) {
+    /*前序遍歷tree*/
+    // 使用了一个辅助结点p，这种写法其实可以看作是一个模版，对应的还有中序和后序的模版写法，形式很统一，方便于记忆。辅助结点p初始化为根结点，
+    // while 循环的条件是栈不为空或者辅助结点p不为空，在循环中首先判断如果辅助结点p存在，那么先将p加入栈中，然后将p的结点值加入结果 res 中，
+    // 此时p指向其左子结点。否则如果p不存在的话，表明没有左子结点，取出栈顶结点，将p指向栈顶结点的右子结点
+    if (!root) return {};
+    vector<int> res;
+    stack<TreeNode*> s;
+    TreeNode* p = root;
+    while (s.size() || p) {
+        if (p) {
+            s.push(p);
+            res.push_back(p->val);
+            p = p->left;
+        }
+        else {
+            p = s.top(); s.pop();
+            p = p->right;
+        }
+    }
+    return res;
+
+    // 用到stack来辅助运算。由于先序遍历的顺序是"根-左-右", 算法为：
+    //1. 把根节点 push 到栈中
+    //2. 循环检测栈是否为空，若不空，则取出栈顶元素，保存其值，然后看其右子节点是否存在，若存在则 push 到栈中。再看其左子节点，若存在，则 push 到栈中。
+    /*if(!root) return {};
+    vector<int> res;
+    stack<TreeNode*> s{{root}};
+    while(s.size()) {
+        TreeNode* n=s.top(); s.pop();
+        res.push_back(n->val);
+        if(n->right) s.push(n->right);
+        if(n->left) s.push(n->left);
+    }
+    return res;*/
+}
+
+vector<int> LC0145::postorderTraversal(TreeNode* root) {
+    /*後序遍歷tree*/
+    // 改变先序遍历的顺序来实现后序遍历。比起另一種方法會有較少的s.push，所以性能較好。
+    // 先将先序遍历的根-左-右顺序变为根-右-左，再翻转变为后序遍历的左-右-根，翻转还是
+    // 改变结果 res 的加入顺序，然后把更新辅助结点p的左右顺序换一下即可
+    if (root == nullptr) return {};
+    vector<int> res;
+    stack<TreeNode*> s;
+    TreeNode* p = root;
+    while (s.size() || p) {
+        if (p) {
+            s.push(p);
+            res.push_back(p->val);
+            p = p->right;
+        }
+        else {
+            p = s.top(); s.pop();
+            p = p->left;
+        }
+    }
+    std::reverse(res.begin(), res.end());
     return res;
 }
