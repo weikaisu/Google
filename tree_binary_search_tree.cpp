@@ -6,6 +6,9 @@ int LC0938::rangeSumBST(TreeNode* root, int low, int high) {
     // 由于 BST 具有 左<根<右 的特点，所以就可以进行剪枝，若当前结点值小于L，则说明其左子树所有结点均小于L，可以直接将左子树剪去；同理，
     // 若当前结点值大于R，则说明其右子树所有结点均大于R，可以直接将右子树剪去。否则说明当前结点值正好在区间内，将其值累加上，并分别对左右子
     // 结点调用递归函数即可
+    // 遞歸
+    // 1. 在每一個node看val不在範圍內的話則剪枝左或右子樹
+    // 2. 回傳val(如果在範圍內)加上左右子樹累積的和
     function<int(TreeNode*)> fun = [&](TreeNode* node) -> int {
         if(node == nullptr) return 0;
         if(node->val < low) node->left = nullptr;
@@ -26,12 +29,17 @@ TreeNode* LC0897::increasingBST(TreeNode* root) {
     // 的位置，那么就在递归函数的参数中传入一个 pre 结点，再对左右子结点调用递归函数时，都将其下一个要连接的结点传入，这个 pre 结点可能是当前
     // 结点或者当前结点的父结点。
     //
-    //在递归函数中，首先判空，若当前结点为空的话，直接返回 pre 结点，因为到空结点的时候，说明已经遍历到叶结点的下方了，那么 pre 就是这个叶结
+    // 在递归函数中，首先判空，若当前结点为空的话，直接返回 pre 结点，因为到空结点的时候，说明已经遍历到叶结点的下方了，那么 pre 就是这个叶结
     // 点了。由于是中序遍历，所以要先对左子结点调用递归函数，将返回值保存到一个新的结点 res 中，表示的意义是此时 node 的左子树已经全部捋直了，
     // 而且根结点就是 res，而且 node 结点本身也被连到了捋直后的左子树下，即此时左子结点和根结点已经完成了交换位子，当然要断开原来的连接，所以
     // 将 node->left 赋值为 nullptr。然后再对 node 的右子结点调用递归函数，注意此时的 pre 不能传入 node 本身，而是要传 node 结点的
     // pre 结点，这是因为右子结点后面要连接的是 node 的父结点
     // recursive way
+    // 遞歸
+    // 1. 在每一個node先處理左子node再處理右子node
+    // 2. 左子node的pre是自己，右子node的pre是自己的父node(如此就可以把父node接到自己的右子node)
+    // 3. 左子node的處理完後設成nullptr
+    // 4. 回傳每個node的最左leaf node
 //    function<TreeNode*(TreeNode*, TreeNode*)> fun = [&](TreeNode* node, TreeNode* pre) -> TreeNode* {
 //        if(node == nullptr) return pre;
 //        TreeNode* res = fun(node->left, node);
@@ -48,15 +56,15 @@ TreeNode* LC0897::increasingBST(TreeNode* root) {
     TreeNode *dummy = new TreeNode(-1), *pre = dummy, *p=root;
     stack<TreeNode*> s;
     while(s.size() || p) {
-        while(p) {
+        while(p) { // 在每個node循環找到最左leaf
             s.push(p);
             p = p->left;
         }
         p = s.top(); s.pop();
         pre->right = p;
-        pre = pre->right;
+        pre = pre->right; // pre代表新root，一路往右走
         p->left = nullptr;
-        p = p->right;
+        p = p->right; // p代表在每個node切換開始處理右子樹
     }
     return dummy->right;
 }
