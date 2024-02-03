@@ -436,7 +436,7 @@ int LC0409::longestPalindrome(string s) {
 string LC0405::toHex(int num) {
     /*將十進位整數轉成十六進位表示*/
     // Input: 26
-    //Output: "1a"
+    // Output: "1a"
 
     // 0000 1100 ( 12)
     // 1111 0100 (-12)
@@ -454,6 +454,23 @@ string LC0405::toHex(int num) {
     // One's Complement
     // The complement or negation of a one's complement number x is 2^n-x-1. The negative of a one's complement is found
     // by inverting each bit, from 0 to 1 and from 1 to 0.
+
+    //-8 1000
+    //-7 1001
+    //-6 1010
+    //-5 1011
+    //-4 1100
+    //-3 1101
+    //-2 1110
+    //-1 1111
+    // 0 0000
+    // 1 0001
+    // 2 0010
+    // 3 0011
+    // 4 0100
+    // 5 0101
+    // 6 0110
+    // 7 0111
 
     // 從大數開始除起，餘數可以一直往結果的字串前面串接，連續除基數，餘數是需不斷往結果的字串前面插入，以6為例。
     // 6/2 = 3~0

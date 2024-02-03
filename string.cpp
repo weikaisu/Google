@@ -899,6 +899,8 @@ int LC0008::myAtoi(string s) {
     // 3. 若下一个字符不是数字，则返回0，完全不考虑小数点和自然数的情况，不过这样也好，起码省事了不少。
     // 4. 如果下一个字符是数字，则转为整型存下来，若接下来再有非数字出现，则返回目前的结果。
     // 5. 还需要考虑边界问题，如果超过了整型数的范围[-2^31, 2^31-1], 2^31=2,147,483,648，则用边界值替代当前值。
+    // Input: s = "4193 with words"
+    // Output: 4193
     if(s.empty()) return 0;
     int sign=1, val=0, i=0, n=s.size();
     while(i<n && s[i]==' ') i++;
@@ -922,24 +924,20 @@ string LC0006::convert(string s, int numRows) {
     // Y   I   R
     // then read line by line: "PAHNAPLSIIGYIR"
     // Write the code that will take a string and make this conversion given a number of rows
-    if(numRows<=1 || numRows>= s.size()) return s;
-
-    vector<string> lines(numRows);
-    int row=0, step=1;
-    for(int i=0 ; i<s.size() ; i++) {
-        lines[row] += s[i];
-        if(row == 0)  step = 1;
-        if(row == numRows-1) step = -1;
-        row += step;
-    }
+    if (numRows <= 1 || numRows >= s.size()) return s;
 
     string res;
-    for(auto l:lines) res += l;
+    vector<string> lines(numRows);
+    int row = 0, dir = 1;
+    for (int i = 0; i < s.size(); ++i) {
+        lines[row] += s[i];
+        if (row == 0) dir = 1;
+        if (row == numRows - 1) dir = -1;
+        row += dir;
+    }
+    for (string line : lines)
+        res += line;
     return res;
-
-//    string ans;
-//    for(int i=0 ; i<numRows ; i++) ans+=line[i];
-//    return ans;
 }
 
 int LC0003::lengthOfLongestSubstring(string s) {
@@ -956,8 +954,8 @@ int LC0003::lengthOfLongestSubstring(string s) {
     int res=0, lidx=-1, ridx=0;
     while(ridx<s.size()) {
         lidx = std::max(lidx, map[s[ridx]]);
+        res = std::max(res, ridx - lidx);
         map[s[ridx]] = ridx;
-        res = std::max(res, ridx-lidx);
         ridx++;
     }
     return res;
