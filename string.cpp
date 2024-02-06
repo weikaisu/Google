@@ -710,10 +710,15 @@ string LC0415::addStrings(string num1, string num2) {
 vector<string> LC0412::fizzBuzz(int n) {
     /*分情況設置字串*/
     // Write a program that outputs the string representation of numbers from 1 to  n.
-    // 这道题真心没有什么可讲的，就是分情况处理就行了。
-    // 注意！i%15需先括號起來再判斷是否為0
+    // answer[i] == "FizzBuzz" if i is divisible by 3 and 5.
+    // answer[i] == "Fizz" if i is divisible by 3.
+    // answer[i] == "Buzz" if i is divisible by 5.
+    // answer[i] == i(as a string) if none of the above conditions are true.
+    // Input: n = 5
+    // Output: ["1", "2", "Fizz", "4", "Buzz"]
     vector<string> res;
     for(int i=1; i<=n; i++) {
+        // 注意！i%x需先括號起來再判斷是否為0
         if(!(i%15)) res.push_back("FizzBuzz");
         else if(!(i%3)) res.push_back("Fizz");
         else if(!(i%5)) res.push_back("Buzz");
@@ -723,14 +728,14 @@ vector<string> LC0412::fizzBuzz(int n) {
 }
 
 bool LC0392::isSubsequence(string s, string t) {
-    /*是否是另一字串的子字串*/
+    /*是否是另一字串的子"序列"*/
     // Given a string s and a string t, check if s is subsequence of t.
     // s = "abc", t = "ahbgdc", Return true.
     // 用两个指针分别指向字符串s和t，然后如果字符相等，则i和j自增1，反之只有j自增1，最后看i是否等于s的长度，等于说明s已经遍历完了，
     // 而且字符都有在t中出现过
     int i=0;
-    for(int j=0; i<s.size()&&j<t.size(); j++)
-        if(s[i]==t[j]) i++;
+    for(int j=0; i<s.size()&&j<t.size(); ++j)
+        if(s[i]==t[j]) ++i;
     return i==s.size();
 }
 
@@ -745,20 +750,21 @@ bool LC0290::wordPattern(string pattern, string s) {
     // 如果没有在 HashMap 中出现，我们还要遍历一遍 HashMap，看新遇到的单词是否已经是其中的映射，
     // 若已经有其他映射，直接返回 false，如果没有，再跟新遇到的字符建立映射。最后循环退出后，要检查此时的 i 是否和 n 相同，
     // 这是检查一对一映射的最后一步，因为当 str 中的单词处理完了之后，pattern 中就不能有多余的字符了
-    unordered_map<char, string> map;
+    unordered_map<char, string> m;
     istringstream in(s);
     int i = 0;
-    for(string word; in>>word; i++) {
-        if(i>=pattern.size()) return false;
-        if(map.count(pattern[i])) {
-            if (map[pattern[i]] != word) return false;
-        } else {
-            for(auto m:map)
-                if(m.second == word) return false;
-            map[pattern[i]] = word;
+    for (string w; in >> w; ++i) {
+        if (i == pattern.size()) return false;
+        if (m.count(pattern[i])) {
+            if (m[pattern[i]] != w) return false;
+        }
+        else {
+            for (auto p : m)
+                if (p.second == w) return false;
+            m[pattern[i]] = w;
         }
     }
-    return i==pattern.size();
+    return i == pattern.size();
 }
 
 bool LC0125::isPalindrome(string s) {
@@ -772,9 +778,9 @@ bool LC0125::isPalindrome(string s) {
     int l=0, r=s.size()-1;
     while(l<r) {
         // isalnum是否為字母或數字
-        if(!isalnum(s[l])) l++;
-        else if(!isalnum(s[r])) r--;
-        else if (tolower(s[l++]) != tolower(s[r--])) return false;
+        if(!isalnum(s[l])) ++l;
+        else if(!isalnum(s[r])) --r;
+        else if (tolower(s[++l]) != tolower(s[--r])) return false;
     }
     return true;
 }
@@ -783,17 +789,17 @@ bool LC0125::isPalindrome(string s) {
 //cout << run.addBinary("11","1");
 string LC0067::addBinary(string a, string b) {
     /*二進位字串相加*/
-    // Given two binary strings a and b, return  their sum as a binary string.
-    int i=a.size()-1, j=b.size()-1, c=0;
+    // Given two binary strings a and b, return their sum as a binary string.
+    int i = a.size() - 1, j = b.size() - 1, c = 0;
     string res;
-
-    while(i>=0 || j>=0 || c) {
-        c += i>=0 ? a[i--]-'0' : 0;
-        c += j>=0 ? b[j--]-'0' : 0;
-        res += c%2+'0';
+    while (i >= 0 || j >= 0 || c) {
+        c += i >= 0 ? a[i--] - '0' : 0;
+        c += j >= 0 ? b[j--] - '0' : 0;
+        res += ('0' + c % 2);
         c /= 2;
     }
-    return string(res.rbegin(), res.rend());
+    std::reverse(res.begin(), res.end());
+    return res;
 }
 
 //LC0058 run;
@@ -804,12 +810,12 @@ int LC0058::lengthOfLastWord(string& s) {
     // return the length of last word in the string.
     // If the last word does not exist, return 0.
     int last=0, curr=0;
-    for(auto c:s) {
+    for(char c:s) {
         if(' '==c) {
             if(curr) last=curr;
             curr=0;
         }
-        else curr++;
+        else ++curr;
     }
     return curr ? curr : last;
 }
@@ -821,8 +827,10 @@ int LC0028::strStr(string haystack, string needle) {
     // Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
     int m = haystack.size();
     int n = needle.size();
-    for(int i=0; ; i++) {
-        for (int j=0;; j++) {
+    // 較簡潔的寫法，反正最終都需要兩層for loop，就直接來
+    // for開頭沒有寫終止條件，是在裡頭判斷是否走到m、n，而直接做return的動作。
+    for(int i=0; ;++i) {
+        for (int j=0; ;++j) {
             if (j == n) return i; // 第一檢查j是否走到n，否則會拿needle[n]來做比較
             if (i + j == m) return -1; // 第二檢查是否走到m，否則會拿到haystack[m]來做比較
             if (haystack[i + j] != needle[j]) break;
@@ -856,14 +864,14 @@ bool LC0020::isValid(string str) {
     // 则将其压入栈中，如果遇到右半边括号时，若此时栈为空，则直接返回 false，如不为空，则取出栈顶元素，若为对应的左半边括号，则继续循环，
     // 反之返回 false
     stack<char> s;
-    for(int i=0; i<str.size(); ++i) {
-        if(str[i]=='(' || str[i]=='[' || str[i]=='{')
-            s.push(str[i]);
+    for (char c : str) {
+        if (c == '(' || c == '[' || c == '{') s.push(c);
         else {
-            if(s.empty()) return false;
-            if(s.top()=='(' && str[i]!=')') return false;
-            if(s.top()=='[' && str[i]!=']') return false;
-            if(s.top()=='{' && str[i]!='}') return false;
+            if (s.empty() ||
+                (c == ')' && s.top() != '(') ||
+                (c == ']' && s.top() != '[') ||
+                (c == '}' && s.top() != '{'))
+                return false;
             s.pop();
         }
     }
@@ -909,7 +917,7 @@ int LC0008::myAtoi(string s) {
     while(i<n && s[i]>='0' && s[i]<='9') {
         if(val > INT_MAX/10 || (val == INT_MAX/10 && s[i]-'0' > 7))
             return (sign==1) ? INT_MAX : INT_MIN;
-        val = 10*val + (s[i++]-'0');
+        val = 10*val + (s[i++]-'0'); //括號需加否則會先加上s[i]而發生overflow
     }
     return sign*val;
 }

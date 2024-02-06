@@ -65,7 +65,7 @@ struct LC0434 { int countSegments(string s); };
 struct LC0415 { string addStrings(string num1, string num2); };
 /*分情況設置字串*/
 struct LC0412 { vector<string> fizzBuzz(int n); };
-/*是否是另一字串的子字串*/
+/*是否是另一字串的子序列*/
 struct LC0392 { bool isSubsequence(string s, string t); };
 /*字串pattern是否相同*/
 struct LC0290 { bool wordPattern(string pattern, string s); };

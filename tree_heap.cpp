@@ -29,9 +29,11 @@ vector<int> LC1337::kWeakestRows(vector<vector<int>>& mat, int k) {
 
     // use priority queue and merge soldier count and index into one number : cunt*100 + idx;
     const int m=mat.size();
-    priority_queue<int, vector<int>, greater<int>> pq;
     vector<int> res(k);
-
+    // priority_queue<int> pq // 預設是max priority queue
+    // 要min要用下列宣告方式
+    priority_queue<int, vector<int>, greater<int>> pq;
+    
     for(int i=0; i<m; i++)
         pq.push(std::accumulate(mat[i].begin(), mat[i].end(), 0) * 100 + i);
 
