@@ -645,10 +645,11 @@ string LC0482::licenseKeyFormatting(string s, int k) {
     // 正确的注册码的格式是每K个字符后面跟一个短杠，每一部分的长度为K，第一部分长度可以小于K，另外，字母必须是大写的。那么由于第一部分可以
     // 不为K，那么我们可以反过来想，我们从S的尾部往前遍历，把字符加入结果res，每K个后面加一个短杠，那么最后遍历完再把res翻转一下即可，
     // 注意翻转之前要把结尾的短杠去掉(如果有的话)
-    string res = "";
-    for(int i=s.size()-1; i>=0; i--)
-        if(s[i]!='-')
-            ((res.size()%(k+1)-k) ? res : res+='-') += toupper(s[i]);
+    string res{};
+    for (int i = s.size() - 1; i >= 0; --i)
+        if (s[i] != '-')
+            // 每k+1個為一組，當餘k個時表示需要增加一'-'
+            ((res.size() % (k+1) == k) ? res+='-' : res) += std::toupper(s[i]);
     return string(res.rbegin(), res.rend());
 }
 
