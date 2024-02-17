@@ -5,6 +5,7 @@
 // 大寫：65~90, 小寫：97~122
 // 數字：48~57(0~9)
 // 跟char有關的hash table都可以用 array<int,128> map; map.fill(0);來放
+// 用array<int,128> m{} 來宣告就可以直接初始化為0
 
 int LC1360::daysBetweenDates(string date1, string date2) {
     /*求兩個日期間的天數*/
@@ -388,30 +389,34 @@ string LC0824::toGoatLatin(string sentence) {
     // 然后要一个单词一个单词的处理，这里我们使用C++的字符串流类来快速的提取单词，对于每个提取出的单词，我们先加上一个空格，
     // 然后判断开头字母是否为元音，是的话直接加上，不然就去子串去掉首字母，然后将首字母加到末尾。后面再加上ma，还有相对应数目个a。
     // 这里我们定义一个变量cnt，初始化为1，每处理一个单词，cnt自增1，这样我们就知道需要加的a的个数了，最后别忘了把结果res的首空格去掉
-    array<int,128> set; set.fill(0);
-    set['a']=set['e']=set['i']=set['o']=set['u']=set['A']=set['E']=set['I']=set['O']=set['U']=1;
-    istringstream ss(sentence);
-    string res, w;
-    int cnt=1;
-    while(ss>>w)
-        res += ' ' + (set[w[0]] ? w : w.substr(1)+w[0]) + "ma" + string(cnt++,'a');
+    // Input: sentence = "I speak Goat Latin"
+    // Output: "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
+    array<int, 128> m{};
+    m['a'] = m['e'] = m['i'] = m['o'] = m['u'] = m['A'] = m['E'] = m['I'] = m['O'] = m['U'] = 1;
+    istringstream iss(sentence);
+    string res;
+    int cnt = 1;
+    for (string w; iss >> w; )
+        res += ' ' + (m[w[0]] ? w : w.substr(1) + w[0]) + "ma" + string(cnt++, 'a');
     return res.substr(1);
 }
 
 bool LC0953::isAlienSorted(vector<string>& words, string order) {
     /*是否按指定字典排序*/
-    // 把順序當作字母的ASCII碼來排序
     // Given a sequence of words written in the alien language, and the order of the alphabet, return true if and only
     // if the given words are sorted lexicographicaly in this alien language.
     // Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
     // Output: true
     // Explanation: As 'h' comes before 'l' in this language, then the sequence is sorted.
-    array<unsigned,26> map{};
-    for(unsigned i=0; i<order.size(); i++)
-        map[order[i]-'a']=i;
-    for(auto &word:words)
-        for(auto &c:word)
-            c = map[c-'a'];
+    // 
+    // 映射回正常字母順序再用內建函式判斷是否已排序，所以這裡宣告為unsigned
+    array<unsigned, 26> m{};
+    for (unsigned i = 0; i < order.size(); ++i)
+        m[order[i] - 'a'] = i;
+    for (string& word : words)
+        // 這裡用auto讓compiler決定優化的型別
+        for (auto& c : word)
+            c = m[c - 'a'];
     return is_sorted(words.begin(), words.end());
 
     // 对于正常的字母顺序，就是按字母来比较，只要有字母不同的话，就可以知道两个单词的顺序了，假如比较的字母均相同，但是有一个单词提前结束了，
@@ -439,45 +444,47 @@ int LC0929::numUniqueEmails(vector<string>& emails) {
     // http://www.cse.yorku.ca/~oz/hash.html
     // 來對email產生特定的值，最後再看去重後有幾個
     // 從左到右，從右到左掃一遍string
-    auto hash = [](const string &addr) -> size_t {
-        size_t val{};
-        unsigned n = addr.size();
-        unsigned i;
-        for(i=0; i<n; i++) {
-            char c=addr[i];
-            if(c == '.') continue;
-            if(c == '+' || c == '@') break;
-            val = (val+c) << 1;
-        }
-        for(i=n-1; i>0; i--) {
-            char c=addr[i];
-            val = (val+c) << 1;
-            if(c == '@') break;
-        }
-        return val;
-    };
-
-    unordered_set<size_t> s;
-    for(auto &addr:emails)
-        s.emplace(hash(addr));
-    return s.size();
+ //   auto hash = [](const string &addr) -> size_t {
+ //       size_t val{};
+ //       unsigned n = addr.size();
+ //       unsigned i;
+ //       for(i=0; i<n; i++) {
+ //           char c=addr[i];
+ //           if(c == '.') continue;
+ //           if(c == '+' || c == '@') break;
+ //           val = (val+c) << 1;
+ //       }
+ //       for(i=n-1; i>0; i--) {
+ //           char c=addr[i];
+ //           val = (val+c) << 1;
+ //           if(c == '@') break;
+ //       }
+ //       return val;
+ //   };
+ //
+ //   unordered_set<size_t> s;
+ //   for(auto &addr:emails)
+ //       s.emplace(hash(addr));
+ //   return s.size();
 
     // 邮件名里可能会有两个特殊符号，点和加号，对于点采取直接忽略的做法，对于加号则是忽略其后面所有的东西，现在问我们有多少个不同的邮箱。
     // 没有太多的技巧，就直接遍历一下所有的字符，遇到点直接跳过，遇到 '+' 或者 '@' 直接 break 掉。注意这里其实有个坑，就是域名中也可能有点，
     // 而这个点是不能忽略的，所以要把 '@' 及其后面的域名都提取出来，连到之前处理好的账号后面，一起放到一个 HashSet 中，
     // 利用其可以去重复的特性，最终剩余的个数即为所求
-//    unordered_set<string> set;
-//    for(auto &email:emails) {
-//        string addr;
-//        for(auto &c:email) {
-//            if(c == '.') continue;
-//            if(c == '+' || c== '@') break;
-//            addr.push_back(c);
-//        }
-//        addr += email.substr(email.find('@'));
-//        set.insert(move(addr));
-//    }
-//    return set.size();
+    unordered_set<string> uset;
+    for (string& email : emails) {
+        string addr{};
+        for (char& c : email) {
+            if (c == '.') continue;
+            if (c == '+' || c == '@') break;
+            addr.push_back(c);
+        }
+        addr += email.substr(email.find('@'));
+        // 使用emplace取代insert避免產生臨時物件
+        // 使用move避免產生臨時物件
+        uset.emplace(std::move(addr));
+    }
+    return uset.size();
 }
 
 vector<string> LC0884::uncommonFromSentences(string s1, string s2) {
@@ -640,8 +647,8 @@ string LC0482::licenseKeyFormatting(string s, int k) {
     /*重新格式化字串*/
     // 这道题让我们对注册码进行格式化，正确的注册码的格式是每四个字符后面跟一个短杠，每一部分的长度为K，第一部分长度可以小于K，另外，
     // 字母必须是大写的。
-    // **Input:** S = "2-4A0r7-4k", K = 4
-    // **Output:** "24A0-R74K"
+    // Input: S = "2-4A0r7-4k", K = 4
+    // Output: "24A0-R74K"
     // 正确的注册码的格式是每K个字符后面跟一个短杠，每一部分的长度为K，第一部分长度可以小于K，另外，字母必须是大写的。那么由于第一部分可以
     // 不为K，那么我们可以反过来想，我们从S的尾部往前遍历，把字符加入结果res，每K个后面加一个短杠，那么最后遍历完再把res翻转一下即可，
     // 注意翻转之前要把结尾的短杠去掉(如果有的话)
