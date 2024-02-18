@@ -372,7 +372,8 @@ string LC0917::reverseOnlyLetters(string s) {
     // Output: "dc-ba"
     // 给了一个由字母和其他字符组成的字符串，让我们只翻转其中的字母
     // 使用两个指针i和j，分别指向S串的开头和结尾。当i指向非字母字符时，指针i自增1，否则若j指向非字母字符时，指针j自减1，
-    // 若i和j都指向字母时，则交换 S[i] 和 S[j] 的位置，同时i自增1，j自减1，这样也可以实现只翻转字母的目的
+    // 若i和j都指向字母时，则交换 S[i] 和 S[j]
+    //  的位置，同时i自增1，j自减1，这样也可以实现只翻转字母的目的
     int l=0, r=s.size()-1;
     while(l<r) {
         while(l<r && !isalpha(s[l])) l++;
@@ -527,45 +528,18 @@ string LC0819::mostCommonWord(string paragraph, vector<string>& banned) {
     // 也无所谓啦，习惯就好，这里我们也是按照空格拆分，将每个单词读出来，这里要使用一个mx变量，统计当前最大的频率，
     // 还需要一个HashMap来建立单词和其出现频率之间的映射。然后我们看读取出的单词，如果不在黑名单中内，并且映射值加1后大于mx的话，
     // 我们更新mx，并且更新结果res即可
-//    unordered_set<string> set (banned.begin(), banned.end());
-//    unordered_map<string,int> map;
-//    string res = "";
-//    int mx = 0;
-//    for(auto &c:paragraph) c = isalpha(c) ? tolower(c) : ' ';
-//    istringstream in(paragraph);
-//    for(string w; in>>w; )
-//        if(!set.count(w) && ++map[w] > mx) {
-//            mx = map[w];
-//            res = w;
-//        }
-//    return res;
-
-    // 僅使用一個map再從map裡erase掉banned的字串，一個迴圈同時去掉非字母、轉小寫、及收集出現次數。
+    // 使用一個map再從map裡erase掉banned的字串，一個迴圈同時去掉非字母、轉小寫、及收集出現次數。
+    unordered_set<string> set (banned.begin(), banned.end());
     unordered_map<string,int> map;
-    string res="";
-    int m = 0;
-    int n = paragraph.size();
-
-    for(int i=0; i<n; i++) {
-        char c = tolower(paragraph[i]);
-        if(isalpha(c)) {
-            res+=c;
-        } else if(res!=""){
-            ++map[res];
-            res="";
+    string res = "";
+    int mx = 0;
+    for(auto &c:paragraph) c = isalpha(c) ? tolower(c) : ' ';
+    istringstream in(paragraph);
+    for(string w; in>>w; )
+        if(!set.count(w) && ++map[w] > mx) {
+            mx = map[w];
+            res = w;
         }
-    }
-    if(isalpha(paragraph[n-1])) ++map[res];
-    res="";
-
-    for(auto s:banned) map.erase(s);
-
-    for(auto e:map) {
-        if(e.second>m) {
-            res = e.first;
-            m = e.second;
-        }
-    }
     return res;
 }
 
@@ -573,8 +547,10 @@ bool LC0796::rotateString(string s, string goal) {
     /*是否可經由選轉子字串來等於另一字串*/
     // 一行完成的方法，就是我们其实可以在A之后再加上一个A，这样如果新的字符串(A+A)中包含B的话，说明A一定能通过偏移得到B。
     // 就比如题目中的例子，A="abcde", B="bcdea"，那么A+A="abcdeabcde"，里面是包括B的，所以返回true即可
-//    return s.size()==goal.size() && (s+s).find(goal) != string::npos;
-    return s.size() != goal.size() ? false : (s+s).find(goal) != std::string::npos;
+    // Input: s = "abcde", goal = "cdeab"
+    // Output: true
+    return s.size()==goal.size() && (s+s).find(goal) != string::npos;
+    //return s.size() != goal.size() ? false : (s+s).find(goal) != std::string::npos;
 
     // 这道题给了我们两个字符串A和B，定义了一种偏移操作，以某一个位置将字符串A分为两截，并将两段调换位置，如果此时跟字符串B相等了，
     // 就说明字符串A可以通过偏移得到B。现在就是让我们判断是否存在这种偏移，那么最简单最暴力的方法就是遍历所有能将A分为两截的位置，
@@ -608,20 +584,22 @@ int LC0696::countBinarySubstrings(string s) {
     // "0011", "01", "1100", "10", "0011", and "01".
     // 这道题给了我们一个二进制字符串，然后我们统计具有相同0和1的个数，且0和1各自都群组在一起(即0和1不能交替出现)的子字符串的个数，
     // 题目中的两个例子也很能说明问题。那么我们来分析题目中的第一个例子00110011，符合要求的子字符串要求0和1同时出现，那么当第一个1出
-    // 现的时候，前面由于前面有两个0，所以肯定能组成01，再遇到下一个1时，此时1有2个，0有2个，能组成0011，下一个遇到0时，此时0的个数重
+    // 现的时候，由于前面有两个0，所以肯定能组成01，再遇到下一个1时，此时1有2个，0有2个，能组成0011，下一个遇到0时，此时0的个数重
     // 置为1，而1的个数有两个，所以一定有10，同理，下一个还为0，就会有1100存在，之后的也是这样分析。那么我们可以发现我们只要分别统计0和1的
     // 个数，而且如果当前遇到的是1，那么只要之前统计的0的个数大于当前1的个数，就一定有一个对应的子字符串，而一旦前一个数字和当前的数字不一
     // 样的时候，那么当前数字的计数要重置为1。所以我们遍历元数组，如果是第一个数字，那么对应的ones或zeros自增1。然后进行分情况讨论，
     // 如果当前数字是1，然后判断如果前面的数字也是1，则ones自增1，否则ones重置为1。如果此时zeros大于ones，res自增1。反之同理，
     // 如果当前数字是0，然后判断如果前面的数字也是0，则zeros自增1，否则zeros重置为1。如果此时ones大于zeros，res自增1。
-    int res=0, pre=0, cur=1;
-    for(int i=1; i<s.size(); i++) {
-        if(s[i]==s[i-1]) cur++;
+    int res = 0;
+    int cur = 1; // 第一個char會是0/1其中一值，所以cur初始值總是1
+    int pre = 0; // 紀錄前一次累積了連續幾個0 or 1
+    for (int i = 1; i < s.size(); ++i) {
+        if (s[i] == s[i - 1]) ++cur;
         else {
-            pre=cur;
-            cur=1;
+            pre = cur;
+            cur = 1;
         }
-        if(pre>=cur) res++;
+        if (pre >= cur) ++res;
     }
     return res;
 }
@@ -632,16 +610,25 @@ int LC0521::findLUSlength(string a, string b) {
     // The longest uncommon subsequence is defined as the longest subsequence of one of these strings and this
     // subsequence should not be any subsequence of the other strings.
     // 如果两个字符串相等，那么一定有共同子序列，反之，如果两个字符串不等，那么较长的那个字符串就是最长非共同子序列
-    return a==b ? -1 : max(a.size(), b.size());
+    // Input: a = "aba", b = "cdc"
+    // Output: 3
+    // Explanation : One longest uncommon subsequence is "aba" because "aba" is a subsequence of "aba" but not "cdc".
+    // Note that "cdc" is also a longest uncommon subsequence.
+    return a==b ? -1 : std::max(a.size(), b.size());
 }
 
 bool LC0520::detectCapitalUse(string word) {
-    /*判斷大寫字符是否正確使用*/
+    /*判斷字符大小寫是否正確使用*/
     // 给了我们一个单词，让我们检测大写格式是否正确，规定了三种正确方式，要么都是大写或小写，要么首字母大写，其他情况都不正确。
     // 那么我们要做的就是统计出单词中所有大写字母的个数cnt，再来判断是否属于这三种情况，如果cnt为0，说明都是小写，正确；
     // 如果cnt和单词长度相等，说明都是大写，正确；如果cnt为1，且首字母为大写，正确，其他情况均返回false
-    int cnt = count_if(word.begin(), word.end(), [](char c){return c<='Z';});
-    return !cnt || cnt==word.size() || (cnt==1 && word[0]<='Z');
+    // Input: word = "FlaG"
+    // Output: false
+    int cnt = std::count_if(word.begin(), word.end(), [](char c)->bool
+        {
+            return c <= 'Z';
+        });
+    return !cnt || cnt == word.size() || (cnt == 1 && word[0] <= 'Z');
 }
 
 string LC0482::licenseKeyFormatting(string s, int k) {

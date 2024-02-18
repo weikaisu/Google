@@ -53,7 +53,7 @@ struct LC0709 { string toLowerCase(string s); };
 struct LC0696 { int countBinarySubstrings(string s) ; };
 /*最長不一樣的子字串*/
 struct LC0521 { int findLUSlength(string a, string b); };
-/*判斷大寫字符是否正確使用*/
+/*判斷字符大小寫是否正確使用*/
 struct LC0520 { bool detectCapitalUse(string word); };
 /*重新格式化字串*/
 struct LC0482 { string licenseKeyFormatting(string s, int k); };
