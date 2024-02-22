@@ -9,10 +9,18 @@
 
 int LC1360::daysBetweenDates(string date1, string date2) {
     /*求兩個日期間的天數*/
-    // 给定两个日期，年的范围是[ 1971 , 2100 ] [1971,2100][1971,2100]，问两个日期之间隔了多少天。日期以YY-MM-DD形式给出。
+    // 给定两个日期，年的范围是[1971,2100]，问两个日期之间隔了多少天。日期以YY-MM-DD形式给出。
+    // 若直接計算從date1到date2過了幾天需
+    // 1. 判斷哪個日期在前面
+    // 2. 判斷是否同年，同年就開始處理月/日
+    // 3. 不同年則計算兩個年之間的天數，減掉data1那年從1/1過了幾天，加上data2那年從1/1過了幾天。
+    // 因此相較於基於同一個時間點兩個日期經過了幾天後相減來的複雜。
     array<int,13> days{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    function<bool(int)> isLeapYear = [&](int year) -> bool {
-        return year%400==0 || (year%100 !=0 && year%4 == 0);
+    // 閏年的定義為4的倍數，例外為100的倍數但不為400的倍數
+    function<bool(int)> isLeapYear = [&](int y) -> bool {
+        //return y%400==0 || (y%100 !=0 && y%4 == 0);
+        //return (y%4==0 && y%100!=0) || (y%400==0);
+        return y%100 ? y%4==0 : y%400==0;
     };
     function<int(const string)> daysFrom1971 = [&](const string str) -> int {
         int y, m , d;
@@ -263,15 +271,14 @@ string LC1021::removeOuterParentheses(string s) {
     // 遍历字符串S，若当前字符为左括号，则 cnt 自增1，否则自减1。若 cnt 不为0，说明还不是一个合法的括号子串，跳过。否则我们就知道了一个合
     // 法括号子串的结束位置，用一个变量 start 记录合法括号子串的起始位置，初始化为0，这样就可以将去除最外层括号后的中间部分直接取出来加入结
     // 果 res 中，然后此时更新 start 为下一个合法子串的起始位置继续遍历即可
-//    string res;
-//    int cnt = 0, start = 0;
-//    for(int i=0; i<s.size(); i++) {
-//        (s[i]=='(') ? cnt++ : cnt--;
-//        if(cnt) continue;
-//        res += s.substr(start+1, i-start-1);
-//        start = i+1;
-//    }
-//    return res;
+ //   string res;
+ //   for (int cnt = 0, i = 0, si = 0; i < s.size(); ++i) {
+ //       (s[i] == '(') ? ++cnt : --cnt;
+ //       if (cnt) continue;
+ //       res += s.substr(si + 1, i - si - 1);// 減1是因為長度不含start
+ //       si = i + 1;
+ //   }
+ //   return res;
 }
 
 vector<string> LC0937::reorderLogFiles(vector<string>& logs) {
