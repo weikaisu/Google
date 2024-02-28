@@ -127,7 +127,7 @@ void Sort::heapify(vector<int>& nums, int n, int node) {
     if(root != node) {
         std::swap(nums[root], nums[node]);
         // 把較小的值繼續往下放直到leaf
-        // 要繼續往下的原因是確保swap過後正個subtree仍滿足heap條件
+        // 要繼續往下的原因是確保swap過後整個subtree仍滿足heap條件
         heapify(nums, n, root);
     }
 }
@@ -143,6 +143,7 @@ void Sort::HeapSort(vector<int>& nums) {
     for(i=n/2-1; i>=0; i--)
         heapify(nums, n, i);
     // 當root為最大值後，持續將root放到最後，vector就會變成一個排序好的vector
+    // 下面動作是為了讓vector內按順序排列，heap本身資料結構不需要
     for(i=n-1; i>=0; i--) {
         std::swap(nums[0], nums[i]);
         heapify(nums, i, 0);

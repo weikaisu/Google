@@ -288,6 +288,11 @@ struct StackArithmetic {
     string toPostFix(string str);
 };
 
+// LC0706 Design HashMap
+// LC0705 Design HashSet
+// LC0232 Implement Queue using Stacks
+// LC0225 Implement Stack using Queues
+
 // LC0706
 //MyHashMap map;
 //map.put(1,1);

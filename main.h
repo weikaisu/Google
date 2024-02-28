@@ -1,25 +1,59 @@
 ﻿#ifndef GOOGLE_MAIN_H
 #define GOOGLE_MAIN_H
 
-#include <array>
-#include <iostream>
+// Sequence containers
+// Sequence containers implement data structures which can be accessed sequentially.
+#include<array>
+#include<vector>
+// insert, emplace, erase, push_back, emplace_back, pop_back
+#include<list>
+// insert, emplace, erase, push_front, emplace_front, pop_front, push_back, emplace_back, pop_back
+#include<forward_list>
+// insert_after, emplace_after, erase_after, push_front, emplace_front, pop_front
+#include<deque>
+// insert, emplace, erase, push_front, emplace_front, pop_front, push_back, emplace_back, pop_back
+
+// Associative containers
+// Associative containers implement sorted data structures that can be quickly searched (O(log n) complexity).
+// insert, emplace, erase, count, find, contains
+#include<set> // set, multiset
+#include<map> // map, multimap
+
+// Unordered associative containers (since C++11)
+// Unordered associative containers implement unsorted (hashed) data structures that can be quickly searched (O(1) average, O(n) worst-case complexity).
+// insert, emplace, erase, count, find, contains
+#include<unordered_set> // set, multiset
+#include<unordered_map> // map, multimap
+
+// Container adaptors
+// Container adaptors provide a different interface for sequential containers.
+#include<stack>
+// top, push, emplace, pop
+#include<queue> // queue, priority_queue
+// front, back, push, emplace, pop
+//#include<priority_queue>
+// top, push, emplace, pop
 #include <string>
-#include <regex>
-#include <algorithm>
-#include <utility>
-#include <vector>
-#include <list>
+// insert, erase, push_back, pop_back
+
 #include <forward_list>
+#include <vector>
 #include <stack>
 #include <queue>
 #include <set>
 #include <map>
 #include <unordered_set>
 #include <unordered_map>
+
+#include <iostream>
+#include <algorithm>
 #include <bitset>
 #include <functional>
+
+#include <utility>
 #include <numeric> // std:: accumulate
 #include <string_view>
+#include <regex>
 
 #include "sort.h"
 #include "list.h"
