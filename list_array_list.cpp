@@ -916,6 +916,6 @@ vector<int> LC0066::plusOne(vector<int>& digits) {
         if(!c) return digits; // 沒有可進的位，那就可以先return了
     }
     if(c)
-        digits.emplace(digits.begin(), c);
+        digits.insert(digits.begin(), c);
     return digits;
 }

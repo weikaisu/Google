@@ -6,24 +6,30 @@
 #include<array>
 #include<vector>
 // insert, emplace, erase, push_back, emplace_back, pop_back
+#include<deque>
+// insert, emplace, erase, push_back, emplace_back, pop_back, push_front, emplace_front, pop_front
 #include<list>
-// insert, emplace, erase, push_front, emplace_front, pop_front, push_back, emplace_back, pop_back
+// insert, emplace, erase, push_back, emplace_back, pop_back, push_front, emplace_front, pop_front
 #include<forward_list>
 // insert_after, emplace_after, erase_after, push_front, emplace_front, pop_front
-#include<deque>
-// insert, emplace, erase, push_front, emplace_front, pop_front, push_back, emplace_back, pop_back
+
+// deque, typical implementations use a sequence of individually allocated fixed-size arrays, 
+// with additional bookkeeping, which means indexed access to deque must perform two pointer 
+// dereferences, compared to vector's indexed access which performs only one
 
 // Associative containers
 // Associative containers implement sorted data structures that can be quickly searched (O(log n) complexity).
 // insert, emplace, erase, count, find, contains
 #include<set> // set, multiset
 #include<map> // map, multimap
+// set/map : red-black tree
 
 // Unordered associative containers (since C++11)
 // Unordered associative containers implement unsorted (hashed) data structures that can be quickly searched (O(1) average, O(n) worst-case complexity).
 // insert, emplace, erase, count, find, contains
 #include<unordered_set> // set, multiset
 #include<unordered_map> // map, multimap
+// unordered set/map : hash table
 
 // Container adaptors
 // Container adaptors provide a different interface for sequential containers.

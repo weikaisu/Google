@@ -140,14 +140,14 @@ ListNode* LC0160::getIntersectionNode(ListNode *headA, ListNode *headB) {
     if(!headA || !headB) return nullptr;
 
     // slower way
-//    unordered_set <ListNode*> set;
+//    unordered_set <ListNode*> uset;
 //    while(headA) {
-//        set.emplace(headA);
+//        uset.emplace(headA);
 //        headA = headA->next;
 //    }
 //    while(headB) {
-//        if(set.count(headB)) return headB;
-//        set.emplace(headB);
+//        if(uset.count(headB)) return headB;
+//        uset.emplace(headB);
 //        headB = headB->next;
 //    }
 //    return nullptr;

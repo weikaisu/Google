@@ -485,9 +485,9 @@ int LC0929::numUniqueEmails(vector<string>& emails) {
  //       return val;
  //   };
  //
- //   unordered_set<size_t> s;
+ //   unordered_set<size_t> uset;
  //   for(auto &addr:emails)
- //       s.emplace(hash(addr));
+ //       uset.emplace(hash(addr));
  //   return s.size();
 
     // 邮件名里可能会有两个特殊符号，点和加号，对于点采取直接忽略的做法，对于加号则是忽略其后面所有的东西，现在问我们有多少个不同的邮箱。
