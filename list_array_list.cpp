@@ -784,9 +784,9 @@ void LC0344::reverseString(vector<char>& s) {
     /*反轉字符陣列*/
     // Input: ["h","e","l","l","o"]
     // Output: ["o","l","l","e","h"]
-    int l=0, r=s.size()-1;
-    while(l<r)
-        swap(s[l++],s[r--]);
+    int l = 0, r = s.size() - 1;
+    while (l < r)
+        std::swap(s[l++], s[r--]);
 }
 
 vector<string> LC0228::summaryRanges(vector<int>& nums) {
@@ -799,12 +799,12 @@ vector<string> LC0228::summaryRanges(vector<int>& nums) {
     // 序列的话要存入首尾数字和箭头“->"。我们需要两个变量i和j，其中i是连续序列起始数字的位置，j是连续数列的长度，当j为1时，说明只有一个数字，
     // 若大于1，则是一个连续序列
     vector<string> res;
-    int i=0, n=nums.size();
-    while(i<n) {
-        int j=1;
-        while(i+j<n && (long)nums[i+j]-nums[i]==j) j++; //需要用long是因為可能有正大數減負大數的情況
-        res.push_back(j==1 ? to_string(nums[i]) : to_string(nums[i]) + "->" + to_string(nums[i+j-1]));
-        i+=j;
+    int i = 0, j = 1, n = nums.size();
+    while (i < n) {
+        j = 1;
+        while (i + j < n && j == (long)nums[i + j] - nums[i]) ++j;
+        res.emplace_back(j == 1 ? std::to_string(nums[i]) : std::to_string(nums[i]) + "->" + std::to_string(nums[i + j - 1]));
+        i += j;
     }
     return res;
 }
@@ -820,16 +820,27 @@ int LC0169::majorityElement(vector<int>& nums) {
     // 那么这个候选者已经很 weak，不一定能出现超过半数，此时选择更换当前的候选者。那有可能你会有疑问，
     // 那万一后面又大量的出现了之前的候选者怎么办，不需要担心，如果之前的候选者在后面大量出现的话，其又会重新变为候选者，
     // 直到最终验证成为正确的过半数
-    int val=0, cnt=0;
-    for(auto n:nums) {
-        if(!cnt) {
-            val = n;
-            cnt++;
-        } else {
-            (val==n) ? cnt++ : cnt--;
+    int val = 0, cnt = 0, n = nums.size();
+    for (int& num : nums) {
+        if (!cnt) {
+            val = num;
+            ++cnt;
+        }
+        else {
+            (val == num) ? ++cnt : --cnt;
+            // 若過半數已經出現可提早回傳(pruning)
+            if (cnt > n / 2) return val;
         }
     }
     return val;
+
+    // 如果能過半的數不一定存在，則用hash table來統計
+ //   unordered_map<int, int> umap;
+ //   for (int num : nums)
+ //       ++umap[num];
+ //   for (auto& m : umap)
+ //       if (m.second > nums.size() / 2) return m.first;
+ //   return -1;
 }
 
 int LC0122::maxProfit(vector<int>& prices) {
@@ -840,11 +851,17 @@ int LC0122::maxProfit(vector<int>& prices) {
     // Total profit is 4 + 3 = 7.
     // 由于可以无限次买入和卖出。我们都知道炒股想挣钱当然是低价买入高价抛出，那么这里我们只需要从第二天开始，如果当前价格比之前价格高，则把差
     // 值加入利润中，因为我们可以昨天买入，今日卖出，若明日价更高的话，还可以今日买入，明日再抛出。以此类推，遍历完整个数组后即可求得最大利润
-    int prf=0;
-    for(int i=0; i<prices.size()-1; ++i)
-        if(prices[i+1] > prices[i])
-            prf += (prices[i+1] - prices[i]);
-    return prf;
+//   int prf=0;
+//   for(int i=0; i<prices.size()-1; ++i)
+//       if(prices[i+1] > prices[i])
+//           prf += (prices[i+1] - prices[i]);
+//   return prf;
+
+    // 只要兩天的差價大於0就買賣
+    int res = 0;
+    for (int i = 1; i < prices.size(); ++i)
+        res += std::max(prices[i] - prices[i - 1], 0);
+    return res;
 }
 
 int LC0121::maxProfit(vector<int>& prices) {
